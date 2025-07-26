@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.github.zuuuyao</groupId>
+  <groupId>org.github.bm</groupId>
   <artifactId>boot-manage_for-cloud</artifactId>
   <version>1.0.0</version>
   <packaging>pom</packaging>
@@ -13,6 +13,11 @@
   <!--子模块-->
   <modules>
     <module>bm-common</module>
+      <module>bm-ops</module>
+    <module>bm-auth</module>
+    <module>bm-gateway</module>
+    <module>bm-service</module>
+    <module>bm-service-api</module>
   </modules>
   <description>🍊 Boot Admin 后端项目微服务版 </description>
 
@@ -30,7 +35,7 @@
   <!-- 属性 -->
   <properties>
     <!--项目版本-->
-    <bt-cloud.version>1.0.0</bt-cloud.version>
+    <bm-cloud.version>1.0.0</bm-cloud.version>
     <!--框架版本， 参考https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74805c72wXUsy2 -->
     <spring-boot.version>3.2.4</spring-boot.version>
     <spring-cloud.version>2023.0.1</spring-cloud.version>
