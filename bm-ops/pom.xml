@@ -13,6 +13,10 @@
     <name>${project.artifactId}</name>
     <version>${bm-cloud.version}</version>
 
+    <modules>
+        <module>bm-swagger</module>
+    </modules>
+
     <description>DevOps 集合 如监控模块、调度、接口文档</description>
 
 </project>

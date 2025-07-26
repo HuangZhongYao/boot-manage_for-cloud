@@ -18,6 +18,7 @@
     <module>bm-gateway</module>
     <module>bm-service</module>
     <module>bm-service-api</module>
+    <module>bm-ops/bm-swagger</module>
   </modules>
   <description>🍊 Boot Admin 后端项目微服务版 </description>
 
@@ -77,12 +78,31 @@
       <scope>import</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <version>${spring-boot.version}</version>
+      <exclusions>
+        <!-- 排除Tomcat依赖 -->
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- 添加Undertow依赖 -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+      <version>${spring-boot.version}</version>
+    </dependency>
+
     <!--knife4j Swagger接口文档-->
     <dependency>
       <groupId>com.github.xiaoymin</groupId>
       <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
       <version>${knife4j.version}</version>
-      <scope>import</scope>
     </dependency>
 
     <!--和knife4j的版本对应-->
