@@ -29,6 +29,10 @@ public interface AppConstant {
 	 */
 	String APPLICATION_AUTH_NAME = APPLICATION_NAME_PREFIX + "auth";
 	/**
+	 * 接口文档模块名称
+	 */
+	String APPLICATION_SWAGGER_NAME = APPLICATION_NAME_PREFIX + "swagger";
+	/**
 	 * 系统模块名称
 	 */
 	String APPLICATION_SYSTEM_NAME = APPLICATION_NAME_PREFIX + "system";
@@ -36,10 +40,6 @@ public interface AppConstant {
 	 * 用户模块名称
 	 */
 	String APPLICATION_USER_NAME = APPLICATION_NAME_PREFIX + "user";
-	/**
-	 * 日志模块名称
-	 */
-	String APPLICATION_LOG_NAME = APPLICATION_NAME_PREFIX + "log";
 
 
 	/**
