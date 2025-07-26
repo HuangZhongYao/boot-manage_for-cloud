@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
-    <version>${bm-cloud.version}</version>
+
 
     <description>微服务集合</description>
 

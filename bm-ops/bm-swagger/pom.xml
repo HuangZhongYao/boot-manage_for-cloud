@@ -10,24 +10,13 @@
     <artifactId>bm-swagger</artifactId>
     <packaging>jar</packaging>
 
-    <name>bm-swagger</name>
-    <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <name>${project.artifactId}</name>
 
     <dependencies>
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-common</artifactId>
             <version>${bm-cloud.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>${knife4j.version}</version>
         </dependency>
 
         <dependency>

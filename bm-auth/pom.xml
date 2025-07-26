@@ -11,7 +11,7 @@
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
-    <version>${bm-cloud.version}</version>
+
 
     <dependencies>
         <dependency>

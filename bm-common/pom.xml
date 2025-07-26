@@ -10,7 +10,7 @@
     <artifactId>bm-common</artifactId>
 
     <name>${project.artifactId}</name>
-    <version>${bm-cloud.version}</version>
+
 
     <packaging>jar</packaging>
 

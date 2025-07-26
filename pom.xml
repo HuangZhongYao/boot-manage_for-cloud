@@ -18,7 +18,6 @@
     <module>bm-gateway</module>
     <module>bm-service</module>
     <module>bm-service-api</module>
-    <module>bm-ops/bm-swagger</module>
   </modules>
   <description>🍊 Boot Admin 后端项目微服务版 </description>
 
