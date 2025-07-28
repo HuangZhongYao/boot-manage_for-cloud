@@ -1,4 +1,4 @@
-package org.github.bm.common.config.mybatis.extension;
+package org.github.bm.common.mybatis;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

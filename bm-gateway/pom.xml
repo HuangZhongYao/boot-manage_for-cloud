@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>org.github.bm</groupId>
-            <artifactId>bm-common</artifactId>
+            <artifactId>bm-core</artifactId>
             <version>${bm-cloud.version}</version>
         </dependency>
     </dependencies>

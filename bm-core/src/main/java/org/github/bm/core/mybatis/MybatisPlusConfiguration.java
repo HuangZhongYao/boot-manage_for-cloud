@@ -1,12 +1,13 @@
-package org.github.bm.common.config.mybatis;
+package org.github.bm.core.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import org.mybatis.spring.annotation.MapperScan;
+//import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Time 2024-07-11 16:22
  * @Author HuangZhongYao
  */
-@MapperScan("org.github.bt.**.repository")
+//@MapperScan("org.github.bm.**.repository")
 @Configuration
 @EnableTransactionManagement
 public class MybatisPlusConfiguration {
@@ -40,13 +41,25 @@ public class MybatisPlusConfiguration {
         log.info("Mybatis-plus拦截器加载...");
 
         // 添加非法SQL拦截器
-         log.info("Mybatis-plus非法SQL拦截插件加载...");
-         interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
+        log.info("Mybatis-plus非法SQL拦截插件加载...");
+        interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
 
         // 如果配置多个插件, 切记分页最后添加
         // 如果有多数据源可以不配具体类型, 否则都建议配上具体的 DbType
         log.info("Mybatis-plus分页插件加载...");
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
+    }
+
+    /**
+     * sql 日志
+     *
+     * @return SqlLogInterceptor
+     */
+    @Bean
+    @ConditionalOnProperty(value = "bm.mybatis-plus.sql-log", matchIfMissing = true)
+    public SqlLogInterceptor sqlLogInterceptor() {
+        log.info(" sql 日志拦截器加载...");
+        return new SqlLogInterceptor();
     }
 }

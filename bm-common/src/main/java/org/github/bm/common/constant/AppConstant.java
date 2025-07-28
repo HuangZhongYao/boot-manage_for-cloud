@@ -14,12 +14,12 @@ public interface AppConstant {
 	/**
 	 * 基础包
 	 */
-	String BASE_PACKAGES = "org.github.bt";
+	String BASE_PACKAGES = "org.github.bm";
 
 	/**
 	 * 应用名前缀
 	 */
-	String APPLICATION_NAME_PREFIX = "bt-";
+	String APPLICATION_NAME_PREFIX = "bm-";
 	/**
 	 * 网关模块名称
 	 */

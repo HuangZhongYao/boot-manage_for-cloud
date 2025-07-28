@@ -1,4 +1,4 @@
-package org.github.swagger;
+package org.github.bm.swagger;
 
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.common.launch.BMApplication;

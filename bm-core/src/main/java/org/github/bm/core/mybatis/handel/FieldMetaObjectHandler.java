@@ -1,4 +1,4 @@
-package org.github.bm.common.config.mybatis.handel;
+package org.github.bm.core.mybatis.handel;
 
 //import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
