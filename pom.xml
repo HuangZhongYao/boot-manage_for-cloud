@@ -50,6 +50,7 @@
     <mybatis-spring.version>3.0.3</mybatis-spring.version>
     <modelmapper.version>3.2.0</modelmapper.version>
     <knife4j.version>4.5.0</knife4j.version>
+    <knife4j-gateway.version>4.4.0</knife4j-gateway.version>
     <knife4j-swagger-models-v3.version>2.2.19</knife4j-swagger-models-v3.version>
     <hutool.version>5.8.39</hutool.version>
     <fastjson2.version>2.0.57</fastjson2.version>
@@ -66,6 +67,14 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-dependencies</artifactId>
       <version>${spring-boot.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-dependencies</artifactId>
+      <version>${spring-cloud.version}</version>
       <type>pom</type>
       <scope>import</scope>
     </dependency>
@@ -102,6 +111,12 @@
     <dependency>
       <groupId>com.github.xiaoymin</groupId>
       <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+      <version>${knife4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
       <version>${knife4j.version}</version>
     </dependency>
 

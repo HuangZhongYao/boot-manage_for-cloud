@@ -11,7 +11,7 @@ public interface LauncherConstant {
 	/**
 	 * nacos namespace id ,为空为public
 	 */
-	String NACOS_NAMESPACE = "9a019fa4-2b71-48d1-bf7c-23f4e4c0395a";
+	String NACOS_NAMESPACE = "";
 
 	/**
 	 * nacos dev 地址
