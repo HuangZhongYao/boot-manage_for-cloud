@@ -48,6 +48,7 @@
     <maven.plugin.version>3.10.1</maven.plugin.version>
     <mybatis-plus.version>3.5.7</mybatis-plus.version>
     <mybatis-spring.version>3.0.3</mybatis-spring.version>
+    <mysql-driver.version>8.0.33</mysql-driver.version>
     <modelmapper.version>3.2.0</modelmapper.version>
     <knife4j.version>4.5.0</knife4j.version>
     <knife4j-gateway.version>4.4.0</knife4j-gateway.version>
@@ -71,6 +72,7 @@
       <scope>import</scope>
     </dependency>
 
+    <!---->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-dependencies</artifactId>
@@ -79,6 +81,7 @@
       <scope>import</scope>
     </dependency>
 
+    <!---->
     <dependency>
       <groupId>com.alibaba.cloud</groupId>
       <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -87,6 +90,7 @@
       <scope>import</scope>
     </dependency>
 
+    <!-- springboot-web-starter-->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -114,10 +118,11 @@
       <version>${knife4j.version}</version>
     </dependency>
 
+    <!--knife4j 聚合文档-->
     <dependency>
       <groupId>com.github.xiaoymin</groupId>
       <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
-      <version>${knife4j.version}</version>
+      <version>${knife4j-gateway.version}</version>
     </dependency>
 
     <!--和knife4j的版本对应-->
@@ -127,14 +132,21 @@
       <version>${knife4j-swagger-models-v3.version}</version>
     </dependency>
 
+    <!--MySQL 驱动-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql-driver.version}</version>
+    </dependency>
 
-    <!--  -->
+    <!--mybatis-plus-starter-->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
       <version>${mybatis-plus.version}</version>
     </dependency>
 
+    <!--mybatis-spring-->
     <dependency>
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
@@ -142,35 +154,32 @@
       <scope>compile</scope>
     </dependency>
 
+    <!--mybatis-plus-->
     <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus</artifactId>
       <version>${mybatis-plus.version}</version>
     </dependency>
 
-    <!-- 对象转换工具 实体->  <-VO -->
+    <!-- 对象转换工具 -->
     <dependency>
       <groupId>org.modelmapper</groupId>
       <artifactId>modelmapper</artifactId>
       <version>${modelmapper.version}</version>
     </dependency>
 
+    <!-- hutool 工具包-->
     <dependency>
       <groupId>cn.hutool</groupId>
       <artifactId>hutool-all</artifactId>
       <version>${hutool.version}</version>
     </dependency>
 
+    <!--json解析库-->
     <dependency>
       <groupId>com.alibaba.fastjson2</groupId>
       <artifactId>fastjson2</artifactId>
       <version>${fastjson2.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>6.0.0</version>
     </dependency>
 
   </dependencies>

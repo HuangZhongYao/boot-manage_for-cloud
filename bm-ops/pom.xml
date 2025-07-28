@@ -15,7 +15,6 @@
 
     <description>DevOps 集合 如监控模块、调度、接口文档</description>
     <modules>
-        <module>bm-swagger</module>
     </modules>
 
 
