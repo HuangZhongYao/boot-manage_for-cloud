@@ -3,21 +3,21 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.github.bm</groupId>
-        <artifactId>boot-manage_for-cloud</artifactId>
+        <artifactId>bm-service-api</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>bm-ops</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>bm-user-api</artifactId>
+    <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
 
 
-    <description>DevOps 集合 如监控模块、调度、接口文档</description>
-    <modules>
-        <module>bm-resource</module>
-        <module>bm-admin</module>
-    </modules>
-
-
+    <dependencies>
+        <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-common</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -48,6 +48,7 @@
         <maven.test.skip>true</maven.test.skip>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <mybatis-spring.version>3.0.3</mybatis-spring.version>
+        <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
         <mysql-driver.version>8.0.33</mysql-driver.version>
         <modelmapper.version>3.2.0</modelmapper.version>
         <knife4j.version>4.5.0</knife4j.version>
@@ -158,6 +159,18 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
             </dependency>
 
             <!-- 对象转换工具 -->

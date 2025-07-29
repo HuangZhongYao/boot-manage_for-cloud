@@ -29,9 +29,13 @@ public interface AppConstant {
 	 */
 	String APPLICATION_AUTH_NAME = APPLICATION_NAME_PREFIX + "auth";
 	/**
-	 * 接口文档模块名称
+	 * 资源模块名称
 	 */
-	String APPLICATION_SWAGGER_NAME = APPLICATION_NAME_PREFIX + "swagger";
+	String APPLICATION_RESOURCE_NAME = APPLICATION_NAME_PREFIX + "resource";
+	/**
+	 * springboot admin模块名称
+	 */
+	String APPLICATION_ADMIN_NAME = APPLICATION_NAME_PREFIX + "admin";
 	/**
 	 * 系统模块名称
 	 */

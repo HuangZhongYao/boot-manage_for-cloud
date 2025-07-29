@@ -14,6 +14,21 @@
 
 
     <description>bm微服务API集合</description>
+    <modules>
+        <module>bm-user-api</module>
+        <module>bm-system-api</module>
+    </modules>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--service模块对外暴露Feign、实体、VO、等，不打包为可执行jar; 子模块都继承该配置-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
