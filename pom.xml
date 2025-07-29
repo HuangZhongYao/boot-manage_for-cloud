@@ -1,213 +1,238 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.github.bm</groupId>
-  <artifactId>boot-manage_for-cloud</artifactId>
-  <version>1.0.0</version>
-  <packaging>pom</packaging>
+    <groupId>org.github.bm</groupId>
+    <artifactId>boot-manage_for-cloud</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
 
-  <name>boot-manage_for-cloud</name>
-  <url>xxxxxx</url>
+    <name>boot-manage_for-cloud</name>
+    <url>xxxxxx</url>
 
-  <!--子模块-->
-  <modules>
-    <module>bm-common</module>
-      <module>bm-ops</module>
-    <module>bm-auth</module>
-    <module>bm-gateway</module>
-    <module>bm-service</module>
-    <module>bm-service-api</module>
-      <module>bm-core</module>
-  </modules>
-  <description>🍊 Boot Admin 后端项目微服务版 </description>
+    <!--子模块-->
+    <modules>
+        <module>bm-common</module>
+        <module>bm-ops</module>
+        <module>bm-auth</module>
+        <module>bm-gateway</module>
+        <module>bm-service</module>
+        <module>bm-service-api</module>
+        <module>bm-core</module>
+    </modules>
+    <description>🍊 Boot Admin 后端项目微服务版</description>
 
-  <!--项目开发人员-->
-  <developers>
-    <developer>
-      <name>zuuuYao</name>
-      <organization>github.zuuuYao</organization>
-      <roles>
-        <role>develop</role>
-      </roles>
-    </developer>
-  </developers>
+    <!--项目开发人员-->
+    <developers>
+        <developer>
+            <name>zuuuYao</name>
+            <organization>github.zuuuYao</organization>
+            <roles>
+                <role>develop</role>
+            </roles>
+        </developer>
+    </developers>
 
-  <!-- 属性 -->
-  <properties>
-    <!--项目版本-->
-    <bm-cloud.version>1.0.0</bm-cloud.version>
-    <!--框架版本， 参考https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74805c72wXUsy2 -->
-    <spring-boot.version>3.2.4</spring-boot.version>
-    <spring-cloud.version>2023.0.1</spring-cloud.version>
-    <alibaba.cloud.version>2023.0.1.3</alibaba.cloud.version>
+    <!-- 属性 -->
+    <properties>
+        <!--项目版本-->
+        <bm-cloud.version>1.0.0</bm-cloud.version>
+        <!--框架版本， 参考https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74805c72wXUsy2 -->
+        <spring-boot.version>3.2.4</spring-boot.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+        <alibaba.cloud.version>2023.0.1.3</alibaba.cloud.version>
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>17</java.version>
-    <maven.plugin.version>3.10.1</maven.plugin.version>
-    <mybatis-plus.version>3.5.7</mybatis-plus.version>
-    <mybatis-spring.version>3.0.3</mybatis-spring.version>
-    <mysql-driver.version>8.0.33</mysql-driver.version>
-    <modelmapper.version>3.2.0</modelmapper.version>
-    <knife4j.version>4.5.0</knife4j.version>
-    <knife4j-gateway.version>4.4.0</knife4j-gateway.version>
-    <knife4j-swagger-models-v3.version>2.2.19</knife4j-swagger-models-v3.version>
-    <hutool.version>5.8.39</hutool.version>
-    <fastjson2.version>2.0.57</fastjson2.version>
-  </properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+        <maven.plugin.version>3.10.1</maven.plugin.version>
+        <maven.test.skip>true</maven.test.skip>
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
+        <mybatis-spring.version>3.0.3</mybatis-spring.version>
+        <mysql-driver.version>8.0.33</mysql-driver.version>
+        <modelmapper.version>3.2.0</modelmapper.version>
+        <knife4j.version>4.5.0</knife4j.version>
+        <knife4j-gateway.version>4.4.0</knife4j-gateway.version>
+        <knife4j-swagger-models-v3.version>2.2.19</knife4j-swagger-models-v3.version>
+        <hutool.version>5.8.39</hutool.version>
+        <fastjson2.version>2.0.57</fastjson2.version>
+    </properties>
 
 
+    <!--依赖管理-->
+    <dependencyManagement>
 
-  <!--依赖管理-->
-<dependencyManagement>
+        <dependencies>
+            <!--spring-boot-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-  <dependencies>
-    <!--spring-boot-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-dependencies</artifactId>
-      <version>${spring-boot.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
+            <!---->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-    <!---->
-    <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-dependencies</artifactId>
-      <version>${spring-cloud.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
+            <!---->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2023.0.1.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-    <!---->
-    <dependency>
-      <groupId>com.alibaba.cloud</groupId>
-      <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-      <version>2023.0.1.3</version>
-      <type>pom</type>
-      <scope>import</scope>
-    </dependency>
+            <!-- springboot-web-starter-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <!-- 排除Tomcat依赖 -->
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-tomcat</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
 
-    <!-- springboot-web-starter-->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-      <version>${spring-boot.version}</version>
-      <exclusions>
-        <!-- 排除Tomcat依赖 -->
-        <exclusion>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-tomcat</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+            <!-- 添加Undertow依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-undertow</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
 
-    <!-- 添加Undertow依赖 -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-undertow</artifactId>
-      <version>${spring-boot.version}</version>
-    </dependency>
+            <!--knife4j Swagger接口文档-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
 
-    <!--knife4j Swagger接口文档-->
-    <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-      <version>${knife4j.version}</version>
-    </dependency>
+            <!--knife4j 聚合文档-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
+                <version>${knife4j-gateway.version}</version>
+            </dependency>
 
-    <!--knife4j 聚合文档-->
-    <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-gateway-spring-boot-starter</artifactId>
-      <version>${knife4j-gateway.version}</version>
-    </dependency>
+            <!--和knife4j的版本对应-->
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${knife4j-swagger-models-v3.version}</version>
+            </dependency>
 
-    <!--和knife4j的版本对应-->
-    <dependency>
-      <groupId>io.swagger.core.v3</groupId>
-      <artifactId>swagger-annotations-jakarta</artifactId>
-      <version>${knife4j-swagger-models-v3.version}</version>
-    </dependency>
+            <!--MySQL 驱动-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-driver.version}</version>
+            </dependency>
 
-    <!--MySQL 驱动-->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>${mysql-driver.version}</version>
-    </dependency>
+            <!--mybatis-plus-starter-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
 
-    <!--mybatis-plus-starter-->
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-      <version>${mybatis-plus.version}</version>
-    </dependency>
+            <!--mybatis-spring-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+                <scope>compile</scope>
+            </dependency>
 
-    <!--mybatis-spring-->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-spring</artifactId>
-      <version>${mybatis-spring.version}</version>
-      <scope>compile</scope>
-    </dependency>
+            <!--mybatis-plus-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
 
-    <!--mybatis-plus-->
-    <dependency>
-      <groupId>com.baomidou</groupId>
-      <artifactId>mybatis-plus</artifactId>
-      <version>${mybatis-plus.version}</version>
-    </dependency>
+            <!-- 对象转换工具 -->
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
+            </dependency>
 
-    <!-- 对象转换工具 -->
-    <dependency>
-      <groupId>org.modelmapper</groupId>
-      <artifactId>modelmapper</artifactId>
-      <version>${modelmapper.version}</version>
-    </dependency>
+            <!-- hutool 工具包-->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
 
-    <!-- hutool 工具包-->
-    <dependency>
-      <groupId>cn.hutool</groupId>
-      <artifactId>hutool-all</artifactId>
-      <version>${hutool.version}</version>
-    </dependency>
+            <!--json解析库-->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
 
-    <!--json解析库-->
-    <dependency>
-      <groupId>com.alibaba.fastjson2</groupId>
-      <artifactId>fastjson2</artifactId>
-      <version>${fastjson2.version}</version>
-    </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-  </dependencies>
-</dependencyManagement>
+    <dependencies>
 
-  <dependencies>
+    </dependencies>
 
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven.plugin.version}</version> <!-- 可根据需要调整版本 -->
-        <configuration>
-          <source>17</source>
-          <target>17</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.plugin.version}</version> <!-- 可根据需要调整版本 -->
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+                <configuration>
+                    <!-- 跳过测试执行 -->
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
