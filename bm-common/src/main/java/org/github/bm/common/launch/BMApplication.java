@@ -2,8 +2,6 @@ package org.github.bm.common.launch;
 
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.constant.AppConstant;
-import org.github.bm.common.constant.LauncherConstant;
-import org.github.bm.common.constant.NacosConstant;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ConfigurableApplicationContext;

@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.github.bm.common.constant;
+package org.github.bm.common.launch;
 
 /**
- * Nacos常量.
+ * Nacos配置常量
  */
 public interface NacosConstant {
-
-    /**
-     * nacos 地址
-     */
-    String NACOS_ADDR = "127.0.0.1:8848";
-
     /**
      * nacos 配置前缀
      */
