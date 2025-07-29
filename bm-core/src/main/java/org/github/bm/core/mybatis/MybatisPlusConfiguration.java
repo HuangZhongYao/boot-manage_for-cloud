@@ -59,7 +59,7 @@ public class MybatisPlusConfiguration {
     @Bean
     @ConditionalOnProperty(value = "bm.mybatis-plus.sql-log", matchIfMissing = true)
     public SqlLogInterceptor sqlLogInterceptor() {
-        log.info(" sql 日志拦截器加载...");
+        log.info("sql 日志拦截器加载...");
         return new SqlLogInterceptor();
     }
 }

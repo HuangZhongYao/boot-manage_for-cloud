@@ -3,10 +3,16 @@ package org.github.bm.auth.web;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.github.bm.common.base.response.ApiResponse;
+import org.github.bm.common.exception.UserFriendlyException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -20,13 +26,23 @@ public class AuthController {
 
     @Operation(summary = "认证接口")
     @GetMapping("/demoLogin")
-    public String auth() {
+    public String auth(@RequestParam(value = "id", required =true) String id) {
         return "auth";
     }
-    @Operation(summary = "认证接口")
+    @Operation(summary = "sys接口")
     @GetMapping("/sys")
     public ApiResponse<Properties> sys() {
-        return ApiResponse.ok(System.getProperties());
+        throw new UserFriendlyException("操作错误了，请不要调用这个接口");
+//        return ApiResponse.ok(System.getProperties());
+    }
+
+    @Operation(summary = "date接口")
+    @GetMapping("/date")
+    public ApiResponse<Map<String,Object>> map() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("date",new Date());
+        map.put("datelocal", LocalDateTime.now());
+        return ApiResponse.ok(map);
     }
 
 }

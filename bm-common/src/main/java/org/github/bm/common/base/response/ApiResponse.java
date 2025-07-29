@@ -40,7 +40,7 @@ public class ApiResponse<Result> extends AbstractResponse {
      * @param <Result> 结果数据的泛型类型。
      * @return 返回一个包含成功结果的响应对象。
      */
-    public static <Result> ApiResponse ok(Result result) {
+    public static <Result> ApiResponse<Result> ok(Result result) {
         return new ApiResponse<Result>(ResponseCode.OK.getCode(), "操作成功", "", true, result);
 
     }
@@ -53,7 +53,7 @@ public class ApiResponse<Result> extends AbstractResponse {
      * @param <Result> 结果数据的泛型类型。
      * @return 返回一个包含成功结果的响应对象。
      */
-    public static <Result> ApiResponse ok(Result result, String msg) {
+    public static <Result> ApiResponse<Result> ok(Result result, String msg) {
         return new ApiResponse<Result>(ResponseCode.OK.getCode(), msg, "", true, result);
 
     }
