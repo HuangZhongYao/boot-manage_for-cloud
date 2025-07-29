@@ -55,6 +55,8 @@ public class BMApplication {
 
         // 构建Springboot启动器
         SpringApplicationBuilder builder = new SpringApplicationBuilder(primarySource);
+        // 设置环境
+        builder.profiles(env);
         // 添加自定义配置类来设置扫描包
         builder.sources(new Object() {
             @Configuration
