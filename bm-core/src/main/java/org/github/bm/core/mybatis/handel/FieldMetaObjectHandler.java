@@ -1,6 +1,7 @@
 package org.github.bm.core.mybatis.handel;
 
 //import cn.dev33.satoken.stp.StpUtil;
+
 import cn.hutool.core.lang.generator.SnowflakeGenerator;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import jakarta.annotation.Resource;
@@ -33,7 +34,7 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         // 判断是否有id字段且值为空
         if (metaObject.hasGetter("id") && metaObject.getValue("id") == null) {
-            strictInsertFill(metaObject, "id", Long.class, idGenerator.next());
+            metaObject.setValue("id", idGenerator.next());
         }
         // 填充创建人
         String operator = this.getLoginUserId();
@@ -62,9 +63,10 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
 
     /**
      * 获取当前登录人id
+     *
      * @return
      */
-    private String getLoginUserId(){
+    private String getLoginUserId() {
         // 获取操作人
 //        Object loginId = StpUtil.getLoginIdDefaultNull();
         Object loginId = null;

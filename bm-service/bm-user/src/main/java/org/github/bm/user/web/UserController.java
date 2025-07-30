@@ -6,12 +6,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.DependentRequired;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
 import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.enums.GenderEnum;
 import org.github.bm.user.feign.IUserClient;
 import org.github.bm.user.repositery.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,15 +33,23 @@ public class UserController extends BaseController {
 
     @Operation(summary = "根据Id获取用户")
     @GetMapping("/getById")
-    public Object getByid(){
+    public Object getByid() {
         ArrayList<Long> longs = new ArrayList<>();
-        for (int i = 0; i <100 ; i++) {
+        for (int i = 0; i < 100; i++) {
             longs.add(snowflakeGenerator.next());
         }
-        List<UserEntity> userEntities = userRepository.selectList(new QueryWrapper<UserEntity>().eq("1","1"));
+        List<UserEntity> userEntities = userRepository.selectList(new QueryWrapper<UserEntity>().eq("1", "1"));
         HashMap<String, Object> stringObjectHashMap = new HashMap<>();
-        stringObjectHashMap.put("adf",longs);
-        stringObjectHashMap.put("adfsdfsd",userEntities);
+        stringObjectHashMap.put("adf", longs);
+        stringObjectHashMap.put("adfsdfsd", userEntities);
         return stringObjectHashMap;
+    }
+
+    @Operation(summary = "根据Id获取用户")
+    @PostMapping("/save")
+    public ApiResponse<Boolean> save() {
+        UserEntity userEntity = UserEntity.builder().account("xxxxxxx45454").phone("17685306043").password("dfsdfsdfsdfsd").enable(Boolean.TRUE).avatarUrl("34234").gender(GenderEnum.MALE).username("7878").build();
+        int insert = userRepository.insert(userEntity);
+        return ApiResponse.ok(insert > 0);
     }
 }

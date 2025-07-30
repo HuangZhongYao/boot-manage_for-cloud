@@ -68,7 +68,7 @@ public class RedisTemplateConfiguration {
 				.cacheDefaults(redisCacheConfiguration).build();
 	}
 
-	@Bean(name = "redisService")
+	@Bean
 	@ConditionalOnBean(RedisTemplate.class)
 	public RedisService redisUtils(RedisTemplate<String, Object> redisTemplate) {
 		log.info("注册 RedisService 中...");
