@@ -20,7 +20,7 @@ public abstract class AbstractIdEntity implements IEntity{
     /**
      * 自增主键id
      */
-    @TableId(value = "id",type = IdType.AUTO)
+    @TableId(value = "id",type = IdType.INPUT)
     private Long id;
 
     public Long getId() {

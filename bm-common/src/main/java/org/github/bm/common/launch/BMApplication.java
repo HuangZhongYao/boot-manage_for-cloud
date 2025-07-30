@@ -5,8 +5,6 @@ import org.github.bm.common.constant.AppConstant;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.*;
 import org.springframework.util.StringUtils;
 
@@ -57,13 +55,6 @@ public class BMApplication {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(primarySource);
         // 设置环境
         builder.profiles(env);
-        // 添加自定义配置类来设置扫描包
-        builder.sources(new Object() {
-            @Configuration
-            @ComponentScan(basePackages = {AppConstant.BASE_PACKAGES})
-            static class CustomScanConfig {
-            }
-        }.getClass());
         // 添加监听器
         builder.listeners((WebServerInitializedEvent event) -> {
             int localPort = event.getWebServer().getPort();

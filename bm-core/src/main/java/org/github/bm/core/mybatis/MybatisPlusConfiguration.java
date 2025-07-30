@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @Time 2024-07-11 16:22
  * @Author HuangZhongYao
  */
-@MapperScan("org.github.bm.**.repository")
+@MapperScan("org.github.bm.**.repositery")
 @Configuration
 @EnableTransactionManagement
 public class MybatisPlusConfiguration {

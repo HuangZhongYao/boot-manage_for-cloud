@@ -1,7 +1,9 @@
 package org.github.bm.core.mybatis.handel;
 
 //import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.lang.generator.SnowflakeGenerator;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -19,6 +21,9 @@ import java.time.LocalDateTime;
 @Component
 public class FieldMetaObjectHandler implements MetaObjectHandler {
 
+    @Resource
+    private SnowflakeGenerator idGenerator;
+
     /**
      * 填充插入填充
      *
@@ -26,6 +31,10 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
      */
     @Override
     public void insertFill(MetaObject metaObject) {
+        // 判断是否有id字段且值为空
+        if (metaObject.hasGetter("id") && metaObject.getValue("id") == null) {
+            strictInsertFill(metaObject, "id", Long.class, idGenerator.next());
+        }
         // 填充创建人
         String operator = this.getLoginUserId();
         this.strictInsertFill(metaObject, "createdBy", String.class, operator);
