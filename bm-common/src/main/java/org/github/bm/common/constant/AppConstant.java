@@ -1,8 +1,11 @@
 package org.github.bm.common.constant;
 
+import org.github.bm.common.enums.ServiceEnum;
+
+import java.util.Set;
+
 /**
  * 系统常量
- *
  */
 public interface AppConstant {
 
@@ -20,31 +23,11 @@ public interface AppConstant {
 	 * 应用名前缀
 	 */
 	String APPLICATION_NAME_PREFIX = "bm-";
-	/**
-	 * 网关模块名称
-	 */
-	String APPLICATION_GATEWAY_NAME = APPLICATION_NAME_PREFIX + "gateway";
-	/**
-	 * 授权模块名称
-	 */
-	String APPLICATION_AUTH_NAME = APPLICATION_NAME_PREFIX + "auth";
-	/**
-	 * 资源模块名称
-	 */
-	String APPLICATION_RESOURCE_NAME = APPLICATION_NAME_PREFIX + "resource";
-	/**
-	 * springboot admin模块名称
-	 */
-	String APPLICATION_ADMIN_NAME = APPLICATION_NAME_PREFIX + "admin";
-	/**
-	 * 系统模块名称
-	 */
-	String APPLICATION_SYSTEM_NAME = APPLICATION_NAME_PREFIX + "system";
-	/**
-	 * 用户模块名称
-	 */
-	String APPLICATION_USER_NAME = APPLICATION_NAME_PREFIX + "user";
 
+	/**
+	 * 应用微服务集合
+	 */
+	Set<ServiceEnum> SERVICES = Set.of(ServiceEnum.values());
 
 	/**
 	 * 开发环境

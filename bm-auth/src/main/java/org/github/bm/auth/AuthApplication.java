@@ -1,6 +1,7 @@
 package org.github.bm.auth;
 
 import org.github.bm.common.constant.AppConstant;
+import org.github.bm.common.enums.ServiceEnum;
 import org.github.bm.common.launch.BMApplication;
 import org.github.bm.core.annotations.BMCloudApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @BMCloudApplication
 public class AuthApplication {
     public static void main(String[] args) {
-        BMApplication.run(AppConstant.APPLICATION_AUTH_NAME, AuthApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_AUTH.name, AuthApplication.class, args);
     }
 }
