@@ -20,7 +20,7 @@ public abstract class AbstractIdEntity implements IEntity{
     private static final long serialVersionUID = -1160371774869499257L;
 
     /**
-     * 自增主键id
+     * 主键id
      */
     @TableId(value = "id",type = IdType.INPUT)
     private Long id;

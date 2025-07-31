@@ -4,8 +4,10 @@ import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import org.github.bm.auth.service.IAuthService;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.exception.UserFriendlyException;
+import org.github.bm.common.security.AuthInfo;
 import org.github.bm.core.service.RedisService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +31,15 @@ public class AuthController {
 
     @Resource
     RedisService redisService;
+    @Resource
+    IAuthService authService;
+
     @Operation(summary = "认证接口")
     @GetMapping("/demoLogin")
-    public String auth(@RequestParam(value = "id", required =true) String id) {
-        return "auth";
+    public ApiResponse<AuthInfo> auth(@RequestParam(value = "id", required = true) String id) {
+        return ApiResponse.ok(authService.login());
     }
+
     @Operation(summary = "sys接口")
     @GetMapping("/sys")
     public ApiResponse<Properties> sys() {
@@ -43,9 +49,9 @@ public class AuthController {
 
     @Operation(summary = "date接口")
     @GetMapping("/date")
-    public ApiResponse<Map<String,Object>> map() {
+    public ApiResponse<Map<String, Object>> map() {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("date",new Date());
+        map.put("date", new Date());
         map.put("datelocal", LocalDateTime.now());
         return ApiResponse.ok(map);
     }
@@ -54,7 +60,7 @@ public class AuthController {
     @GetMapping("/redis")
     public ApiResponse<String> redis() {
         redisService.set("redis", "redis");
-        redisService.hset("redis-hash", "hash-k","hash-v");
+        redisService.hset("redis-hash", "hash-k", "hash-v");
         redisService.hset("redis-hash", "hash-k1", JSON.toJSONString(System.getenv()));
         return ApiResponse.ok(redisService.get("redis").toString());
     }
