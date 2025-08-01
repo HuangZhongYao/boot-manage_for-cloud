@@ -51,6 +51,7 @@
         <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
         <mysql-driver.version>8.0.33</mysql-driver.version>
         <modelmapper.version>3.2.0</modelmapper.version>
+        <openfeign.version>4.1.1</openfeign.version>
         <knife4j.version>4.5.0</knife4j.version>
         <knife4j-gateway.version>4.4.0</knife4j-gateway.version>
         <knife4j-swagger-models-v3.version>2.2.19</knife4j-swagger-models-v3.version>
@@ -72,7 +73,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!---->
+            <!--SpringCloud-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -81,7 +82,13 @@
                 <scope>import</scope>
             </dependency>
 
-            <!---->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+
+            <!--SpringCloud Alibaba-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
