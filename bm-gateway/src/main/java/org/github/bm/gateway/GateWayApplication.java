@@ -17,7 +17,7 @@ import java.net.InetAddress;
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {AppConstant.BASE_PACKAGES})
 public class GateWayApplication implements ApplicationRunner {
     @Resource
     Environment env;

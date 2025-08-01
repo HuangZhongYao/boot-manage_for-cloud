@@ -19,6 +19,8 @@ public enum ResponseCode {
     LOGIN_EXPIRED(402, "登录过期"),
     NO_PERMISSION(403, "没有操作权限"),
     NOT_FOUND(404, "没有该api或资源"),
+    ERROR(500, "没有该api或资源"),
+    ILLEGAL_REQUEST(510, "非法的请求,内调用认证失败"),
     ;
 
     /**

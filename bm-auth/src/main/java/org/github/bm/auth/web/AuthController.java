@@ -8,6 +8,7 @@ import org.github.bm.auth.service.IAuthService;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.security.AuthInfo;
+import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.core.service.RedisService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,6 +54,7 @@ public class AuthController {
         HashMap<String, Object> map = new HashMap<>();
         map.put("date", new Date());
         map.put("datelocal", LocalDateTime.now());
+        map.put("authUser", SecurityContextHolder.getAuthUser());
         return ApiResponse.ok(map);
     }
 
