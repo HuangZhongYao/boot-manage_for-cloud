@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  * Time 2025-07-31 10:41
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
+
 @Slf4j
 @Component
 public class Knife4JGatewayServiceExcludeService implements GatewayServiceExcludeService {
@@ -30,12 +31,10 @@ public class Knife4JGatewayServiceExcludeService implements GatewayServiceExclud
      */
     @Override
     public Set<String> exclude(Environment environment, Knife4jGatewayProperties properties, List<String> services) {
-        log.info("初始化聚合文档...");
         // 获取服务发现配置信息
         Knife4jGatewayProperties.Discover discover = properties.getDiscover();
         // 排除服务
         Set<String> excludeService = services.stream().filter(serviceName -> discover.getExcludedServices().contains(serviceName) || !serviceName.startsWith(AppConstant.APPLICATION_NAME_PREFIX)).collect(Collectors.toSet());
-        log.info("排除 {} 网关聚合文档服务...", excludeService);
         // 获取聚合文档服务配置信息
         Map<String, Knife4jGatewayProperties.ServiceConfigInfo> serviceConfig = discover.getServiceConfig();
         // 设置聚合文档中的服务名称

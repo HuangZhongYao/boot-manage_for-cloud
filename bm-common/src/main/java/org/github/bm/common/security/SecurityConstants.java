@@ -1,5 +1,7 @@
 package org.github.bm.common.security;
 
+import java.util.List;
+
 public interface SecurityConstants {
 
     /**
@@ -14,6 +16,21 @@ public interface SecurityConstants {
      * 认证信息Key
      */
     String CONTEXT_HOLDER_USER_KEY = "BM-Authorization-User";
+
+    /**
+     * 默认排除的URL 不进行鉴权
+     */
+    List<String> DEFAULT_EXCLUDE_PATTERNS = List.of(
+            "/actuator/**",
+            "/actuator/health/**",
+            "/v2/api-docs/**",
+            "/v3/api-docs/**",
+            "/auth/login",
+            "/auth/loginOut",
+            "/doc.html/**",
+            "/error/**",
+            "/assets/**"
+    );
 
     //================================== 内部调用认证 Begin
     /**

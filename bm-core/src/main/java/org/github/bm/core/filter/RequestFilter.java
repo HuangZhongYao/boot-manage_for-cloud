@@ -23,8 +23,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Time 2025-08-01 10:53
@@ -37,24 +35,13 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
     @Resource
     SecurityProperties securityProperties;
 
-    /**
-     * 默认的排除路径，不要拦截
-     */
-    private final List<String> defaultExcludePatterns = new ArrayList<>();
+
     /**
      * 匹配器
      */
     private final AntPathMatcher matcher = new AntPathMatcher();
 
     public RequestFilter() {
-        this.defaultExcludePatterns.add("/actuator/**");
-        this.defaultExcludePatterns.add("/actuator/health/**");
-        this.defaultExcludePatterns.add("/v2/api-docs/**");
-        this.defaultExcludePatterns.add("/v3/api-docs/**");
-        this.defaultExcludePatterns.add("/auth/**");
-        this.defaultExcludePatterns.add("/doc.html/**");
-        this.defaultExcludePatterns.add("/error/**");
-        this.defaultExcludePatterns.add("/assets/**");
     }
 
     @Override
@@ -109,7 +96,7 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
     }
 
     private boolean isSkip(String path) {
-        return defaultExcludePatterns
+        return SecurityConstants.DEFAULT_EXCLUDE_PATTERNS
                 .stream()
                 .anyMatch(skipUrl -> matcher.match(skipUrl, path))
                 ||
