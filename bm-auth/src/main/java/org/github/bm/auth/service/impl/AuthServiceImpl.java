@@ -46,4 +46,9 @@ public class AuthServiceImpl implements IAuthService {
         authInfo.setTokenPrefix(securityProperties.getToken().getPrefix());
         return authInfo;
     }
+
+    @Override
+    public Boolean loginOut() {
+        return true;
+    }
 }

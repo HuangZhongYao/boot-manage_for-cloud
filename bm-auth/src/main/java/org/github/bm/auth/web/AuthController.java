@@ -35,10 +35,16 @@ public class AuthController {
     @Resource
     IAuthService authService;
 
-    @Operation(summary = "认证接口")
-    @GetMapping("/demoLogin")
+    @Operation(summary = "登录认证")
+    @GetMapping("/login")
     public ApiResponse<AuthInfo> auth(@RequestParam(value = "id", required = true) String id) {
         return ApiResponse.ok(authService.login());
+    }
+
+    @Operation(summary = "注销登录")
+    @GetMapping("/loginOut")
+    public ApiResponse<Boolean> loginOut() {
+        return ApiResponse.ok(authService.loginOut());
     }
 
     @Operation(summary = "sys接口")
