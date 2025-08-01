@@ -1,10 +1,11 @@
 package org.github.bm.common.security;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.github.bm.common.base.entity.AbstractIdEntity;
 
 import java.io.Serial;
-
+@Setter
 @Getter
 public class AuthUser extends AbstractIdEntity {
     @Serial
@@ -24,7 +25,6 @@ public class AuthUser extends AbstractIdEntity {
      * 手机号
      */
     private String phone;
-
 
     /**
      * 启用状态

@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
+import org.github.bm.common.security.AuthUser;
+import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.enums.GenderEnum;
 import org.github.bm.user.feign.IUserClient;
@@ -50,6 +52,7 @@ public class UserController extends BaseController {
     public ApiResponse<Boolean> save() {
         UserEntity userEntity = UserEntity.builder().account("xxxxxxx45454").phone("17685306043").password("dfsdfsdfsdfsd").enable(Boolean.TRUE).avatarUrl("34234").gender(GenderEnum.MALE).username("7878").build();
         int insert = userRepository.insert(userEntity);
+        AuthUser authUser = SecurityContextHolder.getAuthUser();
         return ApiResponse.ok(insert > 0);
     }
 }

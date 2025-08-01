@@ -14,12 +14,12 @@ import lombok.Getter;
 public enum ResponseCode {
     OK(200, "操作成功"),
     FAILED(500, "操作失败"),
-    VALIDATION_FAILED(410, "参数验证失败"),
+    REQUEST_FAILED(400, "操作失败"),
     NOT_LOGIN(401, "未登录"),
     LOGIN_EXPIRED(402, "登录过期"),
     NO_PERMISSION(403, "没有操作权限"),
     NOT_FOUND(404, "没有该api或资源"),
-    ERROR(500, "没有该api或资源"),
+    VALIDATION_FAILED(410, "参数验证失败"),
     ILLEGAL_REQUEST(510, "非法的请求,内调用认证失败"),
     ;
 

@@ -19,6 +19,10 @@ public class ErrorResponse extends AbstractResponse {
         super(ResponseCode.FAILED.getCode(), msg, path, success);
     }
 
+    public ErrorResponse(int code,String msg, String path, Boolean success) {
+        super(code, msg, path, success);
+    }
+
     @Override
     public void setMessage(String message) {
         super.setMessage(message);

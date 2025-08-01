@@ -3,9 +3,13 @@ package org.github.bm.common.security;
 public interface SecurityConstants {
 
     /**
-     * 客户端请求认证头
+     * 客户端请求令牌头
      */
-    String AUTH_HEADER_KEY = "Authorization";
+    String AUTH_HEADER_KEY = "BM-Authorization";
+    /**
+     * 刷新令牌头
+     */
+    String REFRESH_AUTH_HEADER_KEY = "BM-Refresh-Authorization";
     /**
      * 认证信息Key
      */
@@ -25,13 +29,16 @@ public interface SecurityConstants {
      */
     String GATEWAY_AUTHORIZATION_KEY = GATEWAY_AUTHORIZATION_PREFIX + "Authorization";
     /**
-     * 网关透传用户ID
+     * 网关透传请求上下文信息KEY
      */
-    String GATEWAY_AUTHORIZATION_ID_KEY = GATEWAY_AUTHORIZATION_KEY + "-id";
+    String GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY = GATEWAY_AUTHORIZATION_KEY + "-ContextHolder";
 
     //================================== 内部调用认证 End
 
+    /**
+     * 生成jwt令牌常量
+     */
     interface JwtConstants {
-        String PAYLOAD_ID = "id";
+        String PAYLOAD_AUTHORIZATION_USER = "payload-authorization";
     }
 }

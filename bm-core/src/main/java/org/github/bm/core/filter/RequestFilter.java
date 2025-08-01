@@ -17,11 +17,14 @@ import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Time 2025-08-01 10:53
@@ -34,11 +37,45 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
     @Resource
     SecurityProperties securityProperties;
 
+    /**
+     * 默认的排除路径，不要拦截
+     */
+    private final List<String> defaultExcludePatterns = new ArrayList<>();
+    /**
+     * 匹配器
+     */
+    private final AntPathMatcher matcher = new AntPathMatcher();
+
+    public RequestFilter() {
+        this.defaultExcludePatterns.add("/actuator/**");
+        this.defaultExcludePatterns.add("/actuator/health/**");
+        this.defaultExcludePatterns.add("/v2/api-docs/**");
+        this.defaultExcludePatterns.add("/v3/api-docs/**");
+        this.defaultExcludePatterns.add("/auth/**");
+        this.defaultExcludePatterns.add("/doc.html/**");
+        this.defaultExcludePatterns.add("/error/**");
+        this.defaultExcludePatterns.add("/assets/**");
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+
+            // 解析请求用户上下文信息
+            String authorizationContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY);
+            if (authorizationContextHolder != null) {
+                AuthUser authUser = JSON.parseObject(authorizationContextHolder, AuthUser.class);
+                request.setAttribute(SecurityConstants.CONTEXT_HOLDER_USER_KEY, authUser);
+            }
+
             // 获取请求路径
             String path = request.getRequestURI();
+
+            // 是否是放行路径
+            if (isSkip(path)) {
+                filterChain.doFilter(request, response);
+                return;
+            }
 
             // 内部调用认证
             if (securityProperties.getInternalValid() != null && securityProperties.getInternalValid().getEnable()) {
@@ -46,18 +83,10 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
                 String internalToken = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_KEY);
                 // 验证内部调用token
                 if (!securityProperties.getInternalValid().getToken().equals(internalToken)) {
-                    log.warn(ResponseCode.ILLEGAL_REQUEST.message);
+                    log.warn(path + " " + ResponseCode.ILLEGAL_REQUEST.message);
                     this.buildErrorResponse(response, path, ResponseCode.ILLEGAL_REQUEST.message);
                     return;
                 }
-            }
-
-            // 解析请求用户上下文信息
-            String header = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_ID_KEY);
-            if (header != null) {
-                AuthUser authUser = new AuthUser();
-                authUser.setId(Long.valueOf(header));
-                request.setAttribute(SecurityConstants.CONTEXT_HOLDER_USER_KEY, authUser);
             }
 
             filterChain.doFilter(request, response);
@@ -77,6 +106,16 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
         writer.write(JSON.toJSONString(new ErrorResponse(msg, path, false)));
         writer.flush();
         writer.close();
+    }
+
+    private boolean isSkip(String path) {
+        return defaultExcludePatterns
+                .stream()
+                .anyMatch(skipUrl -> matcher.match(skipUrl, path))
+                ||
+                securityProperties.getSkipUrl()
+                        .stream()
+                        .anyMatch(skipUrl -> matcher.match(skipUrl, path));
     }
 
     @Override

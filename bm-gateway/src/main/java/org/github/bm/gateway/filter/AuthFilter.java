@@ -1,15 +1,19 @@
 
 package org.github.bm.gateway.filter;
 
+import cn.hutool.core.convert.NumberWithFormat;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
+import cn.hutool.jwt.RegisteredPayload;
 import com.alibaba.fastjson2.JSON;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.base.response.ErrorResponse;
+import org.github.bm.common.base.response.ResponseCode;
 import org.github.bm.common.enums.ServiceEnum;
 import org.github.bm.common.prop.SecurityProperties;
+import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -49,23 +53,29 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		String headerToken = exchange.getRequest().getHeaders().getFirst(SecurityConstants.AUTH_HEADER_KEY);
 		String paramToken = exchange.getRequest().getQueryParams().getFirst(SecurityConstants.AUTH_HEADER_KEY);
 		String token = StrUtil.isNotBlank(headerToken) ? headerToken : paramToken;
-
+		// 验证是否携带令牌
 		if (StrUtil.isAllBlank(headerToken, paramToken)) {
-			return this.error(response, path, "缺失令牌,鉴权失败");
+			return this.error(response, path, "缺失令牌,鉴权失败", ResponseCode.REQUEST_FAILED.code);
 		}
-		// 验证令牌
+		// 验证令牌有效性
 		if (!JWTUtil.verify(token, securityProperties.getToken().getSecret().getBytes())) {
-			return this.error(response, path, "令牌验证失败");
+			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
 		}
 
 		// 解析令牌
 		JWT jwt = JWTUtil.parseToken(headerToken);
-		Object payload = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_ID);
-
-		// 透传header给下游服务
+		// 获取令牌过期时间
+		NumberWithFormat expiresAtNumber = (NumberWithFormat) jwt.getPayload(RegisteredPayload.EXPIRES_AT);
+		// 验证令牌是否过期
+		if ((System.currentTimeMillis() / 1000) > expiresAtNumber.intValue()) {
+			return this.error(response, path, "令牌已过期", ResponseCode.LOGIN_EXPIRED.code);
+		}
+		// 获取token中用户信息
+		String authUser = (String) jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER);
+		// 透传请求上下文信息给下游服务
 		exchange.getRequest()
 				.mutate()
-				.header(SecurityConstants.GATEWAY_AUTHORIZATION_ID_KEY, payload.toString())
+				.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authUser)
 				.header(SecurityConstants.REQUEST_SOURCE, ServiceEnum.APPLICATION_GATEWAY.name)
 				.header(SecurityConstants.GATEWAY_AUTHORIZATION_KEY, securityProperties.getInternalValid().getToken())
 				.build();
@@ -73,10 +83,10 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		return chain.filter(exchange);
 	}
 
-	private Mono<Void> error(ServerHttpResponse response, String path, String msg) {
-		response.setStatusCode(HttpStatus.UNAUTHORIZED);
+	private Mono<Void> error(ServerHttpResponse response, String path, String msg, int code) {
+		response.setStatusCode(HttpStatus.OK);
 		response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-		String result = JSON.toJSONString(new ErrorResponse(msg, path, false));
+		String result = JSON.toJSONString(new ErrorResponse(code, msg, path, false));
 		DataBuffer buffer = response.bufferFactory().wrap(result.getBytes(StandardCharsets.UTF_8));
 		return response.writeWith(Flux.just(buffer));
 	}
