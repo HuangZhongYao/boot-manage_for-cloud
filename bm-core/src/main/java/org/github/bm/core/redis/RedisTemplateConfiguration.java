@@ -2,7 +2,7 @@
 package org.github.bm.core.redis;
 
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.core.service.RedisService;
+import org.github.bm.core.service.IRedisService;
 import org.github.bm.core.service.impl.RedisServiceImpl;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -70,8 +70,8 @@ public class RedisTemplateConfiguration {
 
 	@Bean
 	@ConditionalOnBean(RedisTemplate.class)
-	public RedisService redisUtils(RedisTemplate<String, Object> redisTemplate) {
-		log.info("注册 RedisService 中...");
+	public IRedisService redisUtils(RedisTemplate<String, Object> redisTemplate) {
+		log.info("注册 IRedisService 中...");
 		return new RedisServiceImpl(redisTemplate);
 	}
 

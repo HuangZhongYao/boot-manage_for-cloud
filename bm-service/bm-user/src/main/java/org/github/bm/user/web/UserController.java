@@ -33,7 +33,7 @@ import java.util.List;
 
 @Tag(name = "用户接口")
 @RestController
-@RequestMapping(IUserClient.API_PREFIX)
+@RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Resource

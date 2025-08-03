@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Redis Service
  */
- public interface RedisService {
+ public interface IRedisService {
 	/**
 	 * 指定缓存失效时间
 	 *

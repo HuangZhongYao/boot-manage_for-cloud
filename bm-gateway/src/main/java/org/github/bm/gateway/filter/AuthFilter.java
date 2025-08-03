@@ -45,6 +45,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		String path = exchange.getRequest().getURI().getPath();
 		// 是否是放行路径
 		if (isSkip(path)) {
+			//
+			exchange.getRequest()
+					.mutate()
+					.header(SecurityConstants.REQUEST_SOURCE_PATH, path)
+					.build();
 			return chain.filter(exchange);
 		}
 		// 获取响应对象
@@ -75,6 +80,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		// 透传请求上下文信息给下游服务
 		exchange.getRequest()
 				.mutate()
+				.header(SecurityConstants.REQUEST_SOURCE_PATH, path)
 				.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authUser)
 				.header(SecurityConstants.REQUEST_SOURCE, ServiceEnum.APPLICATION_GATEWAY.name)
 				.header(SecurityConstants.GATEWAY_AUTHORIZATION_KEY, securityProperties.getInternalValid().getToken())

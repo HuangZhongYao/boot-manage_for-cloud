@@ -57,9 +57,10 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
 
             // 获取请求路径
             String path = request.getRequestURI();
-
-            // 是否是放行路径
-            if (isSkip(path)) {
+            // 获取原始路径
+            String sourcePath = request.getHeader(SecurityConstants.REQUEST_SOURCE_PATH);
+            // 是否放行路径支持原始路径匹配; 列子：认证服务的登录请求放行那登录请求触发的调用下游服务也放行
+            if (isSkip(path) || isSkip(sourcePath)) {
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -75,7 +76,6 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
                     return;
                 }
             }
-
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             e.printStackTrace();

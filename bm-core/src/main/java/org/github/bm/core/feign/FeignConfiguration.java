@@ -29,14 +29,16 @@ public class FeignConfiguration {
         return template -> {
             // 获取请求
             RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-
             if (null != requestAttributes) {
                 ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
                 HttpServletRequest request = servletRequestAttributes.getRequest();
                 // 透传请求源
                 String source = request.getHeader(SecurityConstants.REQUEST_SOURCE);
-                source = StrUtil.isNotBlank(source) ? source + " -> " + appName : source;
+                source = StrUtil.isNotBlank(source) ? source + " -> " + appName : appName;
                 template.header(SecurityConstants.REQUEST_SOURCE, source);
+                // 透传请求源path
+                String sourcePath = request.getHeader(SecurityConstants.REQUEST_SOURCE_PATH);
+                template.header(SecurityConstants.REQUEST_SOURCE_PATH, sourcePath);
                 // 透传请求上下文
                 String authorizationContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY);
                 if (authorizationContextHolder != null) {

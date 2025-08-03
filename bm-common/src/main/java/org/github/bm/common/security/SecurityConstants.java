@@ -38,6 +38,10 @@ public interface SecurityConstants {
      */
     String REQUEST_SOURCE = "X-Request-Source";
     /**
+     * 调用源路径
+     */
+    String REQUEST_SOURCE_PATH = "X-Request-Source-Path";
+    /**
      * 网关认证前缀
      */
     String GATEWAY_AUTHORIZATION_PREFIX = "X-Gateway-";
@@ -56,6 +60,20 @@ public interface SecurityConstants {
      * 生成jwt令牌常量
      */
     interface JwtConstants {
+
+        /**
+         * 认证用户信息在jwt PAYLOAD 中的KEY
+         */
         String PAYLOAD_AUTHORIZATION_USER = "payload-authorization";
+
+        /**
+         * 访问令牌过期时间,单位小时
+         */
+        int ACCESS_TOKEN_EXPIRED_TIME = 3;
+        /**
+         * 刷新令牌过期时间,单位天
+         */
+        int REFRESH_TOKEN_EXPIRED_TIME = 3;
+
     }
 }

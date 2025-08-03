@@ -2,18 +2,19 @@ package org.github.bm.auth.web;
 
 import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
+import org.github.bm.auth.dto.LoginDTO;
 import org.github.bm.auth.service.IAuthService;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.SecurityContextHolder;
-import org.github.bm.core.service.RedisService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.github.bm.core.service.IRedisService;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -31,20 +32,28 @@ import java.util.Properties;
 public class AuthController {
 
     @Resource
-    RedisService redisService;
+    IRedisService redisService;
     @Resource
     IAuthService authService;
 
-    @Operation(summary = "登录认证")
-    @GetMapping("/login")
-    public ApiResponse<AuthInfo> auth(@RequestParam(value = "id", required = true) String id) {
-        return ApiResponse.ok(authService.login());
+    @Operation(summary = "登录认证", description = "登录认证接口,认证成功后返回访问令牌")
+    @PostMapping("/login")
+    public ApiResponse<AuthInfo> auth(@Validated @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
+        return ApiResponse.ok(authService.login(loginDTO));
     }
 
     @Operation(summary = "注销登录")
     @GetMapping("/loginOut")
     public ApiResponse<Boolean> loginOut() {
         return ApiResponse.ok(authService.loginOut());
+    }
+
+    @Operation(summary = "刷新令牌")
+    @GetMapping("/refreshToken")
+    public ApiResponse<String> refreshToken(
+            @Parameter(name = "refreshToken", required = true) @RequestParam(name = "refreshToken") String refreshToken
+    ) {
+        return ApiResponse.ok(authService.refreshToken(refreshToken));
     }
 
     @Operation(summary = "sys接口")

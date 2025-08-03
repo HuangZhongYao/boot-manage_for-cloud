@@ -3,6 +3,7 @@ package org.github.bm.core.annotations;
 import org.github.bm.common.constant.AppConstant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.lang.annotation.*;
 
@@ -14,6 +15,7 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = AppConstant.BASE_PACKAGES)
 @SpringBootApplication(scanBasePackages = AppConstant.BASE_PACKAGES)
 public @interface BMCloudApplication {
 

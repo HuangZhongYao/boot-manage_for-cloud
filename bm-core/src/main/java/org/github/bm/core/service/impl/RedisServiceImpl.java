@@ -1,7 +1,7 @@
 package org.github.bm.core.service.impl;
 
 import lombok.*;
-import org.github.bm.core.service.RedisService;
+import org.github.bm.core.service.IRedisService;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
 @AllArgsConstructor
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements IRedisService {
 
     private RedisTemplate<String, Object> redisTemplate;
 
