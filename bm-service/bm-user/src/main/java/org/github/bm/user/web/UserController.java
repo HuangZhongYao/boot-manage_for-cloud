@@ -68,7 +68,6 @@ public class UserController extends BaseController {
     }
 
     @Operation(summary = "添加用户", description = "添加用户接口")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "411", description = "账号已存在")
     @PostMapping(value = "/addUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> addUser(@RequestBody @Validated(Group.Insert.class) AddUserInputDTO inputDTO) {
@@ -76,43 +75,36 @@ public class UserController extends BaseController {
     }
 
     @Operation(summary = "删除用户")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @DeleteMapping(value = "/delUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> delUser(@RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
         return ApiResponse.ok(userService.delUser(inputDTO));
     }
 
     @Operation(summary = "编辑用户", description = "编辑用户接口")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/editUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> addUser(@RequestBody @Validated EditUserInputDTO inputDTO) {
         return ApiResponse.ok(userService.editUser(inputDTO));
     }
 
     @Operation(summary = "启用|停用用户", description = "启用|停用用户接口")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/setState", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> setState(@RequestBody @Validated SetUserStateInputDTO inputDTO) {
         return ApiResponse.ok(userService.setState(inputDTO));
     }
 
     @Operation(summary = "分配角色", description = "给用户分配角色")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/setRole", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> addUser(@RequestBody @Validated SetRoleInputDTO inputDTO) {
         return ApiResponse.ok(userService.setRole(inputDTO));
     }
 
     @Operation(summary = "重置密码", description = "管理员操作的")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/resetPassword", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> resetPassword(@RequestBody @Validated ResetPasswordInputDTO inputDTO) {
         return ApiResponse.ok(userService.resetPassword(inputDTO));
     }
 
     @Operation(summary = "修改密码", description = "用户自己操作的")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "420", description = "OK")
     @PatchMapping(value = "/changePassword", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> changePassword(@RequestBody @Validated ChangePasswordInputDTO inputDTO) {
         return ApiResponse.ok(userService.changePassword(inputDTO));

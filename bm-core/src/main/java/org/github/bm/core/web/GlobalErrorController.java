@@ -143,7 +143,7 @@ public class GlobalErrorController {
         String errorMsg = allErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
             .collect(Collectors.joining(";"));
         errorResponse.setMessage(errorMsg);
-        errorResponse.setCode(ResponseCode.FAILED.getCode());
+        errorResponse.setCode(ResponseCode.VALIDATION_FAILED.getCode());
 
         return errorResponse;
     }
@@ -183,7 +183,7 @@ public class GlobalErrorController {
 
         ErrorResponse errorResponse = this.buildErrorResponse(exception, request);
         errorResponse.setMessage(msg);
-        errorResponse.setCode(ResponseCode.FAILED.getCode());
+        errorResponse.setCode(ResponseCode.REQUEST_METHOD_NOT_FOUND.getCode());
         // 打印日志
         log.error("{} ", msg);
         return errorResponse;

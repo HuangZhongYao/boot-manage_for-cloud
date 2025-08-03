@@ -58,36 +58,6 @@ public class ApiResponse<Result> extends AbstractResponse {
 
     }
 
-    /**
-     * 创建一个表示失败结果的R对象。
-     * <p>
-     * 这个方法提供了一个简洁的方式，来创建一个表示操作失败的R对象，其中包含失败信息但不包括具体的错误代码。
-     * 使用者可以通过传入一个描述失败原因的字符串来定制这个失败结果。
-     *
-     * @param msg 失败的详细信息，描述了操作失败的原因。
-     * @return 返回一个新的R对象，表示操作失败。
-     */
-    public static ApiResponse failed(String msg) {
-        return new ApiResponse(ResponseCode.FAILED.getCode(), msg, "", false, null);
-
-    }
-
-
-    /**
-     * 创建一个表示失败结果的R对象，带有自定义错误代码。
-     * <p>
-     * 这个方法扩展了创建失败R对象的功能，允许用户指定一个特定的错误代码来更准确地描述失败的原因。
-     * 这对于需要根据错误代码进行不同处理逻辑的场景非常有用。
-     *
-     * @param msg  失败的详细信息，描述了操作失败的原因。
-     * @param code 自定义的错误代码，用于更精确地描述失败的原因。
-     * @return 返回一个新的R对象，表示操作失败，并携带自定义的错误代码。
-     */
-    public static ApiResponse failed(String msg, Integer code) {
-        return new ApiResponse(code, msg, "", false, null);
-
-    }
-
     public Result getResult() {
         return result;
     }
