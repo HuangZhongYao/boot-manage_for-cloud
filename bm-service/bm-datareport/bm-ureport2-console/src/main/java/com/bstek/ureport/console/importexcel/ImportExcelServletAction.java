@@ -15,30 +15,27 @@
  ******************************************************************************/
 package com.bstek.ureport.console.importexcel;
 
+import com.bstek.ureport.console.RenderPageServletAction;
+import com.bstek.ureport.console.cache.TempObjectCache;
+import com.bstek.ureport.definition.ReportDefinition;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
-import jakarta.servlet.http.Part;
-import org.apache.commons.fileupload.*;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import com.bstek.ureport.console.RenderPageServletAction;
-import com.bstek.ureport.console.cache.TempObjectCache;
-import com.bstek.ureport.definition.ReportDefinition;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
-import org.apache.commons.fileupload.util.Streams;
-
 /**
  * @author Jacky.gao
  * @since 2017年5月25日
  */
+
 public class ImportExcelServletAction extends RenderPageServletAction {
     private List<ExcelParser> excelParsers = new ArrayList<ExcelParser>();
 
@@ -81,8 +78,8 @@ public class ImportExcelServletAction extends RenderPageServletAction {
             Collection<Part> parts = req.getParts();
             // 2. 遍历处理每个文件
             for (Part part : parts) {
-                String fieldName = part.getSubmittedFileName();
-                String name = part.getName().toLowerCase();
+                String name = part.getSubmittedFileName();
+                String fieldName = part.getName().toLowerCase();
                 if (fieldName.equals("_excel_file") && (name.endsWith(".xls") || name.endsWith(".xlsx"))) {
                     InputStream inputStream = part.getInputStream();
                     for (ExcelParser parser : excelParsers) {
