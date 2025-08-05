@@ -17,6 +17,7 @@
     <modules>
         <module>bm-system</module>
         <module>bm-user</module>
+        <module>bm-datareport</module>
     </modules>
 
 </project>
