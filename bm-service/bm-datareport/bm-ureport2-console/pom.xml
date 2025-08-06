@@ -65,4 +65,23 @@
 	</organization>	
 	<name>${project.artifactId}</name>
 	<url>https://github.com/youseries/ureport/tree/master/ureport2-console</url>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.bstek.ureport.console.DataReportApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
