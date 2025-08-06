@@ -48,6 +48,10 @@ public interface AppConstant {
      * 用户模块名称
      */
     String APPLICATION_USER_NAME = AppConstant.APPLICATION_NAME_PREFIX + "user";
+    /**
+     * 数据报表模块名称
+     */
+    String APPLICATION_DATAREPORT_NAME = AppConstant.APPLICATION_NAME_PREFIX + "datareport";
 
 
     /**

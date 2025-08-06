@@ -6,22 +6,26 @@
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <!--导入-->
     <import resource="classpath:ureport-console-context.xml"/>
 
-
+    <!-- 配置UReportServlet -->
+    <bean class="org.springframework.boot.web.servlet.ServletRegistrationBean">
+        <!-- 设置Servlet实例 -->
+        <property name="servlet">
+            <bean class="com.bstek.ureport.console.UReportServlet" />
+        </property>
+        <!-- 设置URL映射 -->
+        <property name="urlMappings">
+            <list>
+                <value>/ureport/*</value>
+            </list>
+        </property>
+    </bean>
 
     <!-- 引入配置文件 -->
-
     <bean id="propertyConfigurer" parent="ureport.props">
-
-        <property name="location">
-
-            <!-- 读取配置文件 -->
-
-            <value>classpath:application.properties</value>
-
-        </property>
-
+        <property name="location" value="classpath:application.properties"/>
     </bean>
 
 </beans>

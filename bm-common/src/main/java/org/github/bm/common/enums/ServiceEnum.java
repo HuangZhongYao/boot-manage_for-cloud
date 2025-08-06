@@ -32,6 +32,10 @@ public enum ServiceEnum {
      * 用户模块枚举
      */
     APPLICATION_USER(AppConstant.APPLICATION_USER_NAME, "用户服务"),
+    /**
+     * 数据报表模块枚举
+     */
+    APPLICATION_DATAREPORT(AppConstant.APPLICATION_DATAREPORT_NAME, "数据报表服务"),
     ;
 
 
