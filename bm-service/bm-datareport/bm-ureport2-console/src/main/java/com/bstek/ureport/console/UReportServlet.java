@@ -24,6 +24,7 @@ import java.util.Map;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -35,6 +36,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author Jacky.gao
  * @since 2017年1月25日
  */
+@MultipartConfig(
+		fileSizeThreshold = 1024 * 1024 * 5,  // 5MB
+		maxFileSize = 1024 * 1024 * 100,       // 100MB
+		maxRequestSize = 1024 * 1024 * 100     // 100MB
+)
 public class UReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 533049461276487971L;
 	public static final String URL = "/ureport";
