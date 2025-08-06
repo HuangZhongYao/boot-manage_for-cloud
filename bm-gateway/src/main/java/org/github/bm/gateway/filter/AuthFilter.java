@@ -98,7 +98,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
 	}
 
 	private boolean isSkip(String path) {
-		return securityProperties.getSkipUrl().stream().anyMatch(skipUrl -> matcher.match(skipUrl, path));
+		return SecurityConstants.DEFAULT_EXCLUDE_PATTERNS
+				.stream()
+				.anyMatch(skipUrl -> matcher.match(skipUrl, path))
+				||
+				securityProperties.getSkipUrl()
+						.stream()
+						.anyMatch(skipUrl -> matcher.match(skipUrl, path));
 	}
 
 

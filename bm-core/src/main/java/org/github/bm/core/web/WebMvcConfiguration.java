@@ -82,6 +82,10 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         // 静态资源目录
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/");
+        // UReport静态资源
+        registry.addResourceHandler("/ureport/res/ureport-asserts/**")
+                .addResourceLocations("classpath:/resources/ureport-asserts/")
+                .addResourceLocations("classpath:/META-INF/resources/ureport-asserts/");
         // webjars
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
