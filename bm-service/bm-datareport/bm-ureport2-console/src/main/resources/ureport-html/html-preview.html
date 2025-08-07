@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="${contextPath}/ureport/res/ureport-asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<base href="/bm-datareport/">
+<link href="ureport/res/ureport-asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -11,12 +12,12 @@
 <style type="text/css" id="_ureport_table_style">
 	${style}
 </style>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/venderjs/jquery.min.js"></script>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/venderjs/bootstrap.min.js"></script>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/venderjs/Chart.bundle.min.js"></script>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/venderjs/chartjs-plugin-datalabels.min.js"></script>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/venderjs/bootstrap-datetimepicker.js"></script>
- 	<script type="text/javascript" src="${contextPath}/ureport/res/ureport-asserts/js/preview.bundle.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/venderjs/jquery.min.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/venderjs/bootstrap.min.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/venderjs/Chart.bundle.min.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/venderjs/chartjs-plugin-datalabels.min.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/venderjs/bootstrap-datetimepicker.js"></script>
+ 	<script type="text/javascript" src="ureport/res/ureport-asserts/js/preview.bundle.js"></script>
 </head>
 <body style="margin:5px">
 ${upSearchFormHtml}
@@ -25,42 +26,42 @@ ${upSearchFormHtml}
 	<div style="text-align:${reportAlign}">
 		#if($tools.print)
 		<button type="button" class="btn btn-default ureport-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="在线打印">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/print.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdfPrint)
 		<button type="button" class="btn btn-default ureport-pdf-direct-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线打印">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/pdf-direct-print.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/pdf-direct-print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdfPreviewPrint)
 		<button type="button" class="btn btn-default ureport-pdf-print" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="PDF在线预览打印">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/pdf-print.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/pdf-print.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pdf)
 		<button type="button" class="btn btn-default ureport-export-pdf" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出PDF">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/pdf.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/pdf.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.word)
 		<button type="button" class="btn btn-default ureport-export-word" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出WORD">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/word.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/word.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.excel)
 		<button type="button" class="btn btn-default ureport-export-excel" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="导出EXCEL">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/excel.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/excel.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.pagingExcel)
 		<button type="button" class="btn btn-default ureport-export-excel-paging" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="分页导出EXCEL">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/excel-paging.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/excel-paging.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.sheetPagingExcel)
 		<button type="button" class="btn btn-default ureport-export-excel-paging-sheet" style="display:inline-block;padding:0;background:#f8f8f8;border:none;margin:3px" title="分页分Sheet导出EXCEL">
-			<img src='${contextPath}/ureport/res/ureport-asserts/icons/excel-with-paging-sheet.svg' width="20px" height="20px">
+			<img src='ureport/res/ureport-asserts/icons/excel-with-paging-sheet.svg' width="20px" height="20px">
 		</button>
 		#end
 		#if($tools.paging)
@@ -75,14 +76,14 @@ ${upSearchFormHtml}
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				#if($hasTools)
-				<li><a href="${contextPath}/ureport/preview?_u=${file}&_t=${_t}&${customParameters}" style="color:#337ab7">预览</a></li>
+				<li><a href="ureport/preview?_u=${file}&_t=${_t}&${customParameters}" style="color:#337ab7">预览</a></li>
 				#else
-				<li><a href="${contextPath}/ureport/preview?_u=${file}&${customParameters}" style="color:#337ab7">预览</a></li>
+				<li><a href="ureport/preview?_u=${file}&${customParameters}" style="color:#337ab7">预览</a></li>
 				#end
 				#if($hasTools)
-				<li><a href="${contextPath}/ureport/preview?_u=${file}&_i=1&_t=${_t}&${customParameters}" style="color:#337ab7">分页预览</a></li>
+				<li><a href="ureport/preview?_u=${file}&_i=1&_t=${_t}&${customParameters}" style="color:#337ab7">分页预览</a></li>
 				#else
-				<li><a href="${contextPath}/ureport/preview?_u=${file}&_i=1&${customParameters}" style="color:#337ab7">分页预览</a></li>
+				<li><a href="ureport/preview?_u=${file}&_i=1&${customParameters}" style="color:#337ab7">分页预览</a></li>
 				#end
 			</ul>
 		</div>
@@ -108,7 +109,7 @@ ${downSearchFormHtml}
 <iframe name="_print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 <iframe name="_print_pdf_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 <script type="text/javascript">
-window._server="${contextPath}/ureport";
+window._server="/bm-datareport/ureport";
 window.formElements=[];
 $(document).ready(function(){
 	
