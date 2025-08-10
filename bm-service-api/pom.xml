@@ -17,7 +17,16 @@
     <modules>
         <module>bm-user-api</module>
         <module>bm-system-api</module>
+        <module>bm-resource-api</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-common</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

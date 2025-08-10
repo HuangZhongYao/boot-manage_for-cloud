@@ -29,6 +29,10 @@
 		<property name="fileStoreDir" value="${ureport.fileStoreDir}"></property>
 		<property name="disabled" value="${ureport.disableFileProvider}"></property>
 	</bean>
+
+	<!--minio 存储-->
+	<bean id="ureport.MinIOReportProvider" class="com.bstek.ureport.provider.report.minio.MinIOReportProvider">
+	</bean>
 	
 	<bean id="ureport.httpImageProvider" class="com.bstek.ureport.provider.image.HttpImageProvider"></bean>
 	<bean id="ureport.httpsImageProvider" class="com.bstek.ureport.provider.image.HttpsImageProvider"></bean>

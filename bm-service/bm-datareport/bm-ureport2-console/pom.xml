@@ -11,11 +11,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.github.bm</groupId>
-			<artifactId>bm-core</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.6.0</version>
