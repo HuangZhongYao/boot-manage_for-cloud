@@ -63,12 +63,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
 			return this.error(response, path, "缺失令牌,鉴权失败", ResponseCode.REQUEST_FAILED.code);
 		}
 		// 验证令牌有效性
+		token = token.substring(securityProperties.getToken().getPrefix().length());
 		if (!JWTUtil.verify(token, securityProperties.getToken().getSecret().getBytes())) {
 			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
 		}
 
 		// 解析令牌
-		JWT jwt = JWTUtil.parseToken(headerToken);
+		JWT jwt = JWTUtil.parseToken(token);
 		// 获取令牌过期时间
 		NumberWithFormat expiresAtNumber = (NumberWithFormat) jwt.getPayload(RegisteredPayload.EXPIRES_AT);
 		// 验证令牌是否过期

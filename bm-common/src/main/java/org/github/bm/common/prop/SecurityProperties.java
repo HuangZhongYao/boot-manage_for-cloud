@@ -50,12 +50,19 @@ public class SecurityProperties {
          */
         public String getSecret() {
             if (this.secret.length() < 32) {
-                log.warn("Token已启用默认签名,请前往bm.security.token.secret设置32位的key");
+                log.warn("JWT Token已启用默认签名,请前往bm.security.token.secret设置32位的key");
                 return "bm-importorg.github-zuuuYaoZ2l0aHViLXp1dXVZYW8=";
             }
             return this.secret;
         }
 
+        public String getPrefix() {
+            if (StrUtil.isBlank(prefix)) {
+                log.warn("JWT Token已启用前缀,请前往bm.security.token.prefix设置");
+                return "Bearer ";
+            }
+            return prefix;
+        }
     }
 
     @Getter

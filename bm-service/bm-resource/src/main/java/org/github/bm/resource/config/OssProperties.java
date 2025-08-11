@@ -10,7 +10,6 @@ import java.util.Map;
  * Minio参数配置类
  */
 @Data
-@Configuration
 @ConfigurationProperties(prefix = "storage")
 public class OssProperties {
 

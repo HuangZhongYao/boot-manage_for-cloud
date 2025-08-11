@@ -59,7 +59,7 @@ public class MinioConfiguration {
 	@Bean
 	@ConditionalOnBean({MinioClient.class})
 	@ConditionalOnMissingBean(StorageServiceMinioOssImpl.class)
-	public StorageServiceMinioOssImpl minioTemplate(MinioClient minioClient) {
+	public StorageServiceMinioOssImpl storageServiceMinioOss(MinioClient minioClient) {
 		log.info("加载MinIO对象存储...");
 		return new StorageServiceMinioOssImpl(minioClient, ossRule, ossProperties);
 	}

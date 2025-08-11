@@ -69,7 +69,7 @@ public class AliossConfiguration {
     @Bean
     @ConditionalOnBean({OSSClient.class})
     @ConditionalOnMissingBean(StorageServiceAliOssImpl.class)
-    public StorageServiceAliOssImpl ossServiceAliOssImpl(OSSClient ossClient) {
+    public StorageServiceAliOssImpl ossServiceAliOss(OSSClient ossClient) {
         log.info("加载阿里对象存储...");
         return new StorageServiceAliOssImpl(ossClient, ossProperties, ossRule);
     }

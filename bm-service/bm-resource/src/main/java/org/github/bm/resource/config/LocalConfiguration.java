@@ -41,7 +41,7 @@ public class LocalConfiguration {
 
     @Bean
     @ConditionalOnMissingBean(StorageServiceAliOssImpl.class)
-    public StorageServiceLocalImpl ossServiceAliOssImpl() {
+    public StorageServiceLocalImpl storageServiceLocal() {
         log.info("加载本地存储...");
         return new StorageServiceLocalImpl(ossProperties, ossRule);
     }
