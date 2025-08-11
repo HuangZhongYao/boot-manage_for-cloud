@@ -36,13 +36,13 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @AllArgsConstructor
-@AutoConfiguration(after = OssConfiguration.class)
+@AutoConfiguration(after = StorageConfiguration.class)
 @ConditionalOnClass({MinioClient.class})
-@EnableConfigurationProperties(OssProperties.class)
+@EnableConfigurationProperties(StorageProperties.class)
 @ConditionalOnProperty(value = "storage.name", havingValue = "minio")
 public class MinioConfiguration {
 
-	private final OssProperties ossProperties;
+	private final StorageProperties storageProperties;
 	private final OssRule ossRule;
 
 
@@ -51,8 +51,8 @@ public class MinioConfiguration {
 	@ConditionalOnMissingBean(MinioClient.class)
 	public MinioClient minioClient() {
 		return MinioClient.builder()
-			.endpoint(ossProperties.getEndpoint())
-			.credentials(ossProperties.getAccessKey(), ossProperties.getSecretKey())
+			.endpoint(storageProperties.getEndpoint())
+			.credentials(storageProperties.getAccessKey(), storageProperties.getSecretKey())
 			.build();
 	}
 
@@ -61,7 +61,7 @@ public class MinioConfiguration {
 	@ConditionalOnMissingBean(StorageServiceMinioOssImpl.class)
 	public StorageServiceMinioOssImpl storageServiceMinioOss(MinioClient minioClient) {
 		log.info("加载MinIO对象存储...");
-		return new StorageServiceMinioOssImpl(minioClient, ossRule, ossProperties);
+		return new StorageServiceMinioOssImpl(minioClient, ossRule, storageProperties);
 	}
 
 }

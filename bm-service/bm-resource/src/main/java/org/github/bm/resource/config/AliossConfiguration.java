@@ -36,13 +36,13 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @AllArgsConstructor
-@AutoConfiguration(after = OssConfiguration.class)
-@EnableConfigurationProperties(OssProperties.class)
+@AutoConfiguration(after = StorageConfiguration.class)
+@EnableConfigurationProperties(StorageProperties.class)
 @ConditionalOnClass({OSSClient.class})
 @ConditionalOnProperty(value = "storage.name", havingValue = "alioss")
 public class AliossConfiguration {
 
-    private final OssProperties ossProperties;
+    private final StorageProperties storageProperties;
     private final OssRule ossRule;
 
     @Bean
@@ -62,8 +62,8 @@ public class AliossConfiguration {
         conf.setIdleConnectionTime(60000);
         // 设置失败请求重试次数，默认为3次。
         conf.setMaxErrorRetry(5);
-        CredentialsProvider credentialsProvider = new DefaultCredentialProvider(ossProperties.getAccessKey(), ossProperties.getSecretKey());
-        return new OSSClient(ossProperties.getEndpoint(), credentialsProvider, conf);
+        CredentialsProvider credentialsProvider = new DefaultCredentialProvider(storageProperties.getAccessKey(), storageProperties.getSecretKey());
+        return new OSSClient(storageProperties.getEndpoint(), credentialsProvider, conf);
     }
 
     @Bean
@@ -71,7 +71,7 @@ public class AliossConfiguration {
     @ConditionalOnMissingBean(StorageServiceAliOssImpl.class)
     public StorageServiceAliOssImpl ossServiceAliOss(OSSClient ossClient) {
         log.info("加载阿里对象存储...");
-        return new StorageServiceAliOssImpl(ossClient, ossProperties, ossRule);
+        return new StorageServiceAliOssImpl(ossClient, storageProperties, ossRule);
     }
 
 }

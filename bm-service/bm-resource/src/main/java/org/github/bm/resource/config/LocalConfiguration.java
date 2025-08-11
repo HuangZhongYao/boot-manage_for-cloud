@@ -31,19 +31,19 @@ import org.springframework.context.annotation.Bean;
  */
 @Slf4j
 @AllArgsConstructor
-@AutoConfiguration(after = OssConfiguration.class)
-@EnableConfigurationProperties(OssProperties.class)
+@AutoConfiguration(after = StorageConfiguration.class)
+@EnableConfigurationProperties(StorageProperties.class)
 @ConditionalOnProperty(value = "storage.name", havingValue = "local")
 public class LocalConfiguration {
 
-    private final OssProperties ossProperties;
+    private final StorageProperties storageProperties;
     private final OssRule ossRule;
 
     @Bean
     @ConditionalOnMissingBean(StorageServiceAliOssImpl.class)
     public StorageServiceLocalImpl storageServiceLocal() {
         log.info("加载本地存储...");
-        return new StorageServiceLocalImpl(ossProperties, ossRule);
+        return new StorageServiceLocalImpl(storageProperties, ossRule);
     }
 
 }

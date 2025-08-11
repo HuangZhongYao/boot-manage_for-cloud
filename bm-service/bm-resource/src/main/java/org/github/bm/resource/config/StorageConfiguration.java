@@ -24,13 +24,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 /**
- * Oss配置类
+ * 资源存储配置类
  *
  */
 @AutoConfiguration
 @AllArgsConstructor
-@EnableConfigurationProperties(OssProperties.class)
-public class OssConfiguration {
+@EnableConfigurationProperties(StorageProperties.class)
+public class StorageConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(OssRule.class)

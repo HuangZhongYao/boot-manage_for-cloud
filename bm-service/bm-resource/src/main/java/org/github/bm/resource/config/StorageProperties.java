@@ -2,16 +2,15 @@ package org.github.bm.resource.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
 /**
- * Minio参数配置类
+ * 存储配置
  */
 @Data
 @ConfigurationProperties(prefix = "storage")
-public class OssProperties {
+public class StorageProperties {
 
 	/**
 	 * 是否启用

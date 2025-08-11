@@ -10,7 +10,7 @@ import io.minio.messages.Bucket;
 import io.minio.messages.DeleteObject;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.github.bm.resource.config.OssProperties;
+import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.enums.PolicyType;
 import org.github.bm.resource.rule.OssRule;
 import org.github.bm.resource.service.StorageService;
@@ -42,7 +42,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	/**
 	 * 配置类
 	 */
-	private final OssProperties ossProperties;
+	private final StorageProperties storageProperties;
 
 
 	@Override
@@ -115,7 +115,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	@Override
 	@SneakyThrows
 	public OssFile statFile(String fileName) {
-		return statFile(ossProperties.getBucketName(), fileName);
+		return statFile(storageProperties.getBucketName(), fileName);
 	}
 
 	@Override
@@ -147,25 +147,25 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	@Override
 	@SneakyThrows
 	public String fileLink(String fileName) {
-		return ossProperties.getEndpoint().concat(StrUtil.SLASH).concat(getBucketName()).concat(StrUtil.SLASH).concat(fileName);
+		return storageProperties.getEndpoint().concat(StrUtil.SLASH).concat(getBucketName()).concat(StrUtil.SLASH).concat(fileName);
 	}
 
 	@Override
 	@SneakyThrows
 	public String fileLink(String bucketName, String fileName) {
-		return ossProperties.getEndpoint().concat(StrUtil.SLASH).concat(getBucketName(bucketName)).concat(StrUtil.SLASH).concat(fileName);
+		return storageProperties.getEndpoint().concat(StrUtil.SLASH).concat(getBucketName(bucketName)).concat(StrUtil.SLASH).concat(fileName);
 	}
 
 	@Override
 	@SneakyThrows
 	public BMFile putFile(MultipartFile file) {
-		return putFile(ossProperties.getBucketName(), file.getOriginalFilename(), file);
+		return putFile(storageProperties.getBucketName(), file.getOriginalFilename(), file);
 	}
 
 	@Override
 	@SneakyThrows
 	public BMFile putFile(String fileName, MultipartFile file) {
-		return putFile(ossProperties.getBucketName(), fileName, file);
+		return putFile(storageProperties.getBucketName(), fileName, file);
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	@Override
 	@SneakyThrows
 	public BMFile putFile(String fileName, InputStream stream) {
-		return putFile(ossProperties.getBucketName(), fileName, stream);
+		return putFile(storageProperties.getBucketName(), fileName, stream);
 	}
 
 	@Override
@@ -210,7 +210,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	@Override
 	@SneakyThrows
 	public void removeFile(String fileName) {
-		removeFile(ossProperties.getBucketName(), fileName);
+		removeFile(storageProperties.getBucketName(), fileName);
 	}
 
 	@Override
@@ -224,7 +224,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	@Override
 	@SneakyThrows
 	public void removeFiles(List<String> fileNames) {
-		removeFiles(ossProperties.getBucketName(), fileNames);
+		removeFiles(storageProperties.getBucketName(), fileNames);
 	}
 
 	@Override
@@ -240,7 +240,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	 * @return String
 	 */
 	private String getBucketName() {
-		return getBucketName(ossProperties.getBucketName());
+		return getBucketName(storageProperties.getBucketName());
 	}
 
 	/**
@@ -387,7 +387,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	 * @return String
 	 */
 	public String getOssHost(String bucketName) {
-		return ossProperties.getEndpoint() + StrUtil.SLASH + getBucketName(bucketName);
+		return storageProperties.getEndpoint() + StrUtil.SLASH + getBucketName(bucketName);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class StorageServiceMinioOssImpl implements StorageService {
 	 * @return String
 	 */
 	public String getOssHost() {
-		return getOssHost(ossProperties.getBucketName());
+		return getOssHost(storageProperties.getBucketName());
 	}
 
 }

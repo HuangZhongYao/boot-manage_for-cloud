@@ -1,7 +1,7 @@
 package org.github.bm.resource.service.impl;
 
 import lombok.AllArgsConstructor;
-import org.github.bm.resource.config.OssProperties;
+import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.model.OssFile;
 import org.github.bm.resource.rule.OssRule;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @AllArgsConstructor
 public class StorageServiceLocalImpl implements StorageService {
-    private final OssProperties ossProperties;
+    private final StorageProperties storageProperties;
     private final OssRule ossRule;
 
     @Override

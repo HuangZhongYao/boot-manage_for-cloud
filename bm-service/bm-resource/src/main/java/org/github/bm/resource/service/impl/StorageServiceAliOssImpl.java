@@ -11,7 +11,7 @@ import com.aliyun.oss.model.PolicyConditions;
 import com.aliyun.oss.model.PutObjectResult;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.github.bm.resource.config.OssProperties;
+import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.model.OssFile;
 import org.github.bm.resource.rule.OssRule;
@@ -32,7 +32,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class StorageServiceAliOssImpl implements StorageService {
     private final OSSClient ossClient;
-    private final OssProperties ossProperties;
+    private final StorageProperties storageProperties;
     private final OssRule ossRule;
 
     @Override
@@ -70,7 +70,7 @@ public class StorageServiceAliOssImpl implements StorageService {
     @Override
     @SneakyThrows
     public OssFile statFile(String fileName) {
-        return statFile(ossProperties.getBucketName(), fileName);
+        return statFile(storageProperties.getBucketName(), fileName);
     }
 
     @Override
@@ -114,13 +114,13 @@ public class StorageServiceAliOssImpl implements StorageService {
     @Override
     @SneakyThrows
     public BMFile putFile(MultipartFile file) {
-        return putFile(ossProperties.getBucketName(), file.getOriginalFilename(), file);
+        return putFile(storageProperties.getBucketName(), file.getOriginalFilename(), file);
     }
 
     @Override
     @SneakyThrows
     public BMFile putFile(String fileName, MultipartFile file) {
-        return putFile(ossProperties.getBucketName(), fileName, file);
+        return putFile(storageProperties.getBucketName(), fileName, file);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class StorageServiceAliOssImpl implements StorageService {
     @Override
     @SneakyThrows
     public BMFile putFile(String fileName, InputStream stream) {
-        return putFile(ossProperties.getBucketName(), fileName, stream);
+        return putFile(storageProperties.getBucketName(), fileName, stream);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class StorageServiceAliOssImpl implements StorageService {
      * @return String
      */
     private String getBucketName() {
-        return getBucketName(ossProperties.getBucketName());
+        return getBucketName(storageProperties.getBucketName());
     }
 
     /**
@@ -228,7 +228,7 @@ public class StorageServiceAliOssImpl implements StorageService {
 
         PolicyConditions policyConds = new PolicyConditions();
         // 默认大小限制10M
-        String contentLengthRange = ossProperties.getArgs().get("contentLengthRange");
+        String contentLengthRange = storageProperties.getArgs().get("contentLengthRange");
         contentLengthRange = contentLengthRange == null ? "10485760" : contentLengthRange;
         policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, Long.parseLong(contentLengthRange));
         policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, baseDir);
@@ -239,7 +239,7 @@ public class StorageServiceAliOssImpl implements StorageService {
         String postSignature = ossClient.calculatePostSignature(postPolicy);
 
         Map<String, String> respMap = new LinkedHashMap<>(16);
-        respMap.put("accessid", ossProperties.getAccessKey());
+        respMap.put("accessid", storageProperties.getAccessKey());
         respMap.put("policy", encodedPolicy);
         respMap.put("signature", postSignature);
         respMap.put("dir", baseDir);
@@ -255,8 +255,8 @@ public class StorageServiceAliOssImpl implements StorageService {
      * @return String
      */
     public String getOssHost(String bucketName) {
-        String prefix = ossProperties.getEndpoint().contains("https://") ? "https://" : "http://";
-        return prefix + getBucketName(bucketName) + StrUtil.DOT + ossProperties.getEndpoint().replaceFirst(prefix, StrUtil.EMPTY);
+        String prefix = storageProperties.getEndpoint().contains("https://") ? "https://" : "http://";
+        return prefix + getBucketName(bucketName) + StrUtil.DOT + storageProperties.getEndpoint().replaceFirst(prefix, StrUtil.EMPTY);
     }
 
     /**
@@ -265,7 +265,7 @@ public class StorageServiceAliOssImpl implements StorageService {
      * @return String
      */
     public String getOssHost() {
-        return getOssHost(ossProperties.getBucketName());
+        return getOssHost(storageProperties.getBucketName());
     }
 
 }
