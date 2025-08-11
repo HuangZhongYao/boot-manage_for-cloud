@@ -28,7 +28,7 @@ import java.util.List;
  *
  * @author Chill
  */
-public interface StorageService {
+public interface IStorageService {
 
 	/**
 	 * 创建 存储桶

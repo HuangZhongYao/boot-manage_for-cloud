@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @Component
 @ConfigurationProperties("bm")
-public class BladeProperties {
+public class BMProperties {
 
 	/**
 	 * 开发环境

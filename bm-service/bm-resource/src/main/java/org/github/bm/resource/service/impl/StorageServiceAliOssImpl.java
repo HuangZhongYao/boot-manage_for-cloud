@@ -15,7 +15,7 @@ import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.model.OssFile;
 import org.github.bm.resource.rule.OssRule;
-import org.github.bm.resource.service.StorageService;
+import org.github.bm.resource.service.IStorageService;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +30,7 @@ import java.util.Map;
  *  对象存储阿里云OSS实现
  */
 @AllArgsConstructor
-public class StorageServiceAliOssImpl implements StorageService {
+public class StorageServiceAliOssImpl implements IStorageService {
     private final OSSClient ossClient;
     private final StorageProperties storageProperties;
     private final OssRule ossRule;
@@ -217,35 +217,6 @@ public class StorageServiceAliOssImpl implements StorageService {
      */
     private String getFileName(String originalFilename) {
         return ossRule.fileName(originalFilename);
-    }
-
-
-    public String getUploadToken(String bucketName, long expireTime) {
-        String baseDir = "upload";
-
-        long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
-        Date expiration = new Date(expireEndTime);
-
-        PolicyConditions policyConds = new PolicyConditions();
-        // 默认大小限制10M
-        String contentLengthRange = storageProperties.getArgs().get("contentLengthRange");
-        contentLengthRange = contentLengthRange == null ? "10485760" : contentLengthRange;
-        policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, Long.parseLong(contentLengthRange));
-        policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, baseDir);
-
-        String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);
-        byte[] binaryData = postPolicy.getBytes(StandardCharsets.UTF_8);
-        String encodedPolicy = BinaryUtil.toBase64String(binaryData);
-        String postSignature = ossClient.calculatePostSignature(postPolicy);
-
-        Map<String, String> respMap = new LinkedHashMap<>(16);
-        respMap.put("accessid", storageProperties.getAccessKey());
-        respMap.put("policy", encodedPolicy);
-        respMap.put("signature", postSignature);
-        respMap.put("dir", baseDir);
-        respMap.put("host", getOssHost(bucketName));
-        respMap.put("expire", String.valueOf(expireEndTime / 1000));
-        return JSON.toJSONString(respMap);
     }
 
     /**

@@ -29,6 +29,7 @@ public interface SecurityConstants {
             "/auth/loginOut",
             "/doc.html/**",
             "/error/**",
+            "/localStorage/",// 本地存储文件映射
             "/assets/**"
     );
 

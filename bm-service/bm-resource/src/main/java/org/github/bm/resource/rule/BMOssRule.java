@@ -3,6 +3,7 @@ package org.github.bm.resource.rule;
 
 import cn.hutool.core.io.file.FileNameUtil;
 import cn.hutool.core.text.CharPool;
+import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,20 @@ public class BMOssRule implements OssRule {
     @Override
     public String fileName(String originalFilename) {
         LocalDateTime now = LocalDateTime.now();
-        return "upload" + CharPool.SLASH + now.getYear() + CharPool.SLASH + now.getMonthValue() + CharPool.SLASH + now.getDayOfMonth() + CharPool.SLASH + System.currentTimeMillis() + "." + FileNameUtil.getSuffix(originalFilename);
+        // 获取文件后缀
+        String suffix = FileNameUtil.getSuffix(originalFilename);
+        // 构建路径部分
+        StringBuilder pathBuilder = new StringBuilder();
+        pathBuilder.append("upload").append(CharPool.SLASH)
+                .append(now.getYear()).append(CharPool.SLASH)
+                .append(now.getMonthValue()).append(CharPool.SLASH)
+                .append(now.getDayOfMonth()).append(CharPool.SLASH)
+                .append(System.currentTimeMillis());
+        // 只有当存在后缀时才添加点和后缀
+        if (StrUtil.isNotBlank(suffix)) {
+            pathBuilder.append(CharPool.DOT).append(suffix);
+        }
+        return pathBuilder.toString();
     }
 
 }

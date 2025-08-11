@@ -13,7 +13,7 @@ import lombok.SneakyThrows;
 import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.enums.PolicyType;
 import org.github.bm.resource.rule.OssRule;
-import org.github.bm.resource.service.StorageService;
+import org.github.bm.resource.service.IStorageService;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.model.OssFile;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +27,7 @@ import java.util.stream.Stream;
  * 对象存储MinIO 实现
  */
 @AllArgsConstructor
-public class StorageServiceMinioOssImpl implements StorageService {
+public class StorageServiceMinioOssImpl implements IStorageService {
 
 	/**
 	 * MinIO客户端

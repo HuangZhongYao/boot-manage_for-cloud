@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.github.bm.resource.model.BMFile;
-import org.github.bm.resource.service.StorageService;
+import org.github.bm.resource.service.IStorageService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileController {
 
     @Resource
-    private StorageService storageService;
+    private IStorageService storageService;
 
     @Operation(summary = "上传文件", description = "公用上传文件接口")
     @PostMapping("/uploadFile")
