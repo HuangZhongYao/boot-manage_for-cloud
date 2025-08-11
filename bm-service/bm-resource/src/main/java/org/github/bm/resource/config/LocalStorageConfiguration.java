@@ -34,7 +34,7 @@ import org.springframework.context.annotation.Bean;
 @AutoConfiguration(after = StorageConfiguration.class)
 @EnableConfigurationProperties(StorageProperties.class)
 @ConditionalOnProperty(value = "storage.name", havingValue = "local")
-public class LocalConfiguration {
+public class LocalStorageConfiguration {
 
     private final StorageProperties storageProperties;
     private final OssRule ossRule;
