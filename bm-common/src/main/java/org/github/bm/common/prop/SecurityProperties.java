@@ -39,30 +39,11 @@ public class SecurityProperties {
         /**
          * token密钥
          */
-        private String secret = "";
+        private String secret = "bm-importorg.github-zuuuYaoZ2l0aHViLXp1dXVZYW8=";
         /**
          * token前缀
          */
-        private String prefix;
-
-        /**
-         * 获取签名
-         */
-        public String getSecret() {
-            if (this.secret.length() < 32) {
-                log.warn("JWT Token已启用默认签名,请前往bm.security.token.secret设置32位的key");
-                return "bm-importorg.github-zuuuYaoZ2l0aHViLXp1dXVZYW8=";
-            }
-            return this.secret;
-        }
-
-        public String getPrefix() {
-            if (StrUtil.isBlank(prefix)) {
-                log.warn("JWT Token已启用前缀,请前往bm.security.token.prefix设置");
-                return "Bearer ";
-            }
-            return prefix;
-        }
+        private String prefix = "Bearer ";
     }
 
     @Getter
