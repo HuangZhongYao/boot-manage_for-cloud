@@ -1,4 +1,4 @@
-package org.github.bm.common.base.dto.output;
+package org.github.bm.common.base.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -6,31 +6,31 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 
 /**
- * @Desc 基础输出对象带id、时间操作人字段
+ * @Desc 基础VO输出对象带id、时间操作人字段
  * @Time 2024-07-12 10:41
  * @Author HuangZhongYao
  */
-public class BaseOutputIdAndTimeAndOperationDTO extends BaseOutputIdAndTimeDTO {
+public class BaseIdAndTimeAndOperationIdVO extends BaseIdAndTimeIdVO {
 
     @Serial
     private static final long serialVersionUID = -8243192684166209735L;
 
 
-    public BaseOutputIdAndTimeAndOperationDTO() {
+    public BaseIdAndTimeAndOperationIdVO() {
     }
 
-    public BaseOutputIdAndTimeAndOperationDTO(String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(String createdBy, String updatedBy) {
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
     }
 
-    public BaseOutputIdAndTimeAndOperationDTO(LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
         super(createdTime, updatedTime);
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
     }
 
-    public BaseOutputIdAndTimeAndOperationDTO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
         super(id, createdTime, updatedTime);
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;

@@ -1,4 +1,4 @@
-package org.github.bm.common.base.dto.output;
+package org.github.bm.common.base.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.github.bm.common.base.dto.BaseDTO;
@@ -6,20 +6,21 @@ import org.github.bm.common.base.dto.BaseDTO;
 import java.io.Serial;
 
 /**
- * @Desc baseOutputDTO 基类
+ * 包含id字段的VO
+ * @Desc BaseIdVO 基类
  * @Time 2024-07-12 10:41
  * @Author HuangZhongYao
  */
-public class BaseOutputDTO extends BaseDTO {
+public class BaseIdVO extends BaseVO {
 
     @Serial
     private static final long serialVersionUID = -8243192684166209735L;
 
 
-    public BaseOutputDTO() {
+    public BaseIdVO() {
     }
 
-    public BaseOutputDTO(Long id) {
+    public BaseIdVO(Long id) {
         this.id = id;
     }
 

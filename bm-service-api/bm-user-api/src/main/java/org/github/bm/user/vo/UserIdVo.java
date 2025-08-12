@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeAndOperationDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.github.bm.common.enums.GenderEnum;
 
@@ -17,7 +17,7 @@ import org.github.bm.common.enums.GenderEnum;
  */
 @Getter
 @Setter
-public class UserVo extends BaseOutputIdAndTimeAndOperationDTO {
+public class UserIdVo extends BaseIdAndTimeAndOperationIdVO {
 
     @Serial
     private static final long serialVersionUID = -7091624991626890336L;

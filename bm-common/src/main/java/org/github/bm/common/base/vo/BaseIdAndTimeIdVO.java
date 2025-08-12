@@ -1,4 +1,4 @@
-package org.github.bm.common.base.dto.output;
+package org.github.bm.common.base.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -6,25 +6,25 @@ import java.io.Serial;
 import java.time.LocalDateTime;
 
 /**
- * @Desc 基础输出对象带id和时间字段
+ * @Desc 基础VO输出对象带id和时间字段
  * @Time 2024-07-12 10:41
  * @Author HuangZhongYao
  */
-public class BaseOutputIdAndTimeDTO extends BaseOutputDTO {
+public class BaseIdAndTimeIdVO extends BaseIdVO {
 
     @Serial
     private static final long serialVersionUID = -8243192684166209735L;
 
 
-    public BaseOutputIdAndTimeDTO() {
+    public BaseIdAndTimeIdVO() {
     }
 
-    public BaseOutputIdAndTimeDTO(LocalDateTime createdTime, LocalDateTime updatedTime) {
+    public BaseIdAndTimeIdVO(LocalDateTime createdTime, LocalDateTime updatedTime) {
         this.createdTime = createdTime;
         this.updatedTime = updatedTime;
     }
 
-    public BaseOutputIdAndTimeDTO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime) {
+    public BaseIdAndTimeIdVO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime) {
         super(id);
         this.createdTime = createdTime;
         this.updatedTime = updatedTime;

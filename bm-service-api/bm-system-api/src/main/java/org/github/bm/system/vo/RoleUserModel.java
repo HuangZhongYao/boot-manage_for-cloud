@@ -2,7 +2,7 @@ package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.output.BaseOutputDTO;
+import org.github.bm.common.base.vo.BaseIdVO;
 import org.github.bm.common.enums.GenderEnum;
 
 import java.io.Serial;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RoleUserModel extends BaseOutputDTO {
+public class RoleUserModel extends BaseIdVO {
 
     @Serial
     private static final long serialVersionUID = -3191921659477946369L;

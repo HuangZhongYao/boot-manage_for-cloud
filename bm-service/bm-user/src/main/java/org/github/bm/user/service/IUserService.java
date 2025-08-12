@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.vo.RoleVo;
 import org.github.bm.user.dto.*;
-import org.github.bm.user.vo.UserVo;
+import org.github.bm.user.vo.UserIdVo;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public interface IUserService {
 
     List<RoleVo> queryUserRoleList(Long id);
 
-    Page<UserVo> pageQueryList(UserQueryPageInputDTO inputDTO);
+    Page<UserIdVo> pageQueryList(UserQueryPageInputDTO inputDTO);
 
-    List<UserVo> queryAllUserList();
+    List<UserIdVo> queryAllUserList();
 
     Boolean setRole(SetRoleInputDTO inputDTO);
 

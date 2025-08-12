@@ -5,7 +5,7 @@ import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.vo.RoleVo;
 import org.github.bm.user.dto.*;
 import org.github.bm.user.service.IUserService;
-import org.github.bm.user.vo.UserVo;
+import org.github.bm.user.vo.UserIdVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,12 +43,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Page<UserVo> pageQueryList(UserQueryPageInputDTO inputDTO) {
+    public Page<UserIdVo> pageQueryList(UserQueryPageInputDTO inputDTO) {
         return null;
     }
 
     @Override
-    public List<UserVo> queryAllUserList() {
+    public List<UserIdVo> queryAllUserList() {
         return List.of();
     }
 

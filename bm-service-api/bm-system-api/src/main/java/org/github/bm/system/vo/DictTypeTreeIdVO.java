@@ -2,16 +2,18 @@ package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeAndOperationDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.common.util.tree.ITreeNode;
 
 import java.io.Serial;
+import java.util.List;
 
 
 /**
- * 系统字典表VO对象
+ * 系统字典类型表VO对象
  *
  * @Desc Created by Velocity Generate.
- * @Time 2024-08-18 04:22:07
+ * @Time 2024-08-18 05:13:04
  * @Author zuuuYao (https://github.com/HuangZhongYao)
  */
 @Getter
@@ -21,28 +23,22 @@ import java.io.Serial;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class DictDataVO extends BaseOutputIdAndTimeAndOperationDTO {
+public class DictTypeTreeIdVO extends BaseIdAndTimeAndOperationIdVO implements ITreeNode<Long> {
 
     @Serial
     private static final long serialVersionUID = -1;
 
     /**
-     * 字典数据类型id
+     * 上级
      */
-    @Schema(description = "字典数据类型id")
-    private Long dictTypeId;
+    @Schema(description = "上级")
+    private Long parentId;
 
     /**
      * 名称
      */
     @Schema(description = "名称")
     private String name;
-
-    /**
-     * 编码
-     */
-    @Schema(description = "编码")
-    private String code;
 
     /**
      * 排序值
@@ -62,5 +58,10 @@ public class DictDataVO extends BaseOutputIdAndTimeAndOperationDTO {
     @Schema(description = "备注")
     private String remark;
 
+    /**
+     * 下级数据
+     */
+    @Schema(description = "下级数据")
+    List<ITreeNode<Long>> children;
 }
 

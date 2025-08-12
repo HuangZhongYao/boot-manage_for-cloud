@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 
 /**
  * @Desc: Created by IntelliJ IDEA.
@@ -24,7 +24,7 @@ import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeDTO;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RoleVo extends BaseOutputIdAndTimeDTO {
+public class RoleVo extends BaseIdAndTimeIdVO {
 
     @Serial
     private static final long serialVersionUID = 2264364149067433513L;

@@ -2,7 +2,7 @@ package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 
 import java.io.Serial;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RolePageQueryListItemVo extends BaseOutputIdAndTimeDTO {
+public class RolePageQueryListItemVo extends BaseIdAndTimeIdVO {
 
     @Serial
     private static final long serialVersionUID = 2264364149067433513L;

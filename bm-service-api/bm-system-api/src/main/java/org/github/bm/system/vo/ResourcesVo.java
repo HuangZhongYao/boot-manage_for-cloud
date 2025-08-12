@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.common.enums.ResourcesTypeEnum;
 
 import java.io.Serial;
@@ -17,7 +17,7 @@ import java.io.Serial;
 @Getter
 @Setter
 @ToString
-public class ResourcesVo extends BaseOutputIdAndTimeDTO {
+public class ResourcesVo extends BaseIdAndTimeIdVO {
     @Serial
     private static final long serialVersionUID = 343592145962257371L;
 
