@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.dto.BaseDTO;
 import org.github.bm.common.validate.ValidateNotNullAndEmpty;
-import org.github.bm.system.enums.ResourcesTypeEnum;
+import org.github.bm.common.enums.ResourcesTypeEnum;
 
 import java.io.Serial;
 

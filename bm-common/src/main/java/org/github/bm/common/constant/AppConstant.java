@@ -1,7 +1,5 @@
 package org.github.bm.common.constant;
 
-import org.github.bm.common.enums.ServiceEnum;
-
 import java.util.Set;
 
 /**

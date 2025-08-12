@@ -3,7 +3,7 @@ package org.github.bm.admin;
 import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.enums.ServiceEnum;
+import org.github.bm.common.constant.ServiceEnum;
 import org.github.bm.common.launch.BMApplication;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

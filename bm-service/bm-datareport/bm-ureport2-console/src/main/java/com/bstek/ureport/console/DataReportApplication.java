@@ -1,7 +1,7 @@
 package com.bstek.ureport.console;
 
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.enums.ServiceEnum;
+import org.github.bm.common.constant.ServiceEnum;
 import org.github.bm.common.launch.BMApplication;
 import org.github.bm.core.annotations.BMCloudApplication;
 import org.springframework.boot.ApplicationArguments;

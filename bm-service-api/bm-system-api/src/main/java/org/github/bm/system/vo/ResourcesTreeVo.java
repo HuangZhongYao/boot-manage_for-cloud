@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeDTO;
 import org.github.bm.common.util.tree.ITreeNode;
-import org.github.bm.system.enums.ResourcesTypeEnum;
+import org.github.bm.common.enums.ResourcesTypeEnum;
 
 import java.io.Serial;
 import java.util.List;

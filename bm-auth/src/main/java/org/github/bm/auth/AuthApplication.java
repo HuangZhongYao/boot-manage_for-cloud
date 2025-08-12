@@ -1,10 +1,8 @@
 package org.github.bm.auth;
 
-import org.github.bm.common.constant.AppConstant;
-import org.github.bm.common.enums.ServiceEnum;
+import org.github.bm.common.constant.ServiceEnum;
 import org.github.bm.common.launch.BMApplication;
 import org.github.bm.core.annotations.BMCloudApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Time 2025-07-28 16:36

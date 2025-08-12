@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeAndOperationDTO;
 import org.github.bm.system.vo.UserRoleVO;
-import org.github.bm.system.enums.GenderEnum;
+import org.github.bm.common.enums.GenderEnum;
 
 /**
  * @Desc

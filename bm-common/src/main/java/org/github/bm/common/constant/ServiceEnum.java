@@ -1,6 +1,4 @@
-package org.github.bm.common.enums;
-
-import org.github.bm.common.constant.AppConstant;
+package org.github.bm.common.constant;
 
 /**
  * 微服务枚举
