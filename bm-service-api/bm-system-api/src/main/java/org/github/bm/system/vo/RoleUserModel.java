@@ -1,26 +1,31 @@
-package org.github.bm.user.vo;
+package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import java.time.LocalDateTime;
-import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
-import org.github.bm.common.base.dto.output.BaseOutputIdAndTimeAndOperationDTO;
-import org.github.bm.system.vo.UserRoleVO;
+import lombok.*;
+import org.github.bm.common.base.dto.output.BaseOutputDTO;
 import org.github.bm.system.enums.GenderEnum;
 
+import java.io.Serial;
+import java.time.LocalDateTime;
+
 /**
- * @Desc
- * @Time 2024-07-16 16:29
- * @Author HuangZhongYao
+ * 角色下的用户
+ * @Desc: Created by IntelliJ IDEA.
+ * @Author: ZhongYao.Huang
+ * @Copyright: ZuuuuYao By Github
+ * @Time: 2024-07-21 16:17
  */
-@Getter
 @Setter
-public class UserVo extends BaseOutputIdAndTimeAndOperationDTO {
+@Getter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class RoleUserModel extends BaseOutputDTO {
 
     @Serial
-    private static final long serialVersionUID = -7091624991626890336L;
+    private static final long serialVersionUID = -3191921659477946369L;
 
     /**
      * 用户名
@@ -69,10 +74,4 @@ public class UserVo extends BaseOutputIdAndTimeAndOperationDTO {
      */
     @Schema(description = "启用状态")
     private Boolean enable;
-
-    /**
-     * 用户角色列表
-     */
-    @Schema(description = "用户角色列表")
-    private List<UserRoleVO> roles;
 }

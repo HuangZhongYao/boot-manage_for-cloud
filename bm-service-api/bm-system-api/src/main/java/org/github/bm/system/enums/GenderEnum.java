@@ -1,4 +1,4 @@
-package org.github.bm.user.enums;
+package org.github.bm.system.enums;
 
 import lombok.Getter;
 import org.github.bm.common.base.enums.IEnumsValue;

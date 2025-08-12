@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
-import org.github.bm.user.enums.GenderEnum;
+import org.github.bm.system.enums.GenderEnum;
 
 import java.io.Serial;
 
