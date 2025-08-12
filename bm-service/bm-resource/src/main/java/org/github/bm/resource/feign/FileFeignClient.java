@@ -1,5 +1,6 @@
 package org.github.bm.resource.feign;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.service.IStorageService;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
-
+@Hidden
 @RestController
 public class FileFeignClient implements IFileFeignClient {
 

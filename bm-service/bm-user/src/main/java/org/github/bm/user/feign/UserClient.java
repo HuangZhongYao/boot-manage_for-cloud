@@ -1,6 +1,8 @@
 package org.github.bm.user.feign;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.repositery.UserRepository;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 用户服务feign客户端实现
  */
+@Hidden
 @RestController
 public class UserClient implements IUserClient {
     @Resource

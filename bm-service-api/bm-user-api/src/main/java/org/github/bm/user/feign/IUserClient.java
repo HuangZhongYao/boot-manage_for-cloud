@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 用户服务暴露接口，最好不要UserController实现它来复用已有接口
  */
-@FeignClient(value = AppConstant.APPLICATION_USER_NAME)
+@FeignClient(value = AppConstant.APPLICATION_USER_NAME,contextId = "userClient")
 public interface IUserClient extends BaseFeign {
 
     String API_PREFIX = BASE_API_PREFIX + "/user";
