@@ -13,6 +13,14 @@
     <name>${project.artifactId}</name>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-form</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-spring</artifactId>
+        </dependency>
     </dependencies>
 </project>

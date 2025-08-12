@@ -20,6 +20,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-resource-api</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
             <version>8.5.6</version>
