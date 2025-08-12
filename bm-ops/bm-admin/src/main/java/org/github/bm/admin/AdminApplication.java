@@ -35,7 +35,7 @@ public class AdminApplication implements ApplicationRunner {
                             Application '{}' is running! Access URLs:
                             Local: http://localhost:{}
                             External: http://{}:{}
-                            SpringBoot-Admin WebUrl: http://{}:{}/doc.html
+                            SpringBoot-Admin WebUrl: http://{}:{}
                         ----------------------------------------------------------
                         """,
                 appName,
