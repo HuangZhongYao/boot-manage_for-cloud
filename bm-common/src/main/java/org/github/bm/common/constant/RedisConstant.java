@@ -13,7 +13,7 @@ public interface RedisConstant {
         /**
          * 授权信息缓存key
          */
-        String AUTHORIZATION_INFO = BASE_KEY_PREFIX + "info";
+        String AUTHORIZATION_INFO = BASE_KEY_PREFIX + "info:";
         /**
          * 刷新令牌缓存key
          */
@@ -22,6 +22,10 @@ public interface RedisConstant {
          * 刷新令牌缓存时间，单位秒
          */
         long REFRESH_TOKEN_CACHE_TIME = 3 * 24 * 60 * 60;
+        /**
+         * 授权信息缓存时间，单位秒
+         */
+        long AUTHORIZATION_INFO_CACHE_TIME = 7 * 24 * 60 * 60;
         /**
          * web端授权令牌缓存key
          */

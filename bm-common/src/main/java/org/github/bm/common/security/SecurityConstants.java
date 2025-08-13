@@ -27,6 +27,7 @@ public interface SecurityConstants {
             "/v3/api-docs/**",
             "/auth/login",
             "/auth/loginOut",
+            "/auth/refreshToken",
             "/doc.html/**",
             "/error/**",
             "/localStorage/",// 本地存储文件映射
@@ -66,6 +67,11 @@ public interface SecurityConstants {
          * 认证用户信息在jwt PAYLOAD 中的KEY
          */
         String PAYLOAD_AUTHORIZATION_USER = "payload-authorization";
+
+        /**
+         * 认证用户ID信息在jwt PAYLOAD 中的KEY
+         */
+        String PAYLOAD_AUTHORIZATION_USER_ID = "payload-authorization-id";
 
         /**
          * 访问令牌过期时间,单位小时
