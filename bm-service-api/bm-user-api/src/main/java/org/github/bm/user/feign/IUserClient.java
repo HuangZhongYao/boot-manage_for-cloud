@@ -7,6 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Serializable;
+
 /**
  * 用户服务暴露接口，最好不要UserController实现它来复用已有接口
  */
@@ -18,7 +20,7 @@ public interface IUserClient extends BaseFeign {
     String GET_USER_BY_ACCOUNT = API_PREFIX + "/getUserByAccount";
 
     @GetMapping(GET_USER_BY_ID)
-    UserEntity getUserByID(@RequestParam("id") Long id);
+    UserEntity getUserByID(@RequestParam("id") Serializable id);
 
     @GetMapping(GET_USER_BY_ACCOUNT)
     UserEntity getUserByAccount(@RequestParam("account") String account);

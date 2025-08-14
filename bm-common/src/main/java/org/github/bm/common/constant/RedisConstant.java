@@ -26,18 +26,14 @@ public interface RedisConstant {
          * 授权信息缓存时间，单位秒
          */
         long AUTHORIZATION_INFO_CACHE_TIME = 7 * 24 * 60 * 60;
-        /**
-         * web端授权令牌缓存key
-         */
-        String WEB_AUTHORIZATION_KEY = BASE_KEY_PREFIX + ClientEnum.WEB.code + ":";
-        /**
-         * pc端授权令牌缓存key
-         */
-        String PC_AUTHORIZATION_KEY = BASE_KEY_PREFIX + ClientEnum.PC.code + ":";
-        /**
-         * 移动端授权令牌缓存key
-         */
-        String MOBILE_AUTHORIZATION_KEY = BASE_KEY_PREFIX + ClientEnum.MOBILE.code + ":";
+
+        static  String clientAuthorizationCacheKey(ClientEnum clientEnum) {
+            return BASE_KEY_PREFIX + clientEnum.code + ":";
+        }
+
+        static  String clientRefreshTokenCacheKey(ClientEnum clientEnum) {
+            return REFRESH_TOKEN + clientEnum.code + ":";
+        }
     }
 
 

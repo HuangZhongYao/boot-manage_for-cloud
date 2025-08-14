@@ -4,9 +4,9 @@ import org.github.bm.auth.dto.LoginDTO;
 import org.github.bm.common.security.AuthInfo;
 
 public interface IAuthService {
-    AuthInfo login(LoginDTO loginDTO);
+    AuthInfo login(LoginDTO loginDTO, String client);
 
-    Boolean loginOut();
+    Boolean loginOut(String client);
 
-    String refreshToken(String refreshToken);
+    AuthInfo refreshToken(String refreshToken,String client);
 }

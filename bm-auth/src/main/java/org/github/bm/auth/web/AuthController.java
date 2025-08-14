@@ -40,26 +40,33 @@ public class AuthController {
     @Operation(summary = "登录认证", description = "登录认证接口,认证成功后返回访问令牌")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "420", description = "账号或密码错误")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "430", description = "账号不存在")
-    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "440", description = "440")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "440", description = "该账户已被禁用")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "客户端错误")
     @PostMapping("/login")
-    public ApiResponse<AuthInfo> auth(@Validated @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
-        return ApiResponse.ok(authService.login(loginDTO));
+    public ApiResponse<AuthInfo> login(
+            @Validated @RequestBody LoginDTO loginDTO,
+            @RequestHeader(name = SecurityConstants.BM_CLIENT_TYPE) String client) {
+        return ApiResponse.ok(authService.login(loginDTO, client));
     }
 
     @Operation(summary = "注销登录")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "客户端错误")
     @GetMapping("/loginOut")
-    public ApiResponse<Boolean> loginOut() {
-        return ApiResponse.ok(authService.loginOut());
+    public ApiResponse<Boolean> loginOut(@RequestHeader(name = SecurityConstants.BM_CLIENT_TYPE) String client) {
+        return ApiResponse.ok(authService.loginOut(client));
     }
 
-    @Operation(summary = "刷新令牌")
+    @Operation(summary = "刷新令牌", description = "获取成功后原有refreshToken和accessToken都将失效")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "客户端错误")
     @GetMapping("/refreshToken")
-    public ApiResponse<String> refreshToken(
+    public ApiResponse<AuthInfo> refreshToken(
             @Parameter(name = SecurityConstants.REFRESH_AUTH_HEADER_KEY, required = true)
             @RequestHeader(name = SecurityConstants.REFRESH_AUTH_HEADER_KEY)
-            String refreshToken
+            String refreshToken,
+            @RequestHeader(name = SecurityConstants.BM_CLIENT_TYPE)
+            String client
     ) {
-        return ApiResponse.ok(authService.refreshToken(refreshToken));
+        return ApiResponse.ok(authService.refreshToken(refreshToken,client));
     }
 
     @Operation(summary = "sys接口")

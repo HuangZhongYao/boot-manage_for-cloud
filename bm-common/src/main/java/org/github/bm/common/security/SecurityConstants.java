@@ -17,6 +17,8 @@ public interface SecurityConstants {
      */
     String CONTEXT_HOLDER_USER_KEY = "BM-Authorization-User";
 
+    String BM_CLIENT_TYPE = "BM-Client-Type";
+
     /**
      * 默认排除的URL 不进行鉴权
      */

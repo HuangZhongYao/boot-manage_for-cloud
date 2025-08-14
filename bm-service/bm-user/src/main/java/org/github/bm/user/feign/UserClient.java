@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Serializable;
+
 /**
  * 用户服务feign客户端实现
  */
@@ -21,7 +23,7 @@ public class UserClient implements IUserClient {
 
     @Override
     @GetMapping(GET_USER_BY_ID)
-    public UserEntity getUserByID(@RequestParam("id") Long id) {
+    public UserEntity getUserByID(@RequestParam("id") Serializable id) {
         return userRepository.selectById(id);
     }
 
