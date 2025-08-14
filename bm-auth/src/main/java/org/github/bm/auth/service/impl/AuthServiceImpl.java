@@ -59,8 +59,8 @@ public class AuthServiceImpl implements IAuthService {
         ClientEnum clientEnum = this.getClient(client);
         JWT jwt = JWTUtil.parseToken(refreshToken);
         Object userID = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
+        Long ttl = redisService.getExpire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userID);
         UserEntity userEntity = userClient.getUserByID(userID.toString());
-        Object o = redisService.get(RedisConstant.Authorization.REFRESH_TOKEN + userID);
         return this.generateJwt(userEntity, clientEnum);
     }
 
