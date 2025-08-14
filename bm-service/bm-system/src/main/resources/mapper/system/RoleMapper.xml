@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.github.bm.system.repository.RoleRepository">
+
+    <select id="pageQueryList" resultType="org.github.bm.system.vo.RolePageQueryListItemVo">
+        SELECT
+        role.*,
+        GROUP_CONCAT(resources.id SEPARATOR ',') AS resourcesIds
+        FROM
+        sys_role role
+        LEFT JOIN
+        sys_role_resources role_resources ON role.id = role_resources.role_id
+        LEFT JOIN
+        sys_resources resources ON role_resources.resources_id = resources.id
+
+        <where>
+
+            <if test=" param.enable != null and param.enable == true">
+                AND role.enable > 0
+            </if>
+
+            <if test=" param.enable != null and param.enable == false">
+                AND role.enable &lt; 1
+            </if>
+
+            <if test=" param.name != null and param.name != '' ">
+                AND role.name LIKE concat('%', #{param.name}, '%')
+            </if>
+        </where>
+
+        GROUP BY
+        role.id
+    </select>
+
+    <select id="queryUserRolesByUserId" resultType="org.github.bm.system.vo.RoleVo">
+        SELECT role.*
+        FROM sys_role role
+        WHERE role.id IN (SELECT role_id
+                          FROM sys_user_role user_role
+                          WHERE user_role.user_id = #{userId})
+    </select>
+
+    <select id="queryUserRolesByUserIds" resultType="org.github.bm.system.vo.UserRoleVO">
+        SELECT
+        role.*,
+        user_role.user_id
+        FROM
+        sys_role role INNER JOIN sys_user_role user_role ON role.id = user_role.role_id
+        WHERE
+        user_role.user_id IN
+        <foreach item="item" index="index" collection="userIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>

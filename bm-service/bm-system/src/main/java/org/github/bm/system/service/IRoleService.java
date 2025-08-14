@@ -7,7 +7,6 @@ import org.github.bm.system.vo.RolePageQueryListItemVo;
 import org.github.bm.system.vo.RoleUserModel;
 import org.github.bm.system.vo.RoleVo;
 
-
 import java.util.List;
 
 /**
@@ -30,6 +29,7 @@ public interface IRoleService {
 
     /**
      * 批量给角色设置用户
+     *
      * @param inputDTO SetRoleUserInputDTO
      * @return 成功true
      */
@@ -37,6 +37,7 @@ public interface IRoleService {
 
     /**
      * 设置角色启用状态
+     *
      * @param inputDTO
      * @return
      */

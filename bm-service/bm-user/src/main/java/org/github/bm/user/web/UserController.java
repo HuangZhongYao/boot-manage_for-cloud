@@ -21,7 +21,7 @@ import org.github.bm.user.entity.UserEntity;
 import org.github.bm.common.enums.GenderEnum;
 import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
-import org.github.bm.user.vo.UserIdVo;
+import org.github.bm.user.vo.UserVo;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -45,14 +45,14 @@ public class UserController extends BaseController {
     @Operation(summary = "分页查询", description = "分页查询用户接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<Page<UserIdVo>> pageQueryList(UserQueryPageInputDTO inputDTO) {
+    public ApiResponse<Page<UserVo>> pageQueryList(UserQueryPageInputDTO inputDTO) {
         return ApiResponse.ok(userService.pageQueryList(inputDTO));
     }
 
     @Operation(summary = "查询全部用户", description = "查询全部用户接口")
     @GetMapping(value = "/queryAllUserList", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<List<UserIdVo>> queryAllUserList() {
+    public ApiResponse<List<UserVo>> queryAllUserList() {
         return ApiResponse.ok(userService.queryAllUserList());
     }
 

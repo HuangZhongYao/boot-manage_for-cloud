@@ -1,64 +1,260 @@
 package org.github.bm.user.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.CharsetUtil;
+import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.StrUtil;
+import cn.hutool.crypto.digest.DigestUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import jakarta.annotation.Resource;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.common.exception.UserFriendlyException;
+import org.github.bm.common.util.ModelMapperUtil;
+import org.github.bm.system.entity.UserRoleEntity;
+import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.UserRoleVO;
 import org.github.bm.user.dto.*;
+import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
-import org.github.bm.user.vo.UserIdVo;
+import org.github.bm.user.vo.UserVo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+/**
+ * @Desc
+ * @Time 2024-07-11 16:33
+ * @Author HuangZhongYao
+ */
 @Service
 public class UserServiceImpl implements IUserService {
+
+    @Resource
+    UserRepository userRepository;
+    @Resource
+    IRoleClient roleClient;
+
     @Override
-    public Boolean resetPassword(ResetPasswordInputDTO inputDTO) {
-        return null;
+    public Page<UserVo> pageQueryList(UserQueryPageInputDTO inputDTO) {
+
+        // 构建查询条件
+        LambdaQueryWrapper<UserEntity> queryWrapper = Wrappers.<UserEntity>lambdaQuery()
+                .like(StrUtil.isNotBlank(inputDTO.getUsername()), UserEntity::getAccount,
+                        inputDTO.getAccount())
+                .like(StrUtil.isNotBlank(inputDTO.getAccount()), UserEntity::getAccount,
+                        inputDTO.getUsername())
+                .eq(null != inputDTO.getGender(), UserEntity::getGender, inputDTO.getGender())
+                .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable());
+
+        // 执行查询用户
+        Page<UserVo> page =
+                userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVo.class);
+
+        // 查询全部用的角色并根据用户id分组
+        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(page.getRecords().stream().map(UserVo::getId).toList())
+                .stream()
+                .collect(Collectors.groupingBy(UserRoleVO::getUserId));
+
+        // 设置用户角色
+        page.getRecords().forEach(userVo -> {
+            userVo.setRoles(userRoleByUserIdGrouping.get(userVo.getId()));
+        });
+
+        return page;
     }
 
     @Override
-    public Boolean changePassword(ChangePasswordInputDTO inputDTO) {
-        return null;
-    }
-
-    @Override
-    public Boolean setState(SetUserStateInputDTO inputDTO) {
-        return null;
-    }
-
-    @Override
-    public Boolean delUser(BaseManyLongIdInputDTO inputDTO) {
-        return null;
-    }
-
-    @Override
-    public Boolean addUser(AddUserInputDTO inputDTO) {
-        return null;
+    public List<UserVo> queryAllUserList() {
+        return this.userRepository.selectList(null, UserVo.class);
     }
 
     @Override
     public List<RoleVo> queryUserRoleList(Long id) {
-        return List.of();
+        // 查询用户的角色id
+        List<Long> roleIds = roleClient.getUserRoleByUserIdList(List.of(id))
+                .stream()
+                .map(UserRoleEntity::getRoleId)
+                .toList();
+
+        if (roleIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        // 查询角色信息
+        return ModelMapperUtil.mapList(roleClient.getRoleByIdList(roleIds), RoleVo.class);
     }
 
     @Override
-    public Page<UserIdVo> pageQueryList(UserQueryPageInputDTO inputDTO) {
-        return null;
+    public Boolean delUser(BaseManyLongIdInputDTO inputDTO) {
+        // 删除用户角色中间表数据
+        roleClient.delUserRoleByUserIds(inputDTO.getIds());
+        // 删除用户
+        userRepository.deleteByIds(inputDTO.getIds());
+        return true;
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public Boolean addUser(AddUserInputDTO inputDTO) {
+
+        // 判断账号是否已存在
+        if (userRepository.exists(
+                Wrappers.<UserEntity>lambdaQuery().eq(UserEntity::getAccount, inputDTO.getAccount()))) {
+            throw new UserFriendlyException("账号已存在", 411);
+        }
+
+        // 将DTO转换为实体对象
+        UserEntity userEntity = ModelMapperUtil.map(inputDTO, UserEntity.class, target -> {
+            // 设置密码盐
+            String pwdSalt = RandomUtil.randomString(8);
+            target.setSalt(pwdSalt);
+
+            // 设置密码
+            String pwd = DigestUtil.sha256Hex(inputDTO.getPassword() + pwdSalt, CharsetUtil.UTF_8);
+            target.setPassword(pwd);
+        });
+        // 插入数据库
+        userRepository.insert(userEntity);
+
+        // 设置角色
+        if (CollectionUtil.isNotEmpty(inputDTO.getRoleIds())) {
+            List<UserRoleEntity> userRoleEntityList = inputDTO.getRoleIds()
+                    .stream()
+                    .map(roleId -> UserRoleEntity
+                            .builder()
+                            .roleId(roleId)
+                            .userId(userEntity.getId())
+                            .build())
+                    .toList();
+
+            this.roleClient.addUserRoleByUserId(userRoleEntityList);
+        }
+
+        return true;
     }
 
     @Override
-    public List<UserIdVo> queryAllUserList() {
-        return List.of();
+    public Boolean resetPassword(ResetPasswordInputDTO inputDTO) {
+
+        // 修改条件
+        LambdaQueryWrapper<UserEntity> wrapper = Wrappers
+                .<UserEntity>lambdaQuery()
+                .eq(UserEntity::getId, inputDTO.getId())
+                .last(" limit 1 ");
+
+        // 设置密码盐
+        String pwdSalt = RandomUtil.randomString(8);
+
+        // 设置密码
+        String pwd = DigestUtil.sha256Hex(inputDTO.getPassword() + pwdSalt, CharsetUtil.UTF_8);
+
+        UserEntity userEntity = UserEntity
+                .builder()
+                .salt(pwdSalt)
+                .password(pwd)
+                .build();
+
+        // 执行更新
+        int result = this.userRepository.update(userEntity, wrapper);
+
+        if (result == 0) {
+            throw new UserFriendlyException("修改密码失败");
+        }
+        return true;
     }
 
     @Override
+    public Boolean changePassword(ChangePasswordInputDTO inputDTO) {
+
+        // 用户数据
+        UserEntity userEntity = userRepository.selectById(inputDTO.getId());
+
+        // 判断输入旧密码是否正确
+        String oldPwd = DigestUtil.sha256Hex(inputDTO.getOldPassword() + userEntity.getSalt(),
+                CharsetUtil.UTF_8);
+        if (!StrUtil.equals(userEntity.getPassword(), oldPwd)) {
+            throw new UserFriendlyException("输入旧密码不正确", 420);
+        }
+
+        // 设置密码盐
+        String pwdSalt = RandomUtil.randomString(8);
+        // 设置密码
+        String pwd = DigestUtil.sha256Hex(inputDTO.getNewPassword() + pwdSalt, CharsetUtil.UTF_8);
+
+        // 设置更新数据
+        UserEntity updateEntity = UserEntity
+                .builder()
+                .salt(pwdSalt)
+                .password(pwd)
+                .build();
+        updateEntity.setId(updateEntity.getId());
+
+        // 执行更新密码
+        userRepository.updateById(updateEntity);
+        return true;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean setRole(SetRoleInputDTO inputDTO) {
-        return null;
+
+        // 先清空角色
+        roleClient.delUserRoleByUserId(inputDTO.getUserId());
+
+
+        // 使用流创建UserRoleEntity对象
+        List<UserRoleEntity> userRoleEntities = inputDTO.getRoleIds()
+                .stream()
+                .map(roleId -> UserRoleEntity.builder()
+                        .roleId(roleId)
+                        .userId(inputDTO.getUserId())
+                        .build())
+                .toList();
+
+        // 批量插入
+        roleClient.addUserRoleByUserId(userRoleEntities);
+
+        return true;
     }
 
     @Override
     public Boolean editUser(EditUserInputDTO inputDTO) {
-        return null;
+        // 判断该用户id是否有效
+        if (!userRepository.exists(
+                Wrappers.<UserEntity>lambdaQuery().eq(UserEntity::getId, inputDTO.getId()))) {
+            throw new UserFriendlyException("该用户不存在");
+        }
+
+        // 更新的数据
+        UserEntity updateEntity = ModelMapperUtil.map(inputDTO, UserEntity.class);
+
+        // 执行更新
+        userRepository.updateById(updateEntity);
+
+        return true;
+    }
+
+    @Override
+    public Boolean setState(SetUserStateInputDTO inputDTO) {
+        // 判断该用户id是否有效
+        if (!userRepository.exists(
+                Wrappers.<UserEntity>lambdaQuery().eq(UserEntity::getId, inputDTO.getId()))) {
+            throw new UserFriendlyException("该用户不存在");
+        }
+        // 更新对象
+        UserEntity updateEntity = UserEntity.builder()
+                .enable(inputDTO.getState())
+                .build();
+        updateEntity.setId(inputDTO.getId());
+
+        userRepository.updateById(updateEntity);
+        return true;
     }
 }

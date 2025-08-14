@@ -22,12 +22,27 @@ public interface IUserClient extends BaseFeign {
     String GET_USER_BY_ID_List = API_PREFIX + "/getUserByIDList";
     String GET_USER_BY_ACCOUNT = API_PREFIX + "/getUserByAccount";
 
-    @GetMapping(GET_USER_BY_ID)
+    /**
+     * 根据ID查询用户
+     * @param id 用户 ID
+     * @return 用户实体
+     */
+    @PostMapping(GET_USER_BY_ID)
     UserEntity getUserByID(@RequestParam("id") Serializable id);
 
+    /**
+     * 根据ID列表查询用户
+     * @param ids ID列表
+     * @return 用户实体列表
+     */
     @PostMapping(GET_USER_BY_ID_List)
     List<UserEntity> getUserByIDList(@RequestParam("ids") List<Long> ids);
 
+    /**
+     * 根据账号查询用户
+     * @param account 账号
+     * @return 用户实体
+     */
     @GetMapping(GET_USER_BY_ACCOUNT)
     UserEntity getUserByAccount(@RequestParam("account") String account);
 }

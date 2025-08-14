@@ -23,7 +23,7 @@ public class UserClient implements IUserClient {
     private UserRepository userRepository;
 
     @Override
-    @GetMapping(GET_USER_BY_ID)
+    @PostMapping(GET_USER_BY_ID)
     public UserEntity getUserByID(@RequestParam("id") Serializable id) {
         return userRepository.selectById(id);
     }
