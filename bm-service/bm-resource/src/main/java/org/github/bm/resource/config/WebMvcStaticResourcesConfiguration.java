@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebMvcStaticResourcesConfiguration implements WebMvcConfigurer {
     private final StorageProperties storageProperties;
 
-    public static final String LOCAL_STORAGE_RESOURCE_PATH = "/localStorage/";
+    public static final String LOCAL_STORAGE_RESOURCE_PATH = "/localStorage/**";
 
     /**
      * 配置静态资源的处理规则
@@ -31,10 +31,10 @@ public class WebMvcStaticResourcesConfiguration implements WebMvcConfigurer {
     @SneakyThrows
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("配置本地存储静态资源目录...");
+        log.info("配置本地存储资源目录...");
         WebMvcConfigurer.super.addResourceHandlers(registry);
         // 本地存储资源目录
-        registry.addResourceHandler(LOCAL_STORAGE_RESOURCE_PATH + "**")
+        registry.addResourceHandler(LOCAL_STORAGE_RESOURCE_PATH)
                 .addResourceLocations("file:" + LocalStorageUtil.getRootPath(storageProperties.getBucketName())+"/");
     }
 
