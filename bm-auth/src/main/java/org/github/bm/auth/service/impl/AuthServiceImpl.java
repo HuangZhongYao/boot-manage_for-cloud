@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.github.bm.auth.converter.IAuthInfoConverter;
 import org.github.bm.auth.dto.LoginDTO;
 import org.github.bm.auth.service.IAuthService;
+import org.github.bm.common.base.response.ResponseCode;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.common.constant.RedisConstant;
 import org.github.bm.common.enums.ClientEnum;
@@ -18,6 +19,7 @@ import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
+import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.core.service.IRedisService;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
@@ -51,15 +53,31 @@ public class AuthServiceImpl implements IAuthService {
     @Override
     public Boolean loginOut(String client) {
         ClientEnum clientEnum = this.getClient(client);
+        Long userId = SecurityContextHolder.getAuthUserId();
+        redisService.expire(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userId, 1);
+        redisService.expire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userId, 1);
         return true;
     }
 
     @Override
     public AuthInfo refreshToken(String refreshToken, String client) {
         ClientEnum clientEnum = this.getClient(client);
-        JWT jwt = JWTUtil.parseToken(refreshToken);
-        Object userID = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
-        Long ttl = redisService.getExpire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userID);
+        Object userID;
+        Long ttl;
+        try {
+            // 解析refreshToken
+            JWT jwt = JWTUtil.parseToken(refreshToken);
+            // 获取用户ID
+            userID = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
+            // 获取refreshToken过期时间
+            ttl = redisService.getExpire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userID);
+        } catch (Exception e) {
+            throw new UserFriendlyException(ResponseCode.FAILED.message, ResponseCode.FAILED.code);
+        }
+        // 检查refreshToken是否有效
+        if (ttl != null && ttl > 0)
+            throw new UserFriendlyException(ResponseCode.LOGIN_EXPIRED.message, ResponseCode.LOGIN_EXPIRED.code);
+
         UserEntity userEntity = userClient.getUserByID(userID.toString());
         return this.generateJwt(userEntity, clientEnum);
     }
@@ -82,8 +100,6 @@ public class AuthServiceImpl implements IAuthService {
         jwt.setIssuer(AppConstant.BASE_PACKAGES);
         // 密钥
         jwt.setKey(securityProperties.getToken().getSecret().getBytes());
-        // 过期时间
-        jwt.setExpiresAt(DateUtil.offsetDay(now, SecurityConstants.JwtConstants.REFRESH_TOKEN_EXPIRED_TIME));
         // 添加payload,refreshToken payload 只存放用户id
         jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID, userEntity.getId());
         // 生成refreshToken
@@ -91,10 +107,6 @@ public class AuthServiceImpl implements IAuthService {
 
         // 构建accessToken payload
         AuthUser authUser = new AuthUser(userEntity.getId(), userEntity.getUsername(), userEntity.getAccount(), userEntity.getPhone(), userEntity.getEnable());
-        // 访问令牌过期时间
-        DateTime accessTokenExpiresAt = DateUtil.offsetHour(now, SecurityConstants.JwtConstants.ACCESS_TOKEN_EXPIRED_TIME);
-        // 设置accessToken访问令牌过期时间
-        jwt.setExpiresAt(accessTokenExpiresAt);
         // 设置accessToken payload
         jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER, JSON.toJSONString(authUser));
         // 生成accessToken
@@ -103,24 +115,31 @@ public class AuthServiceImpl implements IAuthService {
         // 缓存认证信息-对应用户信息
         redisService.set(RedisConstant.Authorization.AUTHORIZATION_INFO + userEntity.getId(), authUser, RedisConstant.Authorization.AUTHORIZATION_INFO_CACHE_TIME);
         // 缓存认证信息-对应客户端访问令牌
-        redisService.set(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userEntity.getId(), accessToken, RedisConstant.Authorization.AUTHORIZATION_INFO_CACHE_TIME);
+        redisService.set(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userEntity.getId(), accessToken, RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
         // 缓存refreshToken
         redisService.set(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userEntity.getId(), refreshToken, RedisConstant.Authorization.REFRESH_TOKEN_CACHE_TIME);
+
+        // 访问令牌过期时间
+        DateTime accessTokenExpiresAt = DateUtil.offsetSecond(now, (int) RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
+        // 刷新令牌过期时间
+        DateTime refreshTokenExpiresAt = DateUtil.offsetSecond(now, (int) RedisConstant.Authorization.REFRESH_TOKEN_CACHE_TIME);
 
         AuthInfo authInfo = authInfoConverter.toAuthInfo(userEntity);
         authInfo.setAccessToken(accessToken);
         authInfo.setRefreshToken(refreshToken);
         authInfo.setTokenPrefix(securityProperties.getToken().getPrefix());
-        authInfo.setExpiresIn(accessTokenExpiresAt);
+        authInfo.setAccessTokenExpiresIn(accessTokenExpiresAt);
+        authInfo.setRefreshTokenExpiresIn(refreshTokenExpiresAt);
         return authInfo;
     }
 
     private ClientEnum getClient(String client) {
+        if (client == null) throw new UserFriendlyException("客户端错误", 450);
         for (ClientEnum value : ClientEnum.values()) {
-            if (value.code.equals(client)) {
+            if (value.code.equals(client.toUpperCase())) {
                 return value;
             }
         }
-        throw new UserFriendlyException("客户端错误", 430);
+        throw new UserFriendlyException("客户端错误", 450);
     }
 }

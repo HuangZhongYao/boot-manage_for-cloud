@@ -18,7 +18,16 @@ public interface RedisConstant {
          * 刷新令牌缓存key
          */
         String REFRESH_TOKEN = BASE_KEY_PREFIX + "RefreshToken:";
+        /**
+         * 访问令牌缓存key
+         */
         String ACCESS_TOKEN = BASE_KEY_PREFIX + "AccessToken:";
+
+        /**
+         * 访问令牌缓存时间，单位秒
+         */
+        long ACCESS_TOKEN_CACHE_TIME = 3 * 60 * 60;
+
         /**
          * 刷新令牌缓存时间，单位秒
          */

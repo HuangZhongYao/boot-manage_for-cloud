@@ -16,6 +16,10 @@ public interface SecurityConstants {
      * 认证信息Key
      */
     String CONTEXT_HOLDER_USER_KEY = "BM-Authorization-User";
+    /**
+     * 认证信息用户ID Key
+     */
+    String CONTEXT_HOLDER_USER_ID_KEY = "BM-Authorization-UserId";
 
     String BM_CLIENT_TYPE = "BM-Client-Type";
 
@@ -28,7 +32,6 @@ public interface SecurityConstants {
             "/v2/api-docs/**",
             "/v3/api-docs/**",
             "/auth/login",
-            "/auth/loginOut",
             "/auth/refreshToken",
             "/doc.html/**",
             "/error/**",
@@ -56,6 +59,10 @@ public interface SecurityConstants {
      * 网关透传请求上下文信息KEY
      */
     String GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY = GATEWAY_AUTHORIZATION_KEY + "-ContextHolder";
+    /**
+     * 网关透传请求上下文用户Id KEY
+     */
+    String GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY = GATEWAY_AUTHORIZATION_KEY + "-ContextHolder-UserId";
 
     //================================== 内部调用认证 End
 
@@ -73,15 +80,6 @@ public interface SecurityConstants {
          * 认证用户ID信息在jwt PAYLOAD 中的KEY
          */
         String PAYLOAD_AUTHORIZATION_USER_ID = "payload-authorization-id";
-
-        /**
-         * 访问令牌过期时间,单位小时
-         */
-        int ACCESS_TOKEN_EXPIRED_TIME = 3;
-        /**
-         * 刷新令牌过期时间,单位天
-         */
-        int REFRESH_TOKEN_EXPIRED_TIME = 3;
 
     }
 }

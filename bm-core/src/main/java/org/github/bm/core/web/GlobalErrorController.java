@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -161,6 +162,22 @@ public class GlobalErrorController {
         ErrorResponse errorResponse = this.buildErrorResponse(exception, request);
         errorResponse.setCode(ResponseCode.VALIDATION_FAILED.getCode());
         errorResponse.setMessage(String.format("%s 不能为空!", exception.getParameterName()));
+        return errorResponse;
+    }
+
+    /**
+     * 处理 @RequestHeader 参数验证不通过
+     *
+     * @return 异常信息
+     */
+    @ExceptionHandler(MissingRequestHeaderException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public ErrorResponse handelMissingRequestHeaderException(HttpServletRequest request,
+                                                                       HttpServletResponse response,
+                                                             MissingRequestHeaderException exception) {
+        ErrorResponse errorResponse = this.buildErrorResponse(exception, request);
+        errorResponse.setCode(ResponseCode.VALIDATION_FAILED.getCode());
+        errorResponse.setMessage(String.format("请求头参数 %s 不能为空!", exception.getHeaderName()));
         return errorResponse;
     }
 

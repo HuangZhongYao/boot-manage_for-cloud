@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 	 * 根据key 获取过期时间
 	 *
 	 * @param key 键 不能为null
-	 * @return 时间(秒) 返回0代表为永久有效
+	 * @return 时间(秒) 返回-1代表为永久有效，-2已过期
 	 */
 	 long getExpire(String key);
 

@@ -77,11 +77,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		}
 		// 获取token中用户信息
 		String authUser = (String) jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER);
+		Object authUserId =  jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
 		// 透传请求上下文信息给下游服务
 		exchange.getRequest()
 				.mutate()
 				.header(SecurityConstants.REQUEST_SOURCE_PATH, path)
 				.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authUser)
+				.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY, authUserId.toString())
 				.header(SecurityConstants.REQUEST_SOURCE, ServiceEnum.APPLICATION_GATEWAY.name)
 				.header(SecurityConstants.GATEWAY_AUTHORIZATION_KEY, securityProperties.getInternalValid().getToken())
 				.build();

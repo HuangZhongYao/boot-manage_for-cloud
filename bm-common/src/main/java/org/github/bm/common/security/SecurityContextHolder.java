@@ -9,7 +9,6 @@ public class SecurityContextHolder {
 
     private static final ThreadLocal<AuthUser> contextHolder = new ThreadLocal<AuthUser>();
 
-
     public static AuthUser getAuthUser() {
         AuthUser userContextHolder = contextHolder.get();
         if (userContextHolder == null) {
@@ -25,10 +24,16 @@ public class SecurityContextHolder {
     }
 
     public static Long getAuthUserId() {
-        if (contextHolder.get() == null) {
-            return null;
+        AuthUser userContextHolder = contextHolder.get();
+        if (userContextHolder == null) {
+            // 从request中获取
+            RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+            Object authUserId = requestAttributes.getAttribute(SecurityConstants.CONTEXT_HOLDER_USER_ID_KEY, RequestAttributes.SCOPE_REQUEST);
+            if (authUserId != null) {
+                return Long.valueOf(authUserId.toString());
+            }
         }
-        return contextHolder.get().getId();
+        return null;
     }
 
     public static void remove() {

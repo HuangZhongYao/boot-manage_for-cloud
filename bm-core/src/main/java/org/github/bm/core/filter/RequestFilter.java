@@ -50,9 +50,11 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
 
             // 解析请求用户上下文信息
             String authorizationContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY);
+            String authorizationUserIdContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY);
             if (authorizationContextHolder != null) {
                 AuthUser authUser = JSON.parseObject(authorizationContextHolder, AuthUser.class);
                 request.setAttribute(SecurityConstants.CONTEXT_HOLDER_USER_KEY, authUser);
+                request.setAttribute(SecurityConstants.CONTEXT_HOLDER_USER_ID_KEY, authorizationUserIdContextHolder);
             }
 
             // 获取请求路径

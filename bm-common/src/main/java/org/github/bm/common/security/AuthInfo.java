@@ -54,7 +54,10 @@ public class AuthInfo extends BaseVO {
     private String account;
 
     @Schema(description = "accessToken过期时间")
-    private Date expiresIn;
+    private Date accessTokenExpiresIn;
+
+    @Schema(description = "refreshToken过期时间")
+    private Date refreshTokenExpiresIn;
 
     @Schema(description = "备注")
     private String remark;
