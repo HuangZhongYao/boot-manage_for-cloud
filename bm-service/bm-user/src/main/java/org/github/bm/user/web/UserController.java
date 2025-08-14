@@ -19,7 +19,7 @@ import org.github.bm.system.vo.RoleVo;
 import org.github.bm.user.dto.*;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.common.enums.GenderEnum;
-import org.github.bm.user.repositery.UserRepository;
+import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
 import org.github.bm.user.vo.UserIdVo;
 import org.springframework.http.MediaType;

@@ -1,4 +1,4 @@
-package org.github.bm.user.repositery;
+package org.github.bm.user.repository;
 
 import org.github.bm.common.mybatis.BaseMapperExtension;
 import org.github.bm.user.entity.UserEntity;

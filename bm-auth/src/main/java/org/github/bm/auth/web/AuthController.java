@@ -14,14 +14,13 @@ import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.core.service.IRedisService;
+import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.feign.IUserClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Time 2025-07-28 16:38
@@ -68,10 +67,12 @@ public class AuthController {
     ) {
         return ApiResponse.ok(authService.refreshToken(refreshToken,client));
     }
-
+@Resource
+    IUserClient userClient;
     @Operation(summary = "sys接口")
     @GetMapping("/sys")
     public ApiResponse<Properties> sys() {
+        List<UserEntity> userEntityList = userClient.getUserByIDList(List.of(1L, 2L, 3L, 4L));
         throw new UserFriendlyException("操作错误了，请不要调用这个接口");
 //        return ApiResponse.ok(System.getProperties());
     }

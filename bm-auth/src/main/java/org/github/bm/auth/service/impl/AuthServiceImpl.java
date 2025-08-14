@@ -62,19 +62,22 @@ public class AuthServiceImpl implements IAuthService {
     public AuthInfo refreshToken(String refreshToken, String client) {
         ClientEnum clientEnum = this.getClient(client);
         Object userID;
-        Long ttl;
+        Object redisRefreshToken;
         try {
             // 解析refreshToken
             JWT jwt = JWTUtil.parseToken(refreshToken);
             // 获取用户ID
             userID = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
             // 获取refreshToken过期时间
-            ttl = redisService.getExpire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userID);
+            redisRefreshToken = redisService.get(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userID);
         } catch (Exception e) {
             throw new UserFriendlyException(ResponseCode.FAILED.message, ResponseCode.FAILED.code);
         }
-        // 检查refreshToken是否有效
-        if (ttl != null && ttl > 0)
+        // 检查refreshToken是否过期
+        if (redisRefreshToken == null)
+            throw new UserFriendlyException(ResponseCode.LOGIN_EXPIRED.message, ResponseCode.LOGIN_EXPIRED.code);
+        // 检查refreshToken与Redis中是否一致
+        if (!refreshToken.equals(redisRefreshToken))
             throw new UserFriendlyException(ResponseCode.LOGIN_EXPIRED.message, ResponseCode.LOGIN_EXPIRED.code);
 
         UserEntity userEntity = userClient.getUserByID(userID.toString());

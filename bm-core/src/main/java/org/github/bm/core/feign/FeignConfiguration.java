@@ -32,6 +32,9 @@ public class FeignConfiguration {
             if (null != requestAttributes) {
                 ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) requestAttributes;
                 HttpServletRequest request = servletRequestAttributes.getRequest();
+                // 透传内部调用验证token
+                String internalToken = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_KEY);
+                template.header(SecurityConstants.GATEWAY_AUTHORIZATION_KEY, internalToken);
                 // 透传请求源
                 String source = request.getHeader(SecurityConstants.REQUEST_SOURCE);
                 source = StrUtil.isNotBlank(source) ? source + " -> " + appName : appName;
@@ -41,9 +44,9 @@ public class FeignConfiguration {
                 template.header(SecurityConstants.REQUEST_SOURCE_PATH, sourcePath);
                 // 透传请求上下文
                 String authorizationContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY);
-                if (authorizationContextHolder != null) {
-                    template.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authorizationContextHolder);
-                }
+                template.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authorizationContextHolder);
+                String authorizationUserIdContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY);
+                template.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY, authorizationUserIdContextHolder);
             }
         };
     }

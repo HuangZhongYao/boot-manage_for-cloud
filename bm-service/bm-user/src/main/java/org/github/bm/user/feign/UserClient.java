@@ -2,15 +2,16 @@ package org.github.bm.user.feign;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.github.bm.user.entity.UserEntity;
-import org.github.bm.user.repositery.UserRepository;
+import org.github.bm.user.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户服务feign客户端实现
@@ -25,6 +26,12 @@ public class UserClient implements IUserClient {
     @GetMapping(GET_USER_BY_ID)
     public UserEntity getUserByID(@RequestParam("id") Serializable id) {
         return userRepository.selectById(id);
+    }
+
+    @Override
+    @PostMapping(GET_USER_BY_ID_List)
+    public List<UserEntity> getUserByIDList(List<Long> ids) {
+        return userRepository.selectBatchIds(ids);
     }
 
     @Override
