@@ -54,8 +54,7 @@ public class AuthServiceImpl implements IAuthService {
     public Boolean loginOut(String client) {
         ClientEnum clientEnum = this.getClient(client);
         Long userId = SecurityContextHolder.getAuthUserId();
-        redisService.expire(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userId, 1);
-        redisService.expire(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userId, 1);
+        redisService.del(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userId, RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userId);
         return true;
     }
 
