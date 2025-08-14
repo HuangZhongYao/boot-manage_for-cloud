@@ -1,6 +1,7 @@
 
 package org.github.bm.gateway.filter;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.convert.NumberWithFormat;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.jwt.JWT;
@@ -11,13 +12,17 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.base.response.ErrorResponse;
 import org.github.bm.common.base.response.ResponseCode;
+import org.github.bm.common.constant.RedisConstant;
 import org.github.bm.common.constant.ServiceEnum;
+import org.github.bm.common.enums.ClientEnum;
 import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.SecurityConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,6 +34,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Slf4j
@@ -36,6 +43,8 @@ import java.nio.charset.StandardCharsets;
 public class AuthFilter implements GlobalFilter, Ordered {
 	@Resource
 	SecurityProperties securityProperties = new SecurityProperties();
+	@Resource
+	RedisTemplate<String,String> redisTemplate;
 	AntPathMatcher matcher = new AntPathMatcher();
 
 	@Override
@@ -66,18 +75,16 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		if (!JWTUtil.verify(token, securityProperties.getToken().getSecret().getBytes())) {
 			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
 		}
-
 		// 解析令牌
 		JWT jwt = JWTUtil.parseToken(token);
-		// 获取令牌过期时间
-		NumberWithFormat expiresAtNumber = (NumberWithFormat) jwt.getPayload(RegisteredPayload.EXPIRES_AT);
-		// 验证令牌是否过期
-		if ((System.currentTimeMillis() / 1000) > expiresAtNumber.intValue()) {
-			return this.error(response, path, "令牌已过期", ResponseCode.LOGIN_EXPIRED.code);
-		}
-		// 获取token中用户信息
+		// 获取令牌payload中用户信息
 		String authUser = (String) jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER);
 		Object authUserId =  jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
+		// 验证令牌是否过期
+		if (checkExpires(authUserId,token)) {
+			return this.error(response, path, "令牌已过期", ResponseCode.LOGIN_EXPIRED.code);
+		}
+
 		// 透传请求上下文信息给下游服务
 		exchange.getRequest()
 				.mutate()
@@ -89,6 +96,30 @@ public class AuthFilter implements GlobalFilter, Ordered {
 				.build();
 
 		return chain.filter(exchange);
+	}
+
+	/**
+	 * 检查token是否过期
+	 * @param authUserId 用户ID
+	 * @param token 令牌
+	 * @return true:过期
+	 */
+	private boolean checkExpires(Object  authUserId,String token) {
+		ArrayList<String> tokenKeys = new ArrayList<>(6);
+		for (ClientEnum clientEnum : ClientEnum.values()) {
+			tokenKeys.add(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum)+ authUserId.toString());
+		}
+		// 获取redis中令牌
+		List<String> authorizationTokenList = redisTemplate.opsForValue().multiGet(tokenKeys);
+		// 获取不到认为过期
+		if(CollectionUtil.isEmpty(authorizationTokenList)) return true;
+		// 与redis中令牌一致认为未过期
+		for (String authorizationToken : authorizationTokenList) {
+            if (StrUtil.isNotBlank(authorizationToken) && StrUtil.equalsAny(authorizationToken,true, token)) {
+                return false;
+            }
+		}
+		return true;
 	}
 
 	private Mono<Void> error(ServerHttpResponse response, String path, String msg, int code) {
