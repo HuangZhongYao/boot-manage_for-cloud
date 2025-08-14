@@ -36,21 +36,21 @@ public interface SecurityConstants {
 
     //================================== 内部调用认证 Begin
     /**
+     * 网关认证前缀
+     */
+    String BASE_GATEWAY_AUTHORIZATION_PREFIX = "BM-Gateway-";
+    /**
      * 调用源
      */
-    String REQUEST_SOURCE = "X-Request-Source";
+    String REQUEST_SOURCE = BASE_GATEWAY_AUTHORIZATION_PREFIX + "Request-Source";
     /**
      * 调用源路径
      */
-    String REQUEST_SOURCE_PATH = "X-Request-Source-Path";
-    /**
-     * 网关认证前缀
-     */
-    String GATEWAY_AUTHORIZATION_PREFIX = "X-Gateway-";
+    String REQUEST_SOURCE_PATH = BASE_GATEWAY_AUTHORIZATION_PREFIX + "Request-Source-Path";
     /**
      * 网关认证key
      */
-    String GATEWAY_AUTHORIZATION_KEY = GATEWAY_AUTHORIZATION_PREFIX + "Authorization";
+    String GATEWAY_AUTHORIZATION_KEY = BASE_GATEWAY_AUTHORIZATION_PREFIX + "Authorization";
     /**
      * 网关透传请求上下文信息KEY
      */

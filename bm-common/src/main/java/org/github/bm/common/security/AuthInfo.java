@@ -10,6 +10,12 @@ import java.io.Serializable;
 @Schema(description = "认证信息")
 public class AuthInfo implements Serializable {
 
+	@Schema(description = "令牌header名称")
+	private String authHeaderKey = SecurityConstants.AUTH_HEADER_KEY;
+
+	@Schema(description = "refreshToken令牌header名称")
+	private String refreshAuthHeaderKey = SecurityConstants.REFRESH_AUTH_HEADER_KEY;
+
 	@Schema(description = "令牌前缀")
 	private String tokenPrefix;
 

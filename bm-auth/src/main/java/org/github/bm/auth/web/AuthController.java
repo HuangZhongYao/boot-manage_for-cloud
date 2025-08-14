@@ -11,6 +11,7 @@ import org.github.bm.auth.service.IAuthService;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.security.AuthInfo;
+import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.core.service.IRedisService;
 import org.springframework.validation.annotation.Validated;
@@ -51,7 +52,9 @@ public class AuthController {
     @Operation(summary = "刷新令牌")
     @GetMapping("/refreshToken")
     public ApiResponse<String> refreshToken(
-            @Parameter(name = "refreshToken", required = true) @RequestParam(name = "refreshToken") String refreshToken
+            @Parameter(name = SecurityConstants.REFRESH_AUTH_HEADER_KEY, required = true)
+            @RequestHeader(name = SecurityConstants.REFRESH_AUTH_HEADER_KEY)
+            String refreshToken
     ) {
         return ApiResponse.ok(authService.refreshToken(refreshToken));
     }

@@ -46,7 +46,7 @@ public class AuthServiceImpl implements IAuthService {
         jwt.setIssuer(AppConstant.BASE_PACKAGES);
         jwt.setKey(securityProperties.getToken().getSecret().getBytes());
         jwt.setExpiresAt(DateUtil.offsetDay(now, SecurityConstants.JwtConstants.REFRESH_TOKEN_EXPIRED_TIME));
-        jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER, userEntity.getId());
+        jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID, userEntity.getId());
 
         String refreshToken = jwt.sign();
 
