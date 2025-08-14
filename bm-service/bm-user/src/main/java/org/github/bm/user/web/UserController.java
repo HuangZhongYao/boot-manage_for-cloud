@@ -1,9 +1,6 @@
 package org.github.bm.user.web;
 
-import cn.hutool.core.lang.generator.SnowflakeGenerator;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -12,22 +9,15 @@ import jakarta.annotation.Resource;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
-import org.github.bm.common.security.AuthUser;
-import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.common.validate.group.Group;
 import org.github.bm.system.vo.RoleVo;
 import org.github.bm.user.dto.*;
-import org.github.bm.user.entity.UserEntity;
-import org.github.bm.common.enums.GenderEnum;
-import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
 import org.github.bm.user.vo.UserVo;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Tag(name = "用户接口")
@@ -36,22 +26,16 @@ import java.util.List;
 public class UserController extends BaseController {
 
     @Resource
-    SnowflakeGenerator snowflakeGenerator;
-    @Resource
-    UserRepository userRepository;
-    @Resource
     IUserService userService;
 
     @Operation(summary = "分页查询", description = "分页查询用户接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperationSupport(authors = "zuuuYao")
     public ApiResponse<Page<UserVo>> pageQueryList(UserQueryPageInputDTO inputDTO) {
         return ApiResponse.ok(userService.pageQueryList(inputDTO));
     }
 
     @Operation(summary = "查询全部用户", description = "查询全部用户接口")
     @GetMapping(value = "/queryAllUserList", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperationSupport(authors = "zuuuYao")
     public ApiResponse<List<UserVo>> queryAllUserList() {
         return ApiResponse.ok(userService.queryAllUserList());
     }
@@ -61,7 +45,6 @@ public class UserController extends BaseController {
     @Parameters({
             @Parameter(name = "id", description = "用户id"),
     })
-    @ApiOperationSupport(authors = "zuuuYao")
     public ApiResponse<List<RoleVo>> queryCurrentUserList(@RequestParam(name = "id", required = true) Long id) {
         return ApiResponse.ok(userService.queryUserRoleList(id));
     }
@@ -107,28 +90,5 @@ public class UserController extends BaseController {
     @PatchMapping(value = "/changePassword", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> changePassword(@RequestBody @Validated ChangePasswordInputDTO inputDTO) {
         return ApiResponse.ok(userService.changePassword(inputDTO));
-    }
-
-    @Operation(summary = "根据Id获取用户")
-    @GetMapping("/getById")
-    public Object getByid() {
-        ArrayList<Long> longs = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            longs.add(snowflakeGenerator.next());
-        }
-        List<UserEntity> userEntities = userRepository.selectList(new QueryWrapper<UserEntity>().eq("1", "1"));
-        HashMap<String, Object> stringObjectHashMap = new HashMap<>();
-        stringObjectHashMap.put("adf", longs);
-        stringObjectHashMap.put("adfsdfsd", userEntities);
-        return stringObjectHashMap;
-    }
-
-    @Operation(summary = "根据Id获取用户")
-    @PostMapping("/save")
-    public ApiResponse<Boolean> save() {
-        UserEntity userEntity = UserEntity.builder().account("xxxxxxx45454").phone("17685306043").password("dfsdfsdfsdfsd").enable(Boolean.TRUE).avatarUrl("34234").gender(GenderEnum.MALE).username("7878").build();
-        int insert = userRepository.insert(userEntity);
-        AuthUser authUser = SecurityContextHolder.getAuthUser();
-        return ApiResponse.ok(insert > 0);
     }
 }
