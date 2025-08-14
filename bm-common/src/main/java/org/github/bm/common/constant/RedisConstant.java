@@ -18,6 +18,7 @@ public interface RedisConstant {
          * 刷新令牌缓存key
          */
         String REFRESH_TOKEN = BASE_KEY_PREFIX + "RefreshToken:";
+        String ACCESS_TOKEN = BASE_KEY_PREFIX + "AccessToken:";
         /**
          * 刷新令牌缓存时间，单位秒
          */
@@ -28,7 +29,7 @@ public interface RedisConstant {
         long AUTHORIZATION_INFO_CACHE_TIME = 7 * 24 * 60 * 60;
 
         static  String clientAuthorizationCacheKey(ClientEnum clientEnum) {
-            return BASE_KEY_PREFIX + clientEnum.code + ":";
+            return ACCESS_TOKEN + clientEnum.code + ":";
         }
 
         static  String clientRefreshTokenCacheKey(ClientEnum clientEnum) {
