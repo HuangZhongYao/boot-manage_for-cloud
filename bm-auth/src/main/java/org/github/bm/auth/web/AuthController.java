@@ -38,6 +38,9 @@ public class AuthController {
     IAuthService authService;
 
     @Operation(summary = "登录认证", description = "登录认证接口,认证成功后返回访问令牌")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "420", description = "账号或密码错误")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "430", description = "账号不存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "440", description = "440")
     @PostMapping("/login")
     public ApiResponse<AuthInfo> auth(@Validated @RequestBody LoginDTO loginDTO, HttpServletRequest request) {
         return ApiResponse.ok(authService.login(loginDTO));
