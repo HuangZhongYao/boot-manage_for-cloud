@@ -51,6 +51,7 @@
         <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
         <mysql-driver.version>8.0.33</mysql-driver.version>
         <modelmapper.version>3.2.0</modelmapper.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
         <openfeign.version>4.1.1</openfeign.version>
         <openfeign-from-spring.version>13.6</openfeign-from-spring.version>
         <knife4j.version>4.5.0</knife4j.version>
@@ -193,11 +194,24 @@
                 <version>${spring-boot-admin.version}</version>
             </dependency>
 
-            <!-- 对象转换工具 -->
+            <!-- 对象映射框架 -->
             <dependency>
                 <groupId>org.modelmapper</groupId>
                 <artifactId>modelmapper</artifactId>
                 <version>${modelmapper.version}</version>
+            </dependency>
+
+            <!-- 对象映射框架 -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
             </dependency>
 
             <!-- hutool 工具包-->
