@@ -34,7 +34,8 @@ public class AuthUser extends AbstractIdEntity {
     public AuthUser() {
     }
 
-    public AuthUser(String username, String account, String phone, Boolean enable) {
+    public AuthUser(Long id,String username, String account, String phone, Boolean enable) {
+        super.setId(id);
         this.username = username;
         this.account = account;
         this.phone = phone;
