@@ -3,6 +3,7 @@ package org.github.bm.system.feign;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
+import org.github.bm.common.util.ModelMapperUtil;
 import org.github.bm.common.util.tree.ITreeNode;
 import org.github.bm.common.util.tree.TreeUtil;
 import org.github.bm.system.converter.ResourcesConverter;
@@ -45,6 +46,7 @@ public class ResourcesClient implements IResourcesClient {
 //        if (StpUtil.getRoleList().contains(RoleConstant.SUPER_ADMIN_CODE)) {
 //            return resourcesRepository.selectList(null);
 //        }
+        if (true)return resourcesRepository.selectList(null);
         // 用户角色id集合
         List<Long> userRoleIds = userRoleRepository.selectList(Wrappers.<UserRoleEntity>lambdaQuery().eq(UserRoleEntity::getUserId, userId)).stream().map(UserRoleEntity::getRoleId).toList();
 
@@ -72,10 +74,9 @@ public class ResourcesClient implements IResourcesClient {
         // 获取用户权限列表
         List<ResourcesTreeVo> resourcesVos = resourcesConverter.toResourcesTreeVoList(this.queryPermissionsListByUserId(userId));
         // 转换ITreeNode List
-        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesVos.size());
-        treeNodeList.addAll(resourcesVos);
+        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesVos);
         // 转换成树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
-        return resourcesConverter.treeNodeToResourcesTreeVoList(tree);
+        return ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
     }
 }

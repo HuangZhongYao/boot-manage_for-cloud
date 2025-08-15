@@ -22,7 +22,11 @@ import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.common.util.ModelMapperUtil;
+import org.github.bm.common.util.tree.ITreeNode;
+import org.github.bm.common.util.tree.TreeUtil;
 import org.github.bm.core.service.IRedisService;
+import org.github.bm.system.converter.ResourcesConverter;
+import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.feign.IResourcesClient;
 import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.ResourcesTreeVo;
@@ -32,6 +36,7 @@ import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +55,8 @@ public class AuthServiceImpl implements IAuthService {
     IRoleClient roleClient;
     @Resource
     IAuthInfoConverter authInfoConverter;
+    @Resource
+    ResourcesConverter resourcesConverter;
 
     @Override
     public AuthInfo login(LoginDTO loginDTO, String client) {
@@ -58,7 +65,7 @@ public class AuthServiceImpl implements IAuthService {
         UserEntity userEntity = userClient.getUserByAccount(loginDTO.getAccount());
         if (userEntity == null) throw new UserFriendlyException("账号不存在", 430);
         if (!loginDTO.getPassword().equals("123456")) throw new UserFriendlyException("账号或密码错误", 420);
-        if (!userEntity.getEnable()) throw new UserFriendlyException("该账户已被禁用", 440);
+        if (userEntity.getEnable() == Boolean.FALSE) throw new UserFriendlyException("该账户已被禁用", 440);
         return this.generateJwt(userEntity, clientEnum);
     }
 
@@ -100,7 +107,17 @@ public class AuthServiceImpl implements IAuthService {
     public List<ResourcesTreeVo> queryPermissionsTree() {
         // 当前用户id
         Long currentUserId = SecurityContextHolder.getAuthUserId();
-        return this.resourcesClient.queryPermissionsTreeByUserId(currentUserId);
+        // 获取用户权限列表
+        List<ResourcesEntity> resourcesVoList = this.resourcesClient.queryPermissionsListByUserId(currentUserId);
+        // 转换成ResourcesTreeVo
+        List<ResourcesTreeVo> resourcesTreeVoList = resourcesConverter.toResourcesTreeVoList(resourcesVoList);
+        // 转换ITreeNode List
+        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesTreeVoList);
+        // 转换成树结构
+        List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
+        // 转换成ResourcesTreeVo 返回给前端
+        List<ResourcesTreeVo> resourcesTreeVos = ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
+        return resourcesTreeVos;
     }
 
 

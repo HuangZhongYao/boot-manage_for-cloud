@@ -68,7 +68,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		String token = StrUtil.isNotBlank(headerToken) ? headerToken : paramToken;
 		// 验证是否携带令牌
 		if (StrUtil.isBlank(token)) {
-			return this.error(response, path, "缺失令牌,鉴权失败", ResponseCode.REQUEST_FAILED.code);
+			return this.error(response, path, "请登录后重试", ResponseCode.NOT_LOGIN.code);
 		}
 		//  令牌前缀验证
         if (!token.startsWith(securityProperties.getToken().getPrefix())) {

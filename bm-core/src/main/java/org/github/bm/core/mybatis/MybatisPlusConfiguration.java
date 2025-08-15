@@ -42,8 +42,8 @@ public class MybatisPlusConfiguration {
         log.info("Mybatis-plus拦截器加载...");
 
         // 添加非法SQL拦截器
-        log.info("Mybatis-plus非法SQL拦截插件加载...");
-        interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
+//        log.info("Mybatis-plus非法SQL拦截插件加载...");
+//        interceptor.addInnerInterceptor(new IllegalSQLInnerInterceptor());
 
         // 如果配置多个插件, 切记分页最后添加
         // 如果有多数据源可以不配具体类型, 否则都建议配上具体的 DbType
