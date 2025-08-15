@@ -1,9 +1,11 @@
 package org.github.bm.common.security;
 
+import org.github.bm.common.prop.SecurityProperties;
+import org.springframework.util.AntPathMatcher;
+
 import java.util.List;
 
 public interface SecurityConstants {
-
     /**
      * 客户端请求令牌头
      */
@@ -22,21 +24,6 @@ public interface SecurityConstants {
     String CONTEXT_HOLDER_USER_ID_KEY = "BM-Authorization-UserId";
 
     String BM_CLIENT_TYPE = "BM-Client-Type";
-
-    /**
-     * 默认排除的URL 不进行鉴权
-     */
-    List<String> DEFAULT_EXCLUDE_PATTERNS = List.of(
-            "/actuator/**",
-            "/actuator/health/**",
-            "/v2/api-docs/**",
-            "/v3/api-docs/**",
-            "/auth/login",
-            "/auth/refreshToken",
-            "/doc.html/**",
-            "/error/**",
-            "/assets/**"
-    );
 
     //================================== 内部调用认证 Begin
     /**
@@ -81,5 +68,62 @@ public interface SecurityConstants {
          */
         String PAYLOAD_AUTHORIZATION_USER_ID = "payload-authorization-id";
 
+    }
+
+    /**
+     * AntPathMatcher
+     */
+    AntPathMatcher MATCHER = new AntPathMatcher();
+
+    /**
+     * 默认排除的URL不进行鉴权 , 请根据业务情况自行修改
+     */
+    List<String> DEFAULT_EXCLUDE_PATTERNS = List.of(
+            "/auth/login",
+            "/auth/refreshToken",
+            "/actuator/**",
+            "/doc.html/**",
+            "/error/**",
+            "/assets/**",
+            "/static/**",
+            "/public/**",
+            "/resources/**",
+            "/META-INF/resources/**",
+            "/css/**",
+            "/js/**",
+            "/images/**",
+            "/webjars/**"
+    );
+
+    /**
+     * 是否是跳过鉴权
+     * @param isGateway 是否请求来自网关转发
+     * @param path 请求路径
+     * @param originalPath 请求原始路径  （调用 /bm-auth/auth/login 登录，登录中调用用户服务/bm-user/user/getById获取用户. /bm-auth/auth/login 就是/bm-user/user/getById的原始路径  ）
+     * @param securityProperties 项目安全配置属性
+     * @return true: 跳过鉴权
+     */
+    static boolean isSkip(boolean isGateway, String path, String originalPath, SecurityProperties securityProperties) {
+        if (isGateway) {
+            // 配置中心配置的跳过鉴权url集合
+            List<String> skipUrls = securityProperties.getSkipUrl();
+            // 匹配配置中心跳过鉴权url
+            if (skipUrls.stream().anyMatch(pattern -> MATCHER.match(pattern, path))) {
+                return true;
+            }
+            // 去除第一级服务名路径
+            String removeFirstLevelPath = path.replaceAll("^/[^/]+/", "/");
+            // 匹配默认跳过鉴权url
+            return SecurityConstants.DEFAULT_EXCLUDE_PATTERNS.stream().anyMatch(pattern -> MATCHER.match(pattern, removeFirstLevelPath));
+        } else {
+            // 当前路径匹配默认跳过鉴权url
+            if (SecurityConstants.DEFAULT_EXCLUDE_PATTERNS.stream().anyMatch(pattern -> MATCHER.match(pattern, path))) {
+                return true;
+            }
+            // 配置中心配置的跳过鉴权url集合
+            List<String> skipUrls = securityProperties.getSkipUrl();
+            // 原始路径匹配配置中心跳过鉴权url
+            return skipUrls.stream().anyMatch(pattern -> MATCHER.match(pattern, originalPath));
+        }
     }
 }

@@ -52,8 +52,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		// 获取请求路径
 		String path = exchange.getRequest().getURI().getPath();
 		// 是否是放行路径
-		if (isSkip(path)) {
-			//
+		if (SecurityConstants.isSkip(true, path, null, securityProperties)) {
+			// 透传原始请求路径给下游服务
 			exchange.getRequest()
 					.mutate()
 					.header(SecurityConstants.REQUEST_SOURCE_PATH, path)
@@ -67,9 +67,13 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		String paramToken = exchange.getRequest().getQueryParams().getFirst(SecurityConstants.AUTH_HEADER_KEY);
 		String token = StrUtil.isNotBlank(headerToken) ? headerToken : paramToken;
 		// 验证是否携带令牌
-		if (StrUtil.isAllBlank(headerToken, paramToken)) {
+		if (StrUtil.isBlank(token)) {
 			return this.error(response, path, "缺失令牌,鉴权失败", ResponseCode.REQUEST_FAILED.code);
 		}
+		//  令牌前缀验证
+        if (!token.startsWith(securityProperties.getToken().getPrefix())) {
+			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
+        }
 		// 验证令牌有效性
 		token = token.substring(securityProperties.getToken().getPrefix().length());
 		if (!JWTUtil.verify(token, securityProperties.getToken().getSecret().getBytes())) {
@@ -129,17 +133,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
 		DataBuffer buffer = response.bufferFactory().wrap(result.getBytes(StandardCharsets.UTF_8));
 		return response.writeWith(Flux.just(buffer));
 	}
-
-	private boolean isSkip(String path) {
-		return SecurityConstants.DEFAULT_EXCLUDE_PATTERNS
-				.stream()
-				.anyMatch(skipUrl -> matcher.match(skipUrl, path))
-				||
-				securityProperties.getSkipUrl()
-						.stream()
-						.anyMatch(skipUrl -> matcher.match(skipUrl, path));
-	}
-
 
 	@Override
 	public int getOrder() {

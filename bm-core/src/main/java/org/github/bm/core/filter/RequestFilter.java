@@ -62,7 +62,7 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
             // 获取原始路径
             String sourcePath = request.getHeader(SecurityConstants.REQUEST_SOURCE_PATH);
             // 是否放行路径支持原始路径匹配; 列子：认证服务的登录请求放行那登录请求触发的调用下游服务也放行
-            if (isSkip(path) || isSkip(sourcePath)) {
+            if (SecurityConstants.isSkip(false, path, sourcePath, securityProperties)) {
                 filterChain.doFilter(request, response);
                 return;
             }
@@ -95,16 +95,6 @@ public class RequestFilter extends OncePerRequestFilter implements Ordered {
         writer.write(JSON.toJSONString(new ErrorResponse(msg, path, false)));
         writer.flush();
         writer.close();
-    }
-
-    private boolean isSkip(String path) {
-        return SecurityConstants.DEFAULT_EXCLUDE_PATTERNS
-                .stream()
-                .anyMatch(skipUrl -> matcher.match(skipUrl, path))
-                ||
-                securityProperties.getSkipUrl()
-                        .stream()
-                        .anyMatch(skipUrl -> matcher.match(skipUrl, path));
     }
 
     @Override
