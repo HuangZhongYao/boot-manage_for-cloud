@@ -5,6 +5,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson2.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.github.bm.auth.converter.IAuthInfoConverter;
@@ -21,12 +22,18 @@ import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
+import org.github.bm.common.util.ModelMapperUtil;
+import org.github.bm.common.util.tree.ITreeNode;
+import org.github.bm.common.util.tree.TreeUtil;
 import org.github.bm.core.service.IRedisService;
+import org.github.bm.system.entity.ResourcesEntity;
+import org.github.bm.system.feign.IResourcesClient;
 import org.github.bm.system.vo.ResourcesTreeVo;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +46,8 @@ public class AuthServiceImpl implements IAuthService {
     IRedisService redisService;
     @Resource
     IUserClient userClient;
+    @Resource
+    IResourcesClient resourcesClient;
     @Resource
     IAuthInfoConverter authInfoConverter;
 
@@ -89,8 +98,12 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public List<ResourcesTreeVo> queryPermissionsTree() {
-        return List.of();
+        // 当前用户id
+        Long currentUserId = SecurityContextHolder.getAuthUserId();
+        return this.resourcesClient.queryPermissionsTreeByUserId(currentUserId);
     }
+
+
 
     @Override
     public String captcha() {

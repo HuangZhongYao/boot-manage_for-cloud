@@ -1,0 +1,19 @@
+package org.github.bm.system.converter;
+
+import org.github.bm.common.util.tree.ITreeNode;
+import org.github.bm.system.entity.ResourcesEntity;
+import org.github.bm.system.vo.ResourcesTreeVo;
+import org.mapstruct.Mapper;
+
+import java.util.List;
+
+/**
+ * Time 2025-08-15 16:39
+ * CreatedBy IntelliJ IDEA By HuangZhongYao
+ */
+@Mapper(componentModel = "spring")
+public interface ResourcesConverter {
+    List<ResourcesTreeVo> toResourcesTreeVoList(List<ResourcesEntity> resourcesEntityList);
+
+    List<ResourcesTreeVo> treeNodeToResourcesTreeVoList(List<ITreeNode<Long>> treeNodeList);
+}
