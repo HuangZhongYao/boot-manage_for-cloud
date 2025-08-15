@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.github.bm.auth.converter.IAuthInfoConverter;
 import org.github.bm.auth.dto.LoginDTO;
 import org.github.bm.auth.service.IAuthService;
+import org.github.bm.auth.vo.AuthenticationUserDetailVO;
 import org.github.bm.common.base.response.ResponseCode;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.common.constant.RedisConstant;
@@ -21,11 +22,13 @@ import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.core.service.IRedisService;
+import org.github.bm.system.vo.ResourcesTreeVo;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -82,6 +85,21 @@ public class AuthServiceImpl implements IAuthService {
 
         UserEntity userEntity = userClient.getUserByID(userID.toString());
         return this.generateJwt(userEntity, clientEnum);
+    }
+
+    @Override
+    public List<ResourcesTreeVo> queryPermissionsTree() {
+        return List.of();
+    }
+
+    @Override
+    public String captcha() {
+        return "";
+    }
+
+    @Override
+    public AuthenticationUserDetailVO authenticationUserDetail() {
+        return null;
     }
 
     /**

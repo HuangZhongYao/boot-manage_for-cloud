@@ -1,26 +1,21 @@
 package org.github.bm.auth.web;
 
-import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import org.github.bm.auth.dto.LoginDTO;
 import org.github.bm.auth.service.IAuthService;
+import org.github.bm.auth.vo.AuthenticationUserDetailVO;
 import org.github.bm.common.base.response.ApiResponse;
-import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.SecurityConstants;
-import org.github.bm.common.security.SecurityContextHolder;
-import org.github.bm.core.service.IRedisService;
-import org.github.bm.user.entity.UserEntity;
-import org.github.bm.user.feign.IUserClient;
+import org.github.bm.system.vo.ResourcesTreeVo;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
 
 /**
  * Time 2025-07-28 16:38
@@ -31,8 +26,6 @@ import java.util.*;
 @RestController
 public class AuthController {
 
-    @Resource
-    IRedisService redisService;
     @Resource
     IAuthService authService;
 
@@ -65,35 +58,25 @@ public class AuthController {
             @RequestHeader(name = SecurityConstants.BM_CLIENT_TYPE)
             String client
     ) {
-        return ApiResponse.ok(authService.refreshToken(refreshToken,client));
-    }
-@Resource
-    IUserClient userClient;
-    @Operation(summary = "sys接口")
-    @GetMapping("/sys")
-    public ApiResponse<Properties> sys() {
-        List<UserEntity> userEntityList = userClient.getUserByIDList(List.of(1L, 2L, 3L, 4L));
-        throw new UserFriendlyException("操作错误了，请不要调用这个接口");
-//        return ApiResponse.ok(System.getProperties());
+        return ApiResponse.ok(authService.refreshToken(refreshToken, client));
     }
 
-    @Operation(summary = "date接口")
-    @GetMapping("/date")
-    public ApiResponse<Map<String, Object>> map() {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("date", new Date());
-        map.put("datelocal", LocalDateTime.now());
-        map.put("authUser", SecurityContextHolder.getAuthUser());
-        return ApiResponse.ok(map);
+    @GetMapping(value = "/queryPermissionsTree")
+    @Operation(summary = "查询用户权限树", description = "查询用户权限,以树形结构返回")
+    public ApiResponse<List<ResourcesTreeVo>> queryPermissionsTree() {
+        return ApiResponse.ok(authService.queryPermissionsTree());
     }
 
-    @Operation(summary = "redis接口")
-    @GetMapping("/redis")
-    public ApiResponse<String> redis() {
-        redisService.set("redis", "redis");
-        redisService.hset("redis-hash", "hash-k", "hash-v");
-        redisService.hset("redis-hash", "hash-k1", JSON.toJSONString(System.getenv()));
-        return ApiResponse.ok(redisService.get("redis").toString());
+    @Operation(summary = "获取验证码", description = "获取验证码")
+    @GetMapping(value = "/captcha", produces = MediaType.TEXT_HTML_VALUE)
+    public ApiResponse<String> captcha() {
+        return ApiResponse.ok(authService.captcha());
+    }
+
+    @Operation(summary = "认证用户详情", description = "获取用户详情")
+    @GetMapping(value = "/authenticationUserDetail")
+    public ApiResponse<AuthenticationUserDetailVO> authenticationUserDetail() {
+        return ApiResponse.ok(authService.authenticationUserDetail());
     }
 
 }
