@@ -30,11 +30,11 @@ export function setupInterceptors(axiosInstance) {
     }
 
     // 使用Auth Store获取访问令牌
-    const { accessToken } = useAuthStore()
+    const { authHeaderKey,accessToken } = useAuthStore()
     // 如果存在访问令牌，将其添加到请求头中
     if (accessToken) {
       // token: Bearer + xxx
-      config.headers['BM-Authorization'] = `Bearer ${accessToken}`
+      config.headers[`${authHeaderKey}`] = `Bearer ${accessToken}`
     }
 
     return config

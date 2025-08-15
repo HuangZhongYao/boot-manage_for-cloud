@@ -14,7 +14,7 @@ export default {
   // 刷新token
   refreshToken: () => request.get('/bm-auth/auth/refreshToken'),
   // 登出
-  logout: () => request.post('/bm-auth/auth/logout', {}, { needTip: false }),
+  logout: () => request.post('/bm-auth/auth/loginOut', {}, { needTip: false }),
   // 切换当前角色
   switchCurrentRole: role => request.post(`/auth/current-role/switch/${role}`),
   // 获取角色权限

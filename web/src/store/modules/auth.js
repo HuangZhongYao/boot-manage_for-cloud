@@ -14,6 +14,10 @@ export const useAuthStore = defineStore('auth', {
    */
   state: () => ({
     accessToken: undefined,
+    refreshToken: undefined,
+    authHeaderKey: undefined,
+    refreshAuthHeaderKey: undefined,
+    tokenPrefix: "Bearer ",
   }),
   /**
    * 定义actions，用于执行影响store状态的操作。
@@ -23,8 +27,12 @@ export const useAuthStore = defineStore('auth', {
      * 设置accessToken的值。
      * @param {Object} data 包含accessToken的对象。
      */
-    setToken({ accessToken }) {
-      this.accessToken = accessToken
+    setToken(data) {
+      this.accessToken = data.accessToken
+      this.refreshToken = data.refreshToken
+      this.authHeaderKey = data.authHeaderKey
+      this.refreshAuthHeaderKey = data.refreshAuthHeaderKey
+      this.tokenPrefix = data.tokenPrefix
     },
     /**
      * 重置accessToken的值为初始状态。
