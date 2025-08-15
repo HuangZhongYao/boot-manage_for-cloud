@@ -180,8 +180,7 @@ public class DictServiceImpl implements IDictService {
                 .orderByAsc(DictTypeEntity::getParentId, DictTypeEntity::getSort),
             DictTypeTreeVO.class);
         // 转换ITreeNode List
-        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(dictTypeTreeVOS.size());
-        treeNodeList.addAll(dictTypeTreeVOS);
+        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(dictTypeTreeVOS);
         // 转换树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
         // 转换DictTypeTreeVO List

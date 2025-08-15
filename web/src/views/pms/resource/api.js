@@ -10,11 +10,11 @@ import axios from 'axios'
 import { request } from '@/utils'
 
 export default {
-  getMenuTree: () => request.get('/resources/resourcesTree'),
-  getButtons: ({ parentId }) => request.get(`/resources/button/${parentId}`),
+  getMenuTree: () => request.get('/bm-system/resources/resourcesTree'),
+  getButtons: ({ parentId }) => request.get(`/bm-system/resources/button/${parentId}`),
   getComponents: () => axios.get(`${import.meta.env.VITE_PUBLIC_PATH}components.json`),
-  addPermission: data => request.post('/resources/addResources', data),
-  savePermission: (id, data) => request.patch(`/resources/editResources`, data),
-  setState: data => request.patch(`/resources/setState`, data),
-  deletePermission: data => request.delete(`/resources/delResources`, { data }),
+  addPermission: data => request.post('/bm-system/resources/addResources', data),
+  savePermission: (id, data) => request.patch(`/bm-system/resources/editResources`, data),
+  setState: data => request.patch(`/bm-system/resources/setState`, data),
+  deletePermission: data => request.delete(`/bm-system/resources/delResources`, { data }),
 }

@@ -1,11 +1,11 @@
 package org.github.bm.system.web;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.service.IDictService;
@@ -34,78 +34,73 @@ public class DictionaryController extends BaseController {
     IDictService dictService;
 
     @Operation(summary = "获取字典类型Tree", description = "获取字典类型Tree结构接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping(value = "/dictTypeTree", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DictTypeTreeVO> dictTypeTree() {
-        return dictService.dictTypeTree();
+    public org.github.bm.common.base.response.ApiResponse<List<DictTypeTreeVO>> dictTypeTree() {
+        return org.github.bm.common.base.response.ApiResponse.ok(dictService.dictTypeTree());
     }
 
     @Operation(summary = "添加字典类型", description = "添加字典类型接口")
-    @ApiResponse(responseCode = "200", description = "OK")
-    @ApiResponse(responseCode = "450", description = "该字典类型已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "该字典类型已存在")
     @PostMapping(value = "/addDictType", produces = MediaType.APPLICATION_JSON_VALUE)
     public Boolean addDictType(@RequestBody @Validated AddDictTypeInputDTO inputDTO) {
         return dictService.addDictType(inputDTO);
     }
 
     @Operation(summary = "删除字典类型", description = "根据id删除接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @DeleteMapping(value = "/delDictType", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean delDictType(@RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
-        return dictService.delDictType(inputDTO);
+    public ApiResponse<Boolean> delDictType(
+        @RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.delDictType(inputDTO));
     }
 
     @Operation(summary = "编辑字典类型", description = "编辑字典类型接口")
-    @ApiResponse(responseCode = "200", description = "OK")
-    @ApiResponse(responseCode = "450", description = "该字典类型已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "该字典类型已存在")
     @PatchMapping(value = "/editDictType", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean addDictType(@RequestBody @Validated EditDictTypeInputDTO inputDTO) {
-        return dictService.editDictType(inputDTO);
+    public ApiResponse<Boolean> addDictType(@RequestBody @Validated EditDictTypeInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.editDictType(inputDTO));
     }
 
     @Operation(summary = "启用|禁用字典类型", description = "启用|禁用字典类型接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/setStateDictType", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean setStateDictType(@RequestBody @Validated SetStateDictInputDTO inputDTO) {
-        return dictService.setStateDictType(inputDTO);
+    public ApiResponse<Boolean> setStateDictType(
+        @RequestBody @Validated SetStateDictInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.setStateDictType(inputDTO));
     }
 
     @Operation(summary = "获取字典数据", description = "根据字典类型id获取数据")
-    @ApiResponse(responseCode = "200", description = "OK")
     @GetMapping(value = "/dictDataQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<DictDataVO> dictDataQueryList(@RequestParam(name = "dictTypeId") Long dictTypeId) {
-        return dictService.dictDataQueryList(dictTypeId);
+    public ApiResponse<List<DictDataVO>> dictDataQueryList(
+        @RequestParam(name = "dictTypeId") Long dictTypeId) {
+        return ApiResponse.ok(dictService.dictDataQueryList(dictTypeId));
     }
 
     @Operation(summary = "添加字典数据", description = "添加字典数据接口")
-    @ApiResponse(responseCode = "200", description = "OK")
-    @ApiResponse(responseCode = "450", description = "该字典编码已存在")
-    @ApiResponse(responseCode = "451", description = "该字典名称已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "该字典编码已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "451", description = "该字典名称已存在")
     @PostMapping(value = "/addDictData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean addDictData(@RequestBody @Validated AddDictInputDTO inputDTO) {
-        return dictService.addDictData(inputDTO);
+    public ApiResponse<Boolean> addDictData(@RequestBody @Validated AddDictInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.addDictData(inputDTO));
     }
 
     @Operation(summary = "删除字典数据", description = "删除字典数据接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @DeleteMapping(value = "/delDictData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean delDictData(@RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
-        return dictService.delDictData(inputDTO);
+    public ApiResponse<Boolean> delDictData(
+        @RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.delDictData(inputDTO));
     }
 
     @Operation(summary = "编辑字典数据", description = "编辑字典接口")
-    @ApiResponse(responseCode = "200", description = "OK")
-    @ApiResponse(responseCode = "450", description = "该字典编码已存在")
-    @ApiResponse(responseCode = "451", description = "该字典名称已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "该字典编码已存在")
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "451", description = "该字典名称已存在")
     @PatchMapping(value = "/editDictData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean editDictData(@RequestBody @Validated EditDictInputDTO inputDTO) {
-        return dictService.editDictData(inputDTO);
+    public ApiResponse<Boolean> editDictData(@RequestBody @Validated EditDictInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.editDictData(inputDTO));
     }
 
     @Operation(summary = "启用|禁用字典数据", description = "启用|禁用字典数据接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/setStateDictData", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean setStateDictData(@RequestBody @Validated SetStateDictInputDTO inputDTO) {
-        return dictService.setStateDictData(inputDTO);
+    public ApiResponse<Boolean> setStateDictData(
+        @RequestBody @Validated SetStateDictInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.setStateDictData(inputDTO));
     }
 }

@@ -2,10 +2,10 @@ package org.github.bm.system.web;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
 import org.github.bm.system.dto.AddResourcesInputDTO;
 import org.github.bm.system.dto.EditResourcesInputDTO;
@@ -37,43 +37,39 @@ public class ResourcesController extends BaseController {
     @Operation(summary = "查询资源下按钮", description = "查询资源下的按钮")
     @GetMapping(value = "/button/{parentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
-    public List<ResourcesVo> button(@PathVariable(name = "parentId", required = true) Long parentId) {
-        return resourcesService.button(parentId);
+    public ApiResponse<List<ResourcesVo>> button(@PathVariable(name = "parentId", required = true) Long parentId) {
+        return ApiResponse.ok(resourcesService.button(parentId));
     }
 
     @GetMapping(value = "/resourcesTree", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "查询资源树", description = "查询资源树返回全部资源")
-    @ApiResponse(responseCode = "200", description = "ok")
-    public List<ResourcesTreeVo> resourcesTree() {
-        return resourcesService.resourcesTree();
+    public ApiResponse<List<ResourcesTreeVo>> resourcesTree() {
+        return ApiResponse.ok(resourcesService.resourcesTree());
     }
 
     @Operation(summary = "添加资源", description = "添加资源接口")
-    @ApiResponse(responseCode = "200", description = "OK")
+
     @PostMapping(value = "/addResources", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean addResources(@RequestBody @Validated AddResourcesInputDTO inputDTO) {
-        return resourcesService.addResources(inputDTO);
+    public ApiResponse<Boolean> addResources(@RequestBody @Validated AddResourcesInputDTO inputDTO) {
+        return ApiResponse.ok(resourcesService.addResources(inputDTO));
     }
 
     @Operation(summary = "编辑资源", description = "编辑资源接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/editResources", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean editResources(@RequestBody @Validated EditResourcesInputDTO inputDTO) {
-        return resourcesService.editResources(inputDTO);
+    public ApiResponse<Boolean> editResources(@RequestBody @Validated EditResourcesInputDTO inputDTO) {
+        return ApiResponse.ok(resourcesService.editResources(inputDTO));
     }
 
     @Operation(summary = "启用|停用资源", description = "启用|停用资源接口")
-    @ApiResponse(responseCode = "200", description = "OK")
     @PatchMapping(value = "/setState", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean setState(@RequestBody @Validated SetResourcesStateInputDTO inputDTO) {
-        return resourcesService.setState(inputDTO);
+    public ApiResponse<Boolean> setState(@RequestBody @Validated SetResourcesStateInputDTO inputDTO) {
+        return ApiResponse.ok(resourcesService.setState(inputDTO));
     }
 
     @Operation(summary = "删除资源")
-    @ApiResponse(responseCode = "200", description = "OK")
     @DeleteMapping(value = "/delResources", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean delResources(@RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
-        return resourcesService.delResources(inputDTO);
+    public ApiResponse<Boolean> delResources(@RequestBody @Validated BaseManyLongIdInputDTO inputDTO) {
+        return ApiResponse.ok(resourcesService.delResources(inputDTO));
     }
 
 }
