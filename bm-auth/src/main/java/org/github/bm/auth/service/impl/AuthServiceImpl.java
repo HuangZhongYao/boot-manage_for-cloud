@@ -116,8 +116,7 @@ public class AuthServiceImpl implements IAuthService {
         // 转换成树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
         // 转换成ResourcesTreeVo 返回给前端
-        List<ResourcesTreeVo> resourcesTreeVos = ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
-        return resourcesTreeVos;
+        return ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
     }
 
 
