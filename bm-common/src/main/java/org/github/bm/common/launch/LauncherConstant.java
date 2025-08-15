@@ -1,13 +1,7 @@
 package org.github.bm.common.launch;
 
-
 import org.github.bm.common.constant.AppConstant;
 
-/**
- * 通用常量
- *
- * @author Chill
- */
 public interface LauncherConstant {
 
 	/**
