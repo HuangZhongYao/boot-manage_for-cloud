@@ -10,10 +10,10 @@ import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.entity.RoleResourcesEntity;
 import org.github.bm.system.entity.UserRoleEntity;
 import org.github.bm.system.repository.ResourcesRepository;
-import org.github.bm.system.repository.RoleRepository;
 import org.github.bm.system.repository.RoleResourcesRepository;
 import org.github.bm.system.repository.UserRoleRepository;
 import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,6 +59,11 @@ public class ResourcesClient implements IResourcesClient {
             return new ArrayList<>();
         }
         return resourcesRepository.selectList(Wrappers.<ResourcesEntity>lambdaQuery().in(ResourcesEntity::getId, roleResourcesList));
+    }
+
+    @GetMapping(value = QUERY_PERMISSIONS_VO_LIST_BY_USER_ID)
+    public List<ResourcesVo> queryPermissionsVoListByUserId(@RequestParam("userId") Long userId) {
+        return resourcesConverter.toResourcesVOList(this.queryPermissionsListByUserId(userId));
     }
 
 

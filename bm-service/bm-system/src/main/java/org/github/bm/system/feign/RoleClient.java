@@ -3,11 +3,13 @@ package org.github.bm.system.feign;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
+import org.github.bm.system.converter.RoleConverter;
 import org.github.bm.system.entity.RoleEntity;
 import org.github.bm.system.entity.UserRoleEntity;
 import org.github.bm.system.repository.RoleRepository;
 import org.github.bm.system.repository.UserRoleRepository;
 import org.github.bm.system.service.IUserRoleService;
+import org.github.bm.system.vo.RoleVo;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,8 @@ public class RoleClient implements IRoleClient {
     IUserRoleService userRoleService;
     @Resource
     UserRoleRepository userRoleRepository;
+    @Resource
+    RoleConverter roleConverter;
 
     @Override
     @PostMapping(GET_ROLE_BY_ID)
@@ -48,6 +52,12 @@ public class RoleClient implements IRoleClient {
             return List.of();
 
         return roleRepository.selectList(Wrappers.<RoleEntity>lambdaQuery().in(RoleEntity::getId, userRoleEntityList.stream().map(UserRoleEntity::getRoleId).toList()));
+    }
+
+    @Override
+    @PostMapping(GET_ROLE_VO_BY_USER_ID)
+    public List<RoleVo> getRoleVoByUserId(@RequestParam("userId") Serializable userId) {
+        return roleConverter.toRoleVo(this.getRoleByUserId(userId));
     }
 
     @Override

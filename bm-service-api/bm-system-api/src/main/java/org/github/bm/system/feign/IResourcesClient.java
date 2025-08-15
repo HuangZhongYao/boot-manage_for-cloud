@@ -4,6 +4,7 @@ import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,8 +17,9 @@ import java.util.List;
  */
 @FeignClient(value = AppConstant.APPLICATION_SYSTEM_NAME, contextId = "resourcesClient")
 public interface IResourcesClient extends BaseFeign {
-    String QUERY_PERMISSIONS_TREE_BY_USER_ID = "/resources/queryPermissionsTree";
     String QUERY_PERMISSIONS_LIST_BY_USER_ID = "/resources/queryPermissionsList";
+    String QUERY_PERMISSIONS_VO_LIST_BY_USER_ID = "/resources/queryPermissionsVoList";
+    String QUERY_PERMISSIONS_TREE_BY_USER_ID = "/resources/queryPermissionsTree";
 
 
     /**
@@ -28,6 +30,15 @@ public interface IResourcesClient extends BaseFeign {
      */
     @GetMapping(value = QUERY_PERMISSIONS_LIST_BY_USER_ID)
     List<ResourcesEntity> queryPermissionsListByUserId(@RequestParam("userId") Long userId);
+
+    /**
+     * 获取用户权限列表 to ResourcesVo
+     *
+     * @param userId 用户id
+     * @return 权限列表
+     */
+    @GetMapping(value = QUERY_PERMISSIONS_VO_LIST_BY_USER_ID)
+    List<ResourcesVo> queryPermissionsVoListByUserId(@RequestParam("userId") Long userId);
 
     /**
      * 获取用户权限树

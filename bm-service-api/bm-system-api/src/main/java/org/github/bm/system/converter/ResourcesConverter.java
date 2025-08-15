@@ -3,6 +3,7 @@ package org.github.bm.system.converter;
 import org.github.bm.common.util.tree.ITreeNode;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesVo;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface ResourcesConverter {
     List<ResourcesTreeVo> toResourcesTreeVoList(List<ResourcesEntity> resourcesEntityList);
 
     List<ResourcesTreeVo> treeNodeToResourcesTreeVoList(List<ITreeNode<Long>> treeNodeList);
+
+    List<ResourcesVo> toResourcesVOList(List<ResourcesEntity> resourcesEntityList);
 }

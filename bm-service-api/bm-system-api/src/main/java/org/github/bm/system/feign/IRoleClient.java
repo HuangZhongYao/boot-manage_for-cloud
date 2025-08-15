@@ -4,6 +4,7 @@ import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.RoleEntity;
 import org.github.bm.system.entity.UserRoleEntity;
+import org.github.bm.system.vo.RoleVo;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ public interface IRoleClient extends BaseFeign {
     String GET_ROLE_BY_ID = API_PREFIX + "/getRoleById";
     String GET_ROLE_BY_ID_LIST = API_PREFIX + "/getRoleByIdList";
     String GET_ROLE_BY_USER_ID = API_PREFIX + "/getRoleByUserId";
+    String GET_ROLE_VO_BY_USER_ID = API_PREFIX + "/getRoleVoByUserId";
     String GET_ROLE_BY_USER_ID_LIST = API_PREFIX + "/getRoleByUserIdList";
     String GET_USER_ROLE_BY_USER_ID_LIST = API_PREFIX + "/getUserRoleByUserIdList";
     String GET_USER_ROLE_VO_BY_USER_ID_LIST = API_PREFIX + "/getUserRoleVoByUserIdList";
@@ -53,6 +55,15 @@ public interface IRoleClient extends BaseFeign {
      */
     @PostMapping(GET_ROLE_BY_USER_ID)
     List<RoleEntity> getRoleByUserId(@RequestParam("userId") Serializable userId);
+
+    /**
+     * 根据用户id查询角色
+     *
+     * @param userId 用户id
+     * @return 角色列表
+     */
+    @PostMapping(GET_ROLE_VO_BY_USER_ID)
+    List<RoleVo> getRoleVoByUserId(@RequestParam("userId") Serializable userId);
 
     /**
      * 根据用户id列表查询角色

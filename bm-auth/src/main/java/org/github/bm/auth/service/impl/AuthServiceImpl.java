@@ -5,7 +5,6 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson2.JSON;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import jakarta.annotation.Resource;
 import lombok.AllArgsConstructor;
 import org.github.bm.auth.converter.IAuthInfoConverter;
@@ -23,17 +22,16 @@ import org.github.bm.common.security.AuthUser;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.common.util.ModelMapperUtil;
-import org.github.bm.common.util.tree.ITreeNode;
-import org.github.bm.common.util.tree.TreeUtil;
 import org.github.bm.core.service.IRedisService;
-import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.feign.IResourcesClient;
+import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.RoleVo;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +46,8 @@ public class AuthServiceImpl implements IAuthService {
     IUserClient userClient;
     @Resource
     IResourcesClient resourcesClient;
+    @Resource
+    IRoleClient roleClient;
     @Resource
     IAuthInfoConverter authInfoConverter;
 
@@ -104,7 +104,6 @@ public class AuthServiceImpl implements IAuthService {
     }
 
 
-
     @Override
     public String captcha() {
         return "";
@@ -112,7 +111,19 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public AuthenticationUserDetailVO authenticationUserDetail() {
-        return null;
+        // 当前用户Id
+        Long currentUserId = SecurityContextHolder.getAuthUserId();
+        // 查询当前用户
+        AuthenticationUserDetailVO vo = ModelMapperUtil.map(userClient.getUserByID(currentUserId), AuthenticationUserDetailVO.class);
+        // 用户角色列表
+        List<RoleVo> roles = roleClient.getRoleVoByUserId(currentUserId);
+        // 资源权限列表
+        List<ResourcesVo> permissions = this.resourcesClient.queryPermissionsVoListByUserId(currentUserId);
+        // 组装角色
+        vo.setRoles(roles);
+        // 组装权限
+        vo.setPermissions(permissions);
+        return vo;
     }
 
     /**
