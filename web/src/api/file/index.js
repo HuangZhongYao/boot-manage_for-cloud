@@ -1,4 +1,4 @@
-import { request } from '@/utils'
+import { request } from '@/utils/index.js'
 
 export default {
   /**
@@ -9,7 +9,7 @@ export default {
   uploadFile: (file) => {
     const formData = new FormData()
     formData.append('file', file)
-    return request.post('/bm-resources/file/uploadFile', formData)
+    return request.post('/bm-resource/file/uploadFile', formData)
   },
   /**
    * 上传多个文件
@@ -19,6 +19,6 @@ export default {
   uploadFiles: (files) => {
     const formData = new FormData()
     files.forEach(file => formData.append('files', file))
-    return request.post('/bm-resources/file/uploadFiles', formData)
+    return request.post('/bm-resource/file/uploadFiles', formData)
   },
 }

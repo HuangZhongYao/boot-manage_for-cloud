@@ -57,6 +57,7 @@
 
 <script setup>
 import { useClipboard } from '@vueuse/core'
+import api from '@/api/file'
 
 defineOptions({ name: 'ImgUpload' })
 
@@ -85,13 +86,12 @@ async function handleUpload({ file, onFinish }) {
   if (!file || !file.type) {
     $message.error('请选择文件')
   }
-
   // 模拟上传
   $message.loading('上传中...')
-  setTimeout(() => {
+  api.uploadFile(file.file).then((res) => {
     $message.success('上传成功')
-    imgList.push({ fileName: file.name, url: URL.createObjectURL(file.file) })
+    imgList.push({ fileName: res.result.originalName, url: res.result.link })
     onFinish()
-  }, 1500)
+  })
 }
 </script>
