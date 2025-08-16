@@ -7,17 +7,15 @@
  * Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  **********************************/
 
-import { useAuthStore } from '@/store'
-
 /**
  * 根据错误代码和消息解析资源错误，并根据情况提示用户。
  *
  * @param {number} code 错误代码。
  * @param {string} message 错误消息。
  * @param {boolean} needTip 是否需要提示用户，默认为 true。
+ * @param {object} config 请求配置对象，包含一些额外的信息。
  * @returns {string} 解析后的错误消息。
  */
-let isConfirming = false
 export function resolveResError(code, message, needTip = true) {
   switch (code) {
     // 处理表单未填写完成的错误
@@ -25,26 +23,6 @@ export function resolveResError(code, message, needTip = true) {
     case 410:
       message = `表单未填写完: ${message}`
       break
-    // 处理登录过期的错误，需要用户确认是否重新登录
-    case 401:
-    case 402:
-      if (isConfirming || !needTip)
-        return
-      isConfirming = true
-      $dialog.confirm({
-        title: '提示',
-        type: 'info',
-        content: `${message}，是否重新登录？`,
-        confirm() {
-          useAuthStore().logout()
-          window.$message?.success('已退出登录')
-          isConfirming = false
-        },
-        cancel() {
-          isConfirming = false
-        },
-      })
-      return false
     // 处理无权限请求被拒绝的错误
     case 403:
       message = `请求被拒绝: ${message}`
@@ -64,5 +42,5 @@ export function resolveResError(code, message, needTip = true) {
   }
   // 如果需要提示，显示错误消息
   needTip && window.$message?.error(message)
-  return message
+  return { message, retry: false }
 }

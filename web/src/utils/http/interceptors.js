@@ -9,16 +9,21 @@
 
 import { resolveResError } from './helpers'
 import { useAuthStore } from '@/store'
+import api from '@/api/index.js'
+
+let isConfirming = false
+// 拦截器并发控制相关变量（模块级，或者函数外）
+let refreshTokenPromise = null
 
 /**
  * 设置axios实例的拦截器。
- * @param {Object} axiosInstance - Axios实例，用于挂载请求和响应拦截器。
+ * @param {object} axiosInstance - Axios实例，用于挂载请求和响应拦截器。
  */
 export function setupInterceptors(axiosInstance) {
   /**
    * 请求拦截器：在请求发送前进行处理。
-   * @param {Object} config - Axios请求配置。
-   * @returns {Object} 修改后的请求配置。
+   * @param {object} config - Axios请求配置。
+   * @returns {object} 修改后的请求配置。
    */
   function reqResolve(config) {
     // 设置BM-Client-Type请求头表示当前客户端
@@ -28,13 +33,13 @@ export function setupInterceptors(axiosInstance) {
     if (config.needToken === false) {
       return config
     }
-
+    const authStore = useAuthStore()
     // 使用Auth Store获取访问令牌
-    const { authHeaderKey,accessToken } = useAuthStore()
+    const { authHeaderKey, accessToken, tokenPrefix } = authStore
     // 如果存在访问令牌，将其添加到请求头中
     if (accessToken) {
       // token: Bearer + xxx
-      config.headers[`${authHeaderKey}`] = `Bearer ${accessToken}`
+      config.headers[`${authHeaderKey}`] = tokenPrefix + accessToken
     }
 
     return config
@@ -51,6 +56,8 @@ export function setupInterceptors(axiosInstance) {
 
   // 定义成功状态码列表
   const SUCCESS_CODES = [0, 200]
+  // 当响应状态码为401或402时，尝试刷新访问令牌
+  const REFRESH_TOKEN_CODES = [401, 402]
 
   const blobToString = (blob) => {
     return new Promise((resolve, reject) => {
@@ -69,8 +76,60 @@ export function setupInterceptors(axiosInstance) {
   }
 
   /**
+   * 获取一个刷新 token 的 Promise，如果正在刷新则等待，否则发起刷新
+   * @returns {Promise<*>}
+   */
+  async function getRefreshedToken() {
+    if (!refreshTokenPromise) {
+      refreshTokenPromise = (async () => {
+        const authStore = useAuthStore()
+        const { refreshAuthHeaderKey, refreshToken, tokenPrefix } = authStore
+        try {
+          const res = await api.refreshAccessToken({
+            needTip: false,
+            refreshAccessTokenReq: true,
+            headers: {
+              [refreshAuthHeaderKey]: tokenPrefix + refreshToken,
+            },
+          })
+          if (res.success) {
+            // 更新 Pinia 中的 token
+            authStore.setToken(res.result)
+            return true
+          }
+          else {
+            if (isConfirming)
+              return
+            isConfirming = true
+            $dialog.confirm({
+              title: '提示',
+              type: 'info',
+              content: `${res.message}，是否重新登录？`,
+              confirm() {
+                useAuthStore().logout()
+                window.$message?.success('已退出登录')
+                isConfirming = false
+              },
+              cancel() {
+                isConfirming = false
+              },
+            })
+          }
+        }
+        catch (error) {
+          console.error('刷新 Token 出错:', error)
+        }
+        finally {
+          refreshTokenPromise = null // 清空 Promise
+        }
+      })()
+    }
+    return refreshTokenPromise
+  }
+
+  /**
    * 响应拦截器：在接收到响应后进行处理。
-   * @param {Object} response - Axios响应。
+   * @param {object} response - Axios响应。
    * @returns {Promise} 根据响应内容处理后的承诺。
    */
   async function resResolve(response) {
@@ -82,19 +141,25 @@ export function setupInterceptors(axiosInstance) {
       if (data instanceof Blob) {
         await blobToString(data).then(dataStr => data = JSON.parse(dataStr))
       }
-
       // 如果数据中的代码是成功代码之一，返回数据
       if (SUCCESS_CODES.includes(data?.code)) {
         return Promise.resolve(data)
       }
+      // 如果数据中的代码是刷新令牌代码
+      if (REFRESH_TOKEN_CODES.includes(data?.code)) {
+        if (await getRefreshedToken()) {
+          // 标记为重试请求
+          config.headers.retryRequest = true
+          // 刷新成功则重新发送请求
+          return axiosInstance.request(config)
+        }
+      }
       // 使用数据中的代码或状态码作为错误代码
       const code = data?.code ?? status
-
       // 判断是否需要提示错误信息
       const needTip = config?.needTip !== false
-
       // 根据代码处理错误信息，并返回包含错误代码和消息的承诺
-      // 根据code处理对应的操作，并返回处理后的message
+      // 根据code处理对应的操作，并返回处理后的message, retry = true 重试请求
       const message = resolveResError(code, data?.message ?? statusText, needTip)
 
       return Promise.reject({ code, message, error: data ?? response })

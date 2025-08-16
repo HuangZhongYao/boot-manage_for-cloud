@@ -10,14 +10,14 @@ import { usePermissionStore, useRouterStore, useTabStore, useUserStore } from '@
 export const useAuthStore = defineStore('auth', {
   /**
    * 初始化state，定义store的初始状态。
-   * @returns {Object} 返回一个包含accessToken属性的对象，初始值为undefined。
+   * @returns {object} 返回一个包含accessToken属性的对象，初始值为undefined。
    */
   state: () => ({
     accessToken: undefined,
     refreshToken: undefined,
     authHeaderKey: undefined,
     refreshAuthHeaderKey: undefined,
-    tokenPrefix: "Bearer ",
+    tokenPrefix: 'Bearer ',
   }),
   /**
    * 定义actions，用于执行影响store状态的操作。
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     /**
      * 设置accessToken的值。
-     * @param {Object} data 包含accessToken的对象。
+     * @param {object} data 包含accessToken的对象。
      */
     setToken(data) {
       this.accessToken = data.accessToken
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore('auth', {
     /**
      * 切换当前角色。
      * 先重置登录状态，然后设置新的accessToken。
-     * @param {Object} data 包含新角色的访问令牌的对象。
+     * @param {object} data 包含新角色的访问令牌的对象。
      */
     async switchCurrentRole(data) {
       this.resetLoginState()

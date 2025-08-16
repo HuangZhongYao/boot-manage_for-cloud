@@ -87,7 +87,6 @@ public interface SecurityConstants {
             "/assets/**",
             "/static/**",
             "/public/**",
-            "/resources/**",
             "/META-INF/resources/**",
             "/css/**",
             "/js/**",

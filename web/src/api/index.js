@@ -12,7 +12,7 @@ export default {
   // 获取用户信息
   getUser: () => request.get('/bm-auth/auth/authenticationUserDetail'),
   // 刷新token
-  refreshToken: () => request.get('/bm-auth/auth/refreshToken'),
+  refreshAccessToken: config => request.get('/bm-auth/auth/refreshToken', config),
   // 登出
   logout: () => request.post('/bm-auth/auth/loginOut', {}, { needTip: false }),
   // 切换当前角色
