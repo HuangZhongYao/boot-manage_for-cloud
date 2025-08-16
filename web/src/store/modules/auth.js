@@ -13,10 +13,12 @@ export const useAuthStore = defineStore('auth', {
    * @returns {object} 返回一个包含accessToken属性的对象，初始值为undefined。
    */
   state: () => ({
-    accessToken: undefined,
-    refreshToken: undefined,
     authHeaderKey: undefined,
+    accessToken: undefined,
+    accessTokenExpiresIn: undefined,
+    refreshToken: undefined,
     refreshAuthHeaderKey: undefined,
+    refreshTokenExpiresIn: undefined,
     tokenPrefix: 'Bearer ',
   }),
   /**
@@ -24,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
    */
   actions: {
     /**
-     * 设置accessToken的值。
+     * 设置令牌信息
      * @param {object} data 包含accessToken的对象。
      */
     setToken(data) {
@@ -33,6 +35,18 @@ export const useAuthStore = defineStore('auth', {
       this.authHeaderKey = data.authHeaderKey
       this.refreshAuthHeaderKey = data.refreshAuthHeaderKey
       this.tokenPrefix = data.tokenPrefix
+      this.accessTokenExpiresIn = data.accessTokenExpiresIn
+      this.refreshTokenExpiresIn = data.refreshTokenExpiresIn
+    },
+    /**
+     * 设置accessToken的值。
+     * @param {object} data 包含accessToken的对象。
+     */
+    setAccessToken(data) {
+      this.tokenPrefix = data.tokenPrefix
+      this.authHeaderKey = data.authHeaderKey
+      this.accessToken = data.accessToken
+      this.accessTokenExpiresIn = data.accessTokenExpiresIn
     },
     /**
      * 重置accessToken的值为初始状态。

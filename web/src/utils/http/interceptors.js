@@ -11,8 +11,6 @@ import { resolveResError } from './helpers'
 import { useAuthStore } from '@/store'
 import api from '@/api/index.js'
 
-let isConfirming = false
-// 拦截器并发控制相关变量（模块级，或者函数外）
 let refreshTokenPromise = null
 
 /**
@@ -87,34 +85,17 @@ export function setupInterceptors(axiosInstance) {
         try {
           const res = await api.refreshAccessToken({
             needTip: false,
-            refreshAccessTokenReq: true,
+            isRefreshTokenRequest: true,
             headers: {
               [refreshAuthHeaderKey]: tokenPrefix + refreshToken,
             },
           })
+          console.warn('刷新 Token res:', res)
           if (res.success) {
-            // 更新 Pinia 中的 token
-            authStore.setToken(res.result)
-            return true
+            // accessToken
+            authStore.setAccessToken(res.result)
           }
-          else {
-            if (isConfirming)
-              return
-            isConfirming = true
-            $dialog.confirm({
-              title: '提示',
-              type: 'info',
-              content: `${res.message}，是否重新登录？`,
-              confirm() {
-                useAuthStore().logout()
-                window.$message?.success('已退出登录')
-                isConfirming = false
-              },
-              cancel() {
-                isConfirming = false
-              },
-            })
-          }
+          return res.success
         }
         catch (error) {
           console.error('刷新 Token 出错:', error)
@@ -122,6 +103,7 @@ export function setupInterceptors(axiosInstance) {
         finally {
           refreshTokenPromise = null // 清空 Promise
         }
+        return false
       })()
     }
     return refreshTokenPromise
@@ -145,8 +127,10 @@ export function setupInterceptors(axiosInstance) {
       if (SUCCESS_CODES.includes(data?.code)) {
         return Promise.resolve(data)
       }
+      // 处理刷新令牌请求
+      const isRefreshTokenRequest = config.isRefreshTokenRequest || false
       // 如果数据中的代码是刷新令牌代码
-      if (REFRESH_TOKEN_CODES.includes(data?.code)) {
+      if (isRefreshTokenRequest === false && REFRESH_TOKEN_CODES.includes(data?.code)) {
         if (await getRefreshedToken()) {
           // 标记为重试请求
           config.headers.retryRequest = true

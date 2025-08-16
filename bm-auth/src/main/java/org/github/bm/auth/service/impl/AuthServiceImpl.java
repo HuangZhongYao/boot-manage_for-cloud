@@ -84,7 +84,7 @@ public class AuthServiceImpl implements IAuthService {
         Object redisRefreshToken;
         String removePrefixRefreshToken;
         try {
-            removePrefixRefreshToken = refreshToken.replaceAll(securityProperties.getToken().getPrefix(),"");
+            removePrefixRefreshToken = refreshToken.replaceAll(securityProperties.getToken().getPrefix(), "");
             // 解析refreshToken
             JWT jwt = JWTUtil.parseToken(removePrefixRefreshToken);
             // 获取用户ID
@@ -95,14 +95,14 @@ public class AuthServiceImpl implements IAuthService {
             throw new UserFriendlyException(ResponseCode.FAILED.message, ResponseCode.FAILED.code);
         }
         // 检查refreshToken是否过期
-        if (redisRefreshToken == null)
+        if (refreshToken == null || removePrefixRefreshToken == null || redisRefreshToken == null)
             throw new UserFriendlyException(ResponseCode.LOGIN_EXPIRED.message, ResponseCode.LOGIN_EXPIRED.code);
         // 检查refreshToken与Redis中是否一致
         if (!removePrefixRefreshToken.equals(redisRefreshToken))
             throw new UserFriendlyException(ResponseCode.LOGIN_EXPIRED.message, ResponseCode.LOGIN_EXPIRED.code);
 
         UserEntity userEntity = userClient.getUserByID(userID.toString());
-        return this.generateJwt(userEntity, clientEnum);
+        return this.generateRefreshTokenJwt(userEntity, clientEnum);
     }
 
     @Override
@@ -155,32 +155,21 @@ public class AuthServiceImpl implements IAuthService {
         // 当前时间
         Date now = new Date();
         // 构建jwt对象
-        JWT jwt = new JWT();
-        // 签发时间
-        jwt.setIssuedAt(now);
-        // 签发者
-        jwt.setIssuer(AppConstant.BASE_PACKAGES);
-        // 密钥
-        jwt.setKey(securityProperties.getToken().getSecret().getBytes());
-        // 添加payload,refreshToken payload 只存放用户id
-        jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID, userEntity.getId());
+        JWT jwt = this.buildJWT(userEntity.getId());
         // 生成refreshToken
         String refreshToken = jwt.sign();
-
         // 构建accessToken payload
         AuthUser authUser = new AuthUser(userEntity.getId(), userEntity.getUsername(), userEntity.getAccount(), userEntity.getPhone(), userEntity.getEnable());
         // 设置accessToken payload
         jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER, JSON.toJSONString(authUser));
         // 生成accessToken
         String accessToken = jwt.sign();
-
         // 缓存认证信息-对应用户信息
         redisService.set(RedisConstant.Authorization.AUTHORIZATION_INFO + userEntity.getId(), authUser, RedisConstant.Authorization.AUTHORIZATION_INFO_CACHE_TIME);
         // 缓存认证信息-对应客户端访问令牌
         redisService.set(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userEntity.getId(), accessToken, RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
         // 缓存refreshToken
         redisService.set(RedisConstant.Authorization.clientRefreshTokenCacheKey(clientEnum) + userEntity.getId(), refreshToken, RedisConstant.Authorization.REFRESH_TOKEN_CACHE_TIME);
-
         // 访问令牌过期时间
         DateTime accessTokenExpiresAt = DateUtil.offsetSecond(now, (int) RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
         // 刷新令牌过期时间
@@ -193,6 +182,44 @@ public class AuthServiceImpl implements IAuthService {
         authInfo.setAccessTokenExpiresIn(accessTokenExpiresAt);
         authInfo.setRefreshTokenExpiresIn(refreshTokenExpiresAt);
         return authInfo;
+    }
+
+    private AuthInfo generateRefreshTokenJwt(UserEntity userEntity, ClientEnum clientEnum) {
+        // 当前时间
+        Date now = new Date();
+        // 构建jwt对象
+        JWT jwt = this.buildJWT(userEntity.getId());
+        // 构建accessToken payload
+        AuthUser authUser = new AuthUser(userEntity.getId(), userEntity.getUsername(), userEntity.getAccount(), userEntity.getPhone(), userEntity.getEnable());
+        // 设置accessToken payload
+        jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER, JSON.toJSONString(authUser));
+        // 生成accessToken
+        String accessToken = jwt.sign();
+        // 缓存认证信息-对应客户端访问令牌
+        redisService.set(RedisConstant.Authorization.clientAuthorizationCacheKey(clientEnum) + userEntity.getId(), accessToken, RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
+        // 访问令牌过期时间
+        DateTime accessTokenExpiresAt = DateUtil.offsetSecond(now, (int) RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
+        AuthInfo authInfo = authInfoConverter.toAuthInfo(userEntity);
+        authInfo.setAccessToken(accessToken);
+        authInfo.setTokenPrefix(securityProperties.getToken().getPrefix());
+        authInfo.setAccessTokenExpiresIn(accessTokenExpiresAt);
+        return authInfo;
+    }
+
+    private JWT buildJWT(Long userId) {
+        // 当前时间
+        Date now = new Date();
+        // 构建jwt对象
+        JWT jwt = new JWT();
+        // 签发时间
+        jwt.setIssuedAt(now);
+        // 签发者
+        jwt.setIssuer(AppConstant.BASE_PACKAGES);
+        // 密钥
+        jwt.setKey(securityProperties.getToken().getSecret().getBytes());
+        // 添加payload存放用户id
+        jwt.setPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID, userId);
+        return jwt;
     }
 
     private ClientEnum getClient(String client) {
