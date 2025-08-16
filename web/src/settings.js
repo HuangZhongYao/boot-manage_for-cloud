@@ -47,7 +47,7 @@ export const naiveThemeOverrides = {
  * 定义基础权限列表。
  * 每个权限项包含代码、名称、类型、图标等信息，以及子权限列表。
  * @constant basePermissions
- * @type {array}
+ * @type {Array}
  */
 export const basePermissions = [
   {
@@ -91,10 +91,20 @@ export const basePermissions = [
       },
       {
         code: 'MyBlog',
-        name: '博客-掘金',
+        name: '博客-CSND',
         type: 'MENU',
-        path: 'https://juejin.cn/user/1961184475483255/posts',
-        icon: 'i-simple-icons:juejin',
+        path: 'https://blog.csdn.net/weixin_42703501',
+        icon: 'i-me:csdn',
+        order: 4,
+        enable: true,
+        show: true,
+      },
+      {
+        code: 'Report',
+        name: 'UReport2',
+        type: 'MENU',
+        path: 'http://127.0.0.1:8180/bm-datareport/ureport/designer',
+        icon: 'i-me:csdn',
         order: 4,
         enable: true,
         show: true,
