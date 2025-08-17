@@ -26,7 +26,8 @@ public interface RedisConstant {
         /**
          * 访问令牌缓存时间，单位秒
          */
-        long ACCESS_TOKEN_CACHE_TIME = 3 * 60 * 60;
+//        long ACCESS_TOKEN_CACHE_TIME = 3 * 60 * 60;
+        long ACCESS_TOKEN_CACHE_TIME =  60;
 
         /**
          * 刷新令牌缓存时间，单位秒
