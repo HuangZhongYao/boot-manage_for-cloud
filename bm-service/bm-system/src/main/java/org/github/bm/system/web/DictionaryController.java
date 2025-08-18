@@ -35,8 +35,8 @@ public class DictionaryController extends BaseController {
 
     @Operation(summary = "获取字典类型Tree", description = "获取字典类型Tree结构接口")
     @GetMapping(value = "/dictTypeTree", produces = MediaType.APPLICATION_JSON_VALUE)
-    public org.github.bm.common.base.response.ApiResponse<List<DictTypeTreeVO>> dictTypeTree() {
-        return org.github.bm.common.base.response.ApiResponse.ok(dictService.dictTypeTree());
+    public ApiResponse<List<DictTypeTreeVO>> dictTypeTree() {
+        return ApiResponse.ok(dictService.dictTypeTree());
     }
 
     @Operation(summary = "添加字典类型", description = "添加字典类型接口")
