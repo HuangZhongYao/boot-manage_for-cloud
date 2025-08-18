@@ -43,7 +43,6 @@ public class Knife4jSwaggerConfiguration {
                         operation.addSecurityItem(new SecurityRequirement().addList(SecurityConstants.AUTH_HEADER_KEY));
                         // 设置全局响应码 TODO可以排除 SecurityProperties.skipUrl 中的接口
                         operation.getResponses()
-                                .addApiResponse(ResponseCode.OK.code + "", new ApiResponse().description(ResponseCode.OK.message))
                                 .addApiResponse(ResponseCode.REQUEST_FAILED.code + "", new ApiResponse().description(ResponseCode.REQUEST_FAILED.message))
                                 .addApiResponse(ResponseCode.NOT_LOGIN.code + "", new ApiResponse().description(ResponseCode.NOT_LOGIN.message))
                                 .addApiResponse(ResponseCode.LOGIN_EXPIRED.code + "", new ApiResponse().description(ResponseCode.LOGIN_EXPIRED.message))
