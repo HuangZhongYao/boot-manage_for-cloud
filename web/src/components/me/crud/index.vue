@@ -5,7 +5,6 @@
  - @Email: zclzone@outlook.com
  - Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  --------------------------------->
-
 <template>
   <AppCard v-if="$slots.default" bordered bg="#fafafc dark:black" class="mb-30 min-h-60 rounded-4">
     <form class="flex justify-between p-10" @submit.prevent="handleSearch()">
@@ -15,30 +14,34 @@
         </n-space>
       </n-scrollbar>
       <div class="flex-shrink-0 p-10">
-        <n-button ghost type="primary" @click="handleReset">
+        <NButton ghost type="primary" @click="handleReset">
           <i class="i-fe:rotate-ccw mr-4" />
           重置
-        </n-button>
-        <n-button attr-type="submit" class="ml-20" type="primary">
+        </NButton>
+        <NButton attr-type="submit" class="ml-20" type="primary">
           <i class="i-fe:search mr-4" />
           搜索
-        </n-button>
+        </NButton>
+        <NButton class="ml-4" size="large" ghost color="#4b5563" secondary type="tertiary">
+          <i :class="showTable ? 'i-me:xicon-card' : 'i-me:xicon-table'" @click="showTable = !showTable" />
+        </NButton>
 
         <template v-if="expand">
-          <n-button v-if="!isExpanded" type="primary" text @click="toggleExpand">
+          <NButton v-if="!isExpanded" type="primary" text @click="toggleExpand">
             <i class="i-fe:chevrons-down ml-4" />
             展开
-          </n-button>
-          <n-button v-else text type="primary" @click="toggleExpand">
+          </NButton>
+          <NButton v-else text type="primary" @click="toggleExpand">
             <i class="i-fe:chevrons-up ml-4" />
             收起
-          </n-button>
+          </NButton>
         </template>
       </div>
     </form>
   </AppCard>
 
   <NDataTable
+    v-show="showTable"
     :remote="remote"
     :loading="loading"
     :scroll-x="scrollX"
@@ -50,10 +53,41 @@
     @update:checked-row-keys="onChecked"
     @update:page="onPageChange"
   />
+
+  <NFlex v-if="!showTable" vertical align="stretch" class="h-100%">
+    <NFlex inline size="large" class="overflow-auto">
+      <NCard v-for="(row, index) in tableData" :key="index" size="small" hoverable class="n-card-custom max-h-400 max-w-30% min-w-15% overflow-y-auto border-r-8">
+        <n-list hoverable clickable show-divider>
+          <n-list-item v-for=" (column, columnIndex) in columns" :key="index + columnIndex">
+            <span class="inline-block w-70px">{{ column.title }}</span>
+            <span>
+              <template v-if="column.render">
+                <template v-if="Array.isArray(column.render(row))">
+                  <template v-for="(vnode, hindex) in column.render(row)" :key="index + columnIndex + hindex">
+                    <component :is="vnode" />
+                  </template>
+                </template>
+                <template v-else-if="isVNode(column.render(row))">
+                  <component :is="column.render(row)" />
+                </template>
+                <template v-else>
+                  {{ column.render(row) }}
+                </template>
+              </template>
+              <template v-else>
+                {{ row[column.key] }}
+              </template>
+            </span>
+          </n-list-item>
+        </n-list>
+      </NCard>
+    </NFlex>
+
+    <n-pagination class="w-full justify-end" :page-count="5" />
+  </NFlex>
 </template>
 
 <script setup>
-import { NDataTable } from 'naive-ui'
 import { utils, writeFile } from 'xlsx'
 
 const props = defineProps({
@@ -110,7 +144,6 @@ const props = defineProps({
   /** 是否支持展开 */
   expand: Boolean,
 })
-
 const emit = defineEmits(['update:queryItems', 'onChecked', 'onDataChange'])
 const loading = ref(false)
 const initQuery = { ...props.queryItems }
@@ -214,9 +247,30 @@ function handleExport(columns = props.columns, data = tableData.value) {
   writeFile(workBook, '数据报表.xlsx')
 }
 
+// 是否显示表格
+const showTable = ref(true)
+
+// 判断是否是虚拟节点
+function isVNode(obj) {
+  return (
+    typeof obj === 'object' && obj !== null && 'type' in obj && 'props' in obj && 'children' in obj
+  )
+}
+
 defineExpose({
   handleSearch,
   handleReset,
   handleExport,
 })
 </script>
+
+<style scoped>
+.n-card-custom {
+  /* Firefox：隐藏滚动条 */
+  scrollbar-width: none;
+}
+/* Webkit 内核浏览器（Edge Chromium / Chrome / Safari）：隐藏滚动条 */
+.n-card-custom::-webkit-scrollbar {
+  display: none;
+}
+</style>
