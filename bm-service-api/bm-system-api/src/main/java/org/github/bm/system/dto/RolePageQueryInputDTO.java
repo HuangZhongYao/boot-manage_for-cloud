@@ -3,6 +3,7 @@ package org.github.bm.system.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
+import org.github.bm.system.entity.RoleEntity;
 
 import java.io.Serial;
 
@@ -19,7 +20,7 @@ import java.io.Serial;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RolePageQueryInputDTO extends BaseQueryPageInputDTO {
+public class RolePageQueryInputDTO extends BaseQueryPageInputDTO<RoleEntity> {
 
     @Serial
     private static final long serialVersionUID = 4631897722110504328L;

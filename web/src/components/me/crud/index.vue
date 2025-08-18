@@ -8,7 +8,7 @@
 
 <template>
   <AppCard v-if="$slots.default" bordered bg="#fafafc dark:black" class="mb-30 min-h-60 rounded-4">
-    <form class="flex justify-between p-16" @submit.prevent="handleSearch()">
+    <form class="flex justify-between p-10" @submit.prevent="handleSearch()">
       <n-scrollbar x-scrollable>
         <n-space :wrap="!expand || isExpanded" :size="[32, 16]" class="p-10">
           <slot />

@@ -12,10 +12,11 @@ import java.io.Serial;
  * @Desc 分页查询DTO基类
  * @Time 2024-07-11 14:49
  * @Author HuangZhongYao
+ * @param <Entity> 实体类型
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BaseQueryPageInputDTO extends BaseDTO {
+public class BaseQueryPageInputDTO<Entity> extends BaseDTO {
 
     @Serial
     private static final long serialVersionUID = -2789045699043909727L;
@@ -29,6 +30,12 @@ public class BaseQueryPageInputDTO extends BaseDTO {
      * 最小查询页数
      */
     private static final long MIN_PAGE_NO = 1L;
+
+    /**
+     * 关键字查询
+     */
+    @Schema(name = "keyword", description = "关键字查询", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+    private String keyword;
 
     @Schema(name = "pageSize", description = "每页显示条数", requiredMode = Schema.RequiredMode.REQUIRED, example = "10")
     private long pageSize = MIN_SIZE;
@@ -55,8 +62,8 @@ public class BaseQueryPageInputDTO extends BaseDTO {
      *
      * @return Page mybatis分页查询对象
      */
-    public Page toMybatisPageObject() {
-        return new Page(this.pageNo, this.pageSize);
+    public Page<Entity> toMybatisPageObject() {
+        return new Page<Entity>(this.pageNo, this.pageSize);
     }
 
 }

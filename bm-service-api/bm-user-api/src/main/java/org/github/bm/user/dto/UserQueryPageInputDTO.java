@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
 import org.github.bm.common.enums.GenderEnum;
+import org.github.bm.user.entity.UserEntity;
 
 import java.io.Serial;
 
@@ -17,7 +18,7 @@ import java.io.Serial;
 @Getter
 @Setter
 @ToString
-public class UserQueryPageInputDTO extends BaseQueryPageInputDTO {
+public class UserQueryPageInputDTO extends BaseQueryPageInputDTO<UserEntity> {
     @Serial
     private static final long serialVersionUID = 3267321355395088871L;
 

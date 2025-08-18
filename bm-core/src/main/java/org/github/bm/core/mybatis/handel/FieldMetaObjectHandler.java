@@ -1,12 +1,10 @@
 package org.github.bm.core.mybatis.handel;
-
-//import cn.dev33.satoken.stp.StpUtil;
-
 import cn.hutool.core.lang.generator.SnowflakeGenerator;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
+import org.github.bm.common.security.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -68,8 +66,7 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
      */
     private String getLoginUserId() {
         // 获取操作人
-//        Object loginId = StpUtil.getLoginIdDefaultNull();
-        Object loginId = null;
+        Long loginId = SecurityContextHolder.getAuthUserId();
         if (null == loginId) {
             return null;
         }
