@@ -56,14 +56,15 @@
 
   <NFlex v-if="!showTable" vertical align="stretch" class="h-100%">
     <NFlex inline size="large" class="overflow-auto">
-      <NCard v-for="(row, index) in tableData" :key="index" size="small" hoverable class="n-card-custom max-h-400 max-w-30% min-w-15% overflow-y-auto border-r-8">
+      <NCard v-for="(row) in tableData" :key="row._key" size="small" hoverable class="n-card-custom max-h-400 max-w-30% min-w-15% overflow-y-auto border-r-8">
+        {{ row._key }}
         <n-list hoverable clickable show-divider>
-          <n-list-item v-for=" (column, columnIndex) in columns" :key="index + columnIndex">
+          <n-list-item v-for="column in columns" :key="column.key">
             <span class="inline-block w-70px">{{ column.title }}</span>
-            <span>
+            <span class="vertical-mid">
               <template v-if="column.render">
                 <template v-if="Array.isArray(column.render(row))">
-                  <template v-for="(vnode, hindex) in column.render(row)" :key="index + columnIndex + hindex">
+                  <template v-for="(vnode, index) in column.render(row)" :key="column.key + row._key + index">
                     <component :is="vnode" />
                   </template>
                 </template>
@@ -89,6 +90,7 @@
 
 <script setup>
 import { utils, writeFile } from 'xlsx'
+import { nanoid } from 'nanoid'
 
 const props = defineProps({
   /**
@@ -192,6 +194,9 @@ async function handleQuery() {
     if (pagination.itemCount && !tableData.value.length && pagination.page > 1) {
       // 如果当前页数据为空，且总条数不为0，则返回上一页数据
       onPageChange(pagination.page - 1)
+    }
+    for (const valueElement of tableData.value) {
+      valueElement._key = nanoid()
     }
   }
   // eslint-disable-next-line unused-imports/no-unused-vars
