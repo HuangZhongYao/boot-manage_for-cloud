@@ -4,11 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.github.bm.common.base.dto.BaseDTO;
+import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.common.enums.DataSourceEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class DataSourceVO extends BaseDTO {
+public class DataSourceVO extends BaseIdAndTimeIdVO {
     /**
      * 数据源名称
      */
