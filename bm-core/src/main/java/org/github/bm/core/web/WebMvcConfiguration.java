@@ -1,5 +1,6 @@
 package org.github.bm.core.web;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -66,6 +67,9 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         builder.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(dateFormat)));
         // 自定义LocalDate序列化、反序列化
         builder.serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(localDateFormat)));
+        builder.deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(localDateFormat)));
+        // 因为使用雪花id长度超过JavaScript 数字精度限制,所以将id序列化为string
+        builder.serializerByType(Long.class, ToStringSerializer.instance);
         builder.deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(localDateFormat)));
         return new MappingJackson2HttpMessageConverter(builder.build());
     }
