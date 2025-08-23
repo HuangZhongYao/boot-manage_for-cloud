@@ -297,7 +297,7 @@ INSERT INTO `sys_resources` VALUES (76, 6, '2024-07-31 10:03:46', '2024-07-31 10
 INSERT INTO `sys_resources` VALUES (77, 76, '2024-07-31 10:03:46', '2024-07-31 10:03:46', '1', '1', 'AddBusTruck', '创建按钮', '3', NULL, NULL, '创建车辆按钮', 'i-me:btn', '', 1, 1, 0, 0);
 INSERT INTO `sys_resources` VALUES (78, 76, '2024-07-31 10:03:46', '2024-07-31 10:03:46', '1', '1', 'EditBusTruck', '编辑按钮', '3', NULL, NULL, '编辑车辆按钮', 'i-me:btn', '', 1, 1, 0, 0);
 INSERT INTO `sys_resources` VALUES (79, 76, '2024-07-31 10:03:46', '2024-07-31 10:03:46', '1', '1', 'DelBusTruck', '删除按钮', '3', NULL, NULL, '删除车辆按钮', 'i-me:btn', '', 1, 1, 0, 0);
-INSERT INTO `sys_resources` VALUES (1956935293160390656, 42, '2025-08-17 12:25:07', '2025-08-17 12:25:07', NULL, NULL, 'ReprtD', '报表设计', '1', '/develop/report', '/src/views/develop/ReportManage.vue', NULL, 'i-fe:table', '', 1, 1, NULL, 1);
+INSERT INTO `sys_resources` VALUES (1956935293160390656, 42, '2025-08-17 12:25:07', '2025-08-17 12:25:07', NULL, NULL, 'ReprtD', '报表设计', '1', '/develop/report', '/src/views/develop/reportdesign/index.vue', NULL, 'i-fe:table', '', 1, 1, NULL, 1);
 INSERT INTO `sys_resources` VALUES (1957304387617423360, 42, '2025-08-18 12:51:46', '2025-08-18 12:51:46', '1', '1', 'DataSourceMgt', '数据源管理', '1', '/dev/datasource', '/src/views/develop/datasource/index.vue', NULL, 'i-me:database', '', 1, 1, 1, 0);
 
 -- ----------------------------
