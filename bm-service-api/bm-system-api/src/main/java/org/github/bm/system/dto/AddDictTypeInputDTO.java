@@ -41,6 +41,13 @@ public class AddDictTypeInputDTO extends BaseDTO {
     private String name;
 
     /**
+     * 编码
+     */
+    @Schema(description = "编码",requiredMode = Schema.RequiredMode.REQUIRED)
+    @ValidateNotNullAndEmpty(message = "字典类型编码不能为空")
+    private String code;
+
+    /**
      * 排序值
      */
     @Schema(description = "排序值")

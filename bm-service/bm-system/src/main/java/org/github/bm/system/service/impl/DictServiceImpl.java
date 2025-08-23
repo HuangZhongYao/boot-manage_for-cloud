@@ -212,13 +212,12 @@ public class DictServiceImpl implements IDictService {
                 wrapper ->
                     wrapper.eq(dictType.getParentId() != null, DictTypeEntity::getParentId,
                             dictType.getParentId())
-                        .or()
                         .isNull(dictType.getParentId() == null, DictTypeEntity::getParentId)
             )
-            .and(wrapper -> wrapper.eq(DictTypeEntity::getName, dictType.getName()));
+            .and(wrapper -> wrapper.eq(DictTypeEntity::getName, dictType.getName()).or().eq(DictTypeEntity::getCode, dictType.getCode()));
 
         if (this.dictTypeRepository.selectCount(queryWrapper) > 0) {
-            throw new UserFriendlyException("该字典类型已存在", 450);
+            throw new UserFriendlyException("该字典类型名称或编码已存在", 450);
         }
     }
 }
