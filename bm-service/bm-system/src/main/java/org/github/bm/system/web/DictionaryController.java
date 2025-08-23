@@ -42,8 +42,8 @@ public class DictionaryController extends BaseController {
     @Operation(summary = "添加字典类型", description = "添加字典类型接口")
     @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "450", description = "该字典类型已存在")
     @PostMapping(value = "/addDictType", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Boolean addDictType(@RequestBody @Validated AddDictTypeInputDTO inputDTO) {
-        return dictService.addDictType(inputDTO);
+    public ApiResponse<Boolean> addDictType(@RequestBody @Validated AddDictTypeInputDTO inputDTO) {
+        return ApiResponse.ok(dictService.addDictType(inputDTO));
     }
 
     @Operation(summary = "删除字典类型", description = "根据id删除接口")
@@ -67,11 +67,18 @@ public class DictionaryController extends BaseController {
         return ApiResponse.ok(dictService.setStateDictType(inputDTO));
     }
 
-    @Operation(summary = "获取字典数据", description = "根据字典类型id获取数据")
+    @Operation(summary = "字典类型id获取字典数据", description = "根据字典类型id获取数据")
     @GetMapping(value = "/dictDataQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<List<DictDataVO>> dictDataQueryList(
         @RequestParam(name = "dictTypeId") Long dictTypeId) {
         return ApiResponse.ok(dictService.dictDataQueryList(dictTypeId));
+    }
+
+    @Operation(summary = "字典类型code获取字典数据", description = "根据字典类型code获取数据")
+    @GetMapping(value = "/dictDataQueryListByDictTypeCode", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<List<DictDataVO>> dictDataQueryListByDictTypeCode(
+            @RequestParam(name = "dictTypeCode") String dictTypeCode) {
+        return ApiResponse.ok(dictService.dictDataQueryListByDictTypeCode(dictTypeCode));
     }
 
     @Operation(summary = "添加字典数据", description = "添加字典数据接口")

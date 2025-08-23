@@ -24,6 +24,8 @@ public interface IDictService {
 
     Boolean editDictData(EditDictInputDTO inputDTO);
 
+    List<DictDataVO> dictDataQueryListByDictTypeCode(String dictTypeCode);
+
     List<DictDataVO> dictDataQueryList(Long dictTypeId);
 
     Boolean addDictType(AddDictTypeInputDTO inputDTO);
@@ -35,4 +37,5 @@ public interface IDictService {
     List<DictTypeTreeVO> dictTypeTree();
 
     Boolean setStateDictType(SetStateDictInputDTO inputDTO);
+
 }

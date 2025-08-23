@@ -17,7 +17,6 @@ import org.github.bm.system.repository.DictTypeRepository;
 import org.github.bm.system.service.IDictService;
 import org.github.bm.system.vo.DictDataVO;
 import org.github.bm.system.vo.DictTypeTreeVO;
-
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,7 +75,7 @@ public class DictServiceImpl implements IDictService {
 
         // 更新的数据
         DictDataEntity updateEntity =
-            ModelMapperUtil.map(inputDTO, DictDataEntity.class);
+                ModelMapperUtil.map(inputDTO, DictDataEntity.class);
 
         // 如果修改了字典数据名称，检查字典数据是否重复
         if (!StrUtil.equals(dictDataEntityDB.getName(), inputDTO.getName())) {
@@ -95,11 +94,23 @@ public class DictServiceImpl implements IDictService {
     }
 
     @Override
+    public List<DictDataVO> dictDataQueryListByDictTypeCode(String dictTypeCode) {
+        DictTypeEntity dictTypeEntity = this.dictTypeRepository.selectOne(Wrappers.<DictTypeEntity>lambdaQuery().eq(DictTypeEntity::getCode, dictTypeCode));
+        if (dictTypeEntity == null) {
+            return List.of();
+        }
+        return this.dictDataRepository.selectList(
+                Wrappers.<DictDataEntity>lambdaQuery()
+                        .eq(DictDataEntity::getDictTypeId, dictTypeEntity.getId())
+                        .orderByAsc(DictDataEntity::getSort), DictDataVO.class);
+    }
+
+    @Override
     public List<DictDataVO> dictDataQueryList(Long dictTypeId) {
         return this.dictDataRepository.selectList(
-            Wrappers.<DictDataEntity>lambdaQuery()
-                .eq(DictDataEntity::getDictTypeId, dictTypeId)
-                .orderByAsc(DictDataEntity::getSort), DictDataVO.class);
+                Wrappers.<DictDataEntity>lambdaQuery()
+                        .eq(DictDataEntity::getDictTypeId, dictTypeId)
+                        .orderByAsc(DictDataEntity::getSort), DictDataVO.class);
     }
 
     /**
@@ -111,7 +122,7 @@ public class DictServiceImpl implements IDictService {
 
         // 查询条件
         LambdaQueryWrapper<DictDataEntity> queryWrapper = Wrappers.<DictDataEntity>lambdaQuery()
-            .eq(DictDataEntity::getDictTypeId, dictData.getDictTypeId());
+                .eq(DictDataEntity::getDictTypeId, dictData.getDictTypeId());
 
         // 检查名称是否重复
         queryWrapper.eq(DictDataEntity::getName, dictData.getName());
@@ -124,7 +135,7 @@ public class DictServiceImpl implements IDictService {
 
         // 查询条件
         LambdaQueryWrapper<DictDataEntity> queryWrapper = Wrappers.<DictDataEntity>lambdaQuery()
-            .eq(DictDataEntity::getDictTypeId, dictData.getDictTypeId());
+                .eq(DictDataEntity::getDictTypeId, dictData.getDictTypeId());
 
         // 检查code是否重复
         queryWrapper.eq(DictDataEntity::getCode, dictData.getCode());
@@ -159,7 +170,7 @@ public class DictServiceImpl implements IDictService {
         DictTypeEntity dictTypeEntityDB = dictTypeRepository.selectById(inputDTO.getId());
         // 更新的数据
         DictTypeEntity updateEntity =
-            ModelMapperUtil.map(inputDTO, DictTypeEntity.class);
+                ModelMapperUtil.map(inputDTO, DictTypeEntity.class);
 
         // 如果修改了类型名称
         if (!StrUtil.equals(dictTypeEntityDB.getName(), inputDTO.getName())) {
@@ -176,9 +187,9 @@ public class DictServiceImpl implements IDictService {
     public List<DictTypeTreeVO> dictTypeTree() {
         // 字典类型集合
         List<DictTypeTreeVO> dictTypeTreeVOS = this.dictTypeRepository.selectList(
-            Wrappers.<DictTypeEntity>lambdaQuery()
-                .orderByAsc(DictTypeEntity::getParentId, DictTypeEntity::getSort),
-            DictTypeTreeVO.class);
+                Wrappers.<DictTypeEntity>lambdaQuery()
+                        .orderByAsc(DictTypeEntity::getParentId, DictTypeEntity::getSort),
+                DictTypeTreeVO.class);
         // 转换ITreeNode List
         List<ITreeNode<Long>> treeNodeList = new ArrayList<>(dictTypeTreeVOS);
         // 转换树结构
@@ -208,13 +219,13 @@ public class DictServiceImpl implements IDictService {
     private void checkDictTypeExistence(DictTypeEntity dictType) {
         // 查询条件
         LambdaQueryWrapper<DictTypeEntity> queryWrapper = Wrappers.<DictTypeEntity>lambdaQuery()
-            .and(
-                wrapper ->
-                    wrapper.eq(dictType.getParentId() != null, DictTypeEntity::getParentId,
-                            dictType.getParentId())
-                        .isNull(dictType.getParentId() == null, DictTypeEntity::getParentId)
-            )
-            .and(wrapper -> wrapper.eq(DictTypeEntity::getName, dictType.getName()).or().eq(DictTypeEntity::getCode, dictType.getCode()));
+                .and(
+                        wrapper ->
+                                wrapper.eq(dictType.getParentId() != null, DictTypeEntity::getParentId,
+                                                dictType.getParentId())
+                                        .isNull(dictType.getParentId() == null, DictTypeEntity::getParentId)
+                )
+                .and(wrapper -> wrapper.eq(DictTypeEntity::getName, dictType.getName()).or().eq(DictTypeEntity::getCode, dictType.getCode()));
 
         if (this.dictTypeRepository.selectCount(queryWrapper) > 0) {
             throw new UserFriendlyException("该字典类型名称或编码已存在", 450);

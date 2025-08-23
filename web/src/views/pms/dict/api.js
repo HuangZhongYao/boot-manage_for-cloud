@@ -5,6 +5,7 @@
  */
 
 import { request } from '@/utils'
+import dictApi from '@/api/dict'
 
 export default {
   /**
@@ -54,7 +55,7 @@ export default {
    * @param params
    * @returns {*}
    */
-  getDictDataQueryList: (params = {}) => request.get('/bm-system/dict/dictDataQueryList', { params }),
+  getDictDataQueryList: dictApi.getDictDataQueryList,
 
   /**
    * 编辑字典数据
