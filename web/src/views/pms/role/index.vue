@@ -160,13 +160,17 @@
               </template>
             </NSwitch>
           </n-form-item>
-          <n-form-item label="状态" path="remark">
+          <n-form-item label="备注" path="remark">
             <n-input v-model:value="editRoleForm.remark" type="textarea" maxlength="200" round clearable show-count />
           </n-form-item>
         </n-form>
         <template #footer>
-          <NButton @click="cancelEditRole">取消</NButton>
-          <NButton :loading="showEditRoleSubmitFlag" type="primary" class="ml-20" @click="saveEditRole">保存</NButton>
+          <NButton @click="cancelEditRole">
+            取消
+          </NButton>
+          <NButton :loading="showEditRoleSubmitFlag" type="primary" class="ml-20" @click="saveEditRole">
+            保存
+          </NButton>
         </template>
       </n-drawer-content>
     </n-drawer>
@@ -254,7 +258,6 @@ let editRoleTitle
  * @param row 角色数据
  */
 function handelEditRole(row) {
-  // eslint-disable-next-line no-use-before-define
   editRoleTitle = `编辑${row.name}角色`
   editRoleForm.value = { ...row }
   showEditRoleFlag.value = true
