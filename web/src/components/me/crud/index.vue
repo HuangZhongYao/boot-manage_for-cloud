@@ -13,7 +13,7 @@
           <slot />
         </n-space>
       </n-scrollbar>
-      <div class="flex-shrink-0 p-10">
+      <div class="flex flex-shrink-0 items-center p-10">
         <NButton ghost type="primary" @click="handleReset">
           <i class="i-fe:rotate-ccw mr-4" />
           重置
@@ -22,10 +22,9 @@
           <i class="i-fe:search mr-4" />
           搜索
         </NButton>
-        <NButton class="ml-4" size="large" ghost color="#4b5563" secondary type="tertiary">
+        <n-icon class="ml-4 cursor-pointer p-2 transition-all duration-200 hover:bg-gray-100 hover:text-primary" size="25">
           <i :class="showTable ? 'i-me:xicon-card' : 'i-me:xicon-table'" @click="showTable = !showTable" />
-        </NButton>
-
+        </n-icon>
         <template v-if="expand">
           <NButton v-if="!isExpanded" type="primary" text @click="toggleExpand">
             <i class="i-fe:chevrons-down ml-4" />
