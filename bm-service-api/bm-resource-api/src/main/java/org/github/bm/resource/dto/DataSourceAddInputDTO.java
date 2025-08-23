@@ -30,4 +30,8 @@ public class DataSourceAddInputDTO extends BaseDTO {
     @Schema(description = "数据库连接密码")
     @ValidateNotNullAndEmpty(message = "数据库连接密码不能为空")
     private String password;
+
+    @Schema(description = "启用状态")
+    @ValidateNotNullAndEmpty(message = "启用状态不能为空")
+    private Boolean enable;
 }

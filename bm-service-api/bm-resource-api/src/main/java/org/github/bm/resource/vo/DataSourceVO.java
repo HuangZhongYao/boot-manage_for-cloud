@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import org.github.bm.common.base.dto.BaseDTO;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.common.enums.DataSourceEnum;
+import org.github.bm.common.validate.ValidateNotNullAndEmpty;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -35,4 +36,10 @@ public class DataSourceVO extends BaseIdAndTimeIdVO {
      */
     @Schema(description = "数据库连接密码")
     private String password;
+
+    /**
+     * 启用状态
+     */
+    @Schema(description = "启用状态")
+    private Boolean enable;
 }

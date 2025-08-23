@@ -36,4 +36,8 @@ public class DataSourceEntity extends AbstractBaseEntity {
      * 数据库连接密码
      */
     private String password;
+    /**
+     * 是否启用
+     */
+    private Boolean enable;
 }

@@ -1,7 +1,7 @@
 <template>
   <CommonPage>
     <template #action>
-      <NButton v-permission="'AddDataSource'" type="primary" size="small" @click="handleAdd()">
+      <NButton type="primary" size="small" @click="handleAdd()">
         <i class="i-material-symbols:add mr-4 text-18" />
         新增数据源
       </NButton>
@@ -11,7 +11,86 @@
       :scroll-x="1200"
       :columns="columns"
       :get-data="api.read"
-    />
+    >
+      <MeQueryItem label="名称" :label-width="50">
+        <n-input
+          v-model:value="queryItems.username"
+          type="text"
+          placeholder="数据源名称"
+          clearable
+          style="min-width: 70%"
+          autosize
+        />
+      </MeQueryItem>
+    </MeCrud>
+    <MeModal ref="modalRef" width="520px">
+      <n-form
+        ref="modalFormRef"
+        label-placement="left"
+        label-align="left"
+        :label-width="80"
+        :model="modalForm"
+      >
+        <n-form-item
+          label="名称"
+          path="name"
+          :rule="{
+            required: true,
+            message: '请输入名称',
+            trigger: ['input', 'blur'],
+          }"
+        >
+          <n-input v-model:value="modalForm.name" />
+        </n-form-item>
+        <n-form-item label="类型" path="type">
+          <n-select v-model:value="modalForm.type" :default-value="modalForm.type ? modalForm.type : modalForm.type = `i-me:role`" :options="dataSourceOptions()" clearable filterable />
+        </n-form-item>
+        <n-form-item
+          label="驱动类"
+          path="driverClassName"
+          :rule="{
+            required: true,
+            message: '请输入驱动类',
+            trigger: ['input', 'blur'],
+          }"
+        >
+          <n-input v-model:value="modalForm.driverClassName" />
+        </n-form-item>
+        <n-form-item
+          label="用户名"
+          path="username"
+          :rule="{
+            required: true,
+            message: '请输入用户名',
+            trigger: ['input', 'blur'],
+          }"
+        >
+          <n-input v-model:value="modalForm.username" />
+        </n-form-item>
+        <n-form-item
+          label="密码"
+          path="password"
+          :rule="{
+            required: true,
+            message: '请输入密码',
+            trigger: ['input', 'blur'],
+          }"
+        >
+          <n-input v-model:value="modalForm.password" />
+        </n-form-item>
+
+        <n-form-item label="状态" path="enable">
+          <NSwitch v-model:value="modalForm.enable" :default-value="true" :checked-value="true" :unchecked-value="false">
+            <template #checked>
+              启用
+            </template>
+            <template #unchecked>
+              停用
+            </template>
+          </NSwitch>
+        </n-form-item>
+      </n-form>
+    </MeModal>
   </CommonPage>
 </template>
 
@@ -19,9 +98,9 @@
 import { NButton, NSwitch } from 'naive-ui'
 import { ref } from 'vue'
 import api from './api'
-import { CommonPage, MeCrud } from '@/components/index.js'
+import { CommonPage, MeCrud, MeModal, MeQueryItem } from '@/components/index.js'
 import { formatDateTime } from '@/utils/index'
-import isPermission from '@/utils/permissionsTool'
+import { useCrud } from '@/composables/index.js'
 // 定义组件名称。设置keepAlive需将组件的name设置成当前菜单的code。一定要这样写才可以切换页面时保存当前标签页的状态。
 defineOptions({ name: 'DataSourceMgt' })
 
@@ -32,9 +111,32 @@ onMounted(() => {
   $table.value?.handleSearch()
 })
 
+/** QueryBar筛选参数（可选） */
+const queryItems = ref({})
+
+const { modalRef, modalFormRef, modalAction, modalForm, handleAdd, handleDelete, handleEdit }
+    = useCrud({
+      name: '数据源',
+      doCreate: api.create,
+      doDelete: api.delete,
+      doUpdate: api.update,
+      initForm: { enable: true },
+      refresh: (_, keepCurrentPage) => $table.value?.handleSearch(keepCurrentPage),
+    })
+
+function dataSourceOptions() {
+  return [
+    {
+      label: () => h('span', { class: 'flex items-center' }, [h('i', { class: `text-18 mr-8` }), 'mysql']),
+      value: 'MYSQL',
+    },
+  ]
+}
+
 const columns = [
+  { title: '名称', key: 'name' },
   {
-    title: '图标',
+    title: '类型',
     key: 'type',
     render: ({ icon }) =>
       h(
@@ -44,7 +146,6 @@ const columns = [
         },
       ),
   },
-  { title: '名称', key: 'name' },
   { title: '驱动类', key: 'driverClassName' },
   { title: '用户名', key: 'username' },
   {
@@ -68,8 +169,7 @@ const columns = [
             size: 'tiny',
             type: 'primary',
             style: 'margin-left: 12px;',
-            disabled: row.code === 'SUPER_ADMIN' || !isPermission('EditRole'),
-            onClick: () => handelEditRole(row),
+            onClick: () => handleEdit(row),
           },
           {
             default: () => '编辑',
@@ -83,7 +183,6 @@ const columns = [
             size: 'tiny',
             type: 'error',
             style: 'margin-left: 12px;',
-            disabled: row.code === 'SUPER_ADMIN' || !isPermission('DelRole'),
             onClick: () => handleDelete({ ids: [row.id] }),
           },
           {
