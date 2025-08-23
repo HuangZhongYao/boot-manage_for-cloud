@@ -12,7 +12,15 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
   modelValue: {
+    type: [String, Number, Array],
+    default: undefined,
+  },
+  defaultValue: {
     type: [String, Number, Array],
     default: undefined,
   },
@@ -39,6 +47,7 @@ async function loadOptions() {
           h('i', { class: 'text-18 mr-8' }), // 请根据你的 UI 框架替换为真实图标组件
           item.name,
         ]),
+      disabled: !item.enable,
       value: item.code,
     }))
   }
@@ -61,6 +70,8 @@ watch(() => props.dictTypeCode, loadOptions, { immediate: true })
   <n-select
     :model-value="props.modelValue"
     :options="options"
+    :default="props.defaultValue"
+    :clearable="props.clearable"
     :multiple="props.multiple"
     @update:value="(val) => emit('update:modelValue', val)"
   />

@@ -8,13 +8,14 @@
     </template>
     <MeCrud
       ref="$table"
+      v-model:query-items="queryItems"
       :scroll-x="1200"
       :columns="columns"
       :get-data="api.read"
     >
       <MeQueryItem label="名称" :label-width="50">
         <n-input
-          v-model:value="queryItems.username"
+          v-model:value="queryItems.name"
           type="text"
           placeholder="数据源名称"
           clearable
@@ -42,8 +43,15 @@
         >
           <n-input v-model:value="modalForm.name" />
         </n-form-item>
-        <n-form-item label="类型" path="type">
-          <n-select v-model:value="modalForm.type" :default-value="modalForm.type ? modalForm.type : modalForm.type = `i-me:role`" :options="dataSourceOptions()" clearable filterable />
+        <n-form-item
+          label="类型" path="type"
+          :rule="{
+            required: true,
+            message: '请选择数据源类型',
+            trigger: ['change', 'blur'],
+          }"
+        >
+          <DictSelect v-model:value="modalForm.type" dict-type-code="DATA_SOURCE_TYPE" :default-value="modalForm.type ? modalForm.type : modalForm.type = `mysql`" clearable />
         </n-form-item>
         <n-form-item
           label="驱动类"
@@ -98,7 +106,7 @@
 import { NButton, NSwitch } from 'naive-ui'
 import { ref } from 'vue'
 import api from './api'
-import { CommonPage, MeCrud, MeModal, MeQueryItem } from '@/components/index.js'
+import { CommonPage, DictSelect, MeCrud, MeModal, MeQueryItem } from '@/components/index.js'
 import { formatDateTime } from '@/utils/index'
 import { useCrud } from '@/composables/index.js'
 // 定义组件名称。设置keepAlive需将组件的name设置成当前菜单的code。一定要这样写才可以切换页面时保存当前标签页的状态。
@@ -123,28 +131,29 @@ const { modalRef, modalFormRef, modalAction, modalForm, handleAdd, handleDelete,
       initForm: { enable: true },
       refresh: (_, keepCurrentPage) => $table.value?.handleSearch(keepCurrentPage),
     })
-
-function dataSourceOptions() {
-  return [
-    {
-      label: () => h('span', { class: 'flex items-center' }, [h('i', { class: `text-18 mr-8` }), 'mysql']),
-      value: 'MYSQL',
-    },
-  ]
+const typeIcon = {
+  MYSQL: { value: 'i-me:mysql' },
+  ORACLE: { value: 'i-me:sqlserver' },
+  POSTGRESQL: { value: 'i-me:postgre' },
+  SQLSERVER: { value: 'i-me:oracle' },
+  UNKNOWN: { value: 'i-me:database' },
 }
-
 const columns = [
   { title: '名称', key: 'name' },
   {
     title: '类型',
     key: 'type',
-    render: ({ icon }) =>
-      h(
+    render: ({ type }) =>
+      [h(
         'i',
         {
-          class: icon,
+          class: typeIcon[type ?? 'UNKNOWN'].value,
         },
-      ),
+      ), h(
+        'span',
+        {},
+        ` ${type ?? ''}`,
+      )],
   },
   { title: '驱动类', key: 'driverClassName' },
   { title: '用户名', key: 'username' },
