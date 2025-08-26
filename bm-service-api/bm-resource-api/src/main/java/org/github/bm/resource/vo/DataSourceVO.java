@@ -27,6 +27,11 @@ public class DataSourceVO extends BaseIdAndTimeIdVO {
     @Schema(description = "数据库驱动类名")
     private String driverClassName;
     /**
+     * url
+     */
+    @Schema(description = "url")
+    private String url;
+    /**
      * 数据库用户名
      */
     @Schema(description = "数据库用户名")
