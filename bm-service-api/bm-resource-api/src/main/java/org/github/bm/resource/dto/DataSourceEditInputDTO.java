@@ -24,6 +24,10 @@ public class DataSourceEditInputDTO extends BaseLongIdInputDTO {
     @ValidateNotNullAndEmpty(message = "数据库驱动类名不能为空")
     private String driverClassName;
 
+    @Schema(description = "数据源url")
+    @ValidateNotNullAndEmpty(message = "数据源url不能为空")
+    private String url;
+
     @Schema(description = "数据库用户名")
     @ValidateNotNullAndEmpty(message = "数据库用户名不能为空")
     private String username;

@@ -29,6 +29,10 @@ public class DataSourceEntity extends AbstractBaseEntity {
      */
     private String driverClassName;
     /**
+     * jdbc url
+     */
+    private String url;
+    /**
      * 数据库用户名
      */
     private String username;
