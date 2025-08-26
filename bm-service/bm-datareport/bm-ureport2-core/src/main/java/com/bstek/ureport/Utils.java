@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+import org.github.bm.resource.entity.DataSourceEntity;
+import org.github.bm.resource.feign.IDataSourceFeignClient;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -63,6 +65,15 @@ public class Utils implements ApplicationContextAware{
 	}
 	
 	public static Collection<BuildinDatasource> getBuildinDatasources() {
+		if (buildinDatasources.isEmpty()){
+			IDataSourceFeignClient dataSourceFeignClient = applicationContext.getBean(IDataSourceFeignClient.class);
+			// 查询bm-resource服务获取数据源
+			List<DataSourceEntity> dataSourceList = dataSourceFeignClient.getDataSourceAll();
+			// 将数据源注册到spring
+			BuildinDataSourceRegistrar.registerMultipleDataSources(dataSourceList,applicationContext);
+			// 再次从spring容器中获取数据源
+			buildinDatasources.addAll(applicationContext.getBeansOfType(BuildinDatasource.class).values());
+		}
 		return buildinDatasources;
 	}
 	
@@ -216,10 +227,6 @@ public class Utils implements ApplicationContextAware{
 		Utils.debug = debug;
 	}
 
-	public static void setBuildinDatasources(Collection<BuildinDatasource> buildinDatasources){
-		Utils.buildinDatasources.addAll(buildinDatasources);
-	}
-	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)throws BeansException {
 		Utils.applicationContext=applicationContext;

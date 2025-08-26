@@ -1,18 +1,14 @@
 package com.bstek.ureport.console;
 
-import com.bstek.ureport.config.BuildinDataSourceRegistrar;
-import com.bstek.ureport.config.UReportDataSorceConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.constant.ServiceEnum;
 import org.github.bm.common.launch.BMApplication;
 import org.github.bm.core.annotations.BMCloudApplication;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 @Slf4j
-@Import({BuildinDataSourceRegistrar.class, UReportDataSorceConfig.class})
 @ImportResource("classpath:context.xml")
 @BMCloudApplication
 public class DataReportApplication implements ApplicationRunner {

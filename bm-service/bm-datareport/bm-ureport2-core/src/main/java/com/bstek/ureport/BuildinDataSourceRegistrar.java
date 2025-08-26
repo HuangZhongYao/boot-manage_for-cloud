@@ -1,4 +1,4 @@
-package com.bstek.ureport.config;
+package com.bstek.ureport;
 
 import com.bstek.ureport.definition.datasource.BuildinDatasource;
 import com.zaxxer.hikari.HikariDataSource;
@@ -7,27 +7,18 @@ import org.github.bm.resource.entity.DataSourceEntity;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
-@Component
 @Slf4j
 public class BuildinDataSourceRegistrar {
-
-    private final ApplicationContext applicationContext;
-
-    public BuildinDataSourceRegistrar(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
 
     /**
      * 动态创建多个 BuildinDatasource 并注册为 Spring Bean
      *
      * @param dataSourceProps 数据源配置列表
      */
-    public void registerMultipleDataSources(List<DataSourceEntity> dataSourceProps) {
+    public static void registerMultipleDataSources(List<DataSourceEntity> dataSourceProps,ApplicationContext applicationContext) {
         // 确保是可配置的上下文
         ConfigurableApplicationContext configurableContext = (ConfigurableApplicationContext) applicationContext;
         ConfigurableListableBeanFactory beanFactory = configurableContext.getBeanFactory();
@@ -46,7 +37,7 @@ public class BuildinDataSourceRegistrar {
         }
     }
 
-    private BuildinDatasource buildHikariDataSource(DataSourceEntity dataSourceEntity) {
+    private static BuildinDatasource buildHikariDataSource(DataSourceEntity dataSourceEntity) {
 
         return new BuildinDatasource() {
             @Override
@@ -65,9 +56,10 @@ public class BuildinDataSourceRegistrar {
                 ds.setMinimumIdle(2);
                 try {
                     return ds.getConnection();
-                } catch (SQLException e) {
+                } catch (Exception e) {
                     log.error("创建Ureport数据源失败");
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
+                    throw new RuntimeException("创建Ureport数据源失败");
                 }
             }
         };
