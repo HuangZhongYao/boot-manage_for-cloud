@@ -2,8 +2,10 @@ package org.github.bm.core.feign;
 
 import cn.hutool.core.util.StrUtil;
 import feign.RequestInterceptor;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.SecurityConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +23,8 @@ public class FeignConfiguration {
 
     @Value("${spring.application.name}")
     private String appName;
-
+    @Resource
+    private SecurityProperties securityProperties;
 
     @Bean(name = "feignRequestInterceptor")
     public RequestInterceptor feignRequestInterceptor() {
@@ -47,6 +50,9 @@ public class FeignConfiguration {
                 template.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_HOLDER_KEY, authorizationContextHolder);
                 String authorizationUserIdContextHolder = request.getHeader(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY);
                 template.header(SecurityConstants.GATEWAY_AUTHORIZATION_CONTEXT_USER_ID_HOLDER_KEY, authorizationUserIdContextHolder);
+            }else {
+                // 添加内部调用验证token
+                template.header(SecurityConstants.GATEWAY_AUTHORIZATION_KEY, securityProperties.getInternalValid().getToken());
             }
         };
     }

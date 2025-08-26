@@ -79,7 +79,6 @@ public interface SecurityConstants {
      * 默认排除的URL不进行鉴权 , 请根据业务情况自行修改
      */
     List<String> DEFAULT_EXCLUDE_PATTERNS = List.of(
-            "/feign/datasource/getDataSourceAll",
             "/auth/login",
             "/auth/refreshToken",
             "/actuator/**",
