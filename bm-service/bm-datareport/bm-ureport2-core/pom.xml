@@ -15,6 +15,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.github.bm</groupId>
+			<artifactId>bm-resource-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.github.bm</groupId>
 			<artifactId>bm-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>

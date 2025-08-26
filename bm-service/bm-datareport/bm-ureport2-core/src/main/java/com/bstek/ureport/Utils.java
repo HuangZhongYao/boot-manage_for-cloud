@@ -215,6 +215,10 @@ public class Utils implements ApplicationContextAware{
 	public void setDebug(boolean debug) {
 		Utils.debug = debug;
 	}
+
+	public static void setBuildinDatasources(Collection<BuildinDatasource> buildinDatasources){
+		Utils.buildinDatasources.addAll(buildinDatasources);
+	}
 	
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext)throws BeansException {

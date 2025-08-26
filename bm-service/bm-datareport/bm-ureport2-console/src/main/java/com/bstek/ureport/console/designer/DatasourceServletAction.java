@@ -25,11 +25,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,7 +81,11 @@ public class DatasourceServletAction extends RenderPageServletAction {
 	
 	public void loadBuildinDatasources(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		List<String> datasources=new ArrayList<String>();
-		for(BuildinDatasource datasource:Utils.getBuildinDatasources()){
+		Collection<BuildinDatasource> buildinDatasources = Utils.getBuildinDatasources();
+		if (buildinDatasources.isEmpty()) {
+			Utils.setBuildinDatasources(Utils.getApplicationContext().getBeansOfType(BuildinDatasource.class).values());
+		}
+		for(BuildinDatasource datasource:Utils.getApplicationContext().getBeansOfType(BuildinDatasource.class).values()){
 			datasources.add(datasource.name());
 		}
 		writeObjectToJson(resp, datasources);
