@@ -3,23 +3,20 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.github.bm</groupId>
-        <artifactId>boot-manage_for-cloud</artifactId>
+        <artifactId>bm-service</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>bm-service</artifactId>
-    <packaging>pom</packaging>
-
+    <artifactId>bm-websocket</artifactId>
     <name>${project.artifactId}</name>
 
+    <packaging>jar</packaging>
 
-    <description>微服务集合</description>
-    <modules>
-        <module>bm-system</module>
-        <module>bm-user</module>
-        <module>bm-datareport</module>
-        <module>bm-resource</module>
-        <module>bm-websocket</module>
-    </modules>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-websocket-api</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
+    </dependencies>
 </project>
