@@ -14,13 +14,13 @@ import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.util.ModelMapperUtil;
 import org.github.bm.system.entity.UserRoleEntity;
 import org.github.bm.system.feign.IRoleClient;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.github.bm.user.dto.*;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
-import org.github.bm.user.vo.UserVo;
+import org.github.bm.user.vo.UserVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +43,7 @@ public class UserServiceImpl implements IUserService {
     IRoleClient roleClient;
 
     @Override
-    public Page<UserVo> pageQueryList(UserQueryPageInputDTO inputDTO) {
+    public Page<UserVO> pageQueryList(UserQueryPageInputDTO inputDTO) {
 
         // 构建查询条件
         LambdaQueryWrapper<UserEntity> queryWrapper = Wrappers.<UserEntity>lambdaQuery()
@@ -55,29 +55,29 @@ public class UserServiceImpl implements IUserService {
                 .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable());
 
         // 执行查询用户
-        Page<UserVo> page =
-                userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVo.class);
+        Page<UserVO> page =
+                userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVO.class);
 
         // 查询全部用的角色并根据用户id分组
-        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(page.getRecords().stream().map(UserVo::getId).toList())
+        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(page.getRecords().stream().map(UserVO::getId).toList())
                 .stream()
                 .collect(Collectors.groupingBy(UserRoleVO::getUserId));
 
         // 设置用户角色
-        page.getRecords().forEach(userVo -> {
-            userVo.setRoles(userRoleByUserIdGrouping.get(userVo.getId()));
+        page.getRecords().forEach(userVO -> {
+            userVO.setRoles(userRoleByUserIdGrouping.get(userVO.getId()));
         });
 
         return page;
     }
 
     @Override
-    public List<UserVo> queryAllUserList() {
-        return this.userRepository.selectList(null, UserVo.class);
+    public List<UserVO> queryAllUserList() {
+        return this.userRepository.selectList(null, UserVO.class);
     }
 
     @Override
-    public List<RoleVo> queryUserRoleList(Long id) {
+    public List<RoleVO> queryUserRoleList(Long id) {
         // 查询用户的角色id
         List<Long> roleIds = roleClient.getUserRoleByUserIdList(List.of(id))
                 .stream()
@@ -88,7 +88,7 @@ public class UserServiceImpl implements IUserService {
             return new ArrayList<>();
         }
         // 查询角色信息
-        return ModelMapperUtil.mapList(roleClient.getRoleByIdList(roleIds), RoleVo.class);
+        return ModelMapperUtil.mapList(roleClient.getRoleByIdList(roleIds), RoleVO.class);
     }
 
     @Override

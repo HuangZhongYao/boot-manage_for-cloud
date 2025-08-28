@@ -5,7 +5,7 @@ import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.common.enums.GenderEnum;
 import org.github.bm.system.vo.ResourcesVo;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -77,7 +77,7 @@ public class AuthenticationUserDetailVO extends BaseIdAndTimeIdVO {
      * 角色列表
      */
     @Schema(description = "角色列表")
-    private List<RoleVo> roles = new ArrayList<>();
+    private List<RoleVO> roles = new ArrayList<>();
 
     /**
      * 权限列表

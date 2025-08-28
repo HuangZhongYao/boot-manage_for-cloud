@@ -3,7 +3,7 @@ package org.github.bm.system.feign;
 import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.ResourcesEntity;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +47,5 @@ public interface IResourcesClient extends BaseFeign {
      * @return 权限树
      */
     @GetMapping(value = QUERY_PERMISSIONS_TREE_BY_USER_ID)
-    List<ResourcesTreeVo> queryPermissionsTreeByUserId(@RequestParam("userId") Long userId);
+    List<ResourcesTreeVO> queryPermissionsTreeByUserId(@RequestParam("userId") Long userId);
 }

@@ -4,7 +4,7 @@ import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.RoleEntity;
 import org.github.bm.system.entity.UserRoleEntity;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +63,7 @@ public interface IRoleClient extends BaseFeign {
      * @return 角色列表
      */
     @PostMapping(GET_ROLE_VO_BY_USER_ID)
-    List<RoleVo> getRoleVoByUserId(@RequestParam("userId") Serializable userId);
+    List<RoleVO> getRoleVoByUserId(@RequestParam("userId") Serializable userId);
 
     /**
      * 根据用户id列表查询角色

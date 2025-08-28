@@ -5,8 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.github.bm.common.mybatis.BaseMapperExtension;
 import org.github.bm.system.dto.RolePageQueryInputDTO;
 import org.github.bm.system.entity.RoleEntity;
-import org.github.bm.system.vo.RolePageQueryListItemVo;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RolePageQueryListItemVO;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +28,7 @@ public interface RoleRepository extends BaseMapperExtension<RoleEntity> {
      * @param inputDTO 查询参数
      * @return 分页结果
      */
-    Page<RolePageQueryListItemVo> pageQueryList(@Param("page") Page page,
+    Page<RolePageQueryListItemVO> pageQueryList(@Param("page") Page page,
                                                 @Param("param") RolePageQueryInputDTO inputDTO);
 
     /**
@@ -37,7 +37,7 @@ public interface RoleRepository extends BaseMapperExtension<RoleEntity> {
      * @param userId 用户id
      * @return 角色列表
      */
-    List<RoleVo> queryUserRolesByUserId(@Param("userId") Long userId);
+    List<RoleVO> queryUserRolesByUserId(@Param("userId") Long userId);
 
     /**
      * 批量查询用户角色根据用户id

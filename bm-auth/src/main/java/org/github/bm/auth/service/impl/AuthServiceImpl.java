@@ -29,9 +29,9 @@ import org.github.bm.system.converter.ResourcesConverter;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.feign.IResourcesClient;
 import org.github.bm.system.feign.IRoleClient;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
@@ -106,19 +106,19 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public List<ResourcesTreeVo> queryPermissionsTree() {
+    public List<ResourcesTreeVO> queryPermissionsTree() {
         // 当前用户id
         Long currentUserId = SecurityContextHolder.getAuthUserId();
         // 获取用户权限列表
         List<ResourcesEntity> resourcesVoList = this.resourcesClient.queryPermissionsListByUserId(currentUserId);
         // 转换成ResourcesTreeVo
-        List<ResourcesTreeVo> resourcesTreeVoList = resourcesConverter.toResourcesTreeVoList(resourcesVoList);
+        List<ResourcesTreeVO> resourcesTreeVOList = resourcesConverter.toResourcesTreeVoList(resourcesVoList);
         // 转换ITreeNode List
-        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesTreeVoList);
+        List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesTreeVOList);
         // 转换成树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
         // 转换成ResourcesTreeVo 返回给前端
-        return ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
+        return ModelMapperUtil.mapList(tree, ResourcesTreeVO.class);
     }
 
 
@@ -134,7 +134,7 @@ public class AuthServiceImpl implements IAuthService {
         // 查询当前用户
         AuthenticationUserDetailVO vo = ModelMapperUtil.map(userClient.getUserByID(currentUserId), AuthenticationUserDetailVO.class);
         // 用户角色列表
-        List<RoleVo> roles = roleClient.getRoleVoByUserId(currentUserId);
+        List<RoleVO> roles = roleClient.getRoleVoByUserId(currentUserId);
         // 资源权限列表
         List<ResourcesVo> permissions = this.resourcesClient.queryPermissionsVoListByUserId(currentUserId);
         // 组装角色

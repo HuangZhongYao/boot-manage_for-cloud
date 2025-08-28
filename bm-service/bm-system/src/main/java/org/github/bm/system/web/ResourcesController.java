@@ -11,7 +11,7 @@ import org.github.bm.system.dto.AddResourcesInputDTO;
 import org.github.bm.system.dto.EditResourcesInputDTO;
 import org.github.bm.system.dto.SetResourcesStateInputDTO;
 import org.github.bm.system.service.IResourcesService;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -43,7 +43,7 @@ public class ResourcesController extends BaseController {
 
     @GetMapping(value = "/resourcesTree", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "查询资源树", description = "查询资源树返回全部资源")
-    public ApiResponse<List<ResourcesTreeVo>> resourcesTree() {
+    public ApiResponse<List<ResourcesTreeVO>> resourcesTree() {
         return ApiResponse.ok(resourcesService.resourcesTree());
     }
 

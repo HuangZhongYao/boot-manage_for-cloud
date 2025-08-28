@@ -17,7 +17,7 @@ import org.github.bm.common.enums.GenderEnum;
  */
 @Getter
 @Setter
-public class UserVo extends BaseIdAndTimeAndOperationIdVO {
+public class UserVO extends BaseIdAndTimeAndOperationIdVO {
 
     @Serial
     private static final long serialVersionUID = -7091624991626890336L;

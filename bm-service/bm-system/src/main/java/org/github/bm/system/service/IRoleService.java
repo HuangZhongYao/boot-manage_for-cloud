@@ -3,9 +3,9 @@ package org.github.bm.system.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.*;
-import org.github.bm.system.vo.RolePageQueryListItemVo;
+import org.github.bm.system.vo.RolePageQueryListItemVO;
 import org.github.bm.system.vo.RoleUserModel;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public interface IRoleService {
 
     Boolean delRole(BaseManyLongIdInputDTO inputDTO);
 
-    Page<RolePageQueryListItemVo> pageQueryList(RolePageQueryInputDTO inputDTO);
+    Page<RolePageQueryListItemVO> pageQueryList(RolePageQueryInputDTO inputDTO);
 
-    List<RoleVo> queryList(Boolean enable);
+    List<RoleVO> queryList(Boolean enable);
 
     Boolean editRole(EditRoleInputDTO inputDTO);
 

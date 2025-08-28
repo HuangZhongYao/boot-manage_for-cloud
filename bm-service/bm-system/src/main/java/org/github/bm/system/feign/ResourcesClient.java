@@ -13,7 +13,7 @@ import org.github.bm.system.entity.UserRoleEntity;
 import org.github.bm.system.repository.ResourcesRepository;
 import org.github.bm.system.repository.RoleResourcesRepository;
 import org.github.bm.system.repository.UserRoleRepository;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,13 +70,13 @@ public class ResourcesClient implements IResourcesClient {
 
 
     @GetMapping(value = QUERY_PERMISSIONS_TREE_BY_USER_ID)
-    public List<ResourcesTreeVo> queryPermissionsTreeByUserId(@RequestParam("userId") Long userId) {
+    public List<ResourcesTreeVO> queryPermissionsTreeByUserId(@RequestParam("userId") Long userId) {
         // 获取用户权限列表
-        List<ResourcesTreeVo> resourcesVos = resourcesConverter.toResourcesTreeVoList(this.queryPermissionsListByUserId(userId));
+        List<ResourcesTreeVO> resourcesVos = resourcesConverter.toResourcesTreeVoList(this.queryPermissionsListByUserId(userId));
         // 转换ITreeNode List
         List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesVos);
         // 转换成树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
-        return ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
+        return ModelMapperUtil.mapList(tree, ResourcesTreeVO.class);
     }
 }

@@ -17,9 +17,9 @@ import org.github.bm.system.repository.RoleRepository;
 import org.github.bm.system.repository.RoleResourcesRepository;
 import org.github.bm.system.repository.UserRoleRepository;
 import org.github.bm.system.service.IRoleService;
-import org.github.bm.system.vo.RolePageQueryListItemVo;
+import org.github.bm.system.vo.RolePageQueryListItemVO;
 import org.github.bm.system.vo.RoleUserModel;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.user.converter.UserConverter;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
@@ -71,10 +71,10 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public Page<RolePageQueryListItemVo> pageQueryList(RolePageQueryInputDTO inputDTO) {
+    public Page<RolePageQueryListItemVO> pageQueryList(RolePageQueryInputDTO inputDTO) {
 
         // 执行查询
-        Page<RolePageQueryListItemVo> result =
+        Page<RolePageQueryListItemVO> result =
                 this.roleRepository.pageQueryList(inputDTO.toMybatisPageObject(), inputDTO);
 
         // 设置权限id集合
@@ -94,10 +94,10 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public List<RoleVo> queryList(Boolean enable) {
+    public List<RoleVO> queryList(Boolean enable) {
         return roleRepository.selectList(
                 Wrappers.<RoleEntity>lambdaQuery().eq(null != enable, RoleEntity::getEnable, enable),
-                RoleVo.class);
+                RoleVO.class);
     }
 
 

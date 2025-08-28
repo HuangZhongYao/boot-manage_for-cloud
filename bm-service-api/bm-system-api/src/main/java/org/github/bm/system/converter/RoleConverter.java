@@ -1,7 +1,7 @@
 package org.github.bm.system.converter;
 
 import org.github.bm.system.entity.RoleEntity;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RoleConverter {
 
-    RoleVo toRoleVo(RoleEntity roleEntity);
+    RoleVO toRoleVo(RoleEntity roleEntity);
 
-    List<RoleVo> toRoleVo(List<RoleEntity> roleEntityList);
+    List<RoleVO> toRoleVo(List<RoleEntity> roleEntityList);
 }

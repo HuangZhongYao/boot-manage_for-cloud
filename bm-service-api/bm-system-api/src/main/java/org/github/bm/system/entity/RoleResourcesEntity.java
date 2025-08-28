@@ -28,12 +28,12 @@ public class RoleResourcesEntity extends AbstractBaseEntity {
     private static final long serialVersionUID = -8866939458137795129L;
 
     /**
-     * 资源|权限 Id
+     * 资源id {@link ResourcesEntity#id}
      */
     private Long resourcesId;
 
     /**
-     * 角色id
+     * 角色id {@link RoleEntity#id}
      */
     private Long roleId;
 }

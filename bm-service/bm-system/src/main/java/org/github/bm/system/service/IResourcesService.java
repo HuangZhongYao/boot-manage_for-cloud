@@ -6,7 +6,7 @@ import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.AddResourcesInputDTO;
 import org.github.bm.system.dto.EditResourcesInputDTO;
 import org.github.bm.system.dto.SetResourcesStateInputDTO;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public interface IResourcesService {
 
     Boolean addResources(AddResourcesInputDTO inputDTO);
 
-    List<ResourcesTreeVo> resourcesTree();
+    List<ResourcesTreeVO> resourcesTree();
 
     /**
      * 查询资源下的按钮

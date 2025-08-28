@@ -17,7 +17,7 @@ import org.github.bm.system.entity.RoleResourcesEntity;
 import org.github.bm.system.repository.ResourcesRepository;
 import org.github.bm.system.repository.RoleResourcesRepository;
 import org.github.bm.system.service.IResourcesService;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,16 +126,16 @@ public class ResourcesServiceImpl implements IResourcesService {
     }
 
     @Override
-    public List<ResourcesTreeVo> resourcesTree() {
+    public List<ResourcesTreeVO> resourcesTree() {
         // 查询全部资源列表
-        List<ResourcesTreeVo> resourcesVos =
-            resourcesRepository.selectList(Wrappers.<ResourcesEntity>lambdaQuery().orderByAsc(ResourcesEntity::getSort), ResourcesTreeVo.class);
+        List<ResourcesTreeVO> resourcesVos =
+            resourcesRepository.selectList(Wrappers.<ResourcesEntity>lambdaQuery().orderByAsc(ResourcesEntity::getSort), ResourcesTreeVO.class);
         // 转换ITreeNode List
         List<ITreeNode<Long>> treeNodeList = new ArrayList<>(resourcesVos.size());
         treeNodeList.addAll(resourcesVos);
         // 转换树结构
         List<ITreeNode<Long>> tree = TreeUtil.listToTree(treeNodeList);
         // 转换ResourcesTreeVo List
-        return ModelMapperUtil.mapList(tree, ResourcesTreeVo.class);
+        return ModelMapperUtil.mapList(tree, ResourcesTreeVO.class);
     }
 }

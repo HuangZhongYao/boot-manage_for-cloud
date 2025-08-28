@@ -10,10 +10,10 @@ import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
 import org.github.bm.common.validate.group.Group;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.user.dto.*;
 import org.github.bm.user.service.IUserService;
-import org.github.bm.user.vo.UserVo;
+import org.github.bm.user.vo.UserVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +30,13 @@ public class UserController extends BaseController {
 
     @Operation(summary = "分页查询", description = "分页查询用户接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResponse<Page<UserVo>> pageQueryList(UserQueryPageInputDTO inputDTO) {
+    public ApiResponse<Page<UserVO>> pageQueryList(UserQueryPageInputDTO inputDTO) {
         return ApiResponse.ok(userService.pageQueryList(inputDTO));
     }
 
     @Operation(summary = "查询全部用户", description = "查询全部用户接口")
     @GetMapping(value = "/queryAllUserList", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResponse<List<UserVo>> queryAllUserList() {
+    public ApiResponse<List<UserVO>> queryAllUserList() {
         return ApiResponse.ok(userService.queryAllUserList());
     }
 
@@ -45,7 +45,7 @@ public class UserController extends BaseController {
     @Parameters({
             @Parameter(name = "id", description = "用户id"),
     })
-    public ApiResponse<List<RoleVo>> queryCurrentUserList(@RequestParam(name = "id", required = true) Long id) {
+    public ApiResponse<List<RoleVO>> queryCurrentUserList(@RequestParam(name = "id", required = true) Long id) {
         return ApiResponse.ok(userService.queryUserRoleList(id));
     }
 

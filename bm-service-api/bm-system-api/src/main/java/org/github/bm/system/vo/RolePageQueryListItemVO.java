@@ -1,15 +1,12 @@
 package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.Serial;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
+
+import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Desc: Created by IntelliJ IDEA.
@@ -24,7 +21,7 @@ import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class RoleVo extends BaseIdAndTimeIdVO {
+public class RolePageQueryListItemVO extends BaseIdAndTimeIdVO {
 
     @Serial
     private static final long serialVersionUID = 2264364149067433513L;
@@ -58,4 +55,13 @@ public class RoleVo extends BaseIdAndTimeIdVO {
      */
     @Schema(description = "角色编码")
     private String code;
+
+    /**
+     *
+     */
+    @Schema(description = "权限id集合")
+    private List<Long> permissionIds = new ArrayList<>();
+
+    @Schema(description = "权限id字符串拼接逗号分割")
+    private String resourcesIds;
 }

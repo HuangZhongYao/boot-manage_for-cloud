@@ -1,7 +1,7 @@
 package org.github.bm.system.converter;
 
 import org.github.bm.system.entity.ResourcesEntity;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVo;
 import org.mapstruct.Mapper;
 
@@ -13,7 +13,7 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface ResourcesConverter {
-    List<ResourcesTreeVo> toResourcesTreeVoList(List<ResourcesEntity> resourcesEntityList);
+    List<ResourcesTreeVO> toResourcesTreeVoList(List<ResourcesEntity> resourcesEntityList);
 
     List<ResourcesVo> toResourcesVOList(List<ResourcesEntity> resourcesEntityList);
 }

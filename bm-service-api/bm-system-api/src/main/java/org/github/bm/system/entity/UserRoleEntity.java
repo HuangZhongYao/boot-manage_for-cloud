@@ -26,12 +26,12 @@ public class UserRoleEntity extends AbstractBaseEntity {
     private static final long serialVersionUID = -2510671353986711029L;
 
     /**
-     * 角色id
+     * 角色id {@link RoleEntity#id}
      */
     private Long roleId;
 
     /**
-     * 用户id
+     * 用户id {@link UserEntity#id}
      */
     private Long userId;
 }

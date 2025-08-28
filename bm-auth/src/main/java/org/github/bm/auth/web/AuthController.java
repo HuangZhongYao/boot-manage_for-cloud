@@ -10,7 +10,7 @@ import org.github.bm.auth.vo.AuthenticationUserDetailVO;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.security.AuthInfo;
 import org.github.bm.common.security.SecurityConstants;
-import org.github.bm.system.vo.ResourcesTreeVo;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +63,7 @@ public class AuthController {
 
     @GetMapping(value = "/queryPermissionsTree")
     @Operation(summary = "查询用户权限树", description = "查询用户权限,以树形结构返回")
-    public ApiResponse<List<ResourcesTreeVo>> queryPermissionsTree() {
+    public ApiResponse<List<ResourcesTreeVO>> queryPermissionsTree() {
         return ApiResponse.ok(authService.queryPermissionsTree());
     }
 

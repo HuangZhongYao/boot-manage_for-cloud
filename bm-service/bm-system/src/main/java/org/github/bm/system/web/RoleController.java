@@ -13,9 +13,9 @@ import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.service.IRoleService;
-import org.github.bm.system.vo.RolePageQueryListItemVo;
+import org.github.bm.system.vo.RolePageQueryListItemVO;
 import org.github.bm.system.vo.RoleUserModel;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class RoleController extends BaseController {
     @Operation(summary = "分页查询", description = "分页查询角色接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<Page<RolePageQueryListItemVo>> pageQueryList(RolePageQueryInputDTO inputDTO) {
+    public ApiResponse<Page<RolePageQueryListItemVO>> pageQueryList(RolePageQueryInputDTO inputDTO) {
         return ApiResponse.ok(roleService.pageQueryList(inputDTO));
     }
 
@@ -50,7 +50,7 @@ public class RoleController extends BaseController {
         @Parameter(name = "enable", description = "true|false|不传递,true查询启用,false=查询禁用,不传入=查询全部"),
     })
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<List<RoleVo>> queryList(Boolean enable) {
+    public ApiResponse<List<RoleVO>> queryList(Boolean enable) {
         return ApiResponse.ok(roleService.queryList(enable));
     }
 

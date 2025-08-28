@@ -27,7 +27,7 @@ public class DictDataEntity extends AbstractBaseEntity {
     private static final long serialVersionUID = -4909560354235113011L;
 
     /**
-     * 字典数据类型id
+     * 字典数据类型id {@link DictTypeEntity#id}
      */
     private Long dictTypeId;
 

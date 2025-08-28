@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.github.bm.system.repository.RoleRepository">
 
-    <select id="pageQueryList" resultType="org.github.bm.system.vo.RolePageQueryListItemVo">
+    <select id="pageQueryList" resultType="org.github.bm.system.vo.RolePageQueryListItemVO">
         SELECT
         role.*,
         GROUP_CONCAT(resources.id SEPARATOR ',') AS resourcesIds
@@ -33,7 +33,7 @@
         role.id
     </select>
 
-    <select id="queryUserRolesByUserId" resultType="org.github.bm.system.vo.RoleVo">
+    <select id="queryUserRolesByUserId" resultType="org.github.bm.system.vo.RoleVO">
         SELECT role.*
         FROM sys_role role
         WHERE role.id IN (SELECT role_id

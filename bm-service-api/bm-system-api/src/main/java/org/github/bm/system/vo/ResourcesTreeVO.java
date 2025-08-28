@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ResourcesTreeVo extends BaseIdAndTimeIdVO implements ITreeNode<Long> {
+public class ResourcesTreeVO extends BaseIdAndTimeIdVO implements ITreeNode<Long> {
 
 
     @Serial

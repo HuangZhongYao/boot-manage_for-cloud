@@ -9,7 +9,7 @@ import org.github.bm.system.entity.UserRoleEntity;
 import org.github.bm.system.repository.RoleRepository;
 import org.github.bm.system.repository.UserRoleRepository;
 import org.github.bm.system.service.IUserRoleService;
-import org.github.bm.system.vo.RoleVo;
+import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,7 +56,7 @@ public class RoleClient implements IRoleClient {
 
     @Override
     @PostMapping(GET_ROLE_VO_BY_USER_ID)
-    public List<RoleVo> getRoleVoByUserId(@RequestParam("userId") Serializable userId) {
+    public List<RoleVO> getRoleVoByUserId(@RequestParam("userId") Serializable userId) {
         return roleConverter.toRoleVo(this.getRoleByUserId(userId));
     }
 
