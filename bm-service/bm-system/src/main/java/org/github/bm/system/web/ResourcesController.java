@@ -12,7 +12,7 @@ import org.github.bm.system.dto.EditResourcesInputDTO;
 import org.github.bm.system.dto.SetResourcesStateInputDTO;
 import org.github.bm.system.service.IResourcesService;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class ResourcesController extends BaseController {
     @Operation(summary = "查询资源下按钮", description = "查询资源下的按钮")
     @GetMapping(value = "/button/{parentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<List<ResourcesVo>> button(@PathVariable(name = "parentId", required = true) Long parentId) {
+    public ApiResponse<List<ResourcesVO>> button(@PathVariable(name = "parentId", required = true) Long parentId) {
         return ApiResponse.ok(resourcesService.button(parentId));
     }
 

@@ -17,7 +17,7 @@ import java.io.Serial;
 @Getter
 @Setter
 @ToString
-public class ResourcesVo extends BaseIdAndTimeIdVO {
+public class ResourcesVO extends BaseIdAndTimeIdVO {
     @Serial
     private static final long serialVersionUID = 343592145962257371L;
 

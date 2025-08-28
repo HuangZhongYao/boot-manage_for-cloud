@@ -3,6 +3,7 @@ package org.github.bm.system.web;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.github.bm.common.base.web.BaseController;
+import org.github.bm.system.service.INotificationsRecordService;
 import org.github.bm.system.service.INotificationsService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,4 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationsController extends BaseController {
     @Resource
     private INotificationsService notificationsService;
+    @Resource
+    private INotificationsRecordService notificationsRecordService;
 }

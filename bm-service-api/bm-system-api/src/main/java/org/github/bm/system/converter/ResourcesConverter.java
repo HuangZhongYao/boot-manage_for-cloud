@@ -2,7 +2,7 @@ package org.github.bm.system.converter;
 
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -15,5 +15,5 @@ import java.util.List;
 public interface ResourcesConverter {
     List<ResourcesTreeVO> toResourcesTreeVoList(List<ResourcesEntity> resourcesEntityList);
 
-    List<ResourcesVo> toResourcesVOList(List<ResourcesEntity> resourcesEntityList);
+    List<ResourcesVO> toResourcesVOList(List<ResourcesEntity> resourcesEntityList);
 }

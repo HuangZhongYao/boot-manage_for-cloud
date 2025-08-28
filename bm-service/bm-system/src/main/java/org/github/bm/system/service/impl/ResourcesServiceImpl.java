@@ -18,7 +18,7 @@ import org.github.bm.system.repository.ResourcesRepository;
 import org.github.bm.system.repository.RoleResourcesRepository;
 import org.github.bm.system.service.IResourcesService;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,14 +115,14 @@ public class ResourcesServiceImpl implements IResourcesService {
     }
 
     @Override
-    public List<ResourcesVo> button(Long parentId) {
+    public List<ResourcesVO> button(Long parentId) {
         // 查询条件
         LambdaQueryWrapper<ResourcesEntity> queryWrapper = Wrappers.<ResourcesEntity>lambdaQuery()
             .eq(ResourcesEntity::getParentId, parentId)
             .eq(ResourcesEntity::getType, ResourcesTypeEnum.BUTTON)
             .orderByAsc(ResourcesEntity::getSort);
         // 执行查询转换类型
-        return this.resourcesRepository.selectList(queryWrapper, ResourcesVo.class);
+        return this.resourcesRepository.selectList(queryWrapper, ResourcesVO.class);
     }
 
     @Override

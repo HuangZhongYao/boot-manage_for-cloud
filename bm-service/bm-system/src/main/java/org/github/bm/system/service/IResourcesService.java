@@ -7,7 +7,7 @@ import org.github.bm.system.dto.AddResourcesInputDTO;
 import org.github.bm.system.dto.EditResourcesInputDTO;
 import org.github.bm.system.dto.SetResourcesStateInputDTO;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public interface IResourcesService {
      * @param parentId 资源id
      * @return 下级按钮集合
      */
-    List<ResourcesVo> button(Long parentId);
+    List<ResourcesVO> button(Long parentId);
 
     Boolean editResources(EditResourcesInputDTO inputDTO);
 

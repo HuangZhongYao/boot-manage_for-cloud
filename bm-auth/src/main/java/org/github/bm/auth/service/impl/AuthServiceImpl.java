@@ -30,7 +30,7 @@ import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.feign.IResourcesClient;
 import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.github.bm.system.vo.RoleVO;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
@@ -136,7 +136,7 @@ public class AuthServiceImpl implements IAuthService {
         // 用户角色列表
         List<RoleVO> roles = roleClient.getRoleVoByUserId(currentUserId);
         // 资源权限列表
-        List<ResourcesVo> permissions = this.resourcesClient.queryPermissionsVoListByUserId(currentUserId);
+        List<ResourcesVO> permissions = this.resourcesClient.queryPermissionsVoListByUserId(currentUserId);
         // 组装角色
         vo.setRoles(roles);
         // 组装权限

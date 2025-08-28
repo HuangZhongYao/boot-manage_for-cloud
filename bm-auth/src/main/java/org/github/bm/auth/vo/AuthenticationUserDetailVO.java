@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.common.enums.GenderEnum;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.github.bm.system.vo.RoleVO;
 
 import java.io.Serial;
@@ -83,5 +83,5 @@ public class AuthenticationUserDetailVO extends BaseIdAndTimeIdVO {
      * 权限列表
      */
     @Schema(description = "权限列表")
-    private List<ResourcesVo> permissions = new ArrayList<>();
+    private List<ResourcesVO> permissions = new ArrayList<>();
 }

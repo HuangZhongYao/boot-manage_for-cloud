@@ -4,7 +4,7 @@ import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.vo.ResourcesTreeVO;
-import org.github.bm.system.vo.ResourcesVo;
+import org.github.bm.system.vo.ResourcesVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +38,7 @@ public interface IResourcesClient extends BaseFeign {
      * @return 权限列表
      */
     @GetMapping(value = QUERY_PERMISSIONS_VO_LIST_BY_USER_ID)
-    List<ResourcesVo> queryPermissionsVoListByUserId(@RequestParam("userId") Long userId);
+    List<ResourcesVO> queryPermissionsVoListByUserId(@RequestParam("userId") Long userId);
 
     /**
      * 获取用户权限树
