@@ -3,6 +3,7 @@ package org.github.bm.system.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.system.enums.NotificationsStateEnum;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +33,18 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
     private String content;
 
     /**
+     * 状态
+     */
+    @Schema(description = "状态")
+    private NotificationsStateEnum state;
+
+    /**
+     * 状态描述
+     */
+    @Schema(description = "状态描述")
+    private String stateDesc;
+
+    /**
      * 发布时间
      */
     @Schema(description = "发布时间")
@@ -48,4 +61,11 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
      */
     @Schema(description = "通知目标")
     private List<NotificationsTargetVO> notificationsTargets;
+
+    public String getStateDesc() {
+        if (state == null) {
+            return null;
+        }
+        return state.desc;
+    }
 }

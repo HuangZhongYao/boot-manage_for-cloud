@@ -74,7 +74,16 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             throw new UserFriendlyException("请选择通知目标");
         }
         // 转换为通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList = notificationsConverter.toNotificationsTargetEntityList(notificationsTargetDTOList);
+        List<NotificationsTargetEntity> notificationsTargetEntityList =
+                notificationsTargetDTOList
+                        .stream()
+                        .map(notificationsTargetDTO -> NotificationsTargetEntity
+                                .builder()
+                                .notificationsId(notificationsEntity.getId())
+                                .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
+                                .notificationsTargetId(notificationsTargetDTO.getNotificationsTargetId())
+                                .build())
+                        .toList();
         // 批量保存通知目标实体列表
         notificationsTargetService.saveBatch(notificationsTargetEntityList);
 
@@ -95,7 +104,16 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             throw new UserFriendlyException("请选择通知目标");
         }
         // 转换为通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList = notificationsConverter.toNotificationsTargetEntityList(notificationsTargetDTOList);
+        List<NotificationsTargetEntity> notificationsTargetEntityList =
+                notificationsTargetDTOList
+                        .stream()
+                        .map(notificationsTargetDTO -> NotificationsTargetEntity
+                                .builder()
+                                .notificationsId(notificationsEntity.getId())
+                                .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
+                                .notificationsTargetId(notificationsTargetDTO.getNotificationsTargetId())
+                                .build())
+                        .toList();
         // 保存之前先清除
         notificationsTargetService.getBaseMapper().delete(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, notificationsEntity.getId()));
         // 批量保存通知目标实体列表

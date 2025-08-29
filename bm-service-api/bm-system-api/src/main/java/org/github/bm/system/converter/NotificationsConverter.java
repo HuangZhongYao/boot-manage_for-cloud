@@ -35,6 +35,4 @@ public interface NotificationsConverter {
     NotificationsEntity toEntity(AddNotificationsInputDTO inputDTO);
 
     NotificationsEntity toEntity(EditNotificationsInputDTO inputDTO);
-
-    List<NotificationsTargetEntity> toNotificationsTargetEntityList(List<NotificationsTargetInputDTO> notificationsTargetDTOList);
 }
