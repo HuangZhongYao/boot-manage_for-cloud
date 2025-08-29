@@ -18,7 +18,7 @@ import java.io.Serial;
 @Getter
 @Setter
 @ToString
-public class UserQueryPageInputDTO extends BaseQueryPageInputDTO<UserEntity> {
+public class UserQueryPageInputDTO extends BaseQueryPageInputDTO {
     @Serial
     private static final long serialVersionUID = 3267321355395088871L;
 
