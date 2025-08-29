@@ -12,7 +12,7 @@ import java.util.List;
  * 数据源转换器接口
  * 用于在数据源相关的DTO、Entity和VO对象之间进行转换
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",builder = @org.mapstruct.Builder(disableBuilder = true)) // disableBuilder禁用Builder构建器否则父类属性无法赋值
 public interface DataSourceConverter {
     /**
      * 将dataSourceAddInputDTO转换为DataSourceEntity
