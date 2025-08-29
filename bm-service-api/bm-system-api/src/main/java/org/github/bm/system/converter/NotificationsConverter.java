@@ -1,5 +1,8 @@
 package org.github.bm.system.converter;
 
+import org.github.bm.system.dto.AddNotificationsInputDTO;
+import org.github.bm.system.dto.EditNotificationsInputDTO;
+import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.entity.NotificationsRecordEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
@@ -28,4 +31,10 @@ public interface NotificationsConverter {
     NotificationsRecordVO toNotificationsRecordVO(NotificationsRecordEntity entity);
 
     List<NotificationsRecordVO> toNotificationsRecordVOList(List<NotificationsRecordEntity> entityList);
+
+    NotificationsEntity toEntity(AddNotificationsInputDTO inputDTO);
+
+    NotificationsEntity toEntity(EditNotificationsInputDTO inputDTO);
+
+    List<NotificationsTargetEntity> toNotificationsTargetEntityList(List<NotificationsTargetInputDTO> notificationsTargetDTOList);
 }

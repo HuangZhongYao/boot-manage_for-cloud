@@ -3,6 +3,7 @@ package org.github.bm.system.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.github.bm.common.base.entity.AbstractBaseEntity;
+import org.github.bm.system.enums.NotificationsStateEnum;
 
 import java.time.LocalDateTime;
 
@@ -29,6 +30,11 @@ public class NotificationsEntity extends AbstractBaseEntity {
      * 内容
      */
     private String content;
+
+    /**
+     * 状态
+     */
+    private NotificationsStateEnum state;
 
     /**
      * 发布时间
