@@ -85,14 +85,13 @@ public class OrganizationServiceImpl implements IOrganizationService {
             this.organizationRepository.selectById(inputDTO.getId());
         // 更新的实体
         OrganizationEntity organizationUpdateEntity = organizationConvert.toEntity(inputDTO);
-        // 判断名称是否存在
-        if (this.organizationRepository.exists(Wrappers.<OrganizationEntity>lambdaQuery()
+        // 当名称有变动时判断名称是否存在
+        if (!organizationEntityDB.getName().equals(inputDTO.getName()) && this.organizationRepository.exists(Wrappers.<OrganizationEntity>lambdaQuery()
             .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
                 .or()
                 .isNull(OrganizationEntity::getParentId))
             .eq(OrganizationEntity::getName, inputDTO.getName())
-            .ne(OrganizationEntity::getName, organizationEntityDB.getName()))
-        ) {
+        )) {
             throw new UserFriendlyException("名称已存在");
         }
         return this.organizationRepository.updateById((organizationUpdateEntity)) > 0;
