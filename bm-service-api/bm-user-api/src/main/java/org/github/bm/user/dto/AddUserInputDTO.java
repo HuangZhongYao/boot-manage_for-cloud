@@ -28,6 +28,12 @@ public class AddUserInputDTO extends BaseDTO {
     private static final long serialVersionUID = -5329610125578371097L;
 
     /**
+     * 组织ID
+     */
+    @Schema(description = "所属组织ID")
+    private Long organizationId;
+
+    /**
      * 头像地址
      */
     @Schema(description = "头像", example = "https://sfsd.com/fins/tx.png",requiredMode = Schema.RequiredMode.NOT_REQUIRED)

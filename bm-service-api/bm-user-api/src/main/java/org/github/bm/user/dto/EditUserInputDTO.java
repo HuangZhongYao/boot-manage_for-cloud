@@ -26,6 +26,12 @@ public class EditUserInputDTO extends BaseLongIdInputDTO {
     private static final long serialVersionUID = -5329610125578371097L;
 
     /**
+     * 组织ID
+     */
+    @Schema(description = "所属组织ID")
+    private Long organizationId;
+
+    /**
      * 用户名
      */
     @Schema(description = "用户名", example = "宇宙无敌的高手", requiredMode = Schema.RequiredMode.REQUIRED)

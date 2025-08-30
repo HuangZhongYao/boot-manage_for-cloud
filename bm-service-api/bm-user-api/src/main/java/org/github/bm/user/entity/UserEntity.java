@@ -27,6 +27,11 @@ public class UserEntity extends AbstractBaseEntity {
     private static final long serialVersionUID = -4075127738715995785L;
 
     /**
+     * 组织ID
+     */
+    private Long organizationId;
+
+    /**
      * 用户名
      */
     private String username;

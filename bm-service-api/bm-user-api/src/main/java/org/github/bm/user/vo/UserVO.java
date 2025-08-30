@@ -23,6 +23,12 @@ public class UserVO extends BaseIdAndTimeAndOperationIdVO {
     private static final long serialVersionUID = -7091624991626890336L;
 
     /**
+     * 组织ID
+     */
+    @Schema(description = "所属组织ID")
+    private Long organizationId;
+
+    /**
      * 用户名
      */
     @Schema(description = "用户名")
