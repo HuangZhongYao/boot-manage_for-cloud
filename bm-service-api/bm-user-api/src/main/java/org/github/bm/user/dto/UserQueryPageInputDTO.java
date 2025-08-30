@@ -33,4 +33,7 @@ public class UserQueryPageInputDTO extends BaseQueryPageInputDTO {
 
     @Schema(description = "启用状态: true|false")
     private Boolean enable;
+
+    @Schema(description = "组织ID")
+    private Long organizationId;
 }

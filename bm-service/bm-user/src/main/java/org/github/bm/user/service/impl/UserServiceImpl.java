@@ -52,14 +52,17 @@ public class UserServiceImpl implements IUserService {
                 .like(StrUtil.isNotBlank(inputDTO.getAccount()), UserEntity::getAccount,
                         inputDTO.getUsername())
                 .eq(null != inputDTO.getGender(), UserEntity::getGender, inputDTO.getGender())
-                .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable());
+                .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable())
+                .eq(null != inputDTO.getOrganizationId(), UserEntity::getOrganizationId, inputDTO.getOrganizationId());
 
         // 执行查询用户
         Page<UserVO> page =
                 userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVO.class);
-
+        // 用户id列表
+        List<Long> userIds = page.getRecords().stream().map(UserVO::getId).toList();
+        userIds = userIds.isEmpty() ? List.of(-99999L) : userIds;
         // 查询全部用的角色并根据用户id分组
-        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(page.getRecords().stream().map(UserVO::getId).toList())
+        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(userIds)
                 .stream()
                 .collect(Collectors.groupingBy(UserRoleVO::getUserId));
 
