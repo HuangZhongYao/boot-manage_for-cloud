@@ -5,6 +5,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
+import java.util.List;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
@@ -12,7 +13,9 @@ import org.github.bm.system.dto.AddOrganizationInputDTO;
 import org.github.bm.system.dto.EditOrganizationInputDTO;
 import org.github.bm.system.dto.OrganizationPageQueryInputDTO;
 import org.github.bm.system.service.IOrganizationService;
+import org.github.bm.system.vo.OrganizationTreeVO;
 import org.github.bm.system.vo.OrganizationVO;
+import org.github.bm.system.vo.ResourcesTreeVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +27,12 @@ public class OrganizationController extends BaseController {
 
     @Resource
     IOrganizationService organizationService;
+
+    @GetMapping(value = "/organizationTree", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "查询组织树", description = "查询组织树")
+    public ApiResponse<List<OrganizationTreeVO>> organizationTree() {
+        return ApiResponse.ok(organizationService.organizationTree());
+    }
 
     @Operation(summary = "分页查询", description = "分页查询组织架构接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -1,20 +1,32 @@
 package org.github.bm.system.vo;
 
-import lombok.*;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.common.util.tree.ITreeNode;
 import org.github.bm.system.enums.OrganizationTypeEnum;
 
 /**
- * 组织机构类型表实体（或者也叫部门表实体）
+ * 组织树VO
+ * @Desc Created by IntelliJ IDEA.
+ * @Author ZhongYao.Huang (https://github.com/HuangZhongYao)
+ * @Copyright ZuuuuYao By Github
+ * @Time 2025-08-30 22:23
  */
-@Getter
 @Setter
+@Getter
 @Builder
 @ToString
-@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 @AllArgsConstructor
-public class OrganizationVO extends BaseIdAndTimeAndOperationIdVO {
-
+@EqualsAndHashCode(callSuper = false)
+public class OrganizationTreeVO extends BaseIdAndTimeAndOperationIdVO implements ITreeNode<Long> {
     /**
      * 组织机构类型名称
      */
@@ -36,7 +48,7 @@ public class OrganizationVO extends BaseIdAndTimeAndOperationIdVO {
     private String parentName;
 
     /**
-     * 组织机构类型
+     * 组织机构类型类型
      */
     private OrganizationTypeEnum type;
 
@@ -69,6 +81,11 @@ public class OrganizationVO extends BaseIdAndTimeAndOperationIdVO {
      * 备注
      */
     private String remark;
+
+    /**
+     * 子节点
+     */
+    private List<ITreeNode<Long>> children;
 
     public Integer getTypeValue() {
         if (null == type) {
