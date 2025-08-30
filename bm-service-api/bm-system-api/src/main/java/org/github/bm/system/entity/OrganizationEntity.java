@@ -1,5 +1,6 @@
 package org.github.bm.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.github.bm.common.base.entity.AbstractBaseEntity;
 import org.github.bm.system.enums.OrganizationTypeEnum;
@@ -14,10 +15,11 @@ import org.github.bm.system.enums.OrganizationTypeEnum;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
+@TableName("sys_organization")
 public class OrganizationEntity extends AbstractBaseEntity {
 
     /**
-     * 组织机构类型名称
+     * 组织机构名称
      */
     private String name;
 
@@ -32,7 +34,7 @@ public class OrganizationEntity extends AbstractBaseEntity {
     private Long parentId;
 
     /**
-     * 组织机构类型类型
+     * 组织机构类型
      */
     private OrganizationTypeEnum type;
 
