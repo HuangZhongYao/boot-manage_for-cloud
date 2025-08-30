@@ -69,7 +69,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
         OrganizationEntity organizationEntity = organizationConvert.toEntity(inputDTO);
         // 判断名称是否存在
         if (this.organizationRepository.exists(Wrappers.<OrganizationEntity>lambdaQuery()
-            .eq(OrganizationEntity::getParentId, inputDTO.getParentId())
+            .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
+                .or()
+                .isNull(OrganizationEntity::getParentId))
             .eq(OrganizationEntity::getName, inputDTO.getName()))) {
             throw new UserFriendlyException("名称已存在");
         }

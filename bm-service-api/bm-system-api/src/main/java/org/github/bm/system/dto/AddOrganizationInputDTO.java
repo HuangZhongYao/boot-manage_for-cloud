@@ -15,6 +15,7 @@ import org.github.bm.system.enums.OrganizationTypeEnum;
 @ToString
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "新增组织机构输入参数")
 public class AddOrganizationInputDTO extends BaseDTO {
 
@@ -34,8 +35,7 @@ public class AddOrganizationInputDTO extends BaseDTO {
     /**
      * 父级ID
      */
-    @Schema(description = "父级组织机构ID，顶级0", example = "1")
-    @ValidateNotNullAndEmpty(message = "父级不能为空")
+    @Schema(description = "父级组织机构ID，顶级null", example = "1")
     private Long parentId;
 
     /**
