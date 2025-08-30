@@ -17,7 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "组织架构")
+@Tag(name = "组织管理")
 @RestController
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
