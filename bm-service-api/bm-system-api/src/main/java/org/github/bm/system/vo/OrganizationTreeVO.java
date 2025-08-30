@@ -68,11 +68,6 @@ public class OrganizationTreeVO extends BaseIdAndTimeAndOperationIdVO implements
     private Boolean enable;
 
     /**
-     * 描述
-     */
-    private String description;
-
-    /**
      * 负责人id json 数组
      */
     private String leader;

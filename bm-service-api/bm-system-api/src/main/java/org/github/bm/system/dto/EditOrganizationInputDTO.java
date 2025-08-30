@@ -55,12 +55,6 @@ public class EditOrganizationInputDTO extends BaseLongIdInputDTO {
     private Boolean enable;
 
     /**
-     * 描述
-     */
-    @Schema(description = "组织机构描述信息", example = "负责公司技术开发工作")
-    private String description;
-
-    /**
      * 负责人id json 数组
      */
     @Schema(description = "负责人ID的JSON数组格式，如：[\"1\",\"2\"]", example = "[\"1\",\"2\"]")
