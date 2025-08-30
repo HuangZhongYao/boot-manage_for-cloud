@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
-import org.github.bm.system.entity.NotificationsTargetEntity;
 import org.github.bm.system.enums.NotificationsStateEnum;
 
 @Data
