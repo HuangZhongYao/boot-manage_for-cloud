@@ -22,4 +22,9 @@ public class OrganizationClientFallback implements IOrganizationClient {
     public List<OrganizationEntity> getOrganizationAndSubOrganization(Long organizationId) {
         return List.of();
     }
+
+    @Override
+    public List<OrganizationEntity> getOrganizationByIds(List<Long> ids) {
+        return List.of();
+    }
 }
