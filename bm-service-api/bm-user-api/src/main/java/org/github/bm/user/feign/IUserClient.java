@@ -3,6 +3,7 @@ package org.github.bm.user.feign;
 import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.feign.fallback.UserClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * 用户服务暴露接口，最好不要UserController实现它来复用已有接口
  */
-@FeignClient(value = AppConstant.APPLICATION_USER_NAME, contextId = "userClient")
+@FeignClient(value = AppConstant.APPLICATION_USER_NAME, contextId = "userClient",fallback = UserClientFallback.class)
 public interface IUserClient extends BaseFeign {
 
     String API_PREFIX = BASE_API_PREFIX + "/user";
