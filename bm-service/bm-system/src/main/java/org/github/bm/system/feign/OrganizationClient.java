@@ -30,4 +30,15 @@ public class OrganizationClient implements IOrganizationClient{
     public List<OrganizationEntity> getOrganizationAndSubOrganization(Long organizationId) {
         return organizationService.queryOrganizationAndSubOrganization(organizationId);
     }
+
+    /**
+     * 根据组织id列表查询组织
+     * @param ids 组织ID列表
+     * @return 组织列表
+     */
+    @Override
+    @GetMapping(GET_ORGANIZATION_BY_IDS)
+    public List<OrganizationEntity> getOrganizationByIds(List<Long> ids) {
+        return organizationService.queryOrganizationByIds(ids);
+    }
 }

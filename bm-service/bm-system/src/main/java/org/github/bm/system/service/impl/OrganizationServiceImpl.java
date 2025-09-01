@@ -170,4 +170,15 @@ public class OrganizationServiceImpl implements IOrganizationService {
 
         return result;
     }
+
+    /**
+     * 根据组织id列表查询组织
+     *
+     * @param ids 组织id列表
+     * @return 组织列表
+     */
+    @Override
+    public List<OrganizationEntity> queryOrganizationByIds(List<Long> ids) {
+        return this.organizationRepository.selectList(Wrappers.<OrganizationEntity>lambdaQuery().in(OrganizationEntity::getId, ids));
+    }
 }

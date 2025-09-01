@@ -18,6 +18,7 @@ import java.util.List;
 public interface IOrganizationClient extends BaseFeign {
     String API_PREFIX = BASE_API_PREFIX + "/organization";
     String GET_ORGANIZATION_AND_SUB_ORGANIZATION = API_PREFIX + "/getOrganizationAndSubOrganization";
+    String GET_ORGANIZATION_BY_IDS = API_PREFIX + "/getOrganizationByIds";
 
     /**
      * 获取组织及子组织列表
@@ -26,4 +27,12 @@ public interface IOrganizationClient extends BaseFeign {
      */
     @GetMapping(GET_ORGANIZATION_AND_SUB_ORGANIZATION)
     List<OrganizationEntity> getOrganizationAndSubOrganization(@RequestParam("organizationId")Long organizationId);
+
+    /**
+     * 根据组织id列表查询组织
+     * @param ids 组织ID列表
+     * @return 组织列表
+     */
+    @GetMapping(GET_ORGANIZATION_BY_IDS)
+    List<OrganizationEntity> getOrganizationByIds(@RequestParam("ids") List<Long> ids);
 }

@@ -67,5 +67,13 @@ public interface IOrganizationService {
      * @return 组织机构实体列表，包含指定组织机构及其所有子组织机构
      */
     List<OrganizationEntity> queryOrganizationAndSubOrganization(Long id);
+
+    /**
+     * 根据组织id列表查询组织
+     *
+     * @param ids 组织id列表
+     * @return 组织列表
+     */
+    List<OrganizationEntity> queryOrganizationByIds(List<Long> ids);
 }
 

@@ -29,6 +29,12 @@ public class UserVO extends BaseIdAndTimeAndOperationIdVO {
     private Long organizationId;
 
     /**
+     * 组织Name
+     */
+    @Schema(description = "所属组织名称")
+    private String organizationName;
+
+    /**
      * 用户名
      */
     @Schema(description = "用户名")

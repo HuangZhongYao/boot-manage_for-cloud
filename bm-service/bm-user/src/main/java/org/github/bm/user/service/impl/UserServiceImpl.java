@@ -12,7 +12,9 @@ import jakarta.annotation.Resource;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.util.ModelMapperUtil;
+import org.github.bm.system.entity.OrganizationEntity;
 import org.github.bm.system.entity.UserRoleEntity;
+import org.github.bm.system.feign.IOrganizationClient;
 import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -41,35 +44,60 @@ public class UserServiceImpl implements IUserService {
     UserRepository userRepository;
     @Resource
     IRoleClient roleClient;
+    @Resource
+    IOrganizationClient organizationClient;
 
     @Override
     public Page<UserVO> pageQueryList(UserQueryPageInputDTO inputDTO) {
-
         // 构建查询条件
         LambdaQueryWrapper<UserEntity> queryWrapper = Wrappers.<UserEntity>lambdaQuery()
-                .like(StrUtil.isNotBlank(inputDTO.getUsername()), UserEntity::getAccount,
-                        inputDTO.getAccount())
-                .like(StrUtil.isNotBlank(inputDTO.getAccount()), UserEntity::getAccount,
-                        inputDTO.getUsername())
+                .like(StrUtil.isNotBlank(inputDTO.getAccount()), UserEntity::getAccount, inputDTO.getAccount())
+                .like(StrUtil.isNotBlank(inputDTO.getUsername()), UserEntity::getAccount, inputDTO.getUsername())
                 .eq(null != inputDTO.getGender(), UserEntity::getGender, inputDTO.getGender())
-                .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable())
-                .eq(null != inputDTO.getOrganizationId(), UserEntity::getOrganizationId, inputDTO.getOrganizationId());
+                .eq(null != inputDTO.getEnable(), UserEntity::getEnable, inputDTO.getEnable());
+
+        // 用户所属组织Map
+        Map<Long, OrganizationEntity> organizationByIdGrouping = new HashMap<>();
+
+        // 添加组织id条件
+        if (null != inputDTO.getOrganizationId()) {
+            // 查询组织及子组织
+            List<OrganizationEntity> organizationAndSubOrganizationList = organizationClient.getOrganizationAndSubOrganization(inputDTO.getOrganizationId());
+            List<Long> organizationIdList = organizationAndSubOrganizationList.stream().map(OrganizationEntity::getId).toList();
+            // 添加组织id条件
+            queryWrapper.in(!organizationIdList.isEmpty(), UserEntity::getOrganizationId, organizationIdList);
+            // 组织根据组织id进行分组
+            organizationByIdGrouping = organizationAndSubOrganizationList.stream().collect(Collectors.toMap(OrganizationEntity::getId, v -> v));
+        }
 
         // 执行查询用户
-        Page<UserVO> page =
-                userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVO.class);
+        Page<UserVO> page = userRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper, UserVO.class);
+
         // 用户id列表
         List<Long> userIds = page.getRecords().stream().map(UserVO::getId).toList();
         userIds = userIds.isEmpty() ? List.of(-99999L) : userIds;
         // 查询全部用的角色并根据用户id分组
-        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(userIds)
-                .stream()
-                .collect(Collectors.groupingBy(UserRoleVO::getUserId));
+        Map<Long, List<UserRoleVO>> userRoleByUserIdGrouping = roleClient.getUserRoleVoByUserIdList(userIds).stream().collect(Collectors.groupingBy(UserRoleVO::getUserId));
 
-        // 设置用户角色
-        page.getRecords().forEach(userVO -> {
+        // 如果organizationByIdGrouping为空则查询用户所属组织
+        if (organizationByIdGrouping.isEmpty()) {
+            // 全部用户的组织id列表
+            List<Long> userOOrganizationIdList = page.getRecords().stream().map(UserVO::getOrganizationId).toList();
+            // 默认值避免mybatis-plus报错
+            userOOrganizationIdList = userOOrganizationIdList.isEmpty() ? List.of(-99999L) : userOOrganizationIdList;
+            // 一次查询全部用户的所属组织
+            List<OrganizationEntity> organizationEntityList = organizationClient.getOrganizationByIds(userOOrganizationIdList);
+            organizationByIdGrouping = organizationEntityList.stream().collect(Collectors.toMap(OrganizationEntity::getId, item -> item));
+        }
+
+        // 设置用户角色和所属部门名称
+        for (UserVO userVO : page.getRecords()) {
             userVO.setRoles(userRoleByUserIdGrouping.get(userVO.getId()));
-        });
+            OrganizationEntity userOrganization = organizationByIdGrouping.get(userVO.getOrganizationId());
+            if (null != userOrganization) {
+                userVO.setOrganizationName(userOrganization.getName());
+            }
+        }
 
         return page;
     }
