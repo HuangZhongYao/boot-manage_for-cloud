@@ -1,19 +1,15 @@
 package org.github.bm.system.vo;
 
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
 import org.github.bm.common.util.tree.ITreeNode;
 import org.github.bm.system.enums.OrganizationTypeEnum;
 
+import java.util.List;
+
 /**
  * 组织树VO
+ *
  * @Desc Created by IntelliJ IDEA.
  * @Author ZhongYao.Huang (https://github.com/HuangZhongYao)
  * @Copyright ZuuuuYao By Github
@@ -68,6 +64,11 @@ public class OrganizationTreeVO extends BaseIdAndTimeAndOperationIdVO implements
     private Boolean enable;
 
     /**
+     * 前端中是否禁用勾选该节点
+     */
+    private Boolean checkboxDisabled;
+
+    /**
      * 负责人id json 数组
      */
     private String leader;
@@ -81,6 +82,10 @@ public class OrganizationTreeVO extends BaseIdAndTimeAndOperationIdVO implements
      * 子节点
      */
     private List<ITreeNode<Long>> children;
+
+    public Boolean getCheckboxDisabled() {
+        return enable == false;
+    }
 
     public Integer getTypeValue() {
         if (null == type) {
