@@ -4,6 +4,7 @@ import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.RoleEntity;
 import org.github.bm.system.entity.UserRoleEntity;
+import org.github.bm.system.feign.fallback.RoleClientFallback;
 import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.Serializable;
 import java.util.List;
 
-@FeignClient(value = AppConstant.APPLICATION_SYSTEM_NAME, contextId = "roleClient")
+@FeignClient(value = AppConstant.APPLICATION_SYSTEM_NAME, contextId = "roleClient", fallback = RoleClientFallback.class)
 public interface IRoleClient extends BaseFeign {
 
     String API_PREFIX = BASE_API_PREFIX + "/role";

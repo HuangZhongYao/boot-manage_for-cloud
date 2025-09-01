@@ -3,6 +3,7 @@ package org.github.bm.system.feign;
 import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
 import org.github.bm.system.entity.ResourcesEntity;
+import org.github.bm.system.feign.fallback.ResourcesClientFallback;
 import org.github.bm.system.vo.ResourcesTreeVO;
 import org.github.bm.system.vo.ResourcesVO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,11 +16,12 @@ import java.util.List;
  * Time 2025-08-15 15:44
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
-@FeignClient(value = AppConstant.APPLICATION_SYSTEM_NAME, contextId = "resourcesClient")
+@FeignClient(value = AppConstant.APPLICATION_SYSTEM_NAME, contextId = "resourcesClient", fallback = ResourcesClientFallback.class)
 public interface IResourcesClient extends BaseFeign {
-    String QUERY_PERMISSIONS_LIST_BY_USER_ID = "/resources/queryPermissionsList";
-    String QUERY_PERMISSIONS_VO_LIST_BY_USER_ID = "/resources/queryPermissionsVoList";
-    String QUERY_PERMISSIONS_TREE_BY_USER_ID = "/resources/queryPermissionsTree";
+    String API_PREFIX = BASE_API_PREFIX + "/resources";
+    String QUERY_PERMISSIONS_LIST_BY_USER_ID = API_PREFIX + "/queryPermissionsList";
+    String QUERY_PERMISSIONS_VO_LIST_BY_USER_ID = API_PREFIX + "/queryPermissionsVoList";
+    String QUERY_PERMISSIONS_TREE_BY_USER_ID = API_PREFIX + "/queryPermissionsTree";
 
 
     /**
