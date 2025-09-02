@@ -1,7 +1,10 @@
 package org.github.bm.system.repository;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import org.github.bm.common.mybatis.BaseMapperExtension;
 import org.github.bm.system.entity.NotificationsRecordEntity;
+import org.github.bm.system.vo.NotificationsRecordVO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,4 +13,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface NotificationsRecordRepository extends BaseMapperExtension<NotificationsRecordEntity> {
+    /**
+     * 查询我的通知记录
+     * @param page 分页对象
+     * @param userId 用户id
+     * @return Page<通知记录>
+     */
+    Page<NotificationsRecordVO> queryMyNotificationRecords(@Param("page") Page page,@Param("userId") Long userId);
 }

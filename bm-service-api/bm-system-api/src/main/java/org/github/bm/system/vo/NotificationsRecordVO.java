@@ -3,7 +3,7 @@ package org.github.bm.system.vo;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.entity.AbstractIdAndTimeEntity;
+import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.system.entity.NotificationsEntity;
 
 import java.time.LocalDateTime;
@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @TableName("sys_notifications_record")
-public class NotificationsRecordVO extends AbstractIdAndTimeEntity {
+public class NotificationsRecordVO extends BaseIdAndTimeIdVO {
     /**
      * 标题
      */
@@ -47,6 +47,12 @@ public class NotificationsRecordVO extends AbstractIdAndTimeEntity {
     private Long userId;
 
     /**
+     * 用户名
+     */
+    @Schema(description = "通知用户用户名")
+    private String username;
+
+    /**
      * 读取状态
      */
     @Schema(description = "读取状态")
@@ -57,4 +63,9 @@ public class NotificationsRecordVO extends AbstractIdAndTimeEntity {
      */
     @Schema(description = "阅读时间")
     private LocalDateTime readTime;
+
+    /**
+     * 通知公告发布时间
+     */
+    private LocalDateTime publishTime;
 }

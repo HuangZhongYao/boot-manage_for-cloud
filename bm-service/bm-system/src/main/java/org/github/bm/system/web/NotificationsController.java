@@ -10,12 +10,10 @@ import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.common.base.web.BaseController;
-import org.github.bm.system.dto.AddNotificationsInputDTO;
-import org.github.bm.system.dto.EditNotificationsInputDTO;
-import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
-import org.github.bm.system.entity.NotificationsTargetEntity;
+import org.github.bm.system.dto.*;
 import org.github.bm.system.service.INotificationsRecordService;
 import org.github.bm.system.service.INotificationsService;
+import org.github.bm.system.vo.NotificationsRecordVO;
 import org.github.bm.system.vo.NotificationsVO;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -35,7 +33,25 @@ public class NotificationsController extends BaseController {
     @Resource
     private INotificationsRecordService notificationsRecordService;
 
-    @Operation(summary = "分页查询", description = "分页查询通知公告接口")
+    @Operation(summary = "分页查询我的通知记录", description = "分页查询通知公告接口")
+    @GetMapping(value = "/queryMyNotificationRecords", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Page<NotificationsRecordVO>> queryMyNotificationRecords(BaseQueryPageInputDTO inputDTO) {
+        return ApiResponse.ok(notificationsRecordService.queryMyNotificationRecords(inputDTO));
+    }
+
+    @Operation(summary = "已读通知记录")
+    @GetMapping(value = "/readNotificationRecords", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Boolean> readNotificationRecords(ReadNotificationRecordsInputDTO inputDTO) {
+        return ApiResponse.ok(notificationsRecordService.readNotificationRecords(inputDTO));
+    }
+
+    @Operation(summary = "删除通知记录")
+    @PostMapping(value = "/delNotificationRecord", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Boolean> delNotificationRecord(DelNotificationRecordsInputDTO inputDTO) {
+        return ApiResponse.ok(notificationsRecordService.delNotificationRecord(inputDTO));
+    }
+
+    @Operation(summary = "分页查询通知公告", description = "分页查询通知公告接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperationSupport(authors = "zuuuYao")
     public ApiResponse<Page<NotificationsVO>> pageQueryList(NotificationsPageQueryInputDTO inputDTO) {
