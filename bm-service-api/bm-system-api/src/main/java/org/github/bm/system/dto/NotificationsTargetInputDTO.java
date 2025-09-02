@@ -5,6 +5,8 @@ import org.github.bm.common.base.dto.BaseDTO;
 import org.github.bm.common.validate.ValidateNotNullAndEmpty;
 import org.github.bm.system.enums.NotificationsTargetEnum;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @Builder
@@ -23,5 +25,5 @@ public class NotificationsTargetInputDTO extends BaseDTO {
      * 通知目标Id json数组
      */
     @ValidateNotNullAndEmpty(message = "通知目标Id不能为空")
-    private String notificationsTargetId;
+    private Set<String> notificationsTargetIds;
 }

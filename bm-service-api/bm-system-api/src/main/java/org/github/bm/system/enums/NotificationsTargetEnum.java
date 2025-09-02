@@ -10,7 +10,7 @@ import org.github.bm.common.base.enums.IEnumsValue;
 public enum NotificationsTargetEnum implements IEnumsValue {
     USER(1, "用户"),
     ROLE(2, "角色"),
-    DEPARTMENT(3, "部门"),
+    ORGANIZATION(3, "组织"),
     ALL(4, "全部");
 
     NotificationsTargetEnum(Integer value, String desc) {

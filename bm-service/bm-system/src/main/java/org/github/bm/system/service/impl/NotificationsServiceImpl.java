@@ -1,6 +1,7 @@
 package org.github.bm.system.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -81,7 +82,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                                 .builder()
                                 .notificationsId(notificationsEntity.getId())
                                 .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
-                                .notificationsTargetId(notificationsTargetDTO.getNotificationsTargetId())
+                                .notificationsTargetId(JSON.toJSONString(notificationsTargetDTO.getNotificationsTargetIds()))
                                 .build())
                         .toList();
         // 批量保存通知目标实体列表
@@ -111,7 +112,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                                 .builder()
                                 .notificationsId(notificationsEntity.getId())
                                 .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
-                                .notificationsTargetId(notificationsTargetDTO.getNotificationsTargetId())
+                                .notificationsTargetId(JSON.toJSONString(notificationsTargetDTO.getNotificationsTargetIds()))
                                 .build())
                         .toList();
         // 保存之前先清除
