@@ -1,5 +1,6 @@
 package org.github.bm.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -65,11 +66,26 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .between(null != inputDTO.getBeginTime() && null != inputDTO.getEndTime(), NotificationsEntity::getPublishTime, inputDTO.getBeginTime(), inputDTO.getEndTime());
         // 执行查询
         Page<NotificationsEntity> page = this.baseMapper.selectPage(inputDTO.toMybatisPageObject(), queryWrapper);
+        //
+        List<Long> idList = page.getRecords().stream().map(NotificationsEntity::getId).toList();
+        // 查询子表通知目标列表
+        List<NotificationsTargetEntity> notificationsTargetEntityList = notificationsTargetService.getBaseMapper().selectList(Wrappers.<NotificationsTargetEntity>lambdaQuery().in(NotificationsTargetEntity::getNotificationsId, idList));
+        // 通知目标列表分组
+        Map<Long, List<NotificationsTargetEntity>> notificationsTargetMap = notificationsTargetEntityList.stream().collect(Collectors.groupingBy(NotificationsTargetEntity::getNotificationsId));
 
         // 构建VO
         Page<NotificationsVO> pageVO = new Page<>();
         BeanUtils.copyProperties(page, pageVO);
         pageVO.setRecords(notificationsConverter.toNotificationsListVO(page.getRecords()));
+        // 赋值通知目标属性
+        for (NotificationsVO notificationsVO : pageVO.getRecords()) {
+            List<NotificationsTargetEntity> targetEntityList = notificationsTargetMap.get(notificationsVO.getId());
+            if (CollectionUtil.isNotEmpty(targetEntityList)) {
+                List<NotificationsTargetInputDTO> notificationsTargetInputDTOList = targetEntityList.stream().map(item -> NotificationsTargetInputDTO.builder().id(item.getTargetId()).type(item.getTargetType()).name(item.getTargetName()).build()).toList();
+                notificationsVO.setNotificationsTargets(notificationsTargetInputDTOList);
+            }
+        }
+
         return pageVO;
     }
 
@@ -94,8 +110,8 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .map(item ->
                         NotificationsTargetEntity.builder()
                                 .notificationsId(notificationsEntity.getId())
-                                .notificationsTargetId(item.getId())
-                                .notificationsTargetName(item.getName())
+                                .targetId(item.getId())
+                                .targetName(item.getName())
                                 .build()
                 )
                 .toList();
@@ -125,8 +141,8 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .map(item ->
                         NotificationsTargetEntity.builder()
                                 .notificationsId(notificationsEntity.getId())
-                                .notificationsTargetId(item.getId())
-                                .notificationsTargetName(item.getName())
+                                .targetId(item.getId())
+                                .targetName(item.getName())
                                 .build()
                 )
                 .toList();
@@ -161,13 +177,13 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 获取通知目标列表
         List<NotificationsTargetEntity> notificationsTargetEntityList = this.notificationsTargetService.list(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, inputDTO.getId()));
         // 通知目标根据类型分组
-        Map<NotificationsTargetEnum, List<NotificationsTargetEntity>> notificationsTargetTypeMap = notificationsTargetEntityList.stream().collect(Collectors.groupingBy(NotificationsTargetEntity::getNotificationsTarget));
+        Map<NotificationsTargetEnum, List<NotificationsTargetEntity>> notificationsTargetTypeMap = notificationsTargetEntityList.stream().collect(Collectors.groupingBy(NotificationsTargetEntity::getTargetType));
         // 类型分组获取通知用户Id集合
         notificationsTargetTypeMap.forEach((key, value) -> {
 
             // 通知目标Id集合
             Set<Long> targetIdSet = value.stream()
-                    .map(NotificationsTargetEntity::getNotificationsTargetId)
+                    .map(NotificationsTargetEntity::getTargetId)
                     .collect(Collectors.toSet());
 
             // 根据类型获取通知用户Id集合

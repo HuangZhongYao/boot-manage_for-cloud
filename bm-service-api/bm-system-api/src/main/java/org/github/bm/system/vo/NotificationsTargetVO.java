@@ -29,17 +29,17 @@ public class NotificationsTargetVO extends BaseIdAndTimeIdVO {
      * 通知目标id
      */
     @Schema(description = "通知目标id")
-    private Long id;
+    private Long targetId;
     /**
      * 通知目标类型
      */
     @Schema(description = "通知目标类型")
-    private NotificationsTargetEnum type;
+    private NotificationsTargetEnum targetType;
 
     /**
      * 通知目标名称
      */
     @Schema(description = "通知目标名称")
-    private String name;
+    private String targetName;
 
 }

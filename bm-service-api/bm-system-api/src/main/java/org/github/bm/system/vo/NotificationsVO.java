@@ -3,6 +3,7 @@ package org.github.bm.system.vo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.enums.NotificationsStateEnum;
 
 import java.time.LocalDateTime;
@@ -60,7 +61,7 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
      * 通知目标
      */
     @Schema(description = "通知目标")
-    private List<NotificationsTargetVO> notificationsTargets;
+    private List<NotificationsTargetInputDTO> notificationsTargets;
 
     public String getStateDesc() {
         if (state == null) {

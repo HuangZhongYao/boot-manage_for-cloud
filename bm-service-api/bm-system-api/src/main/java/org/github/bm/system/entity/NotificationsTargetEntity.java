@@ -28,15 +28,15 @@ public class NotificationsTargetEntity extends AbstractIdAndTimeEntity {
     /**
      * 通知目标类型
      */
-    private NotificationsTargetEnum notificationsTarget;
+    private NotificationsTargetEnum targetType;
 
     /**
      * 通知目标Id
      */
-    private Long notificationsTargetId;
+    private Long targetId;
 
     /**
      * 通知目标名称
      */
-    private String notificationsTargetName;
+    private String targetName;
 }
