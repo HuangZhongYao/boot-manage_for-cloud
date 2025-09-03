@@ -1,17 +1,17 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : HOME-PC_本地MYSQL8.0
+ Source Server         : Localhost-MySQL
  Source Server Type    : MySQL
- Source Server Version : 80031 (8.0.31)
+ Source Server Version : 80043 (8.0.43)
  Source Host           : localhost:3306
  Source Schema         : bm
 
  Target Server Type    : MySQL
- Target Server Version : 80031 (8.0.31)
+ Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 31/08/2025 01:25:40
+ Date: 03/09/2025 15:23:15
 */
 
 SET NAMES utf8mb4;
@@ -22,12 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `base_template`;
 CREATE TABLE `base_template`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '创建表基础模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -39,19 +39,19 @@ CREATE TABLE `base_template`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_order`;
 CREATE TABLE `bus_order`  (
-                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                              `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
-                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                              `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
-                              `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
-                              `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
-                              `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
-                              `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
-                              `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
-                              `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
-                              PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
+  `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
+  `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
+  `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
+  `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
+  `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商城订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -103,24 +103,24 @@ INSERT INTO `bus_order` VALUES (55, '2024-07-31 00:45:52', '2024-07-31', '1', '1
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_truck`;
 CREATE TABLE `bus_truck`  (
-                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                              `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                              `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
-                              `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
-                              `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
-                              `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
-                              `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
-                              `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
-                              `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
-                              `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
-                              `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
-                              `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
-                              `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
-                              `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
-                              PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
+  `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
+  `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
+  `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
+  `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
+  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
+  `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
+  `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
+  `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
+  `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
+  `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车辆表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -132,20 +132,20 @@ CREATE TABLE `bus_truck`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dev_datasource`;
 CREATE TABLE `dev_datasource`  (
-                                   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                   `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                   `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                   `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                   `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
-                                   `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
-                                   `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
-                                   `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
-                                   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
-                                   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
-                                   `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1959157384936947713 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '创建表基础模板' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
+  `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
+  `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
+  `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1959157384936947713 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dev_datasource
@@ -159,18 +159,18 @@ INSERT INTO `dev_datasource` VALUES (1959157384936947712, '2025-08-23 15:34:55',
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-                                  `sort` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序值',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `sort` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序值',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961491185943969793 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -202,18 +202,18 @@ INSERT INTO `sys_dict_data` VALUES (1961491185943969792, '2025-08-30 02:08:36', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-                                  `sort` int NULL DEFAULT NULL COMMENT '排序值',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `sort` int NULL DEFAULT NULL COMMENT '排序值',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961800796983001089 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -248,62 +248,118 @@ INSERT INTO `sys_dict_type` VALUES (1961800796983001088, '2025-08-30 22:38:53', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications`;
 CREATE TABLE `sys_notifications`  (
-                                      `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                      `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                      `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                      `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                      `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                      `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
-                                      `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
-                                      `state` tinyint NULL DEFAULT NULL COMMENT '状态',
-                                      `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
-                                      `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
-                                      PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1961487100243083265 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+  `state` tinyint NULL DEFAULT NULL COMMENT '状态',
+  `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
+  `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1963121422649786369 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications
 -- ----------------------------
-INSERT INTO `sys_notifications` VALUES (1961476084037844992, '2025-08-30 01:08:36', '2025-08-30 01:08:36', '1', '1', '但是发射点', '34', 1, NULL, NULL);
+INSERT INTO `sys_notifications` VALUES (1961476084037844992, '2025-08-30 01:08:36', '2025-09-03 11:59:22', '1', '1', '但是发射点', '34', 2, '2025-09-03 11:59:19', NULL);
+INSERT INTO `sys_notifications` VALUES (1963121422649786368, '2025-09-03 14:06:35', '2025-09-03 14:17:48', '1', '1', '453454545', '<p>4353453453453453</p>', 2, '2025-09-03 14:17:29', NULL);
+
+-- ----------------------------
+-- Table structure for sys_notifications_record
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notifications_record`;
+CREATE TABLE `sys_notifications_record`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
+  `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+  `read_state` tinyint NULL DEFAULT NULL COMMENT '读取状态',
+  `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `id_index`(`notifications_id` ASC, `user_id` ASC, `created_time` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1963124086565502977 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知通知记录表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notifications_record
+-- ----------------------------
+INSERT INTO `sys_notifications_record` VALUES (1963124083033899008, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 1, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083155533824, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 6, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083252002816, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 7, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083335888896, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 8, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083428163584, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 9, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083524632576, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 10, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083616907264, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 11, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083700793344, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 12, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083793068032, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 13, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083881148416, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 14, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124083960840192, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 15, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084057309184, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 16, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084162166784, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 17, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084279607296, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 1951311556855726080, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084418019328, '2025-09-03 14:17:09', '2025-09-03 14:17:09', 1963121422649786368, 18, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084598374400, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 19, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084879392768, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 20, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124084975861760, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 21, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085101690880, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 22, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085198159872, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 23, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085315600384, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 24, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085407875072, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311702918168576, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085495955456, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311738074824704, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085584035840, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311704486838272, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085676310528, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951299613977739264, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085751808000, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1950580430986018816, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085865054208, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311553856798720, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124085978300416, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311558462144512, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086066380800, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951312144884563968, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086158655488, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951315654149668864, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086263513088, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951301892227203072, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086351593472, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311700531609600, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086439673856, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951300416163545088, 0, NULL);
+INSERT INTO `sys_notifications_record` VALUES (1963124086565502976, '2025-09-03 14:17:10', '2025-09-03 14:17:10', 1963121422649786368, 1951311705631883264, 0, NULL);
 
 -- ----------------------------
 -- Table structure for sys_notifications_target
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_target`;
 CREATE TABLE `sys_notifications_target`  (
-                                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                             `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
-                                             `notifications_target` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
-                                             `notifications_target_id` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标Id json数组',
-                                             PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1961487100276637697 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告通知对象表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
+  `target_type` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
+  `target_id` bigint NULL DEFAULT NULL COMMENT '通知目标Id',
+  `target_name` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1963121422729478145 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告通知对象表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_target
 -- ----------------------------
-INSERT INTO `sys_notifications_target` VALUES (1961476084083982336, '2025-08-30 01:08:36', '2025-08-30 01:08:36', NULL, 4, '1');
-INSERT INTO `sys_notifications_target` VALUES (1961487100276637696, '2025-08-30 01:52:22', '2025-08-30 01:52:22', NULL, 4, '1');
+INSERT INTO `sys_notifications_target` VALUES (1963121422725283840, '2025-09-03 14:06:35', '2025-09-03 14:06:35', 1963121422649786368, 3, 1961811583873056768, '贵阳研发部分公司');
+INSERT INTO `sys_notifications_target` VALUES (1963121422729478144, '2025-09-03 14:06:35', '2025-09-03 14:06:35', 1963121422649786368, 1, 15, '王二');
 
 -- ----------------------------
 -- Table structure for sys_organization
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_organization`;
 CREATE TABLE `sys_organization`  (
-                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                     `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                     `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
-                                     `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
-                                     `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
-                                     `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
-                                     `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                     `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-                                     `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
-                                     PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
+  `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
+  `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961819924967981057 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统组织表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -343,25 +399,25 @@ INSERT INTO `sys_organization` VALUES (1961819924967981056, '2025-08-30 23:54:54
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_resources`;
 CREATE TABLE `sys_resources`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
-                                  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
-                                  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
-                                  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
-                                  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-                                  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-                                  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
-                                  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
-                                  `sort` int NULL DEFAULT NULL COMMENT '排序',
-                                  PRIMARY KEY (`id`, `code`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
+  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
+  `sort` int NULL DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`, `code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961666674675417089 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -420,17 +476,17 @@ INSERT INTO `sys_resources` VALUES (1961666674675417088, 2, '2025-08-30 13:45:56
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                             `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
-                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                             `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
-                             `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                             `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
-                             PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -448,14 +504,14 @@ INSERT INTO `sys_role` VALUES (9, '2024-07-23 01:42:20', '2024-07-25 23:07:43', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_resources`;
 CREATE TABLE `sys_role_resources`  (
-                                       `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                       `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                       `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                       `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                       `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                       `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-                                       `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
-                                       PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+  `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 414 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -500,23 +556,23 @@ INSERT INTO `sys_role_resources` VALUES (410, '2024-07-31 00:48:33', '2024-07-31
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-                             `id` bigint NOT NULL COMMENT '自增主键',
-                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                             `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
-                             `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
-                             `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `gender` tinyint NULL DEFAULT NULL,
-                             `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `last_login_time` datetime NULL DEFAULT NULL,
-                             `enable` tinyint NULL DEFAULT NULL,
-                             PRIMARY KEY (`id`, `account`) USING BTREE
+  `id` bigint NOT NULL COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gender` tinyint NULL DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `last_login_time` datetime NULL DEFAULT NULL,
+  `enable` tinyint NULL DEFAULT NULL,
+  PRIMARY KEY (`id`, `account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -562,14 +618,14 @@ INSERT INTO `sys_user` VALUES (1951315654149668864, '2025-08-02 00:14:40', '2025
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-                                  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -602,13 +658,13 @@ INSERT INTO `sys_user_role` VALUES (45, '2025-06-09 16:25:36', '2025-06-09 16:25
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_setting`;
 CREATE TABLE `sys_user_setting`  (
-                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                     `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
-                                     `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
-                                     PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
+  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户个人设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
