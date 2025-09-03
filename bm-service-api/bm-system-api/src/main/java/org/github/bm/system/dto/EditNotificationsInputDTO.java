@@ -23,5 +23,5 @@ public class EditNotificationsInputDTO extends BaseIdVO {
     private String content;
 
     @ValidateNotNullAndEmpty(message = "通知目标不能为空")
-    private List<NotificationsTargetInputDTO> notificationsTargetDTOList;
+    private List<NotificationsTargetInputDTO> notificationsTargets;
 }

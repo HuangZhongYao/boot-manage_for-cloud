@@ -99,7 +99,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 插入
         this.baseMapper.insert(notificationsEntity);
         // 通知目标列表
-        List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargetDTOList();
+        List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargets();
         // 判断是否为空
         if (notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
@@ -110,6 +110,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .map(item ->
                         NotificationsTargetEntity.builder()
                                 .notificationsId(notificationsEntity.getId())
+                                .targetType(item.getType())
                                 .targetId(item.getId())
                                 .targetName(item.getName())
                                 .build()
@@ -130,7 +131,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 插入
         this.baseMapper.updateById(notificationsEntity);
         // 通知目标列表
-        List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargetDTOList();
+        List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargets();
         // 判断是否为空
         if (notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
@@ -141,6 +142,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .map(item ->
                         NotificationsTargetEntity.builder()
                                 .notificationsId(notificationsEntity.getId())
+                                .targetType(item.getType())
                                 .targetId(item.getId())
                                 .targetName(item.getName())
                                 .build()
