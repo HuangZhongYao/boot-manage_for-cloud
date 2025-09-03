@@ -10,7 +10,7 @@
                a.updated_time,
                a.user_id,
                a.notifications_id,
-               a.`read`,
+               a.`read_state`,
                a.read_time,
                b.title,
                b.content,
@@ -23,5 +23,6 @@
                  LEFT JOIN
              sys_user c ON a.user_id = c.id
         WHERE a.user_id = #{userId}
+        ORDER BY a.created_time DESC
     </select>
 </mapper>

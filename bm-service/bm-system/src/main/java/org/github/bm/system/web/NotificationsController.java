@@ -40,14 +40,14 @@ public class NotificationsController extends BaseController {
     }
 
     @Operation(summary = "已读通知记录")
-    @GetMapping(value = "/readNotificationRecords", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResponse<Boolean> readNotificationRecords(ReadNotificationRecordsInputDTO inputDTO) {
+    @PatchMapping(value = "/readNotificationRecords", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Boolean> readNotificationRecords(@RequestBody @Validated ReadNotificationRecordsInputDTO inputDTO) {
         return ApiResponse.ok(notificationsRecordService.readNotificationRecords(inputDTO));
     }
 
     @Operation(summary = "删除通知记录")
-    @PostMapping(value = "/delNotificationRecord", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ApiResponse<Boolean> delNotificationRecord(DelNotificationRecordsInputDTO inputDTO) {
+    @DeleteMapping(value = "/delNotificationRecord", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Boolean> delNotificationRecord(@RequestBody @Validated DelNotificationRecordsInputDTO inputDTO) {
         return ApiResponse.ok(notificationsRecordService.delNotificationRecord(inputDTO));
     }
 
