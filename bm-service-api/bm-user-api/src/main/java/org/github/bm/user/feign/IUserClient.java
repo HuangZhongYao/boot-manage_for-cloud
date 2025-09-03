@@ -22,6 +22,7 @@ public interface IUserClient extends BaseFeign {
     String GET_USER_BY_ID = API_PREFIX + "/getUserByID";
     String GET_USER_BY_ID_List = API_PREFIX + "/getUserByIDList";
     String GET_USER_BY_ACCOUNT = API_PREFIX + "/getUserByAccount";
+    String GET_ALL_USER_ID_LIST = API_PREFIX + "/getAllUserIdList";
 
     /**
      * 根据ID查询用户
@@ -46,4 +47,11 @@ public interface IUserClient extends BaseFeign {
      */
     @GetMapping(GET_USER_BY_ACCOUNT)
     UserEntity getUserByAccount(@RequestParam("account") String account);
+
+    /**
+     * 获取所有用户ID列表
+     * @return 用户ID列表
+     */
+    @GetMapping(GET_ALL_USER_ID_LIST)
+    List<Long> getAllUserIdList();
 }

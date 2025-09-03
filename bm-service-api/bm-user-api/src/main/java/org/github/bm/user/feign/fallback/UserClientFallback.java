@@ -45,4 +45,14 @@ public class UserClientFallback implements IUserClient {
     public UserEntity getUserByAccount(String account) {
         return null;
     }
+
+    /**
+     * 获取所有用户ID列表
+     *
+     * @return 用户ID列表
+     */
+    @Override
+    public List<Long> getAllUserIdList() {
+        return List.of();
+    }
 }

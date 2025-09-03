@@ -1,5 +1,6 @@
 package org.github.bm.user.feign;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
@@ -38,5 +39,11 @@ public class UserClient implements IUserClient {
     @GetMapping(GET_USER_BY_ACCOUNT)
     public UserEntity getUserByAccount(@RequestParam("account") String account) {
         return userRepository.selectOne(Wrappers.<UserEntity>lambdaQuery().eq(UserEntity::getAccount, account).last(" limit 1 "));
+    }
+
+    @Override
+    @GetMapping(GET_ALL_USER_ID_LIST)
+    public List<Long> getAllUserIdList() {
+        return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().select(UserEntity::getId)).stream().map(UserEntity::getId).toList();
     }
 }
