@@ -103,6 +103,8 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public List<RoleUserModel> queryRoleUserList(Long id) {
+        if (null == id)
+            return new ArrayList<>();
         // 查询角色下的用户 用户id
         List<Long> userIds = userRoleRepository.selectList(Wrappers.<UserRoleEntity>lambdaQuery()
                         .select(UserRoleEntity::getUserId)
@@ -118,6 +120,32 @@ public class RoleServiceImpl implements IRoleService {
         List<UserEntity> userEntityList = userClient.getUserByIDList(userIds);
         return userConverter.toRoleUserModels(userEntityList);
 
+    }
+
+    /**
+     * 批量查询角色用户列表
+     *
+     * @param ids 角色ID列表
+     * @return 角色关联的用户列表
+     */
+    @Override
+    public List<RoleUserModel> queryRoleUserList(List<Long> ids) {
+        if (null == ids || ids.isEmpty())
+            return new ArrayList<>();
+        // 查询角色下的用户 用户id
+        List<Long> userIds = userRoleRepository.selectList(Wrappers.<UserRoleEntity>lambdaQuery()
+                        .select(UserRoleEntity::getUserId)
+                        .in(UserRoleEntity::getRoleId, ids))
+                .stream()
+                .map(UserRoleEntity::getUserId)
+                .toList();
+
+        if (userIds.isEmpty()) {
+            return new ArrayList<>();
+        }
+        // 查询用户信息
+        List<UserEntity> userEntityList = userClient.getUserByIDList(userIds);
+        return userConverter.toRoleUserModels(userEntityList);
     }
 
     @Transactional(rollbackFor = Exception.class)

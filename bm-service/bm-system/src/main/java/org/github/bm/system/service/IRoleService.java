@@ -64,6 +64,14 @@ public interface IRoleService {
     List<RoleUserModel> queryRoleUserList(Long id);
 
     /**
+     * 批量查询角色用户列表
+     *
+     * @param ids 角色ID列表
+     * @return 角色关联的用户列表
+     */
+    List<RoleUserModel> queryRoleUserList(List<Long> ids);
+
+    /**
      * 给角色设置用户
      *
      * @param inputDTO SetRoleUserInputDTO
