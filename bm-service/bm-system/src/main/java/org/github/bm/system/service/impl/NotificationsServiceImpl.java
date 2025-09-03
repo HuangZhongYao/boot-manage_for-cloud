@@ -149,26 +149,19 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
     @Override
     @Transactional
     public Boolean publish(BaseLongIdInputDTO inputDTO) {
-
+        // 查询库中的数据
         NotificationsEntity notificationsEntity = this.getBaseMapper().selectById(inputDTO.getId());
-
         // 验证是否id是否有效
         if (null == notificationsEntity) {
             throw new UserFriendlyException("该通知不存在");
         }
-        // 验证是否已发布
-        if (NotificationsStateEnum.PUBLISHED.equals(notificationsEntity.getState())) {
-            throw new UserFriendlyException("该通知已发布");
+        // 验证是否是草稿状态
+        if (!NotificationsStateEnum.DRAFT.equals(notificationsEntity.getState())) {
+            throw new UserFriendlyException("该通知不是草稿状态不能发布");
         }
-
-        NotificationsEntity updateEntity = new NotificationsEntity();
-        updateEntity.setId(inputDTO.getId());
-        updateEntity.setState(NotificationsStateEnum.PUBLISHED);
-        updateEntity.setPublishTime(LocalDateTime.now());
 
         // 通知用户列表
         Set<Long> targetUserIdSet = new HashSet<>(100);
-
         // 获取通知目标列表
         List<NotificationsTargetEntity> notificationsTargetEntityList = this.notificationsTargetService.list(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, inputDTO.getId()));
         // 通知目标根据类型分组
@@ -218,7 +211,12 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
                 .toList();
         // 批量插入通知记录数据
         notificationsRecordService.saveBatch(notificationsRecordEntityList);
-
+        // 构建更新实体
+        NotificationsEntity updateEntity = new NotificationsEntity();
+        updateEntity.setId(inputDTO.getId());
+        updateEntity.setState(NotificationsStateEnum.PUBLISHED);
+        updateEntity.setPublishTime(LocalDateTime.now());
+        // 更新状态
         return this.updateById(updateEntity);
     }
 }
