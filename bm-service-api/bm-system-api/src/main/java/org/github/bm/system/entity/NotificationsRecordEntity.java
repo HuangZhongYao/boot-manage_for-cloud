@@ -34,7 +34,7 @@ public class NotificationsRecordEntity extends AbstractIdAndTimeEntity {
     /**
      * 读取状态
      */
-    private Boolean read;
+    private Boolean readState;
 
     /**
      * 阅读时间

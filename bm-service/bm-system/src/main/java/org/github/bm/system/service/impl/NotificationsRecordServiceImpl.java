@@ -58,7 +58,7 @@ public class NotificationsRecordServiceImpl extends ServiceImpl<NotificationsRec
 
             // 构建查询条件：当前用户的所有未读通知
             LambdaQueryWrapper<NotificationsRecordEntity> queryWrapper = Wrappers.<NotificationsRecordEntity>lambdaQuery()
-                    .eq(NotificationsRecordEntity::getRead, false)
+                    .eq(NotificationsRecordEntity::getReadState, false)
                     .eq(NotificationsRecordEntity::getUserId, userId);
 
             // 操作的记录Id集合
@@ -83,7 +83,7 @@ public class NotificationsRecordServiceImpl extends ServiceImpl<NotificationsRec
 
             // 构建更新实体
             NotificationsRecordEntity updateRecord = new NotificationsRecordEntity();
-            updateRecord.setRead(true);
+            updateRecord.setReadState(true);
 
             // 执行更新操作
             return this.update(updateRecord, queryWrapper);

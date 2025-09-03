@@ -31,12 +31,12 @@ public class NotificationsTargetEntity extends AbstractIdAndTimeEntity {
     private NotificationsTargetEnum notificationsTarget;
 
     /**
-     * 通知目标Id json数组
+     * 通知目标Id
      */
-    private String notificationsTargetId;
+    private Long notificationsTargetId;
 
     /**
-     * 通知目标名称 json数组
+     * 通知目标名称
      */
     private String notificationsTargetName;
 }
