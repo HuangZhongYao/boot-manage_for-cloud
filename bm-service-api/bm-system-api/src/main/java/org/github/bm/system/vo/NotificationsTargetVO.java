@@ -6,8 +6,6 @@ import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.enums.NotificationsTargetEnum;
 
-import java.util.List;
-
 /**
  * Time 2025-08-28 16:51
  * CreatedBy IntelliJ IDEA By HuangZhongYao
@@ -28,34 +26,20 @@ public class NotificationsTargetVO extends BaseIdAndTimeIdVO {
     private Long notificationsId;
 
     /**
+     * 通知目标id
+     */
+    @Schema(description = "通知目标id")
+    private Long id;
+    /**
      * 通知目标类型
      */
     @Schema(description = "通知目标类型")
-    private NotificationsTargetEnum notificationsTarget;
+    private NotificationsTargetEnum type;
 
     /**
-     * 通知目标Id json数组
+     * 通知目标名称
      */
-    @Schema(description = "通知目标Id json数组")
-    private String notificationsTargetId;
+    @Schema(description = "通知目标名称")
+    private String name;
 
-    /**
-     * 通知目标
-     */
-    @Schema(description = "通知目标列表")
-    private List<NotificationsTargetLabelVO> notificationsTargetLabelList;
-
-    @Getter
-    @Setter
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class NotificationsTargetLabelVO{
-
-        @Schema(description = "目标名称")
-        private String name;
-
-        @Schema(description = "目标Id")
-        private String id;
-    }
 }
