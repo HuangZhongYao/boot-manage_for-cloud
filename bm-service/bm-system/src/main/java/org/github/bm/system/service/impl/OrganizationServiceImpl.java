@@ -24,11 +24,14 @@ import org.github.bm.system.service.IOrganizationService;
 import org.github.bm.system.vo.OrganizationTreeVO;
 import org.github.bm.system.vo.OrganizationVO;
 import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.feign.IUserClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrganizationServiceImpl implements IOrganizationService {
+    @Resource
+    private IUserClient userClient;
     @Resource
     private OrganizationRepository organizationRepository;
     @Resource
@@ -115,24 +118,113 @@ public class OrganizationServiceImpl implements IOrganizationService {
 
     @Override
     public List<OrganizationEntity> queryOrganizationAndSubOrganization(Long id) {
-        // 1. 查询所有组织
+        // 查询所有组织
         List<OrganizationEntity> allOrganizationEntity = organizationRepository.selectList(null);
+        // 查找当前组织及子组织
+        return getOrganizationAndSubOrganization(id, allOrganizationEntity);
+    }
 
+    /**
+     * 根据组织id列表查询组织
+     *
+     * @param ids 组织id列表
+     * @return 组织列表
+     */
+    @Override
+    public List<OrganizationEntity> queryOrganizationByIds(List<Long> ids) {
+        return this.organizationRepository.selectList(Wrappers.<OrganizationEntity>lambdaQuery().in(OrganizationEntity::getId, ids));
+    }
+
+    /**
+     * 根据组织id列表查询组织用户
+     *
+     * @param ids 组织id列表
+     * @return 组织用户列表
+     */
+    @Override
+    public List<UserEntity> queryOrganizationUserEntityListByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+
+        // 只查询一次所有组织数据
+        List<OrganizationEntity> allOrganizationEntity = organizationRepository.selectList(null);
         if (allOrganizationEntity == null || allOrganizationEntity.isEmpty()) {
             return List.of();
         }
 
-        // 2. 构建 id -> OrganizationEntity 映射，便于通过 parentId 查找子组织
+        // 获取所有指定组织及其子组织
+        Set<Long> allOrgIds = new HashSet<>();
+        for (Long id : ids) {
+            List<OrganizationEntity> orgAndSubOrgs = getOrganizationAndSubOrganization(id, allOrganizationEntity);
+            for (OrganizationEntity org : orgAndSubOrgs) {
+                allOrgIds.add(org.getId());
+            }
+        }
+
+        if (allOrgIds.isEmpty()) {
+            return List.of();
+        }
+
+        return this.userClient.getOrganizationUserListByOrganizationIdList(new ArrayList<>(allOrgIds));
+    }
+
+    /**
+     * 根据组织id列表查询组织用户id列表
+     *
+     * @param ids 组织id列表
+     * * @return 组织用户id列表
+     */
+    @Override
+    public List<Long> queryOrganizationUserIdListByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+
+        // 只查询一次所有组织数据
+        List<OrganizationEntity> allOrganizationEntity = organizationRepository.selectList(null);
+        if (allOrganizationEntity == null || allOrganizationEntity.isEmpty()) {
+            return List.of();
+        }
+
+        // 获取所有指定组织及其子组织
+        Set<Long> allOrgIds = new HashSet<>();
+        for (Long id : ids) {
+            List<OrganizationEntity> orgAndSubOrgs = getOrganizationAndSubOrganization(id, allOrganizationEntity);
+            for (OrganizationEntity org : orgAndSubOrgs) {
+                allOrgIds.add(org.getId());
+            }
+        }
+
+        if (allOrgIds.isEmpty()) {
+            return List.of();
+        }
+        return this.userClient.getOrganizationUserIdListByOrganizationIdList(new ArrayList<>(allOrgIds));
+    }
+
+    /**
+     * 根据指定ID查询该组织机构及其所有子组织机构（复用版本）
+     *
+     * @param id 组织机构ID
+     * @param allOrganizationEntity 所有组织实体列表
+     * @return 组织机构实体列表，包含指定组织机构及其所有子组织机构
+     */
+    private List<OrganizationEntity> getOrganizationAndSubOrganization(Long id, List<OrganizationEntity> allOrganizationEntity) {
+        if (allOrganizationEntity == null || allOrganizationEntity.isEmpty()) {
+            return List.of();
+        }
+
+        // 构建 id -> OrganizationEntity 映射，便于通过 parentId 查找子组织
         Map<Long, OrganizationEntity> orgMap = allOrganizationEntity.stream()
                 .collect(Collectors.toMap(OrganizationEntity::getId, org -> org));
 
-        // 3. 找到目标根组织
+        // 找到目标根组织
         OrganizationEntity rootOrg = orgMap.get(id);
         if (rootOrg == null) {
             return List.of();
         }
 
-        // 4. 准备 BFS
+        // 准备 BFS
         List<OrganizationEntity> result = new ArrayList<>();
         Queue<OrganizationEntity> queue = new LinkedList<>();
 
@@ -170,38 +262,5 @@ public class OrganizationServiceImpl implements IOrganizationService {
         }
 
         return result;
-    }
-
-    /**
-     * 根据组织id列表查询组织
-     *
-     * @param ids 组织id列表
-     * @return 组织列表
-     */
-    @Override
-    public List<OrganizationEntity> queryOrganizationByIds(List<Long> ids) {
-        return this.organizationRepository.selectList(Wrappers.<OrganizationEntity>lambdaQuery().in(OrganizationEntity::getId, ids));
-    }
-
-    /**
-     * 根据组织id列表查询组织用户
-     *
-     * @param ids 组织id列表
-     * @return 组织用户列表
-     */
-    @Override
-    public List<UserEntity> queryOrganizationUserEntityListByIds(List<Long> ids) {
-        return List.of();
-    }
-
-    /**
-     * 根据组织id列表查询组织用户id列表
-     *
-     * @param ids 组织id列表
-     * @return 组织用户id列表
-     */
-    @Override
-    public List<Long> queryOrganizationUserIdListByIds(List<Long> ids) {
-        return List.of();
     }
 }

@@ -46,4 +46,19 @@ public class UserClient implements IUserClient {
     public List<Long> getAllUserIdList() {
         return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().select(UserEntity::getId)).stream().map(UserEntity::getId).toList();
     }
+
+    @Override
+    @GetMapping(GET_ORGANIZATION_USER_LIST_BY_ORGANIZATION_ID_LIST)
+    public List<UserEntity> getOrganizationUserListByOrganizationIdList(List<Long> ids) {
+        return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().in(UserEntity::getOrganizationId, ids));
+    }
+
+    @Override
+    @GetMapping(GET_ORGANIZATION_USER_ID_LIST_BY_ORGANIZATION_ID_LIST)
+    public List<Long> getOrganizationUserIdListByOrganizationIdList(List<Long> ids) {
+        return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().select(UserEntity::getId).in(UserEntity::getOrganizationId, ids))
+                .stream()
+                .map(UserEntity::getId)
+                .toList();
+    }
 }

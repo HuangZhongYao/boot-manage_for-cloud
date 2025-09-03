@@ -55,4 +55,26 @@ public class UserClientFallback implements IUserClient {
     public List<Long> getAllUserIdList() {
         return List.of();
     }
+
+    /**
+     * 根据组织ID列表查询组织用户
+     *
+     * @param ids 组织ID列表
+     * @return 组织用户列表
+     */
+    @Override
+    public List<UserEntity> getOrganizationUserListByOrganizationIdList(List<Long> ids) {
+        return List.of();
+    }
+
+    /**
+     * 根据组织ID列表查询组织用户ID列表
+     *
+     * @param ids 组织ID列表
+     * @return 组织用户ID列表
+     */
+    @Override
+    public List<Long> getOrganizationUserIdListByOrganizationIdList(List<Long> ids) {
+        return List.of();
+    }
 }
