@@ -34,4 +34,9 @@ public class NotificationsTargetEntity extends AbstractIdAndTimeEntity {
      * 通知目标Id json数组
      */
     private String notificationsTargetId;
+
+    /**
+     * 通知目标名称 json数组
+     */
+    private String notificationsTargetName;
 }

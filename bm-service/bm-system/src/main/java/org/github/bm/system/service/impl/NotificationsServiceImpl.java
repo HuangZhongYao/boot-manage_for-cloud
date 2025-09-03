@@ -18,6 +18,7 @@ import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
 import org.github.bm.system.enums.NotificationsStateEnum;
+import org.github.bm.system.enums.NotificationsTargetEnum;
 import org.github.bm.system.repository.NotificationsRepository;
 import org.github.bm.system.service.INotificationsService;
 import org.github.bm.system.service.INotificationsTargetService;
@@ -27,7 +28,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Time 2025-08-28 17:12
@@ -74,17 +78,21 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         if (notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
         }
-        // 转换为通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList =
-                notificationsTargetDTOList
-                        .stream()
-                        .map(notificationsTargetDTO -> NotificationsTargetEntity
-                                .builder()
-                                .notificationsId(notificationsEntity.getId())
-                                .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
-                                .notificationsTargetId(JSON.toJSONString(notificationsTargetDTO.getNotificationsTargetIds()))
-                                .build())
-                        .toList();
+        // 通知目标实体对象列表
+        List<NotificationsTargetEntity> notificationsTargetEntityList = new ArrayList<>(5);
+        // 通知目标跟据类型分组
+        Map<NotificationsTargetEnum, List<NotificationsTargetInputDTO>> notificationsTargetTypeMap = notificationsTargetDTOList.stream().collect(Collectors.groupingBy(NotificationsTargetInputDTO::getType));
+        notificationsTargetTypeMap.forEach((key,value)-> {
+            NotificationsTargetEntity notificationsTargetEntity = NotificationsTargetEntity
+                    .builder()
+                    .notificationsId(notificationsEntity.getId())
+                    .notificationsTarget(key)
+                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item->item.getId().toString()).toList()))
+                    .notificationsTargetName(JSON.toJSONString(value.stream().map(NotificationsTargetInputDTO::getName).toList()))
+                    .build();
+            notificationsTargetEntityList.add(notificationsTargetEntity);
+        });
+
         // 批量保存通知目标实体列表
         notificationsTargetService.saveBatch(notificationsTargetEntityList);
 
@@ -104,17 +112,20 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         if (notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
         }
-        // 转换为通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList =
-                notificationsTargetDTOList
-                        .stream()
-                        .map(notificationsTargetDTO -> NotificationsTargetEntity
-                                .builder()
-                                .notificationsId(notificationsEntity.getId())
-                                .notificationsTarget(notificationsTargetDTO.getNotificationsTarget())
-                                .notificationsTargetId(JSON.toJSONString(notificationsTargetDTO.getNotificationsTargetIds()))
-                                .build())
-                        .toList();
+        // 通知目标实体对象列表
+        List<NotificationsTargetEntity> notificationsTargetEntityList = new ArrayList<>(5);
+        // 通知目标跟据类型分组
+        Map<NotificationsTargetEnum, List<NotificationsTargetInputDTO>> notificationsTargetTypeMap = notificationsTargetDTOList.stream().collect(Collectors.groupingBy(NotificationsTargetInputDTO::getType));
+        notificationsTargetTypeMap.forEach((key,value)-> {
+            NotificationsTargetEntity notificationsTargetEntity = NotificationsTargetEntity
+                    .builder()
+                    .notificationsId(notificationsEntity.getId())
+                    .notificationsTarget(key)
+                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item->item.getId().toString()).toList()))
+                    .notificationsTargetName(JSON.toJSONString(value.stream().map(NotificationsTargetInputDTO::getName).toList()))
+                    .build();
+            notificationsTargetEntityList.add(notificationsTargetEntity);
+        });
         // 保存之前先清除
         notificationsTargetService.getBaseMapper().delete(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, notificationsEntity.getId()));
         // 批量保存通知目标实体列表

@@ -1,5 +1,6 @@
 package org.github.bm.system.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.dto.BaseDTO;
 import org.github.bm.common.validate.ValidateNotNullAndEmpty;
@@ -16,14 +17,22 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = false)
 public class NotificationsTargetInputDTO extends BaseDTO {
     /**
+     * 通知目标id
+     */
+    @ValidateNotNullAndEmpty(message = "通知目标id不能为空")
+    @Schema(description = "通知目标id")
+    private Long id;
+    /**
      * 通知目标类型
      */
     @ValidateNotNullAndEmpty(message = "通知目标类型不能为空")
-    private NotificationsTargetEnum notificationsTarget;
+    @Schema(description = "通知目标类型")
+    private NotificationsTargetEnum type;
 
     /**
-     * 通知目标Id json数组
+     * 通知目标名称
      */
-    @ValidateNotNullAndEmpty(message = "通知目标Id不能为空")
-    private Set<String> notificationsTargetIds;
+    @ValidateNotNullAndEmpty(message = "通知目标名称不能为空")
+    @Schema(description = "通知目标名称")
+    private String name;
 }
