@@ -23,6 +23,7 @@ import org.github.bm.system.repository.OrganizationRepository;
 import org.github.bm.system.service.IOrganizationService;
 import org.github.bm.system.vo.OrganizationTreeVO;
 import org.github.bm.system.vo.OrganizationVO;
+import org.github.bm.user.entity.UserEntity;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -180,5 +181,27 @@ public class OrganizationServiceImpl implements IOrganizationService {
     @Override
     public List<OrganizationEntity> queryOrganizationByIds(List<Long> ids) {
         return this.organizationRepository.selectList(Wrappers.<OrganizationEntity>lambdaQuery().in(OrganizationEntity::getId, ids));
+    }
+
+    /**
+     * 根据组织id列表查询组织用户
+     *
+     * @param ids 组织id列表
+     * @return 组织用户列表
+     */
+    @Override
+    public List<UserEntity> queryOrganizationUserEntityListByIds(List<Long> ids) {
+        return List.of();
+    }
+
+    /**
+     * 根据组织id列表查询组织用户id列表
+     *
+     * @param ids 组织id列表
+     * @return 组织用户id列表
+     */
+    @Override
+    public List<Long> queryOrganizationUserIdListByIds(List<Long> ids) {
+        return List.of();
     }
 }

@@ -9,6 +9,7 @@ import org.github.bm.system.dto.OrganizationPageQueryInputDTO;
 import org.github.bm.system.entity.OrganizationEntity;
 import org.github.bm.system.vo.OrganizationTreeVO;
 import org.github.bm.system.vo.OrganizationVO;
+import org.github.bm.user.entity.UserEntity;
 
 /**
  * 组织机构服务接口
@@ -75,5 +76,21 @@ public interface IOrganizationService {
      * @return 组织列表
      */
     List<OrganizationEntity> queryOrganizationByIds(List<Long> ids);
+
+    /**
+     * 根据组织id列表查询组织用户
+     *
+     * @param ids 组织id列表
+     * @return 组织用户列表
+     */
+    List<UserEntity> queryOrganizationUserEntityListByIds(List<Long> ids);
+
+    /**
+     * 根据组织id列表查询组织用户id列表
+     *
+     * @param ids 组织id列表
+     * @return 组织用户id列表
+     */
+    List<Long> queryOrganizationUserIdListByIds(List<Long> ids);
 }
 

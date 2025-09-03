@@ -16,21 +16,21 @@ import org.github.bm.system.dto.EditNotificationsInputDTO;
 import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
 import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
+import org.github.bm.system.entity.NotificationsRecordEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
 import org.github.bm.system.enums.NotificationsStateEnum;
 import org.github.bm.system.enums.NotificationsTargetEnum;
 import org.github.bm.system.repository.NotificationsRepository;
-import org.github.bm.system.service.INotificationsService;
-import org.github.bm.system.service.INotificationsTargetService;
+import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
+import org.github.bm.system.vo.RoleUserModel;
+import org.github.bm.user.feign.IUserClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,9 +41,17 @@ import java.util.stream.Collectors;
 public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepository, NotificationsEntity> implements INotificationsService {
 
     @Resource
+    private IUserClient userClient;
+    @Resource
+    private IOrganizationService organizationService;
+    @Resource
+    private IRoleService roleService;
+    @Resource
     private INotificationsTargetService notificationsTargetService;
     @Resource
     private NotificationsConverter notificationsConverter;
+    @Resource
+    private INotificationsRecordService notificationsRecordService;
 
     @Override
     public Page<NotificationsVO> pageQueryList(NotificationsPageQueryInputDTO inputDTO) {
@@ -82,12 +90,12 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         List<NotificationsTargetEntity> notificationsTargetEntityList = new ArrayList<>(5);
         // 通知目标跟据类型分组
         Map<NotificationsTargetEnum, List<NotificationsTargetInputDTO>> notificationsTargetTypeMap = notificationsTargetDTOList.stream().collect(Collectors.groupingBy(NotificationsTargetInputDTO::getType));
-        notificationsTargetTypeMap.forEach((key,value)-> {
+        notificationsTargetTypeMap.forEach((key, value) -> {
             NotificationsTargetEntity notificationsTargetEntity = NotificationsTargetEntity
                     .builder()
                     .notificationsId(notificationsEntity.getId())
                     .notificationsTarget(key)
-                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item->item.getId().toString()).toList()))
+                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item -> item.getId().toString()).toList()))
                     .notificationsTargetName(JSON.toJSONString(value.stream().map(NotificationsTargetInputDTO::getName).toList()))
                     .build();
             notificationsTargetEntityList.add(notificationsTargetEntity);
@@ -116,12 +124,12 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         List<NotificationsTargetEntity> notificationsTargetEntityList = new ArrayList<>(5);
         // 通知目标跟据类型分组
         Map<NotificationsTargetEnum, List<NotificationsTargetInputDTO>> notificationsTargetTypeMap = notificationsTargetDTOList.stream().collect(Collectors.groupingBy(NotificationsTargetInputDTO::getType));
-        notificationsTargetTypeMap.forEach((key,value)-> {
+        notificationsTargetTypeMap.forEach((key, value) -> {
             NotificationsTargetEntity notificationsTargetEntity = NotificationsTargetEntity
                     .builder()
                     .notificationsId(notificationsEntity.getId())
                     .notificationsTarget(key)
-                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item->item.getId().toString()).toList()))
+                    .notificationsTargetId(JSON.toJSONString(value.stream().map(item -> item.getId().toString()).toList()))
                     .notificationsTargetName(JSON.toJSONString(value.stream().map(NotificationsTargetInputDTO::getName).toList()))
                     .build();
             notificationsTargetEntityList.add(notificationsTargetEntity);
@@ -139,11 +147,78 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
     }
 
     @Override
+    @Transactional
     public Boolean publish(BaseLongIdInputDTO inputDTO) {
+
+        NotificationsEntity notificationsEntity = this.getBaseMapper().selectById(inputDTO.getId());
+
+        // 验证是否id是否有效
+        if (null == notificationsEntity) {
+            throw new UserFriendlyException("该通知不存在");
+        }
+        // 验证是否已发布
+        if (NotificationsStateEnum.PUBLISHED.equals(notificationsEntity.getState())) {
+            throw new UserFriendlyException("该通知已发布");
+        }
+
         NotificationsEntity updateEntity = new NotificationsEntity();
         updateEntity.setId(inputDTO.getId());
         updateEntity.setState(NotificationsStateEnum.PUBLISHED);
         updateEntity.setPublishTime(LocalDateTime.now());
+
+        // 通知用户列表
+        Set<Long> targetUserIdSet = new HashSet<>(100);
+
+        // 获取通知目标列表
+        List<NotificationsTargetEntity> notificationsTargetEntityList = this.notificationsTargetService.list(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, inputDTO.getId()));
+        // 通知目标根据类型分组
+        Map<NotificationsTargetEnum, List<NotificationsTargetEntity>> notificationsTargetTypeMap = notificationsTargetEntityList.stream().collect(Collectors.groupingBy(NotificationsTargetEntity::getNotificationsTarget));
+        // 类型分组获取通知用户Id集合
+        notificationsTargetTypeMap.forEach((key, value) -> {
+
+            // 通知目标Id集合
+            Set<Long> targetIdSet = value.stream()
+                    .filter(item -> StrUtil.isNotBlank(item.getNotificationsTargetId()))
+                    .map(item -> JSON.parseArray(item.getNotificationsTargetId(), Long.class))
+                    .flatMap(List::stream)
+                    .collect(Collectors.toSet());
+
+            // 根据类型获取通知用户Id集合
+            switch (key) {
+                case USER:
+                    targetUserIdSet.addAll(targetIdSet);
+                    break;
+                case ROLE:
+                    // 获取角色用户列表
+                    List<RoleUserModel> roleUserModelList = roleService.queryRoleUserList(targetIdSet.stream().toList());
+                    if (!roleUserModelList.isEmpty()) {
+                        targetUserIdSet.addAll(roleUserModelList.stream().map(RoleUserModel::getId).collect(Collectors.toSet()));
+                    }
+                case ORGANIZATION:
+                    // 获取组织下用户Id列表
+                    List<Long> organizationUserIdList = organizationService.queryOrganizationUserIdListByIds(targetIdSet.stream().toList());
+                    targetUserIdSet.addAll(organizationUserIdList);
+                    break;
+                case ALL:
+                    List<Long> allUserIdList = userClient.getAllUserIdList();
+                    targetUserIdSet.addAll(allUserIdList);
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        // 构建通知记录实体
+        List<NotificationsRecordEntity> notificationsRecordEntityList = targetUserIdSet.stream()
+                .map(userId -> NotificationsRecordEntity.builder()
+                        .notificationsId(inputDTO.getId())
+                        .userId(userId)
+                        .read(false)
+                        .build())
+                .toList();
+        // 批量插入通知记录数据
+        notificationsRecordService.saveBatch(notificationsRecordEntityList);
+
         return this.updateById(updateEntity);
     }
 }
