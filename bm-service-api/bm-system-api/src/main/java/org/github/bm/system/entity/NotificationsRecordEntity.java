@@ -3,6 +3,8 @@ package org.github.bm.system.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.github.bm.common.base.entity.AbstractIdAndTimeEntity;
+import org.github.bm.system.enums.NotificationsLevelEnum;
+import org.github.bm.system.enums.NotificationsTypeEnum;
 
 import java.time.LocalDateTime;
 
@@ -40,4 +42,14 @@ public class NotificationsRecordEntity extends AbstractIdAndTimeEntity {
      * 阅读时间
      */
     private LocalDateTime readTime;
+
+    /**
+     * 通知类型
+     */
+    private NotificationsTypeEnum type;
+
+    /**
+     * 通知级别
+     */
+    private NotificationsLevelEnum level;
 }

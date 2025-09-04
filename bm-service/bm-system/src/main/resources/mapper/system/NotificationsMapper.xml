@@ -12,6 +12,8 @@
                a.notifications_id,
                a.`read_state`,
                a.read_time,
+               a.type,
+               a.level,
                b.title,
                b.content,
                b.publish_time,

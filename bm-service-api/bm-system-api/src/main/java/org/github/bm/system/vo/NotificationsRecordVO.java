@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.system.entity.NotificationsEntity;
+import org.github.bm.system.enums.NotificationsLevelEnum;
+import org.github.bm.system.enums.NotificationsTypeEnum;
 
 import java.time.LocalDateTime;
 
@@ -65,7 +67,20 @@ public class NotificationsRecordVO extends BaseIdAndTimeIdVO {
     private LocalDateTime readTime;
 
     /**
-     * 通知公告发布时间
+     * 通知发布时间
      */
+    @Schema(description = "通知发布时间")
     private LocalDateTime publishTime;
+
+    /**
+     * 通知类型
+     */
+    @Schema(description = "通知类型")
+    private NotificationsTypeEnum type;
+
+    /**
+     * 通知级别
+     */
+    @Schema(description = "通知级别")
+    private NotificationsLevelEnum level;
 }
