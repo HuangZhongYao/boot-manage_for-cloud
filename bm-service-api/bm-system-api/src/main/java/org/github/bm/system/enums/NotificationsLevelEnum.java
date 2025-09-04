@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.github.bm.common.base.enums.IEnumsValue;
 
 /**
- * 消息通知类型枚举
+ * 消息通知等级枚举
  * Time 2025-09-04 14:59
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
