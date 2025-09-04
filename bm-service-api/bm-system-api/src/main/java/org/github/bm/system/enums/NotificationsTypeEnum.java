@@ -12,7 +12,7 @@ import org.github.bm.common.base.enums.IEnumsValue;
 @Getter
 @AllArgsConstructor
 public enum NotificationsTypeEnum implements IEnumsValue {
-    SYSTEM(1, "系统"),
+    SYSTEM(1, "系统通知"),
     ;
     public final Integer value;
     public final String desc;
