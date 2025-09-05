@@ -67,6 +67,12 @@ public class DictionaryController extends BaseController {
         return ApiResponse.ok(dictService.setStateDictType(inputDTO));
     }
 
+    @Operation(summary = "获取全部字典数据")
+    @GetMapping(value = "/allDictDataQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<List<DictDataVO>> allDictDataQueryList() {
+        return ApiResponse.ok(dictService.allDictDataQueryList());
+    }
+
     @Operation(summary = "字典类型id获取字典数据", description = "根据字典类型id获取数据")
     @GetMapping(value = "/dictDataQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<List<DictDataVO>> dictDataQueryList(

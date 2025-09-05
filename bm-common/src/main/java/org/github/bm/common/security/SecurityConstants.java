@@ -80,7 +80,9 @@ public interface SecurityConstants {
      */
     List<String> DEFAULT_EXCLUDE_PATTERNS = List.of(
             "/auth/login",
+            "/auth/loginOut",
             "/auth/refreshToken",
+            "/dict/allDictDataQueryList",
             "/actuator/**",
             "/doc.html/**",
             "/error/**",

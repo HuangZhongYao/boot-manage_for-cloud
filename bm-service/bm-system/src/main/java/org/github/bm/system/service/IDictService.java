@@ -92,5 +92,10 @@ public interface IDictService {
      */
     Boolean setStateDictType(SetStateDictInputDTO inputDTO);
 
+    /**
+     * 获取所有字典数据列表
+     * @return 所有字典数据列表
+     */
+    List<DictDataVO> allDictDataQueryList();
 }
 

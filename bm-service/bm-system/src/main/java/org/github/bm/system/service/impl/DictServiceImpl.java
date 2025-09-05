@@ -9,6 +9,7 @@ import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.util.ModelMapperUtil;
 import org.github.bm.common.util.tree.ITreeNode;
 import org.github.bm.common.util.tree.TreeUtil;
+import org.github.bm.system.converter.DictDataConvert;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.entity.DictDataEntity;
 import org.github.bm.system.entity.DictTypeEntity;
@@ -34,6 +35,7 @@ public class DictServiceImpl implements IDictService {
 
     DictDataRepository dictDataRepository;
     DictTypeRepository dictTypeRepository;
+    DictDataConvert dictDataConvert;
 
     @Override
     public Boolean addDictData(AddDictInputDTO inputDTO) {
@@ -208,6 +210,11 @@ public class DictServiceImpl implements IDictService {
         // 执行更新
         this.dictTypeRepository.updateById(dictTypeEntity);
         return true;
+    }
+
+    @Override
+    public List<DictDataVO> allDictDataQueryList() {
+        return this.dictDataConvert.toVOList(this.dictDataRepository.selectList(null));
     }
 
     /**
