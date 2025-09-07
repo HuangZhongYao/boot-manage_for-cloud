@@ -84,7 +84,7 @@ public class OrganizationTreeVO extends BaseIdAndTimeAndOperationIdVO implements
     private List<ITreeNode<Long>> children;
 
     public Boolean getCheckboxDisabled() {
-        return enable == false;
+        return Boolean.FALSE.equals(enable);
     }
 
     public Integer getTypeValue() {

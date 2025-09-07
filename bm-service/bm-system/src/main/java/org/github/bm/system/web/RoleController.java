@@ -50,7 +50,7 @@ public class RoleController extends BaseController {
         @Parameter(name = "enable", description = "true|false|不传递,true查询启用,false=查询禁用,不传入=查询全部"),
     })
     @ApiOperationSupport(authors = "zuuuYao")
-    public ApiResponse<List<RoleVO>> queryList(Boolean enable) {
+    public ApiResponse<List<RoleVO>> queryList(@RequestParam(name = "enable")Boolean enable) {
         return ApiResponse.ok(roleService.queryList(enable));
     }
 
