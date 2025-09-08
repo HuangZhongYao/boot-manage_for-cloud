@@ -1,7 +1,6 @@
 package org.github.bm.websocket.base;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.github.bm.common.base.dto.BaseDTO;
 
 import java.time.LocalDateTime;
@@ -17,7 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)

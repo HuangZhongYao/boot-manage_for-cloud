@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Time 2025-09-08 14:58
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
-@Component(MessageHandlerConstant.DEFAULT_HANDLER_NAME)
+@Component(MessageHandlerConstant.CHAT_HANDLER_NAME)
 public class WebSocketMessageChatHandlerStrategy implements WebSocketMessageHandlerStrategy {
     @Override
     public Integer handle(String message) {

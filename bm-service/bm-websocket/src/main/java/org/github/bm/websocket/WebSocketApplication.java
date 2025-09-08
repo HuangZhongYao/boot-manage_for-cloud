@@ -1,13 +1,12 @@
 package org.github.bm.websocket;
 
-/**
- * Hello world!
- *
- */
-public class WebSocketApplication
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import org.github.bm.common.constant.ServiceEnum;
+import org.github.bm.common.launch.BMApplication;
+import org.github.bm.core.annotations.BMCloudApplication;
+
+@BMCloudApplication
+public class WebSocketApplication {
+    public static void main(String[] args) {
+        BMApplication.run(ServiceEnum.APPLICATION_WEBSOCKET.name, WebSocketApplication.class, args);
     }
 }
