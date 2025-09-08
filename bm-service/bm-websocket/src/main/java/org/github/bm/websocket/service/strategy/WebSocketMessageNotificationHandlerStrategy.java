@@ -2,7 +2,9 @@ package org.github.bm.websocket.service.strategy;
 
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
+import jakarta.annotation.Resource;
 import org.github.bm.system.entity.NotificationsRecordEntity;
+import org.github.bm.system.feign.INotificationsRecordClient;
 import org.github.bm.websocket.base.MessageHandlerConstant;
 import org.github.bm.websocket.base.WebSocketMessage;
 import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;
@@ -18,6 +20,10 @@ import java.util.List;
  */
 @Component(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME)
 public class WebSocketMessageNotificationHandlerStrategy implements WebSocketMessageHandlerStrategy {
+
+    @Resource
+    private INotificationsRecordClient notificationsRecordClient;
+
     /**
      * 处理WebSocket消息的方法
      *
@@ -49,6 +55,6 @@ public class WebSocketMessageNotificationHandlerStrategy implements WebSocketMes
             notificationsRecordEntityList.add(notificationRecordEntity);
         }
         // 调用存储方法，将通知记录实体列表保存到数据库
-        return notificationsRecordEntityList.size();
+        return notificationsRecordClient.addNotificationsRecord(notificationsRecordEntityList);
     }
 }
