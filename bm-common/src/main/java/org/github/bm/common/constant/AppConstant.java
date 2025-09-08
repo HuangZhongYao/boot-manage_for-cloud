@@ -50,6 +50,10 @@ public interface AppConstant {
      * 数据报表模块名称
      */
     String APPLICATION_DATAREPORT_NAME = AppConstant.APPLICATION_NAME_PREFIX + "datareport";
+    /**
+     * websocket模块名称
+     */
+    String APPLICATION_WEBSOCKET_NAME = AppConstant.APPLICATION_NAME_PREFIX + "websocket";
 
 
     /**

@@ -34,6 +34,10 @@ public enum ServiceEnum {
      * 数据报表模块枚举
      */
     APPLICATION_DATAREPORT(AppConstant.APPLICATION_DATAREPORT_NAME, "数据报表服务"),
+    /**
+     * WebSocket模块枚举
+     */
+    APPLICATION_WEBSOCKET(AppConstant.APPLICATION_WEBSOCKET_NAME, "WebSocket服务"),
     ;
 
 

@@ -1,0 +1,49 @@
+package org.github.bm.websocket.base;
+
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.github.bm.common.base.dto.BaseDTO;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+/**
+ * WebSocket消息负载的抽象基类
+ * <p>
+ * 该类定义了WebSocket消息负载的基本属性，包括消息的发送方、接收方、时间戳和处理器类型。
+ * 所有具体的WebSocket消息负载类都应该继承此类。
+ * </p>
+ */
+@Getter
+@Setter
+@ToString
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public abstract class AbstractPayload extends BaseDTO {
+    /**
+     * 消息标题
+     */
+    private String title;
+
+    /**
+     * 消息发送方标识; 发送方id  -1为系统发送
+     */
+    private String from;
+
+    /**
+     * 消息接收方标识; id列表
+     */
+    private List<String> to;
+
+    /**
+     * 消息发送时间
+     */
+    private LocalDateTime time;
+
+    /**
+     * 消息处理器名称; {@link org.github.bm.websocket.base.MessageHandlerConstant} 中定义
+     */
+    private String handlerEnum;
+}
