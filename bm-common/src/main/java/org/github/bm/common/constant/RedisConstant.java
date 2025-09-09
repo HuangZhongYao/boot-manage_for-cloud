@@ -4,7 +4,9 @@ import org.github.bm.common.enums.ClientEnum;
 
 public interface RedisConstant {
 
-
+    /**
+     * 授权信息
+     */
     interface Authorization {
         /**
          * 授权缓存key前缀
@@ -27,7 +29,7 @@ public interface RedisConstant {
          * 访问令牌缓存时间，单位秒
          */
 //        long ACCESS_TOKEN_CACHE_TIME = 3 * 60 * 60;
-        long ACCESS_TOKEN_CACHE_TIME =  60;
+        long ACCESS_TOKEN_CACHE_TIME = 60;
 
         /**
          * 刷新令牌缓存时间，单位秒
@@ -38,13 +40,27 @@ public interface RedisConstant {
          */
         long AUTHORIZATION_INFO_CACHE_TIME = 7 * 24 * 60 * 60;
 
-        static  String clientAuthorizationCacheKey(ClientEnum clientEnum) {
+        static String clientAuthorizationCacheKey(ClientEnum clientEnum) {
             return ACCESS_TOKEN + clientEnum.code + ":";
         }
 
-        static  String clientRefreshTokenCacheKey(ClientEnum clientEnum) {
+        static String clientRefreshTokenCacheKey(ClientEnum clientEnum) {
             return REFRESH_TOKEN + clientEnum.code + ":";
         }
+    }
+
+    /**
+     * 在线用户
+     */
+    interface OnlineUser {
+        /**
+         * 在线用户缓存 key前缀
+         */
+        String BASE_KEY_PREFIX = "OnlineUser:";
+        /**
+         * 在线用户ID集合 key
+         */
+        String ONLINE_USER_ID_SET_KEY = BASE_KEY_PREFIX + "IdSet";
     }
 
 

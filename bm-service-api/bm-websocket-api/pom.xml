@@ -19,6 +19,11 @@
             <version>${bm-cloud.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-user-api</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-messaging</artifactId>
             <scope>compile</scope>
