@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 04/09/2025 17:31:03
+ Date: 09/09/2025 18:05:46
 */
 
 SET NAMES utf8mb4;
@@ -538,7 +538,6 @@ INSERT INTO `sys_notifications_record` VALUES (1963124083428163584, '2025-09-18 
 INSERT INTO `sys_notifications_record` VALUES (1963124083524632576, '2025-09-03 14:17:09', '2025-09-04 11:38:40', 1963121422649786368, 1, 0, NULL, 1, 1);
 INSERT INTO `sys_notifications_record` VALUES (1963124083616907264, '2025-09-03 14:17:09', '2025-09-04 11:34:30', 1963121422649786368, 1, 0, NULL, 1, 1);
 INSERT INTO `sys_notifications_record` VALUES (1963124083793068032, '2025-09-01 14:17:09', '2025-09-04 11:34:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083881148416, '2025-09-16 14:17:09', '2025-09-04 14:27:50', 1963121422649786368, 1, 1, NULL, 1, 1);
 INSERT INTO `sys_notifications_record` VALUES (1963124083960840192, '2025-09-03 14:17:09', '2025-09-04 11:34:43', 1963121422649786368, 1, 0, NULL, 1, 1);
 INSERT INTO `sys_notifications_record` VALUES (1963124084057309184, '2025-09-05 14:17:09', '2025-09-04 14:27:52', 1963121422649786368, 1, 1, NULL, 1, 1);
 INSERT INTO `sys_notifications_record` VALUES (1963124084279607296, '2025-09-03 14:17:09', '2025-09-04 11:30:11', 1963121422649786368, 1, 0, NULL, 1, 1);
@@ -652,7 +651,7 @@ CREATE TABLE `sys_resources`  (
                                   `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
                                   `sort` int NULL DEFAULT NULL COMMENT '排序',
                                   PRIMARY KEY (`id`, `code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1961666674675417089 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统资源表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1965222813082058753 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_resources
@@ -704,6 +703,7 @@ INSERT INTO `sys_resources` VALUES (1956935293160390656, 42, '2025-08-17 12:25:0
 INSERT INTO `sys_resources` VALUES (1957304387617423360, 42, '2025-08-18 12:51:46', '2025-08-18 12:51:46', '1', '1', 'DataSourceMgt', '数据源管理', '1', '/dev/datasource', '/src/views/develop/datasource/index.vue', NULL, 'i-me:database', '', 1, 1, 1, 0);
 INSERT INTO `sys_resources` VALUES (1961067429727567872, 2, '2025-08-28 22:04:45', '2025-08-28 22:04:45', '1', '1', 'NoticeMgt', '公告通知', '1', '/sys/notice', '/src/views/notice/index.vue', NULL, 'i-fe:message-circle', '', 1, 1, 1, -1);
 INSERT INTO `sys_resources` VALUES (1961666674675417088, 2, '2025-08-30 13:45:56', '2025-08-30 13:46:51', '1', '1', 'organizationalMgt', '组织架构', '1', '/pms/organizational', '/src/views/pms/organizational/index.vue', NULL, 'i-me:company', '', 1, 1, 1, 0);
+INSERT INTO `sys_resources` VALUES (1965222813082058752, 9, '2025-09-09 09:16:45', '2025-09-09 18:03:31', '1', '1', 'websocket', 'websocket', '1', '/base/socket', '/src/views/demo/websocket/index.vue', NULL, 'i-me:long-connection', '', 1, 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -796,7 +796,7 @@ CREATE TABLE `sys_setting`  (
                                 `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
                                 `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统设置表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_setting

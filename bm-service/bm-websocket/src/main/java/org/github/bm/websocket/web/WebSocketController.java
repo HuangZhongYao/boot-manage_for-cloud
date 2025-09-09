@@ -17,7 +17,7 @@ public class WebSocketController {
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/chat")
+    @MessageMapping("/messages")
     @SendTo("/topic/messages")
     public Message sendMessage(Message message) {
         // 处理消息并广播
