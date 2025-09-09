@@ -2,6 +2,7 @@ package org.github.bm.websocket.web;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
+import org.github.bm.websocket.base.SimpConstant;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -17,8 +18,27 @@ public class WebSocketController {
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    @MessageMapping("/messages")
-    @SendTo("/topic/messages")
+    /**
+     * 测试广播通知消息
+     *
+     * @param message 消息
+     * @return Message
+     */
+    @MessageMapping("/testNotificationsMessages") // @MessageMapping 将方法映射为消息处理方法
+    @SendTo(SimpConstant.TOPIC_PREFIX + "/testNotificationsMessages") // @SendTo 将方法返回值发送到指定的主题
+    public Message testSendMessage(Message message) {
+        // 处理消息并广播
+        return message;
+    }
+
+    /**
+     * 广播通知消息
+     *
+     * @param message
+     * @return
+     */
+    @MessageMapping("/notificationsMessages")
+    @SendTo(SimpConstant.TOPIC_PREFIX + "/notificationsMessages")
     public Message sendMessage(Message message) {
         // 处理消息并广播
         return message;
@@ -29,7 +49,7 @@ public class WebSocketController {
         // 发送私人消息
         simpMessagingTemplate.convertAndSendToUser(
                 "user",
-                "/queue/messages",
+                SimpConstant.QUEUE_PREFIX + "/messages",
                 message
         );
     }

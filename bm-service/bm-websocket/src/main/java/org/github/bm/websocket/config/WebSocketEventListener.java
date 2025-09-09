@@ -1,17 +1,12 @@
 package org.github.bm.websocket.config;
+
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.github.bm.websocket.base.SimpConstant;
 import org.github.bm.websocket.service.IOnlineUserService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.messaging.SessionConnectedEvent;
-import org.springframework.web.socket.messaging.SessionDisconnectEvent;
-import org.springframework.web.socket.messaging.SessionSubscribeEvent;
-import org.springframework.web.socket.messaging.SessionUnsubscribeEvent;
-
-import static cn.hutool.json.JSONUtil.toBean;
-import static cn.hutool.json.JSONUtil.toJsonStr;
-import static java.util.Objects.requireNonNull;
+import org.springframework.web.socket.messaging.*;
 
 /**
  * WebSocket客户端状态监听
@@ -27,58 +22,102 @@ public class WebSocketEventListener {
     IOnlineUserService onlineUserService;
 
     /**
-     * 监听客户端连接
-     *
-     * @param event 连接事件对象
+     * 监听客户端连接请求（握手阶段）
      */
     @EventListener
-    public void handleWebSocketConnectListener(SessionConnectedEvent event) {
-        StompPrincipal principal = toBean(toJsonStr(event.getUser()), StompPrincipal.class);
-        log.info("WebSocket 客户端已连接: {}",
-                "{ 客户端主机名: " + principal.getName() +
-                        ", 客户端主机IP地址: " + principal.getPublicName() +
-                        ", 会话ID: " + requireNonNull(event.getMessage().getHeaders().get("simpSessionId")) + " }");
+    public void handleWebSocketConnectListener(SessionConnectEvent event) {
+        String userId = getUserIdFromEvent(event);
+        String sessionId = getSessionIdFromEvent(event);
+
+        if (userId != null) {
+            log.info("WebSocket 客户端正在连接: 用户ID={}, 会话ID={}", userId, sessionId);
+        } else {
+            log.warn("WebSocket 客户端正在连接但未获取到用户信息，会话ID={}", sessionId);
+        }
     }
 
     /**
+     * 监听客户端连接完成（握手后）
+     */
+    @EventListener
+    public void handleWebSocketConnectedListener(SessionConnectedEvent event) {
+        String userId = getUserIdFromEvent(event);
+        String sessionId = getSessionIdFromEvent(event);
+
+        if (userId != null) {
+            log.info("WebSocket 客户端连接完成: 用户ID={}, 会话ID={}", userId, sessionId);
+            // 用户连接成功后的处理
+        } else {
+            log.warn("WebSocket 客户端连接完成但未获取到用户信息，会话ID={}", sessionId);
+        }
+    }
+
+
+    /**
      * 监听客户端关闭事件
-     *
-     * @param event 关闭事件对象
      */
     @EventListener
     public void handleWebSocketCloseListener(SessionDisconnectEvent event) {
-        StompPrincipal principal = toBean(toJsonStr(event.getUser()), StompPrincipal.class);
-        log.info("WebSocket 客户端已关闭: {}",
-                "{ 客户端主机名: " + principal.getName() +
-                        ", 客户端主机IP地址: " + principal.getPublicName() +
-                        ", 会话ID: " + requireNonNull(event.getMessage().getHeaders().get("simpSessionId")) + " }");
+        String userId = getUserIdFromEvent(event);
+        String sessionId = getSessionIdFromEvent(event);
+
+        if (userId != null) {
+            log.info("WebSocket 客户端已关闭: 用户ID={}, 会话ID={}", userId, sessionId);
+        } else {
+            log.warn("WebSocket 客户端已关闭但未获取到用户信息，会话ID={}", sessionId);
+        }
     }
 
     /**
      * 监听客户端订阅事件
-     *
-     * @param event 订阅事件对象
      */
     @EventListener
     public void handleSubscription(SessionSubscribeEvent event) {
-        StompPrincipal principal = toBean(toJsonStr(event.getUser()), StompPrincipal.class);
-        log.info("WebSocket 客户端已订阅: {}",
-                "{ 客户端主机名: " + principal.getName() +
-                        ", 客户端主机IP地址: " + principal.getPublicName() +
-                        ", 订阅节点: " + requireNonNull(event.getMessage().getHeaders().get("simpDestination")) + " }");
+        String userId = getUserIdFromEvent(event);
+        String sessionId = getSessionIdFromEvent(event);
+        String destination = getDestinationFromEvent(event);
+
+        if (userId != null) {
+            log.info("WebSocket 客户端已订阅: 用户ID={}, 订阅节点={}, 会话ID={}", userId, destination, sessionId);
+        } else {
+            log.warn("WebSocket 客户端已订阅但未获取到用户信息，订阅节点={}, 会话ID={}", destination, sessionId);
+        }
     }
 
     /**
      * 监听客户端取消订阅事件
-     *
-     * @param event 取消订阅事件对象
      */
     @EventListener
     public void handleUnSubscription(SessionUnsubscribeEvent event) {
-        StompPrincipal principal = toBean(toJsonStr(event.getUser()), StompPrincipal.class);
-        log.info("WebSocket 客户端已取消订阅: {}",
-                "{ 客户端主机名: " + principal.getName() +
-                        ", 客户端主机IP地址: " + principal.getPublicName() +
-                        ", 取消订阅节点: " + requireNonNull(event.getMessage().getHeaders().get("simpDestination")) + " }");
+        String userId = getUserIdFromEvent(event);
+        String sessionId = getSessionIdFromEvent(event);
+        String destination = getDestinationFromEvent(event);
+
+        if (userId != null) {
+            log.info("WebSocket 客户端已取消订阅: 用户ID={}, 取消订阅节点={}, 会话ID={}", userId, destination, sessionId);
+        } else {
+            log.warn("WebSocket 客户端已取消订阅但未获取到用户信息，取消订阅节点={}, 会话ID={}", destination, sessionId);
+        }
+    }
+
+    // 辅助方法：安全地从事件中获取用户ID
+    private String getUserIdFromEvent(AbstractSubProtocolEvent event) {
+        if (event.getUser() != null) {
+            return event.getUser().getName();
+        }
+        return null;
+    }
+
+    // 辅助方法：安全地从事件中获取会话ID
+    private String getSessionIdFromEvent(AbstractSubProtocolEvent event) {
+        Object sessionId = event.getMessage().getHeaders().get(SimpConstant.SIMP_SESSION_ID_KEY);
+        return sessionId != null ? sessionId.toString() : "unknown";
+    }
+
+    // 辅助方法：安全地从事件中获取订阅目标
+    private String getDestinationFromEvent(AbstractSubProtocolEvent event) {
+        Object destination = event.getMessage().getHeaders().get("simpDestination");
+        return destination != null ? destination.toString() : "unknown";
     }
 }
+
