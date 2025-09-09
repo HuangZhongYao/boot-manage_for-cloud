@@ -40,10 +40,6 @@ public class SecurityProperties {
          * token密钥
          */
         private String secret = "bm-importorg.github-zuuuYaoZ2l0aHViLXp1dXVZYW8=";
-        /**
-         * token前缀
-         */
-        private String prefix = "Bearer ";
     }
 
     @Getter

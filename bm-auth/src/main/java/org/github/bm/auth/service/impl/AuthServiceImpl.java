@@ -84,7 +84,7 @@ public class AuthServiceImpl implements IAuthService {
         Object redisRefreshToken;
         String removePrefixRefreshToken;
         try {
-            removePrefixRefreshToken = refreshToken.replaceAll(securityProperties.getToken().getPrefix(), "");
+            removePrefixRefreshToken = refreshToken.replaceAll(SecurityConstants.AUTH_HEADER_PREFIX, "");
             // 解析refreshToken
             JWT jwt = JWTUtil.parseToken(removePrefixRefreshToken);
             // 获取用户ID
@@ -178,7 +178,6 @@ public class AuthServiceImpl implements IAuthService {
         AuthInfo authInfo = authInfoConverter.toAuthInfo(userEntity);
         authInfo.setAccessToken(accessToken);
         authInfo.setRefreshToken(refreshToken);
-        authInfo.setTokenPrefix(securityProperties.getToken().getPrefix());
         authInfo.setAccessTokenExpiresIn(accessTokenExpiresAt);
         authInfo.setRefreshTokenExpiresIn(refreshTokenExpiresAt);
         return authInfo;
@@ -201,7 +200,6 @@ public class AuthServiceImpl implements IAuthService {
         DateTime accessTokenExpiresAt = DateUtil.offsetSecond(now, (int) RedisConstant.Authorization.ACCESS_TOKEN_CACHE_TIME);
         AuthInfo authInfo = authInfoConverter.toAuthInfo(userEntity);
         authInfo.setAccessToken(accessToken);
-        authInfo.setTokenPrefix(securityProperties.getToken().getPrefix());
         authInfo.setAccessTokenExpiresIn(accessTokenExpiresAt);
         return authInfo;
     }

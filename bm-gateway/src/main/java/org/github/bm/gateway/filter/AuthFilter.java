@@ -71,11 +71,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
 			return this.error(response, path, "请登录后重试", ResponseCode.NOT_LOGIN.code);
 		}
 		//  令牌前缀验证
-        if (!token.startsWith(securityProperties.getToken().getPrefix())) {
+        if (!token.startsWith(SecurityConstants.AUTH_HEADER_PREFIX)) {
 			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
         }
 		// 验证令牌有效性
-		token = token.substring(securityProperties.getToken().getPrefix().length());
+		token = token.substring(SecurityConstants.AUTH_HEADER_PREFIX.length());
 		if (!JWTUtil.verify(token, securityProperties.getToken().getSecret().getBytes())) {
 			return this.error(response, path, "令牌验证失败", ResponseCode.REQUEST_FAILED.code);
 		}

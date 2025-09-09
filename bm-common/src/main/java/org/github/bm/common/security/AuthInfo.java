@@ -21,7 +21,7 @@ public class AuthInfo extends BaseVO {
     private String refreshAuthHeaderKey = SecurityConstants.REFRESH_AUTH_HEADER_KEY;
 
     @Schema(description = "令牌前缀")
-    private String tokenPrefix;
+    private String tokenPrefix = SecurityConstants.AUTH_HEADER_PREFIX;
 
     @Schema(description = "令牌")
     private String accessToken;

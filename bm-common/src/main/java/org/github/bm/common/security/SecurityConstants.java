@@ -7,11 +7,15 @@ import java.util.List;
 
 public interface SecurityConstants {
     /**
-     * 客户端请求令牌头
+     * 客户端请求令牌前缀
+     */
+    String AUTH_HEADER_PREFIX = "Bearer ";
+    /**
+     * 客户端请求令牌头name
      */
     String AUTH_HEADER_KEY = "BM-Authorization";
     /**
-     * 刷新令牌头
+     * 刷新令牌头name
      */
     String REFRESH_AUTH_HEADER_KEY = "BM-Refresh-Authorization";
     /**
@@ -82,7 +86,8 @@ public interface SecurityConstants {
             "/auth/login",
             "/auth/loginOut",
             "/auth/refreshToken",
-            "/dict/allDictDataQueryList",
+            "/bm-websocket/ws/**", // 放行websocket
+            "/ws/**", // 放行websocket
             "/actuator/**",
             "/doc.html/**",
             "/error/**",
