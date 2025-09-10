@@ -1,6 +1,6 @@
 package org.github.bm.websocket.web;
 
-import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.github.bm.websocket.base.SimpConstant;
 import org.springframework.messaging.Message;
@@ -10,13 +10,23 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@Hidden
 @Controller
 public class WebSocketController {
 
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    @Operation(summary = "测试发送广播消息")
+    @GetMapping("/testSendTopic")
+    @ResponseBody
+    public Object testSendTopic(@RequestParam("message") String message) {
+        simpMessagingTemplate.convertAndSend(SimpConstant.TOPIC_PREFIX + "/testNotificationsMessages","Server message:" + message);
+        return "Server message:" + message;
+    }
 
     /**
      * 测试广播通知消息

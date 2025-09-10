@@ -8,4 +8,12 @@ public interface SimpConstant {
     String SIMP_USER_KEY = "userId";
     String SIMP_AUTHENTICATED_KEY = "authenticated";
     String SIMP_SESSION_ID_KEY = "simpSessionId";
+
+    interface Topic {
+        String Test_Topic = TOPIC_PREFIX + "/";
+    }
+
+    interface Queue {
+        String Test_Queue = QUEUE_PREFIX + "/";
+    }
 }
