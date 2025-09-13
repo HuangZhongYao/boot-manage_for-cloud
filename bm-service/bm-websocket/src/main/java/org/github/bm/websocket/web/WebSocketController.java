@@ -2,6 +2,7 @@ package org.github.bm.websocket.web;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
+import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.websocket.base.SimpConstant;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -23,9 +24,21 @@ public class WebSocketController {
     @Operation(summary = "测试发送广播消息")
     @GetMapping("/testSendTopic")
     @ResponseBody
-    public Object testSendTopic(@RequestParam("message") String message) {
-        simpMessagingTemplate.convertAndSend(SimpConstant.TOPIC_PREFIX + "/testNotificationsMessages","Server message:" + message);
-        return "Server message:" + message;
+    public ApiResponse<Boolean> testSendTopic(@RequestParam("message") String message) {
+        simpMessagingTemplate.convertAndSend(SimpConstant.Topic.TEST_TOPIC,
+            "服务器发送测试广播消息:" + message);
+        return ApiResponse.ok(true);
+    }
+
+    @Operation(summary = "测试发送用户消息")
+    @GetMapping("/testSendToUser")
+    @ResponseBody
+    public ApiResponse<Boolean> testSendToUser(@RequestParam("message") String message,
+                                               @RequestParam("userIds") String[] userIds) {
+        for (String userId : userIds) {
+            simpMessagingTemplate.convertAndSendToUser(userId, SimpConstant.Queue.USER_QUEUE_MESSAGES, "服务器发送测试消息" + message);
+        }
+        return ApiResponse.ok(true);
     }
 
     /**
@@ -58,9 +71,9 @@ public class WebSocketController {
     public void sendPrivateMessage(@Payload Message message, StompHeaderAccessor headerAccessor) {
         // 发送私人消息
         simpMessagingTemplate.convertAndSendToUser(
-                "user",
-                SimpConstant.QUEUE_PREFIX + "/messages",
-                message
+            "user",
+            SimpConstant.QUEUE_PREFIX + "/messages",
+            message
         );
     }
 

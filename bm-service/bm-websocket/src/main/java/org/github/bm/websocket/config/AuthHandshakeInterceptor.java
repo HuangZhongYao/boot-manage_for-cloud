@@ -3,6 +3,7 @@ package org.github.bm.websocket.config;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import jakarta.annotation.Resource;
+import java.security.Principal;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.SecurityConstants;
@@ -16,6 +17,7 @@ import org.springframework.web.socket.messaging.AbstractSubProtocolEvent;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import java.util.Map;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 
 /**
@@ -23,9 +25,19 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class AuthHandshakeInterceptor implements HandshakeInterceptor {
+public class AuthHandshakeInterceptor extends DefaultHandshakeHandler implements HandshakeInterceptor {
     @Resource
     SecurityProperties securityProperties = new SecurityProperties();
+
+    @Override
+    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler,
+                                      Map<String, Object> attributes) {
+        return StompPrincipal
+            .builder()
+            .name(attributes.getOrDefault(SimpConstant.SIMP_USER_KEY,"").toString())
+            .publicName(request.getRemoteAddress().getAddress().getHostName())
+            .build();
+    }
 
     /**
      * WebSocket握手前的认证处理方法
@@ -53,7 +65,8 @@ public class AuthHandshakeInterceptor implements HandshakeInterceptor {
                     attributes.put(SimpConstant.SIMP_AUTHENTICATED_KEY, true);
                     log.info("握手成功，用户ID已存储: {}", userId);
                 } else {
-                    log.info("握手失败，用户ID null : {}", userId);
+                    log.info("握手失败，无法从Token中提取用户ID");
+                    return false;
                 }
                 return true;
             } else {

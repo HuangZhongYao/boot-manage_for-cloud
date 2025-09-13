@@ -1,9 +1,11 @@
 package org.github.bm.websocket.config;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.security.Principal;
+import lombok.NoArgsConstructor;
 
 /**
  * 客户端信息实体类
@@ -12,6 +14,8 @@ import java.security.Principal;
  * @date 2022/10/28 8:45
  */
 @Data
+@Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class StompPrincipal implements Principal {
     /**

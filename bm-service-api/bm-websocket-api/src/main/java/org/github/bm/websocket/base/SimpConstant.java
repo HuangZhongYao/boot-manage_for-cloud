@@ -10,10 +10,10 @@ public interface SimpConstant {
     String SIMP_SESSION_ID_KEY = "simpSessionId";
 
     interface Topic {
-        String Test_Topic = TOPIC_PREFIX + "/";
+        String TEST_TOPIC = TOPIC_PREFIX + "/testNotificationsMessages";
     }
 
     interface Queue {
-        String Test_Queue = QUEUE_PREFIX + "/";
+        String USER_QUEUE_MESSAGES = QUEUE_PREFIX + "/messages";
     }
 }

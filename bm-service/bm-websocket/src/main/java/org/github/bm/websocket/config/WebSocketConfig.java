@@ -27,8 +27,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // 注册STOMP端点
-        registry.addEndpoint("/ws").setAllowedOriginPatterns("*").addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
-                .withSockJS(); // 支持SockJS回退
+        registry.addEndpoint("/ws")
+            .setAllowedOriginPatterns("*")
+            .addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
+            .withSockJS(); // 支持SockJS回退
     }
 
     @Override
@@ -53,11 +55,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             @Override
             public Message<?> preSend(Message<?> message, MessageChannel channel) {
                 // 使用StompHeaderAccessor包装消息，便于访问STOMP协议相关头信息
-                // StompHeaderAccessor提供了便捷的方法来获取和设置STOMP帧的头部信息
                 StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
 
                 // 检查是否为CONNECT命令（WebSocket连接建立时的握手消息）
-                // StompCommand.CONNECT表示客户端正在尝试建立STOMP连接
                 if (StompCommand.CONNECT.equals(accessor.getCommand())) {
                     // 获取WebSocket会话属性
                     // 会话属性是在握手阶段由HandshakeInterceptor设置的
@@ -74,11 +74,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
                         // 将用户ID设置到STOMP访问器中，使其成为Principal
                         // 这样在后续的消息处理方法中可以通过Principal参数获取当前用户信息
-                        // userId::toString 是方法引用，等价于 () -> userId.toString()
                         // 这样设置后，Controller中的Principal.getName()将返回用户ID字符串
                         log.info("从会话属性中获取到用户ID: {}", userId);
                         // 设置Principal
-                        accessor.setUser(userId::toString);
+                        accessor.setUser(StompPrincipal.builder().name(userId.toString()).build());
                         log.info("Principal已设置，用户ID: {}", userId);
                     } else {
                         log.warn("会话属性中未找到用户信息，会话属性: {}", sessionAttributes);
