@@ -4,6 +4,10 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.websocket.base.SimpConstant;
+import org.github.bm.websocket.base.WebSocketMessage;
+import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;
+import org.github.bm.websocket.service.strategy.WebSocketMessageHandlerStrategy;
+import org.github.bm.websocket.service.strategy.WebSocketMessageHandlerStrategyFactory;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -20,6 +24,8 @@ public class WebSocketController {
 
     @Resource
     private SimpMessagingTemplate simpMessagingTemplate;
+    @Resource
+    private WebSocketMessageHandlerStrategyFactory webSocketMessageHandlerStrategyFactory;
 
     @Operation(summary = "测试发送广播消息")
     @GetMapping("/testSendTopic")
@@ -61,9 +67,12 @@ public class WebSocketController {
      * @return
      */
     @MessageMapping("/notificationsMessages")
-    @SendTo(SimpConstant.TOPIC_PREFIX + "/notificationsMessages")
-    public Message sendMessage(Message message) {
+    @SendTo(SimpConstant.Topic.NOTIFICATIONS_TOPIC)
+    public Message<NotificationMessagePayloadDTO> sendMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
         // 处理消息并广播
+        WebSocketMessageHandlerStrategy handlerStrategy =
+            webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
+//        handlerStrategy.handle();
         return message;
     }
 

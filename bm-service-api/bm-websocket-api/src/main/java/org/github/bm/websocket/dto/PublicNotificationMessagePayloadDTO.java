@@ -1,5 +1,6 @@
 package org.github.bm.websocket.dto;
 
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,15 +8,13 @@ import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsTypeEnum;
 import org.github.bm.websocket.base.AbstractPayload;
 
-import java.time.LocalDateTime;
-
 /**
- * 通知消息负载类
+ * 公共通知消息全部用户都会收到
  */
 @Setter
 @Getter
 @ToString
-public class NotificationMessagePayloadDTO extends AbstractPayload {
+public class PublicNotificationMessagePayloadDTO extends AbstractPayload {
     /**
      * 通知公告Id
      * NotificationsEntity#id {@link org.github.bm.system.entity.NotificationsEntity#id}

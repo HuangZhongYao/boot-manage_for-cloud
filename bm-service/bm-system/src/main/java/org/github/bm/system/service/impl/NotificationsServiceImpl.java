@@ -27,6 +27,9 @@ import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
 import org.github.bm.system.vo.RoleUserModel;
 import org.github.bm.user.feign.IUserClient;
+import org.github.bm.websocket.base.WebSocketMessage;
+import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;
+import org.github.bm.websocket.feign.IWebSocketClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +60,8 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
     private NotificationsConverter notificationsConverter;
     @Resource
     private INotificationsRecordService notificationsRecordService;
+    @Resource
+    private IWebSocketClient webSocketClient;
 
     @Override
     public Page<NotificationsVO> pageQueryList(NotificationsPageQueryInputDTO inputDTO) {
@@ -232,6 +237,16 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         updateEntity.setId(inputDTO.getId());
         updateEntity.setState(NotificationsStateEnum.PUBLISHED);
         updateEntity.setPublishTime(LocalDateTime.now());
+
+        // 调用websocket模块推送消息
+        NotificationMessagePayloadDTO payloadDTO = new NotificationMessagePayloadDTO();
+        payloadDTO.setNotificationsId(notificationsEntity.getId());
+        payloadDTO.setContent(notificationsEntity.getContent());
+        payloadDTO.setTitle(notificationsEntity.getTitle());
+        payloadDTO.setType(NotificationsTypeEnum.SYSTEM);
+        payloadDTO.setLevel(NotificationsLevelEnum.ORDINARY);
+        webSocketClient.sendNotificationMessage(new WebSocketMessage<>(payloadDTO));
+
         // 更新状态
         return this.updateById(updateEntity);
     }

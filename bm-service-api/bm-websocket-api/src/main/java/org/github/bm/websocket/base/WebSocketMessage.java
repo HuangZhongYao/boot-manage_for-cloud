@@ -18,8 +18,19 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = false)
 public class WebSocketMessage<T extends AbstractPayload> extends BaseDTO implements Message<T> {
 
+    /**
+     * 消息处理器 MessageHandlerConstant 中定义
+     */
+    private String handlerName = MessageHandlerConstant.DEFAULT_HANDLER_NAME;
+
+    /**
+     * 消息载体
+     */
     private T payload;
 
+    /**
+     * 消息头
+     */
     private MessageHeaders headers;
 
     public WebSocketMessage() {

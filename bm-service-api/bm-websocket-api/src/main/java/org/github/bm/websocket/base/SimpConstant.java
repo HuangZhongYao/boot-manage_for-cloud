@@ -11,6 +11,7 @@ public interface SimpConstant {
 
     interface Topic {
         String TEST_TOPIC = TOPIC_PREFIX + "/testNotificationsMessages";
+        String NOTIFICATIONS_TOPIC = TOPIC_PREFIX + "/notificationsMessages";
     }
 
     interface Queue {
