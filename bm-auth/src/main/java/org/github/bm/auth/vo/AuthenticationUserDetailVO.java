@@ -64,7 +64,7 @@ public class AuthenticationUserDetailVO extends BaseIdAndTimeIdVO {
     /**
      * 备注信息
      */
-    @Schema(description = "头像url")
+    @Schema(description = "备注信息")
     private String remark;
 
     /**

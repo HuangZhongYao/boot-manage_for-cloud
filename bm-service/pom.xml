@@ -20,6 +20,7 @@
         <module>bm-datareport</module>
         <module>bm-resource</module>
         <module>bm-websocket</module>
+        <module>bm-example</module>
     </modules>
 
 </project>
