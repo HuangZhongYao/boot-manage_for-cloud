@@ -54,6 +54,10 @@ public interface AppConstant {
      * websocket模块名称
      */
     String APPLICATION_WEBSOCKET_NAME = AppConstant.APPLICATION_NAME_PREFIX + "websocket";
+    /**
+     * 演示使用模块名称
+     */
+    String APPLICATION_EXAMPLE_NAME = AppConstant.APPLICATION_NAME_PREFIX + "example";
 
 
     /**

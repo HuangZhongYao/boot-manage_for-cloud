@@ -2,6 +2,7 @@ package org.github.bm.common.launch;
 
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.constant.AppConstant;
+import org.github.bm.common.constant.ServiceEnum;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,12 +19,12 @@ import java.util.Properties;
 @Slf4j
 public class BMApplication {
     /**
-     * @param appName       应用名 AppConstant中定义
+     * @param serviceEnum   服务枚举 ServiceEnum中定义
      * @param primarySource 启动类
      * @param args          启动参数
      * @return ConfigurableApplicationContext 启动后的上下文
      */
-    public static ConfigurableApplicationContext run(String appName, Class<?> primarySource, String... args) {
+    public static ConfigurableApplicationContext run(ServiceEnum serviceEnum, Class<?> primarySource, String... args) {
         // 读取环境变量，使用spring boot的规则
         ConfigurableEnvironment environment = new StandardEnvironment();
         MutablePropertySources propertySources = environment.getPropertySources();
@@ -36,12 +37,12 @@ public class BMApplication {
         String env = getEnv(props.getProperty("spring.profiles.active"));
         System.out.printf("----启动中，读取到的环境变量:[%s]，jar地址:[%s]----%n", env, startJarPath);
         setProperty(props, "info.version", AppConstant.APPLICATION_VERSION);
-        setProperty(props, "spring.application.name", appName);
+        setProperty(props, "spring.application.name", serviceEnum.getName());
         setProperty(props, "spring.profiles.active", env);
         setProperty(props, "spring.cloud.nacos.discovery.server-addr", LauncherConstant.nacosAddr(env));
         setProperty(props, "spring.cloud.nacos.config.server-addr", LauncherConstant.nacosAddr(env));
         setProperty(props, "spring.config.import[0]", "nacos:" + NacosConstant.dataId(NacosConstant.NACOS_CONFIG_PREFIX));// 公共配置
-        setProperty(props, "spring.config.import[1]", "nacos:" + NacosConstant.dataId(appName));// 当前服务配置
+        setProperty(props, "spring.config.import[1]", "nacos:" + NacosConstant.dataId(serviceEnum.getName()));// 当前服务配置
         setProperty(props, "spring.cloud.nacos.config.namespace", LauncherConstant.NACOS_NAMESPACE);// 设置nacos配置中心命名空间
         setProperty(props, "spring.cloud.nacos.config.refresh-enabled", NacosConstant.NACOS_CONFIG_REFRESH);
         setProperty(props, "spring.cloud.nacos.config.prefix", NacosConstant.NACOS_CONFIG_PREFIX);
@@ -51,7 +52,7 @@ public class BMApplication {
         setProperty(props, "spring.cloud.nacos.config.group", NacosConstant.NACOS_CONFIG_GROUP);
         setProperty(props, "spring.cloud.nacos.discovery.group", NacosConstant.NACOS_CONFIG_GROUP);
         setProperty(props, "spring.cloud.sentinel.transport.dashboard", LauncherConstant.sentinelAddr(env));
-        setProperty(props, "spring.cloud.alibaba.seata.tx-service-group", appName.concat(NacosConstant.NACOS_GROUP_SUFFIX));
+        setProperty(props, "spring.cloud.alibaba.seata.tx-service-group", serviceEnum.getName().concat(NacosConstant.NACOS_GROUP_SUFFIX));
 
         // 构建Springboot启动器
         SpringApplicationBuilder builder = new SpringApplicationBuilder(primarySource);
@@ -67,7 +68,7 @@ public class BMApplication {
         // 添加监听器
         builder.listeners((WebServerInitializedEvent event) -> {
             int localPort = event.getWebServer().getPort();
-            log.info("---[{}]---启动完成，当前使用的端口:[{}]，环境变量:[{}]---", appName.toUpperCase(), localPort, env);
+            log.info("---[{}] [{}]---启动完成，当前使用的端口:[{}]，环境变量:[{}]---", serviceEnum.getName().toUpperCase(),serviceEnum.getDesc(), localPort, env);
         });
         return builder.run(args);
     }

@@ -38,6 +38,10 @@ public enum ServiceEnum {
      * WebSocket模块枚举
      */
     APPLICATION_WEBSOCKET(AppConstant.APPLICATION_WEBSOCKET_NAME, "WebSocket服务"),
+    /**
+     * 演示模块枚举
+     */
+    APPLICATION_EXAMPLE(AppConstant.APPLICATION_EXAMPLE_NAME, "演示使用服务"),
     ;
 
 
@@ -54,6 +58,14 @@ public enum ServiceEnum {
     ServiceEnum(String name, String desc) {
         this.name = name;
         this.desc = desc;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 
     /**

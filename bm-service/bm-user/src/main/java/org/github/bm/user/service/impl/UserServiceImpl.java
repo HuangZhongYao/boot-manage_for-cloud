@@ -18,11 +18,13 @@ import org.github.bm.system.feign.IOrganizationClient;
 import org.github.bm.system.feign.IRoleClient;
 import org.github.bm.system.vo.RoleVO;
 import org.github.bm.system.vo.UserRoleVO;
+import org.github.bm.user.converter.UserConverter;
 import org.github.bm.user.dto.*;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.repository.UserRepository;
 import org.github.bm.user.service.IUserService;
 import org.github.bm.user.vo.UserVO;
+import org.github.bm.websocket.feign.IOnlineUserClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +48,10 @@ public class UserServiceImpl implements IUserService {
     IRoleClient roleClient;
     @Resource
     IOrganizationClient organizationClient;
+    @Resource
+    IOnlineUserClient onlineUserClient;
+    @Resource
+    private UserConverter userConverter;
 
     @Override
     public Page<UserVO> pageQueryList(UserQueryPageInputDTO inputDTO) {
@@ -287,5 +293,19 @@ public class UserServiceImpl implements IUserService {
 
         userRepository.updateById(updateEntity);
         return true;
+    }
+
+    @Override
+    public List<UserVO> queryOnlineUser(UserQueryPageInputDTO inputDTO) {
+        // 获取在线用户ID列表
+        List<Long> onlineUserIdList = onlineUserClient.getOnlineUserIdList();
+        // 无在线用户id列表 返回空
+        if (CollectionUtil.isEmpty(onlineUserIdList)) {
+            return List.of();
+        }
+        // 查询库
+        List<UserEntity> userEntityList = userRepository.selectList(new LambdaQueryWrapper<UserEntity>().in(UserEntity::getId, onlineUserIdList));
+        // 转换为VO
+        return userConverter.toVOList(userEntityList);
     }
 }

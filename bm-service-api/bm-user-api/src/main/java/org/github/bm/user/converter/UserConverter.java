@@ -1,7 +1,9 @@
 package org.github.bm.user.converter;
 
+import org.github.bm.common.base.convert.AbstractConvert;
 import org.github.bm.system.vo.RoleUserModel;
 import org.github.bm.user.entity.UserEntity;
+import org.github.bm.user.vo.UserVO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
 @Mapper(componentModel = "spring",builder = @org.mapstruct.Builder(disableBuilder = true)) // disableBuilder禁用Builder构建器否则父类属性无法赋值
-public interface UserConverter {
+public interface UserConverter extends AbstractConvert<UserEntity, UserVO> {
 
     List<RoleUserModel> toRoleUserModels(List<UserEntity> userEntityList);
 }

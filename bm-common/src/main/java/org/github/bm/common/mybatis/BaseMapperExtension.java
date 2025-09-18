@@ -1,18 +1,28 @@
 package org.github.bm.common.mybatis;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.enums.SqlMethod;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.override.MybatisMapperProxy;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.core.toolkit.MybatisUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
+import org.apache.ibatis.binding.MapperMethod;
+import org.apache.ibatis.logging.LogFactory;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.github.bm.common.util.ModelMapperUtil;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 /**
- * BaseMapper扩展
+ * BaseMapper扩展 , 提供一些常用的方法查询结果并转换类型、批量插入更新
  *
  * @Desc BaseMapper扩展
  * @Time 2024-07-12 09:25
@@ -160,12 +170,22 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
     default <U> Page<U> selectPage(long pageIndex, long pageSize, Wrapper<TEntity> queryWrapper,
                                    Class<U> uClass) {
         // 分页条件
-        Page page = new Page(pageIndex, pageSize);
+        Page<TEntity> page = new Page<>(pageIndex, pageSize);
         // 执行分页查询
-        Page<U> pageResult = this.selectPage(page, queryWrapper);
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
         // 设置数据
-        pageResult.setRecords(ModelMapperUtil.mapList(pageResult.getRecords(), uClass));
-        return pageResult;
+
+        Page<U> uPage = new Page<>();
+        uPage.setRecords(ModelMapperUtil.mapList(pageResult.getRecords(), uClass));
+        this.setPageData(uPage, pageResult);
+        return uPage;
+    }
+
+    private void setPageData(Page<?> uPage, Page<TEntity> pageResult) {
+        uPage.setPages(pageResult.getPages());
+        uPage.setSize(pageResult.getSize());
+        uPage.setCurrent(pageResult.getCurrent());
+        uPage.setTotal(pageResult.getTotal());
     }
 
     /**
@@ -180,10 +200,12 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
     default <U> Page<U> selectPage(Page page, Wrapper<TEntity> queryWrapper,
                                    Class<U> uClass) {
         // 执行分页查询
-        Page<U> pageResult = this.selectPage(page, queryWrapper);
-        // 设置数据
-        pageResult.setRecords(ModelMapperUtil.mapList(pageResult.getRecords(), uClass));
-        return pageResult;
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
+
+        Page<U> uPage = new Page<>();
+        this.setPageData(uPage, pageResult);
+        uPage.setRecords(ModelMapperUtil.mapList(pageResult.getRecords(), uClass));
+        return uPage;
     }
 
     /**
@@ -201,14 +223,18 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
                                    Class<U> uClass, Consumer<U> consumer) {
 
         // 分页条件
-        Page page = new Page(pageIndex, pageSize);
+        Page<TEntity> page = new Page<>(pageIndex, pageSize);
         // 执行分页查询
-        Page<U> pageResult = this.selectPage(page, queryWrapper);
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
+
         // 转换类型并处理
         List<U> uResult = ModelMapperUtil.mapList(pageResult.getRecords(), uClass, consumer);
+
+        Page<U> uPage = new Page<>();
+        this.setPageData(uPage, pageResult);
         // 设置数据
-        pageResult.setRecords(uResult);
-        return pageResult;
+        uPage.setRecords(uResult);
+        return uPage;
     }
 
     /**
@@ -225,12 +251,15 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
                                    Class<U> uClass, Consumer<U> consumer) {
 
         // 执行分页查询
-        Page<U> pageResult = this.selectPage(page, queryWrapper);
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
         // 转换类型并处理
         List<U> uResult = ModelMapperUtil.mapList(pageResult.getRecords(), uClass, consumer);
+
+        Page<U> uPage = new Page<>();
+        this.setPageData(uPage, pageResult);
         // 设置数据
-        pageResult.setRecords(uResult);
-        return pageResult;
+        uPage.setRecords(uResult);
+        return uPage;
     }
 
 
@@ -249,14 +278,17 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
                                    Class<U> uClass, BiConsumer<TEntity, U> biconsumer) {
 
         // 分页条件
-        Page page = new Page(pageIndex, pageSize);
+        Page<TEntity> page = new Page<>(pageIndex, pageSize);
         // 执行分页查询
-        Page pageResult = this.selectPage(page, queryWrapper);
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
         // 转换类型并处理
         List<U> uResult = ModelMapperUtil.mapList(pageResult.getRecords(), uClass, biconsumer);
+
+        Page<U> uPage = new Page<>();
+        this.setPageData(uPage, pageResult);
         // 设置数据
-        pageResult.setRecords(uResult);
-        return pageResult;
+        uPage.setRecords(uResult);
+        return uPage;
     }
 
     /**
@@ -273,23 +305,121 @@ public interface BaseMapperExtension<TEntity> extends BaseMapper<TEntity> {
                                    Class<U> uClass, BiConsumer<TEntity, U> biconsumer) {
 
         // 执行分页查询
-        Page pageResult = this.selectPage(page, queryWrapper);
+        Page<TEntity> pageResult = this.selectPage(page, queryWrapper);
         // 转换类型并处理
         List<U> uResult = ModelMapperUtil.mapList(pageResult.getRecords(), uClass, biconsumer);
+
+        Page<U> uPage = new Page<>();
+        this.setPageData(uPage, pageResult);
         // 设置数据
-        pageResult.setRecords(uResult);
-        return pageResult;
+        uPage.setRecords(uResult);
+        return uPage;
     }
 
+
+    /**
+     * 获取 SQL 语句 ID
+     *
+     * @param sqlMethod SQL 方法枚举
+     * @return SQL 语句 ID
+     */
+    private String getSqlStatement(SqlMethod sqlMethod) {
+        return SqlHelper.getSqlStatement(
+                MybatisUtils.getMybatisMapperProxy(this).getMapperInterface(),
+                sqlMethod
+        );
+    }
+
+    /**
+     * 执行批量操作
+     *
+     * @param list      数据集合
+     * @param batchSize 批量大小
+     * @param consumer  执行方法
+     * @param <E>       泛型
+     * @return 操作结果
+     */
+    private <E> boolean executeBatch(Collection<E> list, int batchSize, BiConsumer<SqlSession, E> consumer) {
+        return SqlHelper.executeBatch(getSqlSessionFactory(), LogFactory.getLog(getClass()), list, batchSize, consumer);
+    }
+
+    /**
+     * 执行批量操作（默认批次大小）
+     *
+     * @param list     数据集合
+     * @param consumer 执行方法
+     * @param <E>      泛型
+     * @return 操作结果
+     */
+    private <E> boolean executeBatch(Collection<E> list, BiConsumer<SqlSession, E> consumer) {
+        return executeBatch(list, 1000, consumer);
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param entityList 实体列表
+     * @return 操作结果
+     */
+    default boolean insertBatch(Collection<TEntity> entityList) {
+        return insertBatch(entityList, 1000);
+    }
+
+    /**
+     * 批量插入
+     *
+     * @param entityList 实体列表
+     * @param batchSize  批量大小
+     * @return 操作结果
+     */
+    default boolean insertBatch(Collection<TEntity> entityList, int batchSize) {
+        String sqlStatement = getSqlStatement(SqlMethod.INSERT_ONE);
+        return executeBatch(entityList, batchSize, (sqlSession, entity) -> sqlSession.insert(sqlStatement, entity));
+    }
+
+    /**
+     * 批量更新
+     *
+     * @param entityList 实体列表
+     * @return 操作结果
+     */
+    default boolean updateBatchById(Collection<TEntity> entityList) {
+        return updateBatchById(entityList, 1000);
+    }
+
+    /**
+     * 批量更新
+     *
+     * @param entityList 实体列表
+     * @param batchSize  批量大小
+     * @return 操作结果
+     */
+    default boolean updateBatchById(Collection<TEntity> entityList, int batchSize) {
+        String sqlStatement = getSqlStatement(SqlMethod.UPDATE_BY_ID);
+        return executeBatch(entityList, batchSize, (sqlSession, entity) -> {
+            MapperMethod.ParamMap<TEntity> param = new MapperMethod.ParamMap<>();
+            param.put(Constants.ENTITY, entity);
+            sqlSession.update(sqlStatement, param);
+        });
+    }
 
     /**
      * 获取批量操作 SqlSession
      *
-     * @param zClass 实体类型
      * @return SqlSession
      */
-    default SqlSession sqlSessionBatch(Class<TEntity> zClass) {
-        return null;
+    default SqlSession sqlSessionBatch() {
+        return getSqlSessionFactory().openSession(ExecutorType.BATCH);
+    }
+
+    /**
+     * 获取 SqlSessionFactory
+     *
+     * @return SqlSessionFactory
+     */
+    private SqlSessionFactory getSqlSessionFactory() {
+        MybatisMapperProxy<?> mybatisMapperProxy = MybatisUtils.getMybatisMapperProxy(this);
+        return MybatisUtils.getSqlSessionFactory(mybatisMapperProxy);
     }
 
 }

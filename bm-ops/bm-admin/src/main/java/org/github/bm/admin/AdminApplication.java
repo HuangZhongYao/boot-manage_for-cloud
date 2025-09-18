@@ -20,7 +20,7 @@ public class AdminApplication implements ApplicationRunner {
     Environment env;
 
     public static void main(String[] args) {
-        BMApplication.run(ServiceEnum.APPLICATION_ADMIN.name, AdminApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_ADMIN, AdminApplication.class, args);
     }
 
     @Override

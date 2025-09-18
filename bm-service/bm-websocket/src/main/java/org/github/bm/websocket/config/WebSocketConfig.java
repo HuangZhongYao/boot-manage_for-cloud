@@ -14,8 +14,10 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.Map;
+
 @Slf4j
 @Configuration
 @EnableWebSocketMessageBroker
@@ -23,20 +25,23 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Resource
     private AuthHandshakeInterceptor authHandshakeInterceptor;
+    @Resource
+    private AuthHandshakeHandler authHandshakeHandler;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // 注册STOMP端点
         registry.addEndpoint("/ws")
-            .setAllowedOriginPatterns("*")
-            .addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
-            .withSockJS(); // 支持SockJS回退
+                .setAllowedOriginPatterns("*")
+                .addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
+                .setHandshakeHandler(authHandshakeHandler)// 添加握手处理器
+                .withSockJS(); // 支持SockJS回退
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        // 配置消息代理
-        registry.enableSimpleBroker(SimpConstant.TOPIC_PREFIX, SimpConstant.QUEUE_PREFIX); // 启用简单代理
+        // 配置消息代理            ！！注意如果websocket需要部署多个服务则不能使用简单代理了。需要依赖外部消息代理如RabbitMQ
+        registry.enableSimpleBroker(SimpConstant.TOPIC_PREFIX, SimpConstant.QUEUE_PREFIX, SimpConstant.USER_DESTINATION_PREFIX); // 启用简单代理
         registry.setApplicationDestinationPrefixes(SimpConstant.APP_DESTINATION_PREFIX); // 应用程序目的地前缀
         registry.setUserDestinationPrefix(SimpConstant.USER_DESTINATION_PREFIX); // 用户目的地前缀
     }

@@ -28,6 +28,12 @@ public class UserController extends BaseController {
     @Resource
     IUserService userService;
 
+    @Operation(summary = "查询在线用户", description = "查询在线用户")
+    @GetMapping(value = "/queryOnlineUser", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<List<UserVO>> queryOnlineUser(UserQueryPageInputDTO inputDTO) {
+        return ApiResponse.ok(userService.queryOnlineUser(inputDTO));
+    }
+
     @Operation(summary = "分页查询", description = "分页查询用户接口")
     @GetMapping(value = "/pageQueryList", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Page<UserVO>> pageQueryList(UserQueryPageInputDTO inputDTO) {

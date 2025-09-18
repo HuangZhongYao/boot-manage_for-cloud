@@ -7,6 +7,6 @@ import org.github.bm.core.annotations.BMCloudApplication;
 @BMCloudApplication
 public class ResourceApplication {
     public static void main(String[] args) {
-        BMApplication.run(ServiceEnum.APPLICATION_RESOURCE.name, ResourceApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_RESOURCE, ResourceApplication.class, args);
     }
 }

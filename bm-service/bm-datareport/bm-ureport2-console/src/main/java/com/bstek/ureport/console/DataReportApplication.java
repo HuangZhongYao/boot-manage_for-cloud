@@ -13,7 +13,7 @@ import org.springframework.context.annotation.ImportResource;
 @BMCloudApplication
 public class DataReportApplication implements ApplicationRunner {
     public static void main(String[] args) {
-        BMApplication.run(ServiceEnum.APPLICATION_DATAREPORT.name, DataReportApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_DATAREPORT, DataReportApplication.class, args);
     }
 
     @Override

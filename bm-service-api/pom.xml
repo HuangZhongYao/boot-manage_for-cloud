@@ -19,6 +19,7 @@
         <module>bm-system-api</module>
         <module>bm-resource-api</module>
         <module>bm-websocket-api</module>
+        <module>bm-example-api</module>
     </modules>
 
     <dependencies>

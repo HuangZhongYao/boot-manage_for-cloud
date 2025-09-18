@@ -81,5 +81,12 @@ public interface IUserService {
      * @return Boolean 编辑结果，true表示成功，false表示失败
      */
     Boolean editUser(EditUserInputDTO inputDTO);
+
+    /**
+     * 查询在线用户列表
+     * @param inputDTO 查询输入参数，包含分页信息和查询条件
+     * @return List<UserVO> 在线用户列表
+     */
+    List<UserVO> queryOnlineUser(UserQueryPageInputDTO inputDTO);
 }
 

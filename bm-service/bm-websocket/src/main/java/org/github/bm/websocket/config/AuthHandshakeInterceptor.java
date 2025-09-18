@@ -3,11 +3,11 @@ package org.github.bm.websocket.config;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import jakarta.annotation.Resource;
-import java.security.Principal;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.SecurityConstants;
 import org.github.bm.websocket.base.SimpConstant;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -16,8 +16,8 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.messaging.AbstractSubProtocolEvent;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import java.security.Principal;
 import java.util.Map;
-import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 
 /**
@@ -25,27 +25,17 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
  */
 @Slf4j
 @Component
-public class AuthHandshakeInterceptor extends DefaultHandshakeHandler implements HandshakeInterceptor {
+public class AuthHandshakeInterceptor implements HandshakeInterceptor {
     @Resource
     SecurityProperties securityProperties = new SecurityProperties();
-
-    @Override
-    protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler,
-                                      Map<String, Object> attributes) {
-        return StompPrincipal
-            .builder()
-            .name(attributes.getOrDefault(SimpConstant.SIMP_USER_KEY,"").toString())
-            .publicName(request.getRemoteAddress().getAddress().getHostName())
-            .build();
-    }
 
     /**
      * WebSocket握手前的认证处理方法
      * 在WebSocket连接建立之前验证用户身份，如果验证通过则允许连接并存储用户信息
      *
-     * @param request WebSocket握手请求对象
-     * @param response WebSocket握手响应对象
-     * @param wsHandler WebSocket处理器
+     * @param request    WebSocket握手请求对象
+     * @param response   WebSocket握手响应对象
+     * @param wsHandler  WebSocket处理器
      * @param attributes 用于存储连接属性的Map对象
      * @return 验证通过返回true允许连接，验证失败返回false拒绝连接
      * @throws Exception 验证过程中可能抛出的异常
@@ -63,6 +53,7 @@ public class AuthHandshakeInterceptor extends DefaultHandshakeHandler implements
                 if (userId != null) {
                     attributes.put(SimpConstant.SIMP_USER_KEY, userId);
                     attributes.put(SimpConstant.SIMP_AUTHENTICATED_KEY, true);
+                    request.getHeaders().add(SimpConstant.SIMP_USER_KEY, userId);
                     log.info("握手成功，用户ID已存储: {}", userId);
                 } else {
                     log.info("握手失败，无法从Token中提取用户ID");
@@ -112,13 +103,13 @@ public class AuthHandshakeInterceptor extends DefaultHandshakeHandler implements
             Object authUserId = jwt.getPayload(SecurityConstants.JwtConstants.PAYLOAD_AUTHORIZATION_USER_ID);
             return authUserId.toString();
         } catch (Exception e) {
-            return "userId";
+            return null;
         }
     }
 
     // 辅助方法：安全地从事件中获取会话ID
     private String getSessionIdFromEvent(AbstractSubProtocolEvent event) {
         Object sessionId = event.getMessage().getHeaders().get(SimpConstant.SIMP_SESSION_ID_KEY);
-        return sessionId != null ? sessionId.toString() : "unknown";
+        return sessionId != null ? sessionId.toString() : null;
     }
 }
