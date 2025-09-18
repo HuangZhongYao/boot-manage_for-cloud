@@ -14,6 +14,7 @@ import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.Map;
 
@@ -24,6 +25,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Resource
     private AuthHandshakeInterceptor authHandshakeInterceptor;
+    @Resource
+    private AuthHandshakeHandler authHandshakeHandler;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -31,6 +34,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws")
                 .setAllowedOriginPatterns("*")
                 .addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
+                .setHandshakeHandler(authHandshakeHandler)// 添加握手处理器
                 .withSockJS(); // 支持SockJS回退
     }
 

@@ -8,6 +8,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.*;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * WebSocket客户端状态监听
  *
@@ -30,28 +33,12 @@ public class WebSocketEventListener {
         String sessionId = getSessionIdFromEvent(event);
 
         if (userId != null) {
+            onlineUserService.addOnlineUser(userId);
             log.info("WebSocket 客户端正在连接: 用户ID={}, 会话ID={}", userId, sessionId);
         } else {
             log.warn("WebSocket 客户端正在连接但未获取到用户信息，会话ID={}", sessionId);
         }
     }
-
-    /**
-     * 监听客户端连接完成（握手后）
-     */
-    @EventListener
-    public void handleWebSocketConnectedListener(SessionConnectedEvent event) {
-        String userId = getUserIdFromEvent(event);
-        String sessionId = getSessionIdFromEvent(event);
-
-        if (userId != null) {
-            log.info("WebSocket 客户端连接完成: 用户ID={}, 会话ID={}", userId, sessionId);
-            // 用户连接成功后的处理
-        } else {
-            log.warn("WebSocket 客户端连接完成但未获取到用户信息，会话ID={}", sessionId);
-        }
-    }
-
 
     /**
      * 监听客户端关闭事件
@@ -62,6 +49,7 @@ public class WebSocketEventListener {
         String sessionId = getSessionIdFromEvent(event);
 
         if (userId != null) {
+            onlineUserService.removeOnlineUser(userId);
             log.info("WebSocket 客户端已关闭: 用户ID={}, 会话ID={}", userId, sessionId);
         } else {
             log.warn("WebSocket 客户端已关闭但未获取到用户信息，会话ID={}", sessionId);
@@ -102,10 +90,17 @@ public class WebSocketEventListener {
 
     // 辅助方法：安全地从事件中获取用户ID
     private String getUserIdFromEvent(AbstractSubProtocolEvent event) {
+        // 获取Principal
         if (event.getUser() != null) {
             return event.getUser().getName();
         }
-        return null;
+        // 从消息头中获取
+        Map simpSessionAttributes = event.getMessage().getHeaders().get("simpSessionAttributes", Map.class);
+        if (simpSessionAttributes == null) {
+            return null;
+        }
+        Object userId = simpSessionAttributes.get(SimpConstant.SIMP_USER_KEY);
+        return userId == null ? null : userId.toString();
     }
 
     // 辅助方法：安全地从事件中获取会话ID
