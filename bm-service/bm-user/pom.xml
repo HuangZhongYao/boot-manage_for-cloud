@@ -23,5 +23,10 @@
             <artifactId>bm-user-api</artifactId>
             <version>${bm-cloud.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.github.bm</groupId>
+            <artifactId>bm-websocket-api</artifactId>
+            <version>${bm-cloud.version}</version>
+        </dependency>
     </dependencies>
 </project>
