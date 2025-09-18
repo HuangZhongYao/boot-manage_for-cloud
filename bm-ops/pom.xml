@@ -13,7 +13,7 @@
     <name>${project.artifactId}</name>
 
 
-    <description>DevOps 集合 如监控模块、调度、接口文档</description>
+    <description>DevOps 集合 如代码生成、监控控制台、调度中心、接口文档</description>
     <modules>
         <module>bm-admin</module>
     </modules>
