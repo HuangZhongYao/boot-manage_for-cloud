@@ -11,6 +11,6 @@ import org.github.bm.core.annotations.BMCloudApplication;
 @BMCloudApplication
 public class AuthApplication {
     public static void main(String[] args) {
-        BMApplication.run(ServiceEnum.APPLICATION_AUTH.name, AuthApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_AUTH, AuthApplication.class, args);
     }
 }

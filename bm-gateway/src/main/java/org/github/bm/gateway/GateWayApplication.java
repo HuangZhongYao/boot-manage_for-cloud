@@ -22,7 +22,7 @@ public class GateWayApplication implements ApplicationRunner {
     @Resource
     Environment env;
     public static void main(String[] args) {
-        BMApplication.run(ServiceEnum.APPLICATION_GATEWAY.name, GateWayApplication.class, args);
+        BMApplication.run(ServiceEnum.APPLICATION_GATEWAY, GateWayApplication.class, args);
     }
 
 

@@ -60,6 +60,14 @@ public enum ServiceEnum {
         this.desc = desc;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
     /**
      * 根据名称获取枚举
      *
