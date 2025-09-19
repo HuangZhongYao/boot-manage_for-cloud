@@ -1,5 +1,7 @@
 package org.github.bm.websocket.web;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.github.bm.common.base.response.ApiResponse;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
+import java.util.List;
+
 @Controller
 public class WebSocketController {
 
@@ -32,7 +37,7 @@ public class WebSocketController {
     @ResponseBody
     public ApiResponse<Boolean> testSendTopic(@RequestParam("message") String message) {
         simpMessagingTemplate.convertAndSend(SimpConstant.Topic.TEST_TOPIC,
-            "服务器发送测试广播消息:" + message);
+                "服务器发送测试广播消息:" + message);
         return ApiResponse.ok(true);
     }
 
@@ -48,42 +53,46 @@ public class WebSocketController {
     }
 
     /**
-     * 测试广播通知消息
+     * 广播通知消息, 发送通知消息给全体用户
      *
      * @param message 消息
      * @return Message
      */
-    @MessageMapping("/testNotificationsMessages") // @MessageMapping 将方法映射为消息处理方法
-    @SendTo(SimpConstant.TOPIC_PREFIX + "/testNotificationsMessages") // @SendTo 将方法返回值发送到指定的主题
-    public Message testSendMessage(Message message) {
+    @MessageMapping("/sendNotificationsMessagesToAll")
+    @SendTo(SimpConstant.Topic.NOTIFICATIONS_TOPIC) // @SendTo 将方法返回值发送到指定的主题
+    public Message<NotificationMessagePayloadDTO> sendMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
         // 处理消息并广播
+        WebSocketMessageHandlerStrategy handlerStrategy =
+                webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
+        handlerStrategy.handle(JSON.toJSONString(message));
         return message;
     }
 
     /**
-     * 广播通知消息
+     * 通知消息, 发送通知消息给指定用户
      *
-     * @param message
-     * @return
+     * @param principal      用户
+     * @param message        消息
+     * @param headerAccessor 头信息
      */
-    @MessageMapping("/notificationsMessages")
-    @SendTo(SimpConstant.Topic.NOTIFICATIONS_TOPIC)
-    public Message<NotificationMessagePayloadDTO> sendMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
-        // 处理消息并广播
-        WebSocketMessageHandlerStrategy handlerStrategy =
-            webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
-//        handlerStrategy.handle();
-        return message;
-    }
-
-    @MessageMapping("/private")
-    public void sendPrivateMessage(@Payload Message message, StompHeaderAccessor headerAccessor) {
-        // 发送私人消息
-        simpMessagingTemplate.convertAndSendToUser(
-            "user",
-            SimpConstant.QUEUE_PREFIX + "/messages",
-            message
-        );
+    @MessageMapping("/sendNotificationsMessagesToUser")
+    public void sendPrivateMessage(Principal principal, @Payload WebSocketMessage<NotificationMessagePayloadDTO> message, StompHeaderAccessor headerAccessor) {
+        // payload
+        NotificationMessagePayloadDTO payload = message.getPayload();
+        // 接收消息的目标用户
+        List<String> payloadTo = payload.getTo();
+        // 如果接收用户为空，则不处理
+        if (CollectionUtil.isEmpty(payloadTo)) {
+            return;
+        }
+        for (String userId : payloadTo) {
+            // 发送用户消息
+            simpMessagingTemplate.convertAndSendToUser(
+                    userId,
+                    SimpConstant.Queue.USER_QUEUE_MESSAGES,
+                    message
+            );
+        }
     }
 
 

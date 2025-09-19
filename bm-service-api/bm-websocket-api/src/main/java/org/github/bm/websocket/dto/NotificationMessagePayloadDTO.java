@@ -1,8 +1,7 @@
 package org.github.bm.websocket.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsTypeEnum;
 import org.github.bm.websocket.base.AbstractPayload;
@@ -15,6 +14,9 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NotificationMessagePayloadDTO extends AbstractPayload {
     /**
      * 通知公告Id

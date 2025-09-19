@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public abstract class AbstractPayload extends BaseDTO {
+    public static final String DEFAULT_FROM = "-1";
     /**
      * 消息标题
      */
@@ -33,15 +34,10 @@ public abstract class AbstractPayload extends BaseDTO {
     /**
      * 消息接收方标识; id列表
      */
-    private List<String> to;
+    private List<Long> to;
 
     /**
      * 消息发送时间
      */
     private LocalDateTime time;
-
-    /**
-     * 消息处理器名称; {@link org.github.bm.websocket.base.MessageHandlerConstant} 中定义
-     */
-    private String handlerEnum;
 }

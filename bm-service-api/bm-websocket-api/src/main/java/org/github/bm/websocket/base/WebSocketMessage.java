@@ -41,8 +41,18 @@ public class WebSocketMessage<T extends AbstractPayload> extends BaseDTO impleme
         this.headers = new MessageHeaders(null);
     }
 
+    public WebSocketMessage(String handlerName, T payload) {
+        this.handlerName = handlerName;
+        this.payload = payload;
+    }
 
     public WebSocketMessage(T payload, MessageHeaders headers) {
+        this.payload = payload;
+        this.headers = headers;
+    }
+
+    public WebSocketMessage(String handlerName, T payload, MessageHeaders headers) {
+        this.handlerName = handlerName;
         this.payload = payload;
         this.headers = headers;
     }

@@ -16,7 +16,6 @@ import org.github.bm.system.dto.EditNotificationsInputDTO;
 import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
 import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
-import org.github.bm.system.entity.NotificationsRecordEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
 import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsStateEnum;
@@ -27,6 +26,7 @@ import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
 import org.github.bm.system.vo.RoleUserModel;
 import org.github.bm.user.feign.IUserClient;
+import org.github.bm.websocket.base.AbstractPayload;
 import org.github.bm.websocket.base.MessageHandlerConstant;
 import org.github.bm.websocket.base.WebSocketMessage;
 import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;
@@ -36,10 +36,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -221,35 +218,27 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             }
         });
 
-        // 构建通知记录实体
-        List<NotificationsRecordEntity> notificationsRecordEntityList = targetUserIdSet.stream()
-                .map(userId -> NotificationsRecordEntity.builder()
-                        .notificationsId(inputDTO.getId())
-                        .type(NotificationsTypeEnum.SYSTEM)
-                        .level(NotificationsLevelEnum.ORDINARY)
-                        .userId(userId)
-                        .readState(false)
-                        .build())
-                .toList();
-        // 批量插入通知记录数据
-        notificationsRecordService.saveBatch(notificationsRecordEntityList);
         // 构建更新实体
         NotificationsEntity updateEntity = new NotificationsEntity();
         updateEntity.setId(inputDTO.getId());
         updateEntity.setState(NotificationsStateEnum.PUBLISHED);
         updateEntity.setPublishTime(LocalDateTime.now());
 
-        // 调用websocket模块推送消息
-        NotificationMessagePayloadDTO payloadDTO = new NotificationMessagePayloadDTO();
-        payloadDTO.setNotificationsId(notificationsEntity.getId());
-        payloadDTO.setContent(notificationsEntity.getContent());
+        // websocket构建消息体
+        NotificationMessagePayloadDTO payloadDTO = NotificationMessagePayloadDTO.builder()
+                .content(notificationsEntity.getTitle())
+                .notificationsId(notificationsEntity.getId())
+                .publishTime(notificationsEntity.getPublishTime())
+                .level(notificationsEntity.getLevel())
+                .type(notificationsEntity.getType())
+                .build();
         payloadDTO.setTitle(notificationsEntity.getTitle());
-        payloadDTO.setType(NotificationsTypeEnum.SYSTEM);
-        payloadDTO.setLevel(NotificationsLevelEnum.ORDINARY);
-        WebSocketMessage<NotificationMessagePayloadDTO> webSocketMessage = new WebSocketMessage<>(payloadDTO);
-        webSocketMessage.setHandlerName(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME);
+        payloadDTO.setFrom(AbstractPayload.DEFAULT_FROM);
+        payloadDTO.setTo(new ArrayList<>(targetUserIdSet));
+        payloadDTO.setTime(LocalDateTime.now());
 
-        webSocketClient.sendNotificationMessage(new WebSocketMessage<>(payloadDTO));
+        // 调用websocket模块推送消息
+        webSocketClient.sendNotificationMessage(new WebSocketMessage<>(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME, payloadDTO));
 
         // 更新状态
         return this.updateById(updateEntity);

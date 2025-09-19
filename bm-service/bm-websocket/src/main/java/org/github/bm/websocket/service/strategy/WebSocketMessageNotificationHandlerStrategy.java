@@ -45,9 +45,9 @@ public class WebSocketMessageNotificationHandlerStrategy implements WebSocketMes
         // 创建通知记录实体列表，并为每个接收者创建一个记录
         List<NotificationsRecordEntity> notificationsRecordEntityList = new ArrayList<>(payload.getTo().size());
         // 遍历接收者列表，创建通知记录实体，并设置相关属性
-        for (String userId : payload.getTo()) {
+        for (Long userId : payload.getTo()) {
             NotificationsRecordEntity notificationRecordEntity = new NotificationsRecordEntity();
-            notificationRecordEntity.setUserId(Long.valueOf(userId));
+            notificationRecordEntity.setUserId(userId);
             notificationRecordEntity.setNotificationsId(payload.getNotificationsId());
             notificationRecordEntity.setReadState(Boolean.FALSE);
             notificationRecordEntity.setType(payload.getType());

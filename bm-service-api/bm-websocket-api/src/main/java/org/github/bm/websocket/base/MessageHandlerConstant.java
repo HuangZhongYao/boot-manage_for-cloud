@@ -1,7 +1,7 @@
 package org.github.bm.websocket.base;
 
 /**
- * websocket 消息处理器枚举
+ * websocket 消息处理器常量
  * Time 2025-09-08 11:29
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
