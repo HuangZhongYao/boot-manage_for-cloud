@@ -1,9 +1,7 @@
 package org.github.bm.websocket.service.strategy;
 
-import org.github.bm.websocket.base.WebSocketMessage;
-
 /**
- * 消息处理策略接口
+ * 推送消息处理策略接口
  * Time 2025-09-08 14:49
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */

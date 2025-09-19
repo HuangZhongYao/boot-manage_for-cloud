@@ -30,39 +30,29 @@ public class WebSocketServiceImpl implements IWebSocketService {
     private IOnlineUserService onlineUserService;
 
     @Override
-    public Integer sendNotificationMessage(
-            WebSocketMessage<NotificationMessagePayloadDTO> message) {
+    public Integer sendNotificationMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
         NotificationMessagePayloadDTO payload = message.getPayload();
         // 发送目标为空则不执行
         if (CollectionUtil.isEmpty(payload.getTo())) {
             return 0;
         }
-        // 遍历用户推送通知 TODO 可以优化成遍历在线用户
-//        for (String userId : payload.getTo()) {
-//            simpMessagingTemplate.convertAndSendToUser(userId,
-//                SimpConstant.Queue.USER_QUEUE_MESSAGES, message);
-//        }
         // 获取所有在线用户
         for (Long userId : onlineUserService.getOnlineUserIdList()) {
-            simpMessagingTemplate.convertAndSendToUser(String.valueOf(userId),
-                    SimpConstant.Queue.USER_QUEUE_MESSAGES, message);
+            simpMessagingTemplate.convertAndSendToUser(String.valueOf(userId), SimpConstant.Queue.USER_QUEUE_MESSAGES, message);
         }
         // 获取消息处理策略
-        WebSocketMessageHandlerStrategy handlerStrategy =
-                webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
+        WebSocketMessageHandlerStrategy handlerStrategy = webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
         //
         handlerStrategy.handle(JSON.toJSONString(message));
         return payload.getTo().size();
     }
 
     @Override
-    public Integer sendPublicNotificationMessage(
-            WebSocketMessage<NotificationMessagePayloadDTO> message) {
+    public Integer sendPublicNotificationMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
         // 推送消息
         simpMessagingTemplate.convertAndSend(SimpConstant.Topic.NOTIFICATIONS_TOPIC, message);
         // 获取消息处理策略
-        WebSocketMessageHandlerStrategy handlerStrategy =
-                webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
+        WebSocketMessageHandlerStrategy handlerStrategy = webSocketMessageHandlerStrategyFactory.getStrategy(message.getHandlerName());
         // 处理消息
         handlerStrategy.handle(JSON.toJSONString(message));
         return message.getPayload().getTo().size();
