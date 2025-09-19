@@ -57,4 +57,9 @@ public class NotificationsEntity extends AbstractBaseEntity {
      * 通知级别
      */
     private NotificationsLevelEnum level;
+
+    /**
+     * 是否全体通知
+     */
+    private Boolean allNotifications;
 }

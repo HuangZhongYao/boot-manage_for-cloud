@@ -26,11 +26,25 @@ public interface IWebSocketClient extends BaseFeign {
     String SEND_NOTIFICATION_MESSAGE = API_PREFIX + "/sendNotificationMessage";
 
     /**
-     * 发送公告通知消息
+     * 发送公告通知消息path
+     */
+    String SEND_PUBLIC_NOTIFICATION_MESSAGE = API_PREFIX + "/sendPublicNotificationMessage";
+
+    /**
+     * 发送公告通知消息,通知指定用户
      *
      * @param message 包含消息载体的对象
      * @return 发送成功数
      */
     @PostMapping(SEND_NOTIFICATION_MESSAGE)
     Integer sendNotificationMessage(@RequestBody WebSocketMessage<NotificationMessagePayloadDTO> message);
+
+    /**
+     * 发送广播公告通知消息,通知全体用户
+     *
+     * @param message 包含消息载体的对象
+     * @return 发送成功数
+     */
+    @PostMapping(SEND_PUBLIC_NOTIFICATION_MESSAGE)
+    Integer sendPublicNotificationMessage(@RequestBody WebSocketMessage<NotificationMessagePayloadDTO> message);
 }

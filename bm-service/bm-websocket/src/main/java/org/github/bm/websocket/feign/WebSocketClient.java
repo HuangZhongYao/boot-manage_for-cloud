@@ -24,4 +24,10 @@ public class WebSocketClient implements IWebSocketClient{
     public Integer sendNotificationMessage(@RequestBody WebSocketMessage<NotificationMessagePayloadDTO> message) {
         return webSocketService.sendNotificationMessage(message);
     }
+
+    @Override
+    @PostMapping(SEND_PUBLIC_NOTIFICATION_MESSAGE)
+    public Integer sendPublicNotificationMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
+        return webSocketService.sendPublicNotificationMessage( message);
+    }
 }

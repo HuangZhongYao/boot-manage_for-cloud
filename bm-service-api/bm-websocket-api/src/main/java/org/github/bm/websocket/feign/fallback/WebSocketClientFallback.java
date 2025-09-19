@@ -15,4 +15,9 @@ public class WebSocketClientFallback implements IWebSocketClient {
     public Integer sendNotificationMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
         return 0;
     }
+
+    @Override
+    public Integer sendPublicNotificationMessage(WebSocketMessage<NotificationMessagePayloadDTO> message) {
+        return 0;
+    }
 }

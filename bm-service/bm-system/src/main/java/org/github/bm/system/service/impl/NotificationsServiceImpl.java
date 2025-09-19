@@ -17,10 +17,8 @@ import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
 import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
-import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsStateEnum;
 import org.github.bm.system.enums.NotificationsTargetEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
 import org.github.bm.system.repository.NotificationsRepository;
 import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
@@ -238,7 +236,11 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         payloadDTO.setTime(LocalDateTime.now());
 
         // 调用websocket模块推送消息
-        webSocketClient.sendNotificationMessage(new WebSocketMessage<>(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME, payloadDTO));
+        if (Boolean.TRUE.equals(notificationsEntity.getAllNotifications())) {
+            webSocketClient.sendPublicNotificationMessage(new WebSocketMessage<>(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME, payloadDTO));
+        } else {
+            webSocketClient.sendNotificationMessage(new WebSocketMessage<>(MessageHandlerConstant.NOTIFICATION_HANDLER_NAME, payloadDTO));
+        }
 
         // 更新状态
         return this.updateById(updateEntity);
