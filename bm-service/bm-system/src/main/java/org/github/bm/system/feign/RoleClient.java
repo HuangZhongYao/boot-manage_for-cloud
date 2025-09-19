@@ -1,5 +1,6 @@
 package org.github.bm.system.feign;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.annotation.Resource;
@@ -41,6 +42,9 @@ public class RoleClient implements IRoleClient {
     @Override
     @PostMapping(GET_ROLE_BY_ID_LIST)
     public List<RoleEntity> getRoleByIdList(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return List.of();
+        }
         return roleRepository.selectBatchIds(ids);
     }
 
@@ -63,6 +67,9 @@ public class RoleClient implements IRoleClient {
     @Override
     @PostMapping(GET_ROLE_BY_USER_ID_LIST)
     public List<RoleEntity> getRoleByUserIdList(List<Long> userIds) {
+        if (CollectionUtil.isEmpty(userIds)) {
+            return List.of();
+        }
         List<UserRoleEntity> userRoleEntityList = userRoleRepository.selectList(Wrappers.<UserRoleEntity>lambdaQuery().in(UserRoleEntity::getUserId, userIds));
         if (userRoleEntityList.isEmpty())
             return List.of();
@@ -73,11 +80,17 @@ public class RoleClient implements IRoleClient {
     @Override
     @PostMapping(GET_USER_ROLE_BY_USER_ID_LIST)
     public List<UserRoleEntity> getUserRoleByUserIdList(@RequestParam("userIds") List<Long> userIds) {
+        if (CollectionUtil.isEmpty(userIds)) {
+            return List.of();
+        }
         return userRoleRepository.selectList(Wrappers.<UserRoleEntity>lambdaQuery().in(UserRoleEntity::getUserId, userIds));
     }
 
     @PostMapping(GET_USER_ROLE_VO_BY_USER_ID_LIST)
-    public List<UserRoleVO> getUserRoleVoByUserIdList(@RequestParam("userIds") List<Long> userIds){
+    public List<UserRoleVO> getUserRoleVoByUserIdList(@RequestParam("userIds") List<Long> userIds) {
+        if (CollectionUtil.isEmpty(userIds)) {
+            return List.of();
+        }
         return roleRepository.queryUserRolesByUserIds(userIds);
     }
 
@@ -90,11 +103,17 @@ public class RoleClient implements IRoleClient {
     @Override
     @PostMapping(DEL_USER_ROLE_BY_USER_ID_LIST)
     public Integer delUserRoleByUserIds(List<Long> userIds) {
+        if (CollectionUtil.isEmpty(userIds)) {
+            return 0;
+        }
         return userRoleRepository.delete(Wrappers.<UserRoleEntity>lambdaQuery().in(UserRoleEntity::getUserId, userIds));
     }
 
     @PostMapping(ADD_USER_ROLE_BY_USER_ID)
     public Boolean addUserRoleByUserId(@RequestBody List<UserRoleEntity> userRoleEntityList) {
+        if (CollectionUtil.isEmpty(userRoleEntityList)) {
+            return false;
+        }
         return userRoleService.saveBatch(userRoleEntityList);
     }
 }
