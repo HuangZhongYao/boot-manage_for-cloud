@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Hidden
 @RestController
-public class NotificationsRecordClient implements INotificationsRecordClient {
+public class NotificationsClient implements INotificationsClient {
     @Resource
     private INotificationsRecordService notificationsRecordService;
 
