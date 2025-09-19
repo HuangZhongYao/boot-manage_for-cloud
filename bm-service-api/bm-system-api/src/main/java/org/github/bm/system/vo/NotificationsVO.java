@@ -95,20 +95,20 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
         if (state == null) {
             return false;
         }
-        return state.equals(NotificationsStateEnum.DRAFT);
+        return NotificationsStateEnum.DRAFT.equals(state);
     }
 
     public Boolean getShowEditBtn() {
         if (state == null) {
             return false;
         }
-        return state.equals(NotificationsStateEnum.DRAFT);
+        return NotificationsStateEnum.DRAFT.equals(state);
     }
 
     public Boolean getShowPublishBtn() {
         if (state == null) {
             return false;
         }
-        return state.equals(NotificationsStateEnum.DRAFT);
+        return NotificationsStateEnum.DRAFT.equals(state);
     }
 }
