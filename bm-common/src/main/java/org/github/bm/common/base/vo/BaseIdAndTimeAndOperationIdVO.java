@@ -19,48 +19,83 @@ public class BaseIdAndTimeAndOperationIdVO extends BaseIdAndTimeIdVO {
     public BaseIdAndTimeAndOperationIdVO() {
     }
 
-    public BaseIdAndTimeAndOperationIdVO(String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(Long createdBy, String createdName, Long updatedBy, String updatedName) {
         this.createdBy = createdBy;
+        this.createdName = createdName;
         this.updatedBy = updatedBy;
+        this.updatedName = updatedName;
     }
 
-    public BaseIdAndTimeAndOperationIdVO(LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(LocalDateTime createdTime, LocalDateTime updatedTime, Long createdBy, String createdName, Long updatedBy, String updatedName) {
         super(createdTime, updatedTime);
         this.createdBy = createdBy;
+        this.createdName = createdName;
         this.updatedBy = updatedBy;
+        this.updatedName = updatedName;
     }
 
-    public BaseIdAndTimeAndOperationIdVO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime, String createdBy, String updatedBy) {
+    public BaseIdAndTimeAndOperationIdVO(Long id, LocalDateTime createdTime, LocalDateTime updatedTime, Long createdBy, String createdName, Long updatedBy, String updatedName) {
         super(id, createdTime, updatedTime);
         this.createdBy = createdBy;
+        this.createdName = createdName;
         this.updatedBy = updatedBy;
+        this.updatedName = updatedName;
     }
 
     /**
      * 创建时间
      */
-    @Schema(description = "创建人",name = "createdBy", example = "144344665")
-    private String createdBy;
+    @Schema(description = "创建人Id",name = "createdBy", example = "144344665")
+    private Long createdBy;
+
+    /**
+     * 创建人名称
+     */
+    @Schema(description = "创建人名称",name = "createdName", example = "管理员")
+    private String createdName;
 
     /**
      * 更新时间
      */
-    @Schema(description = "更新人",name = "updatedBy", example = "153344665")
-    private String updatedBy;
+    @Schema(description = "更新人Id",name = "updatedBy", example = "153344665")
+    private Long updatedBy;
 
-    public String getCreatedBy() {
+    /**
+     * 更新人名称
+     */
+    @Schema(description = "更新人名称",name = "updatedName", example = "管理员")
+    private String updatedName;
+
+
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
-    public String getUpdatedBy() {
+    public String getCreatedName() {
+        return createdName;
+    }
+
+    public void setCreatedName(String createdName) {
+        this.createdName = createdName;
+    }
+
+    public Long getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(String updatedBy) {
+    public void setUpdatedBy(Long updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public String getUpdatedName() {
+        return updatedName;
+    }
+
+    public void setUpdatedName(String updatedName) {
+        this.updatedName = updatedName;
     }
 }

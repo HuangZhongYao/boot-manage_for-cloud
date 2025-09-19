@@ -21,27 +21,27 @@ public abstract class AbstractBaseEntity  extends AbstractIdAndTimeEntity{
      * 创建人
      */
     @TableField(value = "created_by",fill = FieldFill.INSERT)
-    private String createdBy;
+    private Long createdBy;
 
     /**
      * 更新人
      */
     @TableField(value = "updated_by",fill = FieldFill.INSERT_UPDATE)
-    private String updatedBy;
+    private Long updatedBy;
 
-    public String getCreatedBy() {
+    public Long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(String createdBy) {
+    public void setCreatedBy(Long createdBy) {
         this.createdBy = createdBy;
     }
 
-    public String getUpdatedBy() {
+    public Long getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(String updatedBy) {
+    public void setUpdatedBy(Long updatedBy) {
         this.updatedBy = updatedBy;
     }
 }

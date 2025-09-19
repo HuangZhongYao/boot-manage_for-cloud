@@ -44,6 +44,11 @@ public class NotificationsEntity extends AbstractBaseEntity {
     private LocalDateTime publishTime;
 
     /**
+     * 发布人
+     */
+    private Long publisher;
+
+    /**
      * 撤回时间
      */
     private LocalDateTime revokeTime;

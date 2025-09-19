@@ -52,6 +52,18 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
     private LocalDateTime publishTime;
 
     /**
+     * 发布人id
+     */
+    @Schema(description = "发布人id")
+    private Long publisher;
+
+    /**
+     * 发布人名称
+     */
+    @Schema(description = "发布人名称")
+    private String publisherName;
+
+    /**
      * 撤回时间
      */
     @Schema(description = "撤回时间")
@@ -63,10 +75,40 @@ public class NotificationsVO extends BaseIdAndTimeAndOperationIdVO {
     @Schema(description = "通知目标")
     private List<NotificationsTargetInputDTO> notificationsTargets;
 
+    @Schema(description = "是否显示删除按钮")
+    private Boolean showDelBtn;
+
+    @Schema(description = "是否显示编辑按钮")
+    private Boolean showEditBtn;
+
+    @Schema(description = "是否显示发布按钮")
+    private Boolean showPublishBtn;
+
     public String getStateDesc() {
         if (state == null) {
             return null;
         }
         return state.desc;
+    }
+
+    public Boolean getShowDelBtn() {
+        if (state == null) {
+            return false;
+        }
+        return state.equals(NotificationsStateEnum.DRAFT);
+    }
+
+    public Boolean getShowEditBtn() {
+        if (state == null) {
+            return false;
+        }
+        return state.equals(NotificationsStateEnum.DRAFT);
+    }
+
+    public Boolean getShowPublishBtn() {
+        if (state == null) {
+            return false;
+        }
+        return state.equals(NotificationsStateEnum.DRAFT);
     }
 }

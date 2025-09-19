@@ -26,6 +26,7 @@ import org.github.bm.system.repository.NotificationsRepository;
 import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
 import org.github.bm.system.vo.RoleUserModel;
+import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.github.bm.websocket.base.AbstractPayload;
 import org.github.bm.websocket.base.MessageHandlerConstant;
@@ -79,10 +80,28 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 通知目标列表分组
         Map<Long, List<NotificationsTargetEntity>> notificationsTargetMap = notificationsTargetEntityList.stream().collect(Collectors.groupingBy(NotificationsTargetEntity::getNotificationsId));
 
+        // 发布人Id列表
+        List<Long> publisherIdList = page.getRecords().stream().map(NotificationsEntity::getPublisher).toList();
+
         // 构建VO
         Page<NotificationsVO> pageVO = new Page<>();
         BeanUtils.copyProperties(page, pageVO);
         pageVO.setRecords(notificationsConverter.toNotificationsListVO(page.getRecords()));
+
+        if (CollectionUtil.isNotEmpty(publisherIdList)) {
+            // 获取发布人
+            List<UserEntity> createdByUserList = userClient.getUserByIDList(publisherIdList);
+            // 发布人分组
+            Map<Long, String> createdByUserMap = createdByUserList.stream().collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
+            // 赋值发布人属性
+            pageVO.getRecords().forEach(item -> {
+                String username = createdByUserMap.get(item.getCreatedBy());
+                if (null != username) {
+                    item.setPublisherName(username);
+                }
+            });
+        }
+
         // 赋值通知目标属性
         for (NotificationsVO notificationsVO : pageVO.getRecords()) {
             List<NotificationsTargetEntity> targetEntityList = notificationsTargetMap.get(notificationsVO.getId());
