@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.github.bm.system.repository.OrganizationRepository">
+
+    <select id="getOrganizationAndSubOrganizationId" resultType="java.lang.Long">
+        WITH RECURSIVE organization_descendants AS (
+
+            SELECT
+                id
+            FROM
+                sys_organization
+            WHERE
+                id = #{organizationId}
+            UNION ALL
+
+            SELECT
+                d.id
+            FROM
+                sys_organization d
+                    INNER JOIN organization_descendants oc ON d.parent_id = oc.id
+
+        ) SELECT id FROM organization_descendants
+    </select>
+
+    <select id="getOrganizationAndSubOrganizationIdList" resultType="java.lang.Long">
+        WITH RECURSIVE organization_descendants AS (
+
+            SELECT
+                id
+            FROM
+                sys_organization
+            WHERE
+                id IN
+
+            <foreach collection="ids" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+
+            UNION ALL
+
+            SELECT
+                d.id
+            FROM
+                sys_organization d
+                    INNER JOIN organization_descendants oc ON d.parent_id = oc.id
+
+        ) SELECT id FROM organization_descendants
+    </select>
+</mapper>

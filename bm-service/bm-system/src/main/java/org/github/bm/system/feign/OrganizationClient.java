@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Time 2025-09-01 16:35
@@ -15,9 +16,19 @@ import java.util.List;
  */
 @Hidden
 @RestController
-public class OrganizationClient implements IOrganizationClient{
+public class OrganizationClient implements IOrganizationClient {
     @Resource
     private IOrganizationService organizationService;
+
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationIdList(Long organizationId) {
+        return organizationService.getOrganizationAndSubOrganizationId(organizationId);
+    }
+
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationIdList(List<Long> ids) {
+        return organizationService.getOrganizationAndSubOrganizationIdList(ids);
+    }
 
     /**
      * 获取组织及子组织列表
@@ -33,6 +44,7 @@ public class OrganizationClient implements IOrganizationClient{
 
     /**
      * 根据组织id列表查询组织
+     *
      * @param ids 组织ID列表
      * @return 组织列表
      */

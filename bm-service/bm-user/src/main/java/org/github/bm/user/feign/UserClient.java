@@ -1,5 +1,6 @@
 package org.github.bm.user.feign;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.swagger.v3.oas.annotations.Hidden;
@@ -50,12 +51,18 @@ public class UserClient implements IUserClient {
     @Override
     @GetMapping(GET_ORGANIZATION_USER_LIST_BY_ORGANIZATION_ID_LIST)
     public List<UserEntity> getOrganizationUserListByOrganizationIdList(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)){
+            return List.of();
+        }
         return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().in(UserEntity::getOrganizationId, ids));
     }
 
     @Override
     @GetMapping(GET_ORGANIZATION_USER_ID_LIST_BY_ORGANIZATION_ID_LIST)
     public List<Long> getOrganizationUserIdListByOrganizationIdList(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)){
+            return List.of();
+        }
         return userRepository.selectList(new LambdaQueryWrapper<UserEntity>().select(UserEntity::getId).in(UserEntity::getOrganizationId, ids))
                 .stream()
                 .map(UserEntity::getId)

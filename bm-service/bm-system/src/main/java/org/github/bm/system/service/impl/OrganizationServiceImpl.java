@@ -1,14 +1,11 @@
 package org.github.bm.system.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.github.bm.common.util.ModelMapperUtil;
@@ -28,6 +25,9 @@ import org.github.bm.user.feign.IUserClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 public class OrganizationServiceImpl implements IOrganizationService {
     @Resource
@@ -41,8 +41,8 @@ public class OrganizationServiceImpl implements IOrganizationService {
     public List<OrganizationTreeVO> organizationTree() {
         // 查询全部组织
         List<OrganizationTreeVO> organizationTreeVOList = this.organizationRepository.selectList(
-            Wrappers.<OrganizationEntity>lambdaQuery().orderByAsc(OrganizationEntity::getSort),
-            OrganizationTreeVO.class);
+                Wrappers.<OrganizationEntity>lambdaQuery().orderByAsc(OrganizationEntity::getSort),
+                OrganizationTreeVO.class);
         // 转换ITreeNode List
         List<ITreeNode<Long>> treeNodeList = new ArrayList<>(organizationTreeVOList.size());
         treeNodeList.addAll(organizationTreeVOList);
@@ -56,13 +56,13 @@ public class OrganizationServiceImpl implements IOrganizationService {
     public Page<OrganizationVO> pageQueryList(OrganizationPageQueryInputDTO inputDTO) {
         // 构建查询条件
         LambdaQueryWrapper<OrganizationEntity> queryWrapper =
-            Wrappers.<OrganizationEntity>lambdaQuery()
-                .orderByDesc(OrganizationEntity::getCreatedTime)
-                .like(StrUtil.isNotBlank(inputDTO.getKeyword()), OrganizationEntity::getName,
-                    inputDTO.getKeyword());
+                Wrappers.<OrganizationEntity>lambdaQuery()
+                        .orderByDesc(OrganizationEntity::getCreatedTime)
+                        .like(StrUtil.isNotBlank(inputDTO.getKeyword()), OrganizationEntity::getName,
+                                inputDTO.getKeyword());
         // 执行查询
         Page<OrganizationEntity> page =
-            organizationRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper);
+                organizationRepository.selectPage(inputDTO.toMybatisPageObject(), queryWrapper);
         // 构建返回值
         Page<OrganizationVO> pageVO = new Page<>();
         BeanUtils.copyProperties(page, pageVO);
@@ -75,10 +75,10 @@ public class OrganizationServiceImpl implements IOrganizationService {
         OrganizationEntity organizationEntity = organizationConvert.toEntity(inputDTO);
         // 判断名称是否存在
         if (this.organizationRepository.exists(Wrappers.<OrganizationEntity>lambdaQuery()
-            .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
-                .or()
-                .isNull(OrganizationEntity::getParentId))
-            .eq(OrganizationEntity::getName, inputDTO.getName()))) {
+                .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
+                        .or()
+                        .isNull(OrganizationEntity::getParentId))
+                .eq(OrganizationEntity::getName, inputDTO.getName()))) {
             throw new UserFriendlyException("名称已存在");
         }
         return this.organizationRepository.insert((organizationEntity)) > 0;
@@ -88,15 +88,15 @@ public class OrganizationServiceImpl implements IOrganizationService {
     public Boolean editOrganization(EditOrganizationInputDTO inputDTO) {
         // 查询库中的数据
         OrganizationEntity organizationEntityDB =
-            this.organizationRepository.selectById(inputDTO.getId());
+                this.organizationRepository.selectById(inputDTO.getId());
         // 更新的实体
         OrganizationEntity organizationUpdateEntity = organizationConvert.toEntity(inputDTO);
         // 当名称有变动时判断名称是否存在
         if (!organizationEntityDB.getName().equals(inputDTO.getName()) && this.organizationRepository.exists(Wrappers.<OrganizationEntity>lambdaQuery()
-            .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
-                .or()
-                .isNull(OrganizationEntity::getParentId))
-            .eq(OrganizationEntity::getName, inputDTO.getName())
+                .or(wrapper -> wrapper.eq(OrganizationEntity::getId, inputDTO.getParentId())
+                        .or()
+                        .isNull(OrganizationEntity::getParentId))
+                .eq(OrganizationEntity::getName, inputDTO.getName())
         )) {
             throw new UserFriendlyException("名称已存在");
         }
@@ -122,6 +122,22 @@ public class OrganizationServiceImpl implements IOrganizationService {
         List<OrganizationEntity> allOrganizationEntity = organizationRepository.selectList(null);
         // 查找当前组织及子组织
         return getOrganizationAndSubOrganization(id, allOrganizationEntity);
+    }
+
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationId(Long organizationId) {
+        if (null == organizationId) {
+            return Set.of();
+        }
+        return organizationRepository.getOrganizationAndSubOrganizationId(organizationId);
+    }
+
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationIdList(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return Set.of();
+        }
+        return organizationRepository.getOrganizationAndSubOrganizationIdList(ids);
     }
 
     /**
@@ -173,7 +189,7 @@ public class OrganizationServiceImpl implements IOrganizationService {
      * 根据组织id列表查询组织用户id列表
      *
      * @param ids 组织id列表
-     * * @return 组织用户id列表
+     *            * @return 组织用户id列表
      */
     @Override
     public List<Long> queryOrganizationUserIdListByIds(List<Long> ids) {
@@ -205,7 +221,7 @@ public class OrganizationServiceImpl implements IOrganizationService {
     /**
      * 根据指定ID查询该组织机构及其所有子组织机构（复用版本）
      *
-     * @param id 组织机构ID
+     * @param id                    组织机构ID
      * @param allOrganizationEntity 所有组织实体列表
      * @return 组织机构实体列表，包含指定组织机构及其所有子组织机构
      */

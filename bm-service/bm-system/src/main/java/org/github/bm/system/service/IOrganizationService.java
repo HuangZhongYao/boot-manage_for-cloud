@@ -1,7 +1,6 @@
 package org.github.bm.system.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import java.util.List;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.AddOrganizationInputDTO;
 import org.github.bm.system.dto.EditOrganizationInputDTO;
@@ -10,6 +9,9 @@ import org.github.bm.system.entity.OrganizationEntity;
 import org.github.bm.system.vo.OrganizationTreeVO;
 import org.github.bm.system.vo.OrganizationVO;
 import org.github.bm.user.entity.UserEntity;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 组织机构服务接口
@@ -68,6 +70,22 @@ public interface IOrganizationService {
      * @return 组织机构实体列表，包含指定组织机构及其所有子组织机构
      */
     List<OrganizationEntity> queryOrganizationAndSubOrganization(Long id);
+
+    /**
+     * 获取组织及子组织id列表
+     *
+     * @param organizationId 组织ID
+     * @return 当前组织及子组织列表
+     */
+    Set<Long> getOrganizationAndSubOrganizationId(Long organizationId);
+
+    /**
+     * 获取组织及子组织id列表
+     *
+     * @param ids 组织ID列表
+     * @return 当前组织及子组织列表
+     */
+    Set<Long> getOrganizationAndSubOrganizationIdList(List<Long> ids);
 
     /**
      * 根据组织id列表查询组织

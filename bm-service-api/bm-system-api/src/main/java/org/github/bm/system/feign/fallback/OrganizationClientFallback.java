@@ -5,6 +5,7 @@ import org.github.bm.system.feign.IOrganizationClient;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Time 2025-09-01 16:27
@@ -12,12 +13,16 @@ import java.util.List;
  */
 @Component
 public class OrganizationClientFallback implements IOrganizationClient {
-    /**
-     * 获取组织及子组织列表
-     *
-     * @param organizationId 组织ID
-     * @return 当前组织及子组织列表
-     */
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationIdList(Long organizationId) {
+        return Set.of();
+    }
+
+    @Override
+    public Set<Long> getOrganizationAndSubOrganizationIdList(List<Long> ids) {
+        return Set.of();
+    }
+
     @Override
     public List<OrganizationEntity> getOrganizationAndSubOrganization(Long organizationId) {
         return List.of();
