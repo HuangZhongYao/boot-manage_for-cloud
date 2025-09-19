@@ -80,15 +80,15 @@ public class WebSocketController {
         // payload
         NotificationMessagePayloadDTO payload = message.getPayload();
         // 接收消息的目标用户
-        List<String> payloadTo = payload.getTo();
+        List<Long> payloadTo = payload.getTo();
         // 如果接收用户为空，则不处理
         if (CollectionUtil.isEmpty(payloadTo)) {
             return;
         }
-        for (String userId : payloadTo) {
+        for (Long userId : payloadTo) {
             // 发送用户消息
             simpMessagingTemplate.convertAndSendToUser(
-                    userId,
+                    String.valueOf(userId),
                     SimpConstant.Queue.USER_QUEUE_MESSAGES,
                     message
             );
