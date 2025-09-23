@@ -48,7 +48,6 @@ public class BMApplication {
         setProperty(props, "spring.cloud.nacos.config.prefix", NacosConstant.NACOS_CONFIG_PREFIX);
         setProperty(props, "spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
         setProperty(props, "spring.cloud.nacos.config.import-check.enabled", "false");
-        setProperty(props, "spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
         setProperty(props, "spring.cloud.nacos.config.group", NacosConstant.NACOS_CONFIG_GROUP);
         setProperty(props, "spring.cloud.nacos.discovery.group", NacosConstant.NACOS_CONFIG_GROUP);
         setProperty(props, "spring.cloud.sentinel.transport.dashboard", LauncherConstant.sentinelAddr(env));
