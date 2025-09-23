@@ -64,4 +64,17 @@ public interface RedisConstant {
     }
 
 
+    /**
+     * 加密相关
+     */
+    interface Encryption {
+        /**
+         * 加密私钥缓存时长
+         */
+        int ENCRYPTION_SESSION_EXPIRATION_TIME = 60 * 30;
+        /**
+         * 加密私钥缓存key前缀
+         */
+        String ENCRYPTION_KEY_PREFIX = "Encryption:PrivateKey:";
+    }
 }
