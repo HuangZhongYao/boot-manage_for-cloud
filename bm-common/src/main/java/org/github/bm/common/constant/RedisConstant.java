@@ -40,10 +40,22 @@ public interface RedisConstant {
          */
         long AUTHORIZATION_INFO_CACHE_TIME = 7 * 24 * 60 * 60;
 
+        /**
+         * 获取客户端访问令牌缓存key前缀
+         *
+         * @param clientEnum 客户端枚举
+         * @return 客户端访问令牌缓存key前缀
+         */
         static String clientAuthorizationCacheKey(ClientEnum clientEnum) {
             return ACCESS_TOKEN + clientEnum.code + ":";
         }
 
+        /**
+         * 获取客户端刷新令牌缓存key前缀
+         *
+         * @param clientEnum 客户端枚举
+         * @return 获取客户端刷新令牌缓存key前缀
+         */
         static String clientRefreshTokenCacheKey(ClientEnum clientEnum) {
             return REFRESH_TOKEN + clientEnum.code + ":";
         }

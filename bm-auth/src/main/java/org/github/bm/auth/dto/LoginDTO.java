@@ -36,4 +36,8 @@ public class LoginDTO extends BaseDTO {
     @ValidateNotNullAndEmpty(message = "登录账号不能为空")
     @Schema(description = "账号")
     private String account;
+
+    @Schema(description = "加密会话Id")
+    @ValidateNotNullAndEmpty(message = "加密会话Id不能为空")
+    private String sessionId;
 }
