@@ -2,6 +2,9 @@ package org.github.bm.auth.service.impl;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.crypto.asymmetric.AsymmetricAlgorithm;
+import cn.hutool.crypto.asymmetric.KeyType;
+import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson2.JSON;
@@ -58,16 +61,38 @@ public class AuthServiceImpl implements IAuthService {
     @Resource
     ResourcesConverter resourcesConverter;
 
+    /**
+     * 用户登录认证
+     *
+     * @param loginDTO 登录信息传输对象，包含账号、密码和会话ID
+     * @param client 客户端类型
+     * @return AuthInfo 认证信息，包含访问令牌和刷新令牌等
+     * @throws UserFriendlyException 当账号不存在、账户被禁用、登录超时或密码错误时抛出异常
+     */
     @Override
     public AuthInfo login(LoginDTO loginDTO, String client) {
         ClientEnum clientEnum = this.getClient(client);
         // 查询用户
         UserEntity userEntity = userClient.getUserByAccount(loginDTO.getAccount());
+        // 校验用户
         if (userEntity == null) throw new UserFriendlyException("账号不存在", 430);
-        if (!loginDTO.getPassword().equals("123456")) throw new UserFriendlyException("账号或密码错误", 420);
+        // 校验账户状态
         if (userEntity.getEnable() == Boolean.FALSE) throw new UserFriendlyException("该账户已被禁用", 440);
+        // 获取加密密钥
+        Object privateKey = redisService.get(RedisConstant.Encryption.ENCRYPTION_KEY_PREFIX + loginDTO.getSessionId());
+        // 校验密钥
+        if (privateKey == null) throw new UserFriendlyException("登录超时请重试", 450);
+        // 构建RSA
+        RSA rsa = new RSA(privateKey.toString(),null);
+        // 解密后密码byte
+        byte[] decrypt = rsa.decrypt(loginDTO.getPassword(), KeyType.PrivateKey);
+        // 解密后密码明文
+        String passwordText = new String(decrypt);
+        // 校验密码
+        if (!passwordText.equals("123456")) throw new UserFriendlyException("账号或密码错误", 420);
         return this.generateJwt(userEntity, clientEnum);
     }
+
 
     @Override
     public Boolean loginOut(String client) {
