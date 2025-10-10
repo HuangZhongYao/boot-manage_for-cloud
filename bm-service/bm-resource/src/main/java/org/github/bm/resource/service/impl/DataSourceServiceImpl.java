@@ -49,8 +49,10 @@ public class DataSourceServiceImpl extends ServiceImpl<DataSourceRepository, Dat
 
     @Override
     public Boolean editDataSource(DataSourceEditInputDTO inputDTO) {
+        // 库中数据源
+        DataSourceEntity dataSourceDBEntity = dataSourceRepository.selectById(inputDTO.getId());
         // 检查数据源是否使用中
-        if (dataSourceRepository.selectCount(Wrappers.<DataSourceEntity>lambdaQuery().eq(DataSourceEntity::getName, inputDTO.getName())) > 0) {
+        if (!StrUtil.equals(inputDTO.getName(), dataSourceDBEntity.getName()) && dataSourceRepository.selectCount(Wrappers.<DataSourceEntity>lambdaQuery().eq(DataSourceEntity::getName, inputDTO.getName())) > 0) {
             throw new UserFriendlyException("数据源名称已存在");
         }
         DataSourceEntity entity = dataSourceConverter.toEntity(inputDTO);
