@@ -126,7 +126,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 通知目标列表
         List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargets();
         // 判断是否为空
-        if (notificationsTargetDTOList.isEmpty()) {
+        if (Boolean.FALSE.equals(inputDTO.getAllNotifications()) && notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
         }
         // 通知目标实体对象列表
@@ -158,7 +158,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // 通知目标列表
         List<NotificationsTargetInputDTO> notificationsTargetDTOList = inputDTO.getNotificationsTargets();
         // 判断是否为空
-        if (notificationsTargetDTOList.isEmpty()) {
+        if (Boolean.FALSE.equals(inputDTO.getAllNotifications()) && notificationsTargetDTOList.isEmpty()) {
             throw new UserFriendlyException("请选择通知目标");
         }
         // 通知目标实体对象列表
