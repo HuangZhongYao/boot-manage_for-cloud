@@ -53,6 +53,19 @@ public class WebSocketController {
     }
 
     /**
+     * 测试广播通知消息
+     *
+     * @param message 消息
+     * @return Message
+     */
+    @MessageMapping("/testNotificationsMessages") // @MessageMapping 将方法映射为消息处理方法
+    @SendTo(SimpConstant.Topic.TEST_TOPIC) // @SendTo 将方法返回值发送到指定的主题
+    public Message<Object> testSendMessage(Message<Object> message) {
+        // 处理消息并广播
+        return message;
+    }
+
+    /**
      * 广播通知消息, 发送通知消息给全体用户
      *
      * @param message 消息
