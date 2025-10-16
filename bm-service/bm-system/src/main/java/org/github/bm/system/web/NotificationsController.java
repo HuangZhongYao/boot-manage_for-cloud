@@ -39,6 +39,12 @@ public class NotificationsController extends BaseController {
         return ApiResponse.ok(notificationsRecordService.queryMyNotificationRecords(inputDTO));
     }
 
+    @Operation(summary = "查询未读通知数量")
+    @GetMapping(value = "/countUnreadNotifications", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Long> countUnreadNotifications() {
+        return ApiResponse.ok(notificationsRecordService.countUnreadNotifications());
+    }
+
     @Operation(summary = "已读通知记录")
     @PatchMapping(value = "/readNotificationRecords", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResponse<Boolean> readNotificationRecords(@RequestBody @Validated ReadNotificationRecordsInputDTO inputDTO) {

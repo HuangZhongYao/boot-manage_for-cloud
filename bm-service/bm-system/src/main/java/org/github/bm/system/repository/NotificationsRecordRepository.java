@@ -20,4 +20,11 @@ public interface NotificationsRecordRepository extends BaseMapperExtension<Notif
      * @return Page<通知记录>
      */
     Page<NotificationsRecordVO> queryMyNotificationRecords(@Param("page") Page page,@Param("userId") Long userId);
+
+    /**
+     * 查询未读通知数量
+     * @param userId 用户id
+     * @return Long
+     */
+    Long countUnreadNotifications(@Param("userId") Long userId);
 }

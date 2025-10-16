@@ -146,4 +146,16 @@ public class NotificationsRecordServiceImpl extends ServiceImpl<NotificationsRec
             return false;
         }
     }
+
+    @Override
+    public Long countUnreadNotifications() {
+        // 获取当前认证用户ID
+        Long userId = SecurityContextHolder.getAuthUserId();
+
+        // 验证用户ID有效性
+        if (userId == null) {
+            return 0L;
+        }
+        return this.baseMapper.countUnreadNotifications(userId);
+    }
 }

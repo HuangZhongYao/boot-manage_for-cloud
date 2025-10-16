@@ -27,4 +27,10 @@
         WHERE a.user_id = #{userId}
         ORDER BY a.created_time DESC
     </select>
+
+    <select id="countUnreadNotifications" resultType="java.lang.Long">
+        SELECT COUNT(a.id)
+        FROM sys_notifications_record a
+        WHERE a.user_id = #{userId} AND a.read_state = 0
+    </select>
 </mapper>
