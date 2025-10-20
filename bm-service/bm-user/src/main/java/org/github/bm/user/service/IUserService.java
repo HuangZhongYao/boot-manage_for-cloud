@@ -88,5 +88,12 @@ public interface IUserService {
      * @return List<UserVO> 在线用户列表
      */
     List<UserVO> queryOnlineUser(UserQueryPageInputDTO inputDTO);
+
+    /**
+     * 更新用户头像
+     * @param inputDTO 更新头像输入参数，包含用户ID和头像信息
+     * @return Boolean 更新结果，true表示成功，false表示失败
+     */
+    Boolean changeAvatar(ChangeAvatarInputDTO inputDTO);
 }
 

@@ -308,4 +308,21 @@ public class UserServiceImpl implements IUserService {
         // 转换为VO
         return userConverter.toVOList(userEntityList);
     }
+
+    @Override
+    public Boolean changeAvatar(ChangeAvatarInputDTO inputDTO) {
+        // 判断该用户id是否有效
+        if (!userRepository.exists(
+                Wrappers.<UserEntity>lambdaQuery().eq(UserEntity::getId, inputDTO.getId()))) {
+            throw new UserFriendlyException("该用户不存在");
+        }
+        // 更新对象
+        UserEntity updateEntity = UserEntity.builder()
+                .avatarUrl(inputDTO.getAvatarUrl())
+                .build();
+        updateEntity.setId(inputDTO.getId());
+
+        userRepository.updateById(updateEntity);
+        return true;
+    }
 }

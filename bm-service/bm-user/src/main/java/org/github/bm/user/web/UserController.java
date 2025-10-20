@@ -97,4 +97,10 @@ public class UserController extends BaseController {
     public ApiResponse<Boolean> changePassword(@RequestBody @Validated ChangePasswordInputDTO inputDTO) {
         return ApiResponse.ok(userService.changePassword(inputDTO));
     }
+
+    @Operation(summary = "更新头像")
+    @PatchMapping(value = "/changeAvatar", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ApiResponse<Boolean> changeAvatar(@RequestBody @Validated ChangeAvatarInputDTO inputDTO) {
+        return ApiResponse.ok(userService.changeAvatar(inputDTO));
+    }
 }
