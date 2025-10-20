@@ -33,6 +33,12 @@ public class DictDataVO extends BaseIdAndTimeAndOperationIdVO {
     private Long dictTypeId;
 
     /**
+     * 字典数据类型code
+     */
+    @Schema(description = "字典数据类型code")
+    private String typeCode;
+
+    /**
      * 名称
      */
     @Schema(description = "名称")

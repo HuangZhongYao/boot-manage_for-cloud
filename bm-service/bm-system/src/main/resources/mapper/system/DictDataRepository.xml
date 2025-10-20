@@ -3,4 +3,18 @@
 
 <mapper namespace="org.github.bm.system.repository.DictDataRepository">
 
+    <select id="allDictDataQueryList" resultType="org.github.bm.system.vo.DictDataVO">
+        SELECT
+            a.*,
+            b.code AS typeCode
+        FROM sys_dict_data a LEFT JOIN sys_dict_type b ON a.dict_type_id = b.id
+    </select>
+
+    <select id="dictDataQueryListByDictTypeId" resultType="org.github.bm.system.vo.DictDataVO">
+        SELECT
+            a.*,
+            b.code AS typeCode
+        FROM sys_dict_data a LEFT JOIN sys_dict_type b ON a.dict_type_id = b.id
+        WHERE a.dict_type_id = #{dictTypeId}
+    </select>
 </mapper>

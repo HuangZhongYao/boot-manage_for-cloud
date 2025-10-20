@@ -101,18 +101,17 @@ public class DictServiceImpl implements IDictService {
         if (dictTypeEntity == null) {
             return List.of();
         }
-        return this.dictDataRepository.selectList(
+        List<DictDataVO> dictDataVOS = this.dictDataRepository.selectList(
                 Wrappers.<DictDataEntity>lambdaQuery()
                         .eq(DictDataEntity::getDictTypeId, dictTypeEntity.getId())
                         .orderByAsc(DictDataEntity::getSort), DictDataVO.class);
+        dictDataVOS.forEach(dictDataVO -> dictDataVO.setTypeCode(dictTypeEntity.getCode()));
+        return dictDataVOS;
     }
 
     @Override
     public List<DictDataVO> dictDataQueryList(Long dictTypeId) {
-        return this.dictDataRepository.selectList(
-                Wrappers.<DictDataEntity>lambdaQuery()
-                        .eq(DictDataEntity::getDictTypeId, dictTypeId)
-                        .orderByAsc(DictDataEntity::getSort), DictDataVO.class);
+        return this.dictDataRepository.dictDataQueryListByDictTypeId(dictTypeId);
     }
 
     /**
@@ -214,7 +213,7 @@ public class DictServiceImpl implements IDictService {
 
     @Override
     public List<DictDataVO> allDictDataQueryList() {
-        return this.dictDataConvert.toVOList(this.dictDataRepository.selectList(null));
+        return this.dictDataRepository.allDictDataQueryList();
     }
 
     /**
