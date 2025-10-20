@@ -98,14 +98,16 @@ public interface SecurityConstants {
             "/css/**",
             "/js/**",
             "/images/**",
-            "/webjars/**"
+            "/webjars/**",
+            "/localStorage/**"// 使用本地存储放行请求
     );
 
     /**
      * 是否是跳过鉴权
-     * @param isGateway 是否请求来自网关转发
-     * @param path 请求路径
-     * @param originalPath 请求原始路径  （调用 /bm-auth/auth/login 登录，登录中调用用户服务/bm-user/user/getById获取用户. /bm-auth/auth/login 就是/bm-user/user/getById的原始路径  ）
+     *
+     * @param isGateway          是否请求来自网关转发
+     * @param path               请求路径
+     * @param originalPath       请求原始路径  （调用 /bm-auth/auth/login 登录，登录中调用用户服务/bm-user/user/getById获取用户. /bm-auth/auth/login 就是/bm-user/user/getById的原始路径  ）
      * @param securityProperties 项目安全配置属性
      * @return true: 跳过鉴权
      */
