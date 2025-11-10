@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.github.bm.common.base.entity.AbstractIdAndTimeEntity;
 import org.github.bm.system.enums.NotificationsLevelEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
+import org.github.bm.system.enums.NotificationsRecordBusinessTypeEnum;
 
 import java.time.LocalDateTime;
 
@@ -24,9 +24,9 @@ import java.time.LocalDateTime;
 public class NotificationsRecordEntity extends AbstractIdAndTimeEntity {
 
     /**
-     * NotificationsEntity 主表 id {@link NotificationsEntity#id}
+     * 通知内容表id {@link NotificationsRecordContentEntity#id}
      */
-    private Long notificationsId;
+    private Long contentId;
 
     /**
      * 用户id {@link UserEntity#id}
@@ -44,9 +44,14 @@ public class NotificationsRecordEntity extends AbstractIdAndTimeEntity {
     private LocalDateTime readTime;
 
     /**
-     * 通知类型
+     * 通知业务场景
      */
-    private NotificationsTypeEnum type;
+    private NotificationsRecordBusinessTypeEnum businessType;
+
+    /**
+     * 通知业务场景关联业务Id
+     */
+    private Long businessId;
 
     /**
      * 通知级别

@@ -10,7 +10,7 @@ import org.github.bm.system.enums.NotificationsTypeEnum;
 import java.time.LocalDateTime;
 
 /**
- * 通知表实体
+ * 公告通知表实体
  * Time 2025-08-28 16:08
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */

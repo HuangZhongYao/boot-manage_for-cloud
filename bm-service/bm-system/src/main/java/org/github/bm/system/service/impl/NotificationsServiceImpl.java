@@ -16,12 +16,11 @@ import org.github.bm.system.dto.EditNotificationsInputDTO;
 import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
 import org.github.bm.system.dto.NotificationsTargetInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
+import org.github.bm.system.entity.NotificationsRecordContentEntity;
 import org.github.bm.system.entity.NotificationsRecordEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
-import org.github.bm.system.enums.NotificationsLevelEnum;
-import org.github.bm.system.enums.NotificationsStateEnum;
-import org.github.bm.system.enums.NotificationsTargetEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
+import org.github.bm.system.enums.*;
+import org.github.bm.system.repository.NotificationsRecordContentRepository;
 import org.github.bm.system.repository.NotificationsRepository;
 import org.github.bm.system.service.*;
 import org.github.bm.system.vo.NotificationsVO;
@@ -62,6 +61,8 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
     private INotificationsRecordService notificationsRecordService;
     @Resource
     private IWebSocketClient webSocketClient;
+    @Resource
+    private NotificationsRecordContentRepository notificationsRecordContentRepository;
 
     @Override
     public Page<NotificationsVO> pageQueryList(NotificationsPageQueryInputDTO inputDTO) {
@@ -238,11 +239,16 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             }
         });
 
+        // 通知内容实体
+        NotificationsRecordContentEntity notificationsRecordContent = NotificationsRecordContentEntity.builder().content(notificationsEntity.getContent()).build();
+        notificationsRecordContentRepository.insert(notificationsRecordContent);
+
         // 构建通知记录实体
         List<NotificationsRecordEntity> notificationsRecordEntityList = targetUserIdSet.stream()
                 .map(userId -> NotificationsRecordEntity.builder()
-                        .notificationsId(inputDTO.getId())
-                        .type(NotificationsTypeEnum.SYSTEM)
+                        .contentId(notificationsRecordContent.getId())
+                        .businessId(notificationsEntity.getId())
+                        .businessType(NotificationsRecordBusinessTypeEnum.NOTIFICATIONS)
                         .level(NotificationsLevelEnum.ORDINARY)
                         .userId(userId)
                         .readState(false)
