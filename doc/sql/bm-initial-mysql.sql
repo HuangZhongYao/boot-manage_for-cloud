@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 10/10/2025 15:44:10
+ Date: 10/11/2025 16:33:42
 */
 
 SET NAMES utf8mb4;
@@ -22,12 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `base_template`;
 CREATE TABLE `base_template`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '创建表基础模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -39,19 +39,19 @@ CREATE TABLE `base_template`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_order`;
 CREATE TABLE `bus_order`  (
-                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                              `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
-                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                              `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
-                              `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
-                              `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
-                              `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
-                              `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
-                              `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
-                              `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
-                              PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
+  `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
+  `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
+  `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
+  `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
+  `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商城订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -103,24 +103,24 @@ INSERT INTO `bus_order` VALUES (55, '2024-07-31 00:45:52', '2024-07-31', '1', '1
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_truck`;
 CREATE TABLE `bus_truck`  (
-                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                              `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                              `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
-                              `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
-                              `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
-                              `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
-                              `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
-                              `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
-                              `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
-                              `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
-                              `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
-                              `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
-                              `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
-                              `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
-                              PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
+  `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
+  `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
+  `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
+  `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
+  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
+  `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
+  `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
+  `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
+  `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
+  `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车辆表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -132,19 +132,19 @@ CREATE TABLE `bus_truck`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dev_datasource`;
 CREATE TABLE `dev_datasource`  (
-                                   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                   `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                   `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                   `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                   `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
-                                   `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
-                                   `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
-                                   `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
-                                   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
-                                   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
-                                   `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                   PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
+  `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
+  `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
+  `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1976535119783002113 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -160,19 +160,19 @@ INSERT INTO `dev_datasource` VALUES (1976535119783002112, '2025-10-10 14:27:49',
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-                                  `sort` int NULL DEFAULT NULL COMMENT '排序值',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1963512333384810497 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典数据表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `sort` int NULL DEFAULT NULL COMMENT '排序值',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1980170245347737601 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_dict_data
@@ -201,24 +201,27 @@ INSERT INTO `sys_dict_data` VALUES (1963512054480371712, '2025-09-04 15:58:49', 
 INSERT INTO `sys_dict_data` VALUES (1963512239579201536, '2025-09-04 15:59:33', '2025-09-04 15:59:33', '1', '1', 1963511847990591488, '低', 'ORDINARY', 0, 1, NULL);
 INSERT INTO `sys_dict_data` VALUES (1963512281945866240, '2025-09-04 15:59:43', '2025-09-04 15:59:43', '1', '1', 1963511847990591488, '中', 'WARNING', 0, 1, NULL);
 INSERT INTO `sys_dict_data` VALUES (1963512333384810496, '2025-09-04 15:59:55', '2025-09-04 15:59:55', '1', '1', 1963511847990591488, '高', 'HIGH', 0, 1, NULL);
+INSERT INTO `sys_dict_data` VALUES (1980170118679756800, '2025-10-20 15:12:01', '2025-10-20 15:12:01', NULL, NULL, 15, '保密', 'UNKNOWN', 0, 1, NULL);
+INSERT INTO `sys_dict_data` VALUES (1980170193761992704, '2025-10-20 15:12:19', '2025-10-20 15:12:19', NULL, NULL, 15, '男', 'MALE', 1, 1, NULL);
+INSERT INTO `sys_dict_data` VALUES (1980170245347737600, '2025-10-20 15:12:31', '2025-10-20 15:12:31', NULL, NULL, 15, '女', 'FEMALE', 2, 1, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_type
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-                                  `sort` int NULL DEFAULT NULL COMMENT '排序值',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+  `sort` int NULL DEFAULT NULL COMMENT '排序值',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1963511847990591489 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -231,7 +234,7 @@ INSERT INTO `sys_dict_type` VALUES (6, '2024-08-18 11:58:23', '2024-08-18 11:58:
 INSERT INTO `sys_dict_type` VALUES (8, '2024-08-18 11:58:51', '2024-08-18 11:58:51', '1', '1', 6, '能源类型', 'NYTYPE', 1, 1, '演示demo数据');
 INSERT INTO `sys_dict_type` VALUES (9, '2024-08-18 11:59:07', '2024-08-18 11:59:07', '1', '1', 6, '车牌颜色', NULL, 1, 1, '演示demo数据');
 INSERT INTO `sys_dict_type` VALUES (10, '2024-08-18 12:00:01', '2024-08-18 12:00:01', '1', '1', 6, '使用性质', NULL, 1, 1, '演示demo数据');
-INSERT INTO `sys_dict_type` VALUES (15, '2024-09-01 00:18:47', '2024-09-01 13:08:50', '1', '1', 1, '性别', NULL, 1, 1, '车辆品牌11');
+INSERT INTO `sys_dict_type` VALUES (15, '2024-09-01 00:18:47', '2025-10-20 15:13:27', '1', NULL, 1, '性别', 'SYS:GENDER', 1, 1, '性别');
 INSERT INTO `sys_dict_type` VALUES (1959175732345176064, '2025-08-23 16:47:49', '2025-08-23 16:47:49', '1', '1', NULL, '数据源类型', 'DATA_SOURCE_TYPE', 0, 1, '数据源类型');
 INSERT INTO `sys_dict_type` VALUES (1961490437826936832, '2025-08-30 02:05:38', '2025-09-04 16:01:15', '1', '1', 1963511596957302784, '公告状态', 'NOTICE_STATE', 0, 1, '公告通知状态');
 INSERT INTO `sys_dict_type` VALUES (1961701350643335168, '2025-08-30 16:03:43', '2025-08-30 16:03:43', '1', '1', NULL, '开发工具', 'DEV_TOOLS_CODE', 0, 1, '');
@@ -256,22 +259,22 @@ INSERT INTO `sys_dict_type` VALUES (1963511847990591488, '2025-09-04 15:58:00', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications`;
 CREATE TABLE `sys_notifications`  (
-                                      `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                      `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                      `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                      `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                      `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                      `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
-                                      `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
-                                      `state` tinyint NULL DEFAULT NULL COMMENT '状态',
-                                      `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
-                                      `publisher` bigint NULL DEFAULT NULL COMMENT '发布人id',
-                                      `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
-                                      `type` tinyint NULL DEFAULT NULL COMMENT '通知类型',
-                                      `level` tinyint NULL DEFAULT NULL COMMENT '通知级别',
-                                      `all_notifications` tinyint NULL DEFAULT NULL COMMENT '是否全体通知',
-                                      PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1976488251443118081 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+  `state` tinyint NULL DEFAULT NULL COMMENT '状态',
+  `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
+  `publisher` bigint NULL DEFAULT NULL COMMENT '发布人id',
+  `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
+  `type` tinyint NULL DEFAULT NULL COMMENT '通知类型',
+  `level` tinyint NULL DEFAULT NULL COMMENT '通知级别',
+  `all_notifications` tinyint NULL DEFAULT NULL COMMENT '是否全体通知',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1987796045492387841 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications
@@ -279,431 +282,420 @@ CREATE TABLE `sys_notifications`  (
 INSERT INTO `sys_notifications` VALUES (1961476084037844992, '2025-08-30 01:08:36', '2025-09-19 15:16:40', '1', NULL, '但是发射点', '<h1 style=\"text-align: start;\">涉嫌严重违纪违法！吴卫民被查</h1><p>2025-09-03 14:45·鲁中晨报</p><p><br></p><p>皖北煤电集团有限责任公司销售公司原经理吴卫民涉嫌严重违纪违法，目前正接受皖北煤电集团纪委纪律审查；经安徽省监委指定管辖，接受淮南市监察委员会监察调查。（皖北煤电集团纪委、淮南市纪委监委）</p><p><img src=\"https://p3-sign.toutiaoimg.com/tos-cn-i-axegupay5k/c9c0f1c6ca144f9285bb4c772b9d4dd2~tplv-tt-origin-web:gif.jpeg?_iz=58558&from=article.pc_detail&lk3s=953192f4&x-expires=1757512482&x-signature=dRW4sCGSnl%2FKGHBquSkKaBPBeZA%3D\" alt=\"\" data-href=\"\" style=\"height: auto;\"/></p>', 2, '2025-09-19 15:16:40', 1, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_notifications` VALUES (1963121422649786368, '2025-09-03 14:06:35', '2025-09-19 15:16:52', '1', NULL, '纪念中国人民抗日战争', '<h1>纪念中国人民抗日战争暨世界反法西斯战争胜利80周年文艺晚会在京举行 习近平等出席观看</h1><p><img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAREAAAAqCAMAAACjgJ9mAAAAvVBMVEUAAAAAGWYAGmYAGWcAGWYAGWYAGWYAG2cAI2wAGWYAGWcAGmcAGmgAGmYAGmcAGWYAGmfrrn0AGmYAHmsAHWoAGWYAGWcAGWcAH2gAGmbsrn4AGmYAGWcAHHAAGmbtr37srn0AGmbsrn0AG2gAGmbsrn4AGWcAGmjtr30AH2sAG2cAGWYAGmYAKm3rrX7srX7trn/srn7srn7srn7vsILtrn38u4bsr33ur37wtIPtrn7tr3/troAAGWbrrX0PNpqGAAAAPXRSTlMA/EK1rnrZNw3kcKUxXlnzT93PHhKO7JggdfOTZgmHY+Ocaihqsr+AfhhKzMQGqKGX1s28J24IdDsVjFZJmA/2FQAABsFJREFUaN7t2WlX2kAUgOE72SCEkAhIGkQUg1hEigLuDv//ZzVzL2HIzuZpP/ie02NIKDQPycxI4aeffjquX3ciyK6NB6u46aZTYLvXVdgc0r1/vb6v36wS1gKo5AbpFB7mVKG4ShNrQEYqC/NB1maiX4Blvh+D7AIuGtPz0pmw3ZsQ6b7IHS/vy7fP37fX4e4rwDwedg7Ac6MTd/Wt7pg4MNC3S5/MpcNFGmQ0EkdiIvjcbxT5vBUtVqIFbs/g86y7ki32E9F4SQqkUvGAUyLSYWHKWqTORN8h8nuV7Bpu4jvev0ekWtl0QUcamx1BlgheSRsR/AGiobUJn80s2Ya/0e8PuMjr9/VjRV6/R+Se56eCyGKM4UMWNs4VsXh+NmDxJ3WOEjmb3Sz/gUj6pdYi1jl90oMjRNha5DKqt5vI0+3Hzdc7bJqGiTknIzcp4lxkpR0vIjtMhJqSCETZ8ZF1JbqdhV0jxMda5AV2rp4UMfCUbWwsZ9n/RIRBJNLXwlwpgr2sRG9i80ls3UC2SH8UNgRFTeVmi3gcG0ChCEt1mIipih7IE3NyRcyNCD5flyLUfBX2LG1yRDQaR3o8lZ4l0lbpINNko7QIg2Q1EklXLDJIzb5mTORXHcPhZ1QiMluFzWiZRhAk8jvqbS+R82aYem/yzJxms3KoSDXdjiKyidh5UShyNcfRozufz88QYn6bnH1v9hChApXn1ARsV5Gx0hO/OLTFdiurPUVatO5JiZTMNceK1C3GTyJyJ+4TF4BxU9WhwzPaU0TH49WTikzHNBhURYbYrE3jIpocwYb1dZUBO0BEx5en1bdxCpGxQy9+UhG45CIaDFCkB3ERk8vUOoh60T7m7yPSoJseVzvaKURo+rsvFnntUisRbj1FK7QnGmGePjNEHmiCKxShqSYA14geTQJIirST6VKkQhS45+4EIi5dqJqSLyJ7XIX9iZRQBOAKl/EASRFZjoihu82NycajU4Pt3NIVWpvuM4tGw5ouUulFdV/H9hGpbKZvf08RupO6h4o0vQreKZ3EvNuvwn4itAJxaMYMgBolvkrBJZ1c6mVsqhFIR84FhbPvNdZFBNxcwEe5SHMkSt41snFjkFiRdAZunKRRKkIWbUec2RQsVUQnaqjrgFPlr+UzXi5Cd0iyJ3gsECkfWSGwB3ggFRvplSlE9UrPgt7TpakmexzZWWSI24eKzHDKOUykribvlgmLPXwYAuWXi/TFtoe3yZEi8t0sjUkROoFykVtcuxaKMCxjHHHjt4rlXkJLNzLOlk7XUDILti4jvPv6JxOpQdu3K4YIpngGLrji0QioqzOMxhHcXMCCvl4tH1mLRUxPmQJV75spEYs++6IUHmWvRczwHByxZZok0thqxKOshkxJisju6QTagBXMNfgLzuxIEdOzG1vZAych8kCTZlEtHlVfiygG595QUFRSC7x7Ju/NABL53NGNpIjFMaVUZCX6KBTxdFEnU8QxeW6mFDFpVCssUmTVcpGAnjyhyagK8WrnbWgmROosU+TmLOyGRD7E9tWSvm8+bGQN7AD6PLfWr54P2Hh9NxRmhPMTjXqlIoFBV+Al/Rylb4WkyCXipURoGP0ikWe8Xb5WuKtQxFZce6jTrX2RmH0LRRILtAAKu9DHCp5nqUjDodulBQqjq7FSIjLV5HfhihE2AQrH1BcSecO5Bl1Wy2yRSnqpoR0kMsATgNJq9L6tQpGWxzGm4N+gbb1dJDJ+4FLE3frHLGmmJZGXFf6gBVq2iMJ3FDEgXiMh0qHPvjQ8V7PD2/kiihat5Ht0ZXHKGdTzRFp3Ds8Wod9zH6OR9QkxEOmbReh1dCguaETTdp6I78klIbNTF6mpXdgpEdsSWzKrr22J0AVx3SWR2SpqtrOI4wX6/iID+R/aufXxc8wWCSYkgmBU5x6ihlt/U02JaPIYi7akyDWuxsI/KPK5uP1DD67yRExjomqD87ua7SomzTV3PEOEGfHMmMiY4UwJhWk8X6TOkyLqGGRBcxcRD1IiNIxc30Qi8lu1ZY5ILEOK7DmyntP68XQiEwXi2WaZiOFCTKQDorfbsN9vJPIIojk57C9yubsIfeHpVHcUMTRdgSwRh0ScgQKppq7GCkSatWkC3QLZO4J0lyD6WHQJp1zEHoYFaxEDdhcJBiZ+hVoqwgzLVwiORGzfV+q+75OIBZZ1MaxPIbtLxfe0PkSpRpgNcK56tQCwtjdprvOqsYXr8/Pz1TtELb+W+ONZ7AbqfBKWeZmjCGvKma5Sy60qn9RvBlBcr0YY1NAP2wzFbfGoMYWffvppz/4CEPCdl1Be4EsAAAAASUVORK5CYII=\" alt=\"\" data-href=\"\" style=\"height: 14px;\"/></p><p><span style=\"color: rgb(153, 153, 153);\">2025-09-03 19:57:52</span></p><p>浏览量3454721</p><p><br></p><p>9月3日晚，纪念中国人民抗日战争暨世界反法西斯战争胜利80周年文艺晚会《正义必胜》在北京人民大会堂举行，习近平等出席观看。</p><p><br></p><p><span style=\"color: rgb(164, 172, 182);\">©2025中央广播电视总台版权所有。未经许可，请勿转载使用。</span></p><p>责任编辑：孟浩</p><p><img src=\"https://content-static.cctvnews.cctv.com/lib/cctv_logo.png\" alt=\"\" data-href=\"\" style=\"width: 32px;height: 32px;\"/></p><p>央视新闻</p><p>我用心你放心</p>', 1, '2025-09-19 15:16:52', 1, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_notifications` VALUES (1976488251443118080, '2025-10-10 11:21:35', '2025-10-10 11:30:44', NULL, NULL, '测试中等级通知', '<p><br></p>', 2, '2025-10-10 11:30:44', NULL, NULL, 1, 2, 0);
+INSERT INTO `sys_notifications` VALUES (1987792515905880064, '2025-11-10 16:00:42', '2025-11-10 16:06:00', NULL, NULL, '测试重构通知记录', '<p><a href=\"https://www.google.com.hk/imghp?hl=zh-CN&ogbl\" target=\"_top\">图片</a></p><p><a href=\"https://accounts.google.com/ServiceLogin?hl=zh-CN&amp;passive=true&amp;continue=https://www.google.com.hk/&amp;ec=futura_exp_og_so_72776762_e\" target=\"_top\" style=\"text-align: center;\">登录</a></p><p> </p><p><a href=\"https://about.google/?utm_source=google-ZZ&utm_medium=referral&utm_campaign=hp-footer&fg=1\" target=\"\">关于 Google</a><a href=\"https://www.google.com.hk/intl/zh-CN_zz/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1\" target=\"\">广告</a><a href=\"https://www.google.com.hk/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1\" target=\"\">商务</a><a href=\"https://google.com/search/howsearchworks/?fg=1\" target=\"\">Google 搜索的运作方式</a></p><p><a href=\"https://policies.google.com/privacy?hl=zh-CN&fg=1\" target=\"\">隐私权</a><a href=\"https://policies.google.com/terms?hl=zh-CN&fg=1\" target=\"\">条款</a>设置</p>', 2, '2025-11-10 16:06:00', NULL, NULL, NULL, 1, 1);
+INSERT INTO `sys_notifications` VALUES (1987793178039681024, '2025-11-10 16:03:20', '2025-11-10 16:07:49', NULL, NULL, '测试重构通知记录', '<p>434343</p>', 2, '2025-11-10 16:07:49', NULL, NULL, NULL, 1, 1);
+INSERT INTO `sys_notifications` VALUES (1987796045492387840, '2025-11-10 16:14:43', '2025-11-10 16:14:51', NULL, NULL, '测试重构通知记录', '<p><span style=\"color: rgb(255, 255, 255); font-size: 14px;\">En</span></p><p><br></p><ul><li><a href=\"https://nacos.io/\" target=\"_blank\">首页</a></li><li><a href=\"https://nacos.io/docs/latest/what-is-nacos/\" target=\"_blank\">文档</a></li><li><a href=\"https://nacos.io/blog/\" target=\"_blank\">博客</a></li><li><a href=\"https://nacos.io/news/\" target=\"_blank\">社区</a></li><li><a href=\"https://cn.aliyun.com/product/aliware/mse?spm=nacos-website.topbar.0.0.0\" target=\"_blank\">Nacos企业版</a></li><li></li><li></li><li></li><li></li></ul><h1 style=\"text-align: center;\">NACOS2.5.1</h1><h1 style=\"text-align: center;\">模式standalone</h1><ul><li>配置管理</li><li>服务管理服务列表订阅者列表</li><li>命名空间</li><li>集群管理</li><li>设置中心</li><li></li><li></li><li></li><li>当前集群没有开启鉴权，请参考<a href=\"https://nacos.io/docs/latest/manual/admin/auth/\" target=\"\">文档</a>开启鉴权~</li><li></li><li>服务列表</li><li></li><li></li><li></li><li></li><li></li><li></li><li><span style=\"color: rgb(32, 155, 250); font-size: 14px;\">public</span></li><li><span style=\"color: rgb(153, 153, 153);\">|</span><span style=\"color: rgb(201, 201, 204); font-size: 14px;\">dev</span></li><li></li><li></li><li>服务名称分组名称隐藏空服务</li><li></li><li></li><li></li></ul><table style=\"width: auto;\"><tbody><tr><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">服务名</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">分组名称</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">集群数目</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">健康实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">触发保护阈值</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">操作</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-system</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-websocket</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-user</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-resource</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-example</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-gateway</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-auth</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-admin</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除<br><br><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">每页显示：</span><em>100</em><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">总数：8</span></td></tr></tbody></table><ul><li></li><li></li><li></li><li></li></ul>', 2, '2025-11-10 16:14:51', NULL, NULL, NULL, 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_notifications_record
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_record`;
 CREATE TABLE `sys_notifications_record`  (
-                                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                             `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
-                                             `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
-                                             `read_state` tinyint NULL DEFAULT NULL COMMENT '读取状态',
-                                             `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
-                                             `type` tinyint NULL DEFAULT NULL COMMENT '通知类型',
-                                             `level` tinyint NULL DEFAULT NULL COMMENT '消息通知等级枚举',
-                                             PRIMARY KEY (`id`) USING BTREE,
-                                             INDEX `id_index`(`notifications_id` ASC, `user_id` ASC, `created_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1976490554124402690 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知通知记录表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `content_id` bigint NULL DEFAULT NULL COMMENT '通知内容表id',
+  `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+  `read_state` tinyint NULL DEFAULT NULL COMMENT '读取状态',
+  `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
+  `business_type` tinyint NULL DEFAULT NULL COMMENT '通知业务场景类型',
+  `business_id` bigint NULL DEFAULT NULL COMMENT '通知业务场景关联业务Id',
+  `level` tinyint NULL DEFAULT NULL COMMENT '消息通知等级枚举',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `id_index`(`content_id` ASC, `user_id` ASC, `created_time` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1987796078677721089 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_record
 -- ----------------------------
-INSERT INTO `sys_notifications_record` VALUES (20250904142207, '2025-09-04 14:22:07', '2025-09-04 14:22:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142211, '2025-09-04 14:22:11', '2025-09-04 14:22:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142213, '2025-09-04 14:22:13', '2025-09-04 14:22:13', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142214, '2025-09-04 14:22:14', '2025-09-04 14:22:14', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142215, '2025-09-04 14:22:15', '2025-09-04 14:22:15', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142220, '2025-09-04 14:22:20', '2025-09-04 14:22:20', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142221, '2025-09-04 14:22:21', '2025-09-04 14:22:21', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142222, '2025-09-04 14:22:22', '2025-09-04 14:22:22', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142223, '2025-09-04 14:22:23', '2025-09-04 14:22:23', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142224, '2025-09-04 14:22:24', '2025-09-04 14:22:24', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142225, '2025-09-04 14:22:25', '2025-09-04 14:22:25', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142226, '2025-09-04 14:22:26', '2025-09-04 14:22:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142241, '2025-09-04 14:22:41', '2025-09-04 14:22:41', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142242, '2025-09-04 14:22:42', '2025-09-04 14:22:42', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142243, '2025-09-04 14:22:43', '2025-09-04 14:22:43', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142244, '2025-09-04 14:22:44', '2025-09-04 14:22:44', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142312, '2025-09-04 14:23:12', '2025-09-04 14:23:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142314, '2025-09-04 14:23:14', '2025-09-04 14:23:14', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142315, '2025-09-04 14:23:15', '2025-09-04 14:23:15', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142316, '2025-09-04 14:23:16', '2025-09-04 14:23:16', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142317, '2025-09-04 14:23:17', '2025-09-04 14:23:17', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142318, '2025-09-04 14:23:18', '2025-09-04 14:23:18', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142343, '2025-09-04 14:23:43', '2025-09-04 14:23:43', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142610, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142621, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142626, '2025-09-04 14:26:05', '2025-09-04 14:26:05', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142628, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142637, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142642, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142651, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142654, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142655, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142664, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142665, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142667, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142679, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142690, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142706, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142709, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142710, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142717, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142718, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142725, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142727, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142731, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142737, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142740, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142747, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142756, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142758, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142770, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142773, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142775, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142779, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142782, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142783, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142786, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142794, '2025-09-04 14:26:25', '2025-09-04 14:26:25', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142798, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142801, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142817, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142819, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142830, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142833, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142835, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142839, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142843, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142844, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142846, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142847, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142860, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142862, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142864, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142865, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142877, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142880, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142882, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142887, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142894, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142900, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142907, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142909, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142917, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142920, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142921, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142929, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142932, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142940, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142941, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142943, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142946, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142948, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142952, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142958, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142960, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142978, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142988, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142992, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142997, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904142998, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143002, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143004, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143005, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143012, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143013, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143014, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143037, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143043, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143050, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143051, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143057, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143061, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143065, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143077, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143088, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143090, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143092, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143100, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143118, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143121, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143123, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143141, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143142, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143143, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143144, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143146, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143155, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143157, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143169, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143174, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143175, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143177, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143182, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143183, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143184, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143188, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143189, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143191, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143199, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143200, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143202, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143210, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143215, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143217, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143219, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143221, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143222, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143223, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143232, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143234, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143236, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143242, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143247, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143264, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143275, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143276, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143278, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143289, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143298, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143299, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143301, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143309, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143313, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143316, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143323, '2025-09-04 14:26:04', '2025-09-04 14:26:04', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143327, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143328, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143329, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143332, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143333, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143335, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143336, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143338, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143341, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143343, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143345, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143350, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143352, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143367, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143368, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143372, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143376, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143380, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143382, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143388, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143400, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143402, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143404, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143406, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143407, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143408, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143414, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143421, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143427, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143432, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143438, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143439, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143440, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143447, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143454, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143467, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143468, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143471, '2025-09-04 14:26:34', '2025-09-04 14:27:54', 1963121422649786368, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143482, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143490, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143496, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143504, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143506, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143509, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143512, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143513, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143514, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143516, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143517, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143522, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143531, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143532, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143537, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143538, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143544, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143552, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143553, '2025-09-04 14:26:06', '2025-09-04 14:26:06', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143556, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143562, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143563, '2025-09-04 14:26:34', '2025-09-04 14:27:34', 1963121422649786368, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143569, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143575, '2025-09-04 14:26:12', '2025-09-04 14:26:12', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143576, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143578, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143579, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143582, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143586, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143591, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143594, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143597, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143617, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (20250904143625, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083033899008, '2025-09-03 14:17:09', '2025-09-04 11:39:07', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083155533824, '2025-09-12 14:17:09', '2025-09-04 14:27:52', 1963121422649786368, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083428163584, '2025-09-18 14:17:09', '2025-09-04 14:27:44', 1963121422649786368, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083524632576, '2025-09-03 14:17:09', '2025-09-04 11:38:40', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083616907264, '2025-09-03 14:17:09', '2025-09-04 11:34:30', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083793068032, '2025-09-01 14:17:09', '2025-09-04 11:34:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124083960840192, '2025-09-03 14:17:09', '2025-09-04 11:34:43', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124084057309184, '2025-09-05 14:17:09', '2025-09-04 14:27:52', 1963121422649786368, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124084279607296, '2025-09-03 14:17:09', '2025-09-04 11:30:11', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124084418019328, '2025-09-03 13:17:10', '2025-09-04 11:30:15', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124084975861760, '2025-09-03 11:16:07', '2025-09-04 11:30:19', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124085676310528, '2025-09-03 14:17:12', '2025-09-04 11:29:44', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124085751808000, '2025-09-03 14:17:14', '2025-09-04 10:10:41', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124085865054208, '2025-09-03 14:17:15', '2025-09-04 11:41:32', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1963124086565502976, '2025-09-03 14:17:16', '2025-09-04 11:53:27', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057559683072, '2025-09-19 14:36:06', '2025-10-10 11:31:48', 1961476084037844992, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057584848896, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 6, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057584848897, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 7, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057589043200, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 8, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057593237504, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 9, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057597431808, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 10, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057601626112, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 11, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057605820416, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 12, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057610014720, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 13, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057614209024, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 14, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057618403328, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 15, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057626791936, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 16, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057630986240, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 17, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057635180544, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311556855726080, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057639374848, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 18, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057643569152, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 19, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057647763456, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 20, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057651957760, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 21, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057660346368, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 22, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057664540672, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 23, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057672929280, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 24, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057677123584, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311702918168576, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057685512192, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311738074824704, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057689706496, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311704486838272, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057698095104, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951299613977739264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057706483712, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1950580430986018816, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057710678016, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311553856798720, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057719066624, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311558462144512, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057731649536, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951312144884563968, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057740038144, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951315654149668864, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057748426752, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951301892227203072, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057752621056, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311700531609600, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057761009664, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951300416163545088, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968927057769398272, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311705631883264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264885006336, '2025-09-19 15:16:40', '2025-10-10 11:31:50', 1961476084037844992, 1, 1, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264905977856, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 6, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264910172160, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 7, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264918560768, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 8, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264922755072, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 9, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264935337984, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 10, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264939532288, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 11, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264947920896, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 12, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264952115200, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 13, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264960503808, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 14, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264964698112, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 15, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264973086720, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 16, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264981475328, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 17, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264989863936, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311556855726080, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937264998252544, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 18, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265006641152, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 19, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265015029760, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 20, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265015029761, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 21, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265019224064, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 22, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265023418368, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 23, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265023418369, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 24, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265027612672, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311702918168576, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265031806976, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311738074824704, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265036001280, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311704486838272, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265040195584, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951299613977739264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265040195585, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1950580430986018816, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265044389888, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311553856798720, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265052778496, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311558462144512, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265052778497, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951312144884563968, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265056972800, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951315654149668864, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265061167104, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951301892227203072, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265061167105, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311700531609600, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265065361408, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951300416163545088, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937265069555712, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311705631883264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314591703040, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314595897344, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 6, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314600091648, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 7, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314600091649, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 8, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314604285952, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 9, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314608480256, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 10, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314608480257, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 11, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314612674560, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 12, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314612674561, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 13, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314616868864, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 14, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314616868865, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 15, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314621063168, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 16, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314625257472, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 17, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314625257473, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311556855726080, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314629451776, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 18, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314629451777, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 19, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314633646080, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 20, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314633646081, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 21, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314637840384, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 22, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314642034688, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 23, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314642034689, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 24, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314646228992, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311702918168576, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314646228993, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311738074824704, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314650423296, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311704486838272, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314654617600, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951299613977739264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314654617601, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1950580430986018816, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314658811904, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311553856798720, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314658811905, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311558462144512, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314663006208, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951312144884563968, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314663006209, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951315654149668864, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314667200512, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951301892227203072, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314667200513, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311700531609600, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314671394816, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951300416163545088, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1968937314675589120, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311705631883264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554023739392, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554027933696, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 6, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554032128000, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 7, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554032128001, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 8, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554036322304, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 9, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554040516608, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 10, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554044710912, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 11, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554048905216, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 12, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554053099520, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 13, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554057293824, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 14, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554057293825, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 15, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554061488128, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 16, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554065682432, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 17, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554069876736, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311556855726080, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554069876737, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 18, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554074071040, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 19, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554078265344, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 20, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554078265345, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 21, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554082459648, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 22, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554086653952, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 23, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554086653953, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 24, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554090848256, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311702918168576, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554095042560, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311738074824704, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554099236864, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311704486838272, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554099236865, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951299613977739264, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554103431168, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1950580430986018816, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554107625472, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311553856798720, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554107625473, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311558462144512, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554111819776, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951312144884563968, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554116014080, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951315654149668864, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554116014081, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951301892227203072, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554120208384, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311700531609600, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554124402688, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951300416163545088, 0, NULL, 1, 1);
-INSERT INTO `sys_notifications_record` VALUES (1976490554124402689, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311705631883264, 0, NULL, 1, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142207, '2025-09-04 14:22:07', '2025-09-04 14:22:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142211, '2025-09-04 14:22:11', '2025-09-04 14:22:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142213, '2025-09-04 14:22:13', '2025-09-04 14:22:13', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142214, '2025-09-04 14:22:14', '2025-09-04 14:22:14', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142215, '2025-09-04 14:22:15', '2025-09-04 14:22:15', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142220, '2025-09-04 14:22:20', '2025-09-04 14:22:20', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142221, '2025-09-04 14:22:21', '2025-09-04 14:22:21', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142222, '2025-09-04 14:22:22', '2025-09-04 14:22:22', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142223, '2025-09-04 14:22:23', '2025-09-04 14:22:23', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142224, '2025-09-04 14:22:24', '2025-09-04 14:22:24', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142225, '2025-09-04 14:22:25', '2025-10-23 14:37:04', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142226, '2025-09-04 14:22:26', '2025-09-04 14:22:26', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142241, '2025-09-04 14:22:41', '2025-09-04 14:22:41', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142242, '2025-09-04 14:22:42', '2025-09-04 14:22:42', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142243, '2025-09-04 14:22:43', '2025-09-04 14:22:43', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142244, '2025-09-04 14:22:44', '2025-09-04 14:22:44', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142312, '2025-09-04 14:23:12', '2025-09-04 14:23:12', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142314, '2025-09-04 14:23:14', '2025-09-04 14:23:14', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142315, '2025-09-04 14:23:15', '2025-09-04 14:23:15', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142316, '2025-09-04 14:23:16', '2025-09-04 14:23:16', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142317, '2025-09-04 14:23:17', '2025-09-04 14:23:17', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142318, '2025-09-04 14:23:18', '2025-10-23 14:36:56', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142343, '2025-09-04 14:23:43', '2025-09-04 14:23:43', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142610, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142621, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142626, '2025-09-04 14:26:05', '2025-09-04 14:26:05', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142637, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142642, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142654, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142667, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142690, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142706, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142709, '2025-09-04 14:26:33', '2025-10-16 14:50:15', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142710, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142718, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142725, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142727, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142731, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142740, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142756, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142758, '2025-09-04 14:26:32', '2025-10-23 14:21:22', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142770, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142773, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142775, '2025-09-04 14:26:26', '2025-09-04 14:26:26', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142779, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142782, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142798, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142817, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142819, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142830, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142835, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142843, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142846, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142847, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142860, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142864, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142865, '2025-09-04 14:26:34', '2025-10-23 14:36:49', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142877, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142894, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142900, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142907, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142909, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142917, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142920, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142921, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142929, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142932, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142940, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142941, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142943, '2025-09-04 14:26:33', '2025-10-20 15:08:07', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142946, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142952, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142958, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142978, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142988, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142992, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142997, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904142998, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143002, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143004, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143005, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143013, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143014, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143037, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143043, '2025-09-04 14:26:28', '2025-09-04 14:26:28', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143051, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143057, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143065, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143088, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143090, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143092, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143100, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143118, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143121, '2025-09-04 14:26:33', '2025-09-04 14:26:33', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143123, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143141, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143142, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143143, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143144, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143146, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143157, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143188, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143189, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143191, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143199, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143200, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143210, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143219, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143221, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143222, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143234, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143236, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143247, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143264, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143276, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143278, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143301, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143309, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143313, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143323, '2025-09-04 14:26:04', '2025-09-04 14:26:04', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143327, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143328, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143332, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143335, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143338, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143341, '2025-09-04 14:26:34', '2025-10-20 14:58:52', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143343, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143345, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143352, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143367, '2025-09-04 14:26:07', '2025-09-04 14:26:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143368, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143372, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143380, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143382, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143388, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143400, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143402, '2025-09-04 14:26:34', '2025-09-04 14:26:34', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143404, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143407, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143408, '2025-09-04 14:26:27', '2025-09-04 14:26:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143414, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143421, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143432, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143438, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143439, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143440, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143467, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143468, '2025-09-04 14:26:29', '2025-09-04 14:26:29', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143490, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143496, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143504, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143506, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143509, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143512, '2025-09-04 14:26:10', '2025-09-04 14:26:10', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143513, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143514, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143516, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143522, '2025-09-04 14:26:32', '2025-09-04 14:26:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143532, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143537, '2025-09-04 14:26:11', '2025-09-04 14:26:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143553, '2025-09-04 14:26:06', '2025-09-04 14:26:06', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143556, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143562, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143563, '2025-09-04 14:26:34', '2025-09-04 14:27:34', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143576, '2025-09-04 14:26:33', '2025-10-20 15:07:28', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143578, '2025-09-04 14:26:08', '2025-09-04 14:26:08', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143579, '2025-09-04 14:26:09', '2025-09-04 14:26:09', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143591, '2025-09-04 14:26:31', '2025-09-04 14:26:31', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (20250904143597, '2025-09-04 14:26:30', '2025-09-04 14:26:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083033899008, '2025-09-03 14:17:09', '2025-09-04 11:39:07', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083155533824, '2025-09-12 14:17:09', '2025-09-04 14:27:52', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083428163584, '2025-09-18 14:17:09', '2025-09-04 14:27:44', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083524632576, '2025-09-03 14:17:09', '2025-09-04 11:38:40', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083616907264, '2025-09-03 14:17:09', '2025-09-04 11:34:30', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083793068032, '2025-09-01 14:17:09', '2025-09-04 11:34:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124083960840192, '2025-09-03 14:17:09', '2025-09-04 11:34:43', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124084279607296, '2025-09-03 14:17:09', '2025-09-04 11:30:11', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124084418019328, '2025-09-03 13:17:10', '2025-09-04 11:30:15', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124085676310528, '2025-09-03 14:17:12', '2025-09-04 11:29:44', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124085751808000, '2025-09-03 14:17:14', '2025-09-04 10:10:41', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124085865054208, '2025-09-03 14:17:15', '2025-09-04 11:41:32', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1963124086565502976, '2025-09-03 14:17:16', '2025-09-04 11:53:27', 1963121422649786368, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057584848896, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 6, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057584848897, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 7, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057589043200, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 8, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057593237504, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 9, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057597431808, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 10, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057601626112, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 11, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057605820416, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 12, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057610014720, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 13, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057614209024, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 14, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057618403328, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 15, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057626791936, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 16, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057630986240, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 17, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057635180544, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311556855726080, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057639374848, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 18, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057643569152, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 19, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057647763456, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 20, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057651957760, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 21, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057660346368, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 22, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057664540672, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 23, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057672929280, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 24, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057677123584, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311702918168576, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057685512192, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311738074824704, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057689706496, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311704486838272, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057698095104, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951299613977739264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057706483712, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1950580430986018816, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057710678016, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311553856798720, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057719066624, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311558462144512, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057731649536, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951312144884563968, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057740038144, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951315654149668864, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057748426752, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951301892227203072, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057752621056, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311700531609600, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057761009664, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951300416163545088, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968927057769398272, '2025-09-19 14:36:06', '2025-09-19 14:36:06', 1961476084037844992, 1951311705631883264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264905977856, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 6, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264910172160, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 7, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264918560768, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 8, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264922755072, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 9, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264935337984, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 10, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264939532288, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 11, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264947920896, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 12, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264952115200, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 13, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264960503808, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 14, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264964698112, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 15, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264973086720, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 16, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264981475328, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 17, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264989863936, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311556855726080, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937264998252544, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 18, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265006641152, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 19, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265015029760, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 20, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265015029761, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 21, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265019224064, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 22, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265023418368, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 23, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265023418369, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 24, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265027612672, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311702918168576, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265031806976, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311738074824704, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265036001280, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311704486838272, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265040195584, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951299613977739264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265040195585, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1950580430986018816, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265044389888, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311553856798720, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265052778496, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311558462144512, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265052778497, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951312144884563968, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265056972800, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951315654149668864, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265061167104, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951301892227203072, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265061167105, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311700531609600, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265065361408, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951300416163545088, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937265069555712, '2025-09-19 15:16:40', '2025-09-19 15:16:40', 1961476084037844992, 1951311705631883264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314591703040, '2025-09-19 15:16:52', '2025-10-23 14:21:35', 1963121422649786368, 1, 1, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314595897344, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 6, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314600091648, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 7, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314600091649, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 8, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314604285952, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 9, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314608480256, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 10, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314608480257, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 11, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314612674560, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 12, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314612674561, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 13, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314616868864, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 14, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314616868865, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 15, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314621063168, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 16, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314625257472, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 17, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314625257473, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311556855726080, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314629451776, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 18, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314629451777, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 19, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314633646080, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 20, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314633646081, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 21, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314637840384, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 22, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314642034688, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 23, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314642034689, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 24, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314646228992, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311702918168576, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314646228993, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311738074824704, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314650423296, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311704486838272, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314654617600, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951299613977739264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314654617601, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1950580430986018816, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314658811904, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311553856798720, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314658811905, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311558462144512, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314663006208, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951312144884563968, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314663006209, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951315654149668864, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314667200512, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951301892227203072, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314667200513, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311700531609600, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314671394816, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951300416163545088, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1968937314675589120, '2025-09-19 15:16:52', '2025-09-19 15:16:52', 1963121422649786368, 1951311705631883264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554023739392, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554027933696, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 6, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554032128000, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 7, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554032128001, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 8, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554036322304, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 9, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554040516608, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 10, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554044710912, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 11, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554048905216, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 12, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554053099520, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 13, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554057293824, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 14, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554057293825, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 15, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554061488128, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 16, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554065682432, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 17, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554069876736, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311556855726080, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554069876737, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 18, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554074071040, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 19, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554078265344, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 20, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554078265345, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 21, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554082459648, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 22, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554086653952, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 23, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554086653953, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 24, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554090848256, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311702918168576, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554095042560, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311738074824704, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554099236864, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311704486838272, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554099236865, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951299613977739264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554103431168, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1950580430986018816, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554107625472, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311553856798720, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554107625473, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311558462144512, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554111819776, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951312144884563968, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554116014080, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951315654149668864, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554116014081, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951301892227203072, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554120208384, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311700531609600, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554124402688, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951300416163545088, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1976490554124402689, '2025-10-10 11:30:44', '2025-10-10 11:30:44', 1976488251443118080, 1951311705631883264, 0, NULL, 1, NULL, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078472200192, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078476394496, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 6, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078480588800, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 7, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078484783104, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 8, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078488977408, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 9, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078497366016, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 10, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078501560320, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 11, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078505754624, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 12, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078509948928, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 13, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078514143232, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 14, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078518337536, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 15, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078522531840, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 16, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078526726144, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 17, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078530920448, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311556855726080, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078539309056, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 18, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078547697664, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 19, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078556086272, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 20, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078560280576, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 21, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078568669184, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 22, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078577057792, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 23, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078581252096, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 24, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078589640704, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311702918168576, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078593835008, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311738074824704, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078610612224, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311704486838272, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078619000832, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951299613977739264, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078627389440, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1950580430986018816, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078635778048, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311553856798720, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078639972352, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311558462144512, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078648360960, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951312144884563968, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078652555264, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951315654149668864, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078660943872, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951301892227203072, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078665138176, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311700531609600, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078673526784, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951300416163545088, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1987796078677721088, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311705631883264, 0, NULL, 1, 1987796045492387840, 1);
+
+-- ----------------------------
+-- Table structure for sys_notifications_record_content
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_notifications_record_content`;
+CREATE TABLE `sys_notifications_record_content`  (
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1987796078451228673 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录内容表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of sys_notifications_record_content
+-- ----------------------------
+INSERT INTO `sys_notifications_record_content` VALUES (1987792534667001856, '2025-11-10 16:00:46', '2025-11-10 16:00:46', NULL, '<p><a href=\"https://www.google.com.hk/imghp?hl=zh-CN&ogbl\" target=\"_top\">图片</a></p><p><a href=\"https://accounts.google.com/ServiceLogin?hl=zh-CN&amp;passive=true&amp;continue=https://www.google.com.hk/&amp;ec=futura_exp_og_so_72776762_e\" target=\"_top\" style=\"text-align: center;\">登录</a></p><p> </p><p><a href=\"https://about.google/?utm_source=google-ZZ&utm_medium=referral&utm_campaign=hp-footer&fg=1\" target=\"\">关于 Google</a><a href=\"https://www.google.com.hk/intl/zh-CN_zz/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1\" target=\"\">广告</a><a href=\"https://www.google.com.hk/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1\" target=\"\">商务</a><a href=\"https://google.com/search/howsearchworks/?fg=1\" target=\"\">Google 搜索的运作方式</a></p><p><a href=\"https://policies.google.com/privacy?hl=zh-CN&fg=1\" target=\"\">隐私权</a><a href=\"https://policies.google.com/terms?hl=zh-CN&fg=1\" target=\"\">条款</a>设置</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1987793185581039616, '2025-11-10 16:03:22', '2025-11-10 16:03:22', '测试重构通知记录', '<p>434343</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1987793685806317568, '2025-11-10 16:05:21', '2025-11-10 16:05:21', '测试重构通知记录', '<p><a href=\"https://www.google.com.hk/imghp?hl=zh-CN&ogbl\" target=\"_top\">图片</a></p><p><a href=\"https://accounts.google.com/ServiceLogin?hl=zh-CN&amp;passive=true&amp;continue=https://www.google.com.hk/&amp;ec=futura_exp_og_so_72776762_e\" target=\"_top\" style=\"text-align: center;\">登录</a></p><p> </p><p><a href=\"https://about.google/?utm_source=google-ZZ&utm_medium=referral&utm_campaign=hp-footer&fg=1\" target=\"\">关于 Google</a><a href=\"https://www.google.com.hk/intl/zh-CN_zz/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1\" target=\"\">广告</a><a href=\"https://www.google.com.hk/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1\" target=\"\">商务</a><a href=\"https://google.com/search/howsearchworks/?fg=1\" target=\"\">Google 搜索的运作方式</a></p><p><a href=\"https://policies.google.com/privacy?hl=zh-CN&fg=1\" target=\"\">隐私权</a><a href=\"https://policies.google.com/terms?hl=zh-CN&fg=1\" target=\"\">条款</a>设置</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1987794082096742400, '2025-11-10 16:06:55', '2025-11-10 16:06:55', '测试重构通知记录', '<p>434343</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1987794305497956352, '2025-11-10 16:07:49', '2025-11-10 16:07:49', '测试重构通知记录', '<p>434343</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1987796078451228672, '2025-11-10 16:14:51', '2025-11-10 16:14:51', '测试重构通知记录', '<p><span style=\"color: rgb(255, 255, 255); font-size: 14px;\">En</span></p><p><br></p><ul><li><a href=\"https://nacos.io/\" target=\"_blank\">首页</a></li><li><a href=\"https://nacos.io/docs/latest/what-is-nacos/\" target=\"_blank\">文档</a></li><li><a href=\"https://nacos.io/blog/\" target=\"_blank\">博客</a></li><li><a href=\"https://nacos.io/news/\" target=\"_blank\">社区</a></li><li><a href=\"https://cn.aliyun.com/product/aliware/mse?spm=nacos-website.topbar.0.0.0\" target=\"_blank\">Nacos企业版</a></li><li></li><li></li><li></li><li></li></ul><h1 style=\"text-align: center;\">NACOS2.5.1</h1><h1 style=\"text-align: center;\">模式standalone</h1><ul><li>配置管理</li><li>服务管理服务列表订阅者列表</li><li>命名空间</li><li>集群管理</li><li>设置中心</li><li></li><li></li><li></li><li>当前集群没有开启鉴权，请参考<a href=\"https://nacos.io/docs/latest/manual/admin/auth/\" target=\"\">文档</a>开启鉴权~</li><li></li><li>服务列表</li><li></li><li></li><li></li><li></li><li></li><li></li><li><span style=\"color: rgb(32, 155, 250); font-size: 14px;\">public</span></li><li><span style=\"color: rgb(153, 153, 153);\">|</span><span style=\"color: rgb(201, 201, 204); font-size: 14px;\">dev</span></li><li></li><li></li><li>服务名称分组名称隐藏空服务</li><li></li><li></li><li></li></ul><table style=\"width: auto;\"><tbody><tr><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">服务名</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">分组名称</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">集群数目</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">健康实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">触发保护阈值</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">操作</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-system</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-websocket</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-user</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-resource</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-example</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-gateway</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-auth</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-admin</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除<br><br><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">每页显示：</span><em>100</em><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">总数：8</span></td></tr></tbody></table><ul><li></li><li></li><li></li><li></li></ul>');
 
 -- ----------------------------
 -- Table structure for sys_notifications_target
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_target`;
 CREATE TABLE `sys_notifications_target`  (
-                                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                             `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
-                                             `target_type` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
-                                             `target_id` bigint NULL DEFAULT NULL COMMENT '通知目标Id',
-                                             `target_name` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标名称',
-                                             PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1976488251594113025 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统通知公告通知对象表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
+  `target_type` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
+  `target_id` bigint NULL DEFAULT NULL COMMENT '通知目标Id',
+  `target_name` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标名称',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1987796045567885313 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告通知目标表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_target
@@ -740,25 +732,26 @@ INSERT INTO `sys_notifications_target` VALUES (1976488251581530112, '2025-10-10 
 INSERT INTO `sys_notifications_target` VALUES (1976488251585724416, '2025-10-10 11:21:35', '2025-10-10 11:21:35', 1976488251443118080, 3, 1961819067719352320, '研发部');
 INSERT INTO `sys_notifications_target` VALUES (1976488251589918720, '2025-10-10 11:21:35', '2025-10-10 11:21:35', 1976488251443118080, 3, 1961819826523471872, '产品部');
 INSERT INTO `sys_notifications_target` VALUES (1976488251594113024, '2025-10-10 11:21:35', '2025-10-10 11:21:35', 1976488251443118080, 3, 1961819848073805824, '研发部');
+INSERT INTO `sys_notifications_target` VALUES (1987796045567885312, '2025-11-10 16:14:43', '2025-11-10 16:14:43', 1987796045492387840, 4, NULL, '全部');
 
 -- ----------------------------
 -- Table structure for sys_organization
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_organization`;
 CREATE TABLE `sys_organization`  (
-                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                     `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                     `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
-                                     `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
-                                     `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
-                                     `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
-                                     `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                     `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-                                     `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
-                                     PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
+  `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
+  `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961819924967981057 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统组织表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -798,25 +791,25 @@ INSERT INTO `sys_organization` VALUES (1961819924967981056, '2025-08-30 23:54:54
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_resources`;
 CREATE TABLE `sys_resources`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
-                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
-                                  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
-                                  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
-                                  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
-                                  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-                                  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-                                  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
-                                  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
-                                  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-                                  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
-                                  `sort` int NULL DEFAULT NULL COMMENT '排序',
-                                  PRIMARY KEY (`id`, `code`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
+  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
+  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
+  `sort` int NULL DEFAULT NULL COMMENT '排序',
+  PRIMARY KEY (`id`, `code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1965222813082058753 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -875,18 +868,18 @@ INSERT INTO `sys_resources` VALUES (1965222813082058752, 9, '2025-09-09 09:16:45
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                             `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
-                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-                             `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
-                             `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-                             `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
-                             PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1978732602692993025 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
@@ -897,21 +890,22 @@ INSERT INTO `sys_role` VALUES (3, '2024-07-17 12:10:21', '2024-07-25 23:08:48', 
 INSERT INTO `sys_role` VALUES (7, '2024-07-22 10:37:46', '2024-07-31 00:48:33', NULL, '1', '平台管理员', '普通管理员', 'i-me:superadmin', 1, 'PTADMIN');
 INSERT INTO `sys_role` VALUES (8, '2024-07-22 16:08:12', '2024-07-23 01:07:39', NULL, NULL, '订单审核员', '进行订单审核的人员', 'i-me:role', 1, 'DDSHENHE');
 INSERT INTO `sys_role` VALUES (9, '2024-07-23 01:42:20', '2024-07-25 23:07:43', NULL, '1', '系统功能测试员', '研发部测试人员0000', 'i-me:role', 1, 'TESTgcs');
+INSERT INTO `sys_role` VALUES (1978732602692993024, '2025-10-16 15:59:50', '2025-10-16 16:00:53', NULL, NULL, '测试功能的角色111', NULL, 'i-me:role', 1, 'TEST:GN:ROLE');
 
 -- ----------------------------
 -- Table structure for sys_role_resources
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_resources`;
 CREATE TABLE `sys_role_resources`  (
-                                       `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                       `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                       `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                       `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                       `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                       `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-                                       `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
-                                       PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 414 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色权限表' ROW_FORMAT = DYNAMIC;
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+  `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1978732865558413314 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_resources
@@ -949,18 +943,28 @@ INSERT INTO `sys_role_resources` VALUES (407, '2024-07-31 00:48:33', '2024-07-31
 INSERT INTO `sys_role_resources` VALUES (408, '2024-07-31 00:48:33', '2024-07-31 00:48:33', '1', '1', '7', '31');
 INSERT INTO `sys_role_resources` VALUES (409, '2024-07-31 00:48:33', '2024-07-31 00:48:33', '1', '1', '7', '33');
 INSERT INTO `sys_role_resources` VALUES (410, '2024-07-31 00:48:33', '2024-07-31 00:48:33', '1', '1', '7', '34');
+INSERT INTO `sys_role_resources` VALUES (1978732865537441792, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '12');
+INSERT INTO `sys_role_resources` VALUES (1978732865537441793, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '11');
+INSERT INTO `sys_role_resources` VALUES (1978732865545830400, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '10');
+INSERT INTO `sys_role_resources` VALUES (1978732865545830401, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '14');
+INSERT INTO `sys_role_resources` VALUES (1978732865550024704, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '1965222813082058752');
+INSERT INTO `sys_role_resources` VALUES (1978732865550024705, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '9');
+INSERT INTO `sys_role_resources` VALUES (1978732865554219008, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '4');
+INSERT INTO `sys_role_resources` VALUES (1978732865554219009, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '2');
+INSERT INTO `sys_role_resources` VALUES (1978732865558413312, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '1961067429727567872');
+INSERT INTO `sys_role_resources` VALUES (1978732865558413313, '2025-10-16 16:00:53', '2025-10-16 16:00:53', NULL, NULL, '1978732602692993024', '1961666674675417088');
 
 -- ----------------------------
 -- Table structure for sys_setting
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_setting`;
 CREATE TABLE `sys_setting`  (
-                                `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -972,76 +976,76 @@ CREATE TABLE `sys_setting`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-                             `id` bigint NOT NULL COMMENT '自增主键',
-                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                             `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
-                             `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
-                             `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `gender` tinyint NULL DEFAULT NULL,
-                             `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-                             `last_login_time` datetime NULL DEFAULT NULL,
-                             `enable` tinyint NULL DEFAULT NULL,
-                             PRIMARY KEY (`id`, `account`) USING BTREE
+  `id` bigint NOT NULL COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `gender` tinyint NULL DEFAULT NULL,
+  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `last_login_time` datetime NULL DEFAULT NULL,
+  `enable` tinyint NULL DEFAULT NULL,
+  PRIMARY KEY (`id`, `account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '2024-07-15 21:46:49', '2024-07-28 15:42:58', NULL, '1', 1961811583873056768, '宇宙无敌的高手555', 'admin', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, '17685306042', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', '超级管理员拥有系统全部权限', '2024-07-16 16:44:05', 1);
-INSERT INTO `sys_user` VALUES (6, '2024-07-22 10:23:30', '2024-07-25 23:05:24', NULL, '1', 1961811583873056768, '王老五', 'wlwu', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (7, '2024-07-22 10:24:00', '2024-07-25 23:05:40', NULL, '1', 1961811583873056768, '李四', '9她发给对方', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (8, '2024-07-22 10:24:36', '2024-07-25 23:06:01', NULL, '1', 1961811583873056768, 'java高手', 'jwgs12', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (9, '2024-07-22 10:25:03', '2024-07-25 23:06:02', NULL, '1', 1961811583873056768, '324', 'hy', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (10, '2024-07-22 10:32:13', '2024-07-25 23:06:04', NULL, '1', 1961811583873056768, 'HuangZy最帅', 'hyl8980', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (11, '2024-07-22 10:40:39', '2025-08-18 16:07:52', NULL, '1', 1961811583873056768, 'zy无敌帅', '23234230900', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (12, '2024-07-22 11:39:00', '2024-07-25 23:06:06', NULL, '1', 1961811583873056768, '韩信', 'hanxin', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (13, '2024-07-22 11:42:05', '2024-07-25 23:06:07', NULL, '1', 1961811583873056768, '赵云', 'zhaoyun', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (14, '2024-07-22 11:43:37', '2025-05-07 16:32:00', NULL, '1', 1961811583873056768, '赵信', 'zx121212', '3b35ea3514d460a379d837d9f22a800f990045faf0e7b88af48a8c5cd87435de', 'qiv9vc0b', 1, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (15, '2024-07-22 14:56:42', '2024-07-25 23:06:17', NULL, '1', 1961819067719352320, '王二小', 'wex', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (16, '2024-07-23 19:13:25', '2024-07-25 23:06:15', NULL, '1', 1961819067719352320, '德莱厄斯', 'delaies', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (17, '2024-07-24 14:46:16', '2024-07-25 23:06:14', '1', '1', 1961819067719352320, '起重机操作员2号', 'hzy0318', 'd61488d9883af097dfb0313c95082f91dbad8deaa8d1c60be1fda9cb2a677d45', 'q0lf117d', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (18, '2024-07-25 11:01:24', '2024-07-25 23:06:13', '1', '1', 1961819067719352320, '花木兰', 'huamul', '0971779f8e00c4b59d81097df6eadadcdb08f05fc36efd8d62eab3676eb5a8ff', '5t2tv3zj', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (19, '2024-07-25 11:01:44', '2024-07-25 23:06:13', '1', '1', 1961819067719352320, '悟空', 'wukong', '0415561d60d9cd991dd9c6317f2a67ec53576cd3e01bd51e877882c8c8105628', 'mbbj6j84', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (20, '2024-07-25 11:05:25', '2024-07-25 11:10:42', '1', '1', 1961819067719352320, '钟馗', 'zhongkui', '708dbac3c15824031d7fe1cfd5d15bdea9c359ba6d056d62e603e3a74ce37b45', '0ssyh8y8', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (21, '2024-07-25 11:10:20', '2024-07-25 11:10:20', '1', '1', 1961819067719352320, '李白', 'libai', 'c9feb63af3a94086a7b7d5ccfa828968f805e54a0458b341627e66aa8ebb256e', 'yv6vz1sm', 0, NULL, 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (22, '2024-07-25 11:30:23', '2024-07-25 11:52:52', '1', '22', 1961819067719352320, '普通管理员', 'ptadmin', 'd18c63a0924c11224b9dab0c012ffd23ec49d6c40e0d6ff40e0a33dc39681d65', 'jt7pmvh1', 0, '16687590876', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', '业务管理员', NULL, 1);
-INSERT INTO `sys_user` VALUES (23, '2025-07-30 23:06:55', '2025-07-30 23:06:55', NULL, NULL, 1961819067719352320, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (24, '2025-07-30 23:08:40', '2025-07-30 23:08:40', NULL, NULL, 1961811583873056768, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1950580430986018816, '2025-07-30 23:33:16', '2025-07-30 23:33:16', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951299613977739264, '2025-08-01 23:11:03', '2025-08-01 23:11:03', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951300416163545088, '2025-08-01 23:14:07', '2025-08-01 23:14:07', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951301892227203072, '2025-08-01 23:19:59', '2025-08-01 23:19:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311553856798720, '2025-08-01 23:58:23', '2025-08-01 23:58:23', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311556855726080, '2025-08-01 23:58:23', '2025-08-01 23:58:23', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311558462144512, '2025-08-01 23:58:24', '2025-08-01 23:58:24', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311700531609600, '2025-08-01 23:58:58', '2025-08-01 23:58:58', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311702918168576, '2025-08-01 23:58:58', '2025-08-01 23:58:58', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311704486838272, '2025-08-01 23:58:59', '2025-08-01 23:58:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311705631883264, '2025-08-01 23:58:59', '2025-08-01 23:58:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951311738074824704, '2025-08-01 23:59:07', '2025-08-01 23:59:07', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951312144884563968, '2025-08-02 00:00:44', '2025-08-02 00:00:44', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
-INSERT INTO `sys_user` VALUES (1951315654149668864, '2025-08-02 00:14:40', '2025-08-02 00:14:40', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://avatars.githubusercontent.com/u/46741470?v=4&size=256', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1, '2024-07-15 21:46:49', '2025-10-20 15:18:22', NULL, NULL, 1961811583873056768, '宇宙无敌的高手555', 'admin', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 2, '17685306042', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', '超级管理员拥有系统全部权限', '2024-07-16 16:44:05', 1);
+INSERT INTO `sys_user` VALUES (6, '2024-07-22 10:23:30', '2024-07-25 23:05:24', NULL, '1', 1961811583873056768, '王老五', 'wlwu', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (7, '2024-07-22 10:24:00', '2024-07-25 23:05:40', NULL, '1', 1961811583873056768, '李四', '9她发给对方', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (8, '2024-07-22 10:24:36', '2024-07-25 23:06:01', NULL, '1', 1961811583873056768, 'java高手', 'jwgs12', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (9, '2024-07-22 10:25:03', '2024-07-25 23:06:02', NULL, '1', 1961811583873056768, '324', 'hy', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (10, '2024-07-22 10:32:13', '2024-07-25 23:06:04', NULL, '1', 1961811583873056768, 'HuangZy最帅', 'hyl8980', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (11, '2024-07-22 10:40:39', '2025-08-18 16:07:52', NULL, '1', 1961811583873056768, 'zy无敌帅', '23234230900', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (12, '2024-07-22 11:39:00', '2024-07-25 23:06:06', NULL, '1', 1961811583873056768, '韩信', 'hanxin', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (13, '2024-07-22 11:42:05', '2024-07-25 23:06:07', NULL, '1', 1961811583873056768, '赵云', 'zhaoyun', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (14, '2024-07-22 11:43:37', '2025-05-07 16:32:00', NULL, '1', 1961811583873056768, '赵信', 'zx121212', '3b35ea3514d460a379d837d9f22a800f990045faf0e7b88af48a8c5cd87435de', 'qiv9vc0b', 1, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (15, '2024-07-22 14:56:42', '2024-07-25 23:06:17', NULL, '1', 1961819067719352320, '王二小', 'wex', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 1, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (16, '2024-07-23 19:13:25', '2024-07-25 23:06:15', NULL, '1', 1961819067719352320, '德莱厄斯', 'delaies', 'eb7bf5a85ac5de5de478ad57bda53bbd6f97233546e8c7e8f448e70cde94de54', '2ztkxntw', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (17, '2024-07-24 14:46:16', '2024-07-25 23:06:14', '1', '1', 1961819067719352320, '起重机操作员2号', 'hzy0318', 'd61488d9883af097dfb0313c95082f91dbad8deaa8d1c60be1fda9cb2a677d45', 'q0lf117d', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (18, '2024-07-25 11:01:24', '2024-07-25 23:06:13', '1', '1', 1961819067719352320, '花木兰', 'huamul', '0971779f8e00c4b59d81097df6eadadcdb08f05fc36efd8d62eab3676eb5a8ff', '5t2tv3zj', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (19, '2024-07-25 11:01:44', '2024-07-25 23:06:13', '1', '1', 1961819067719352320, '悟空', 'wukong', '0415561d60d9cd991dd9c6317f2a67ec53576cd3e01bd51e877882c8c8105628', 'mbbj6j84', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (20, '2024-07-25 11:05:25', '2024-07-25 11:10:42', '1', '1', 1961819067719352320, '钟馗', 'zhongkui', '708dbac3c15824031d7fe1cfd5d15bdea9c359ba6d056d62e603e3a74ce37b45', '0ssyh8y8', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (21, '2024-07-25 11:10:20', '2024-07-25 11:10:20', '1', '1', 1961819067719352320, '李白', 'libai', 'c9feb63af3a94086a7b7d5ccfa828968f805e54a0458b341627e66aa8ebb256e', 'yv6vz1sm', 0, NULL, 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (22, '2024-07-25 11:30:23', '2024-07-25 11:52:52', '1', '22', 1961819067719352320, '普通管理员', 'ptadmin', 'd18c63a0924c11224b9dab0c012ffd23ec49d6c40e0d6ff40e0a33dc39681d65', 'jt7pmvh1', 0, '16687590876', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', '业务管理员', NULL, 1);
+INSERT INTO `sys_user` VALUES (23, '2025-07-30 23:06:55', '2025-07-30 23:06:55', NULL, NULL, 1961819067719352320, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (24, '2025-07-30 23:08:40', '2025-07-30 23:08:40', NULL, NULL, 1961811583873056768, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1950580430986018816, '2025-07-30 23:33:16', '2025-07-30 23:33:16', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951299613977739264, '2025-08-01 23:11:03', '2025-08-01 23:11:03', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951300416163545088, '2025-08-01 23:14:07', '2025-08-01 23:14:07', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951301892227203072, '2025-08-01 23:19:59', '2025-08-01 23:19:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311553856798720, '2025-08-01 23:58:23', '2025-08-01 23:58:23', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311556855726080, '2025-08-01 23:58:23', '2025-08-01 23:58:23', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311558462144512, '2025-08-01 23:58:24', '2025-08-01 23:58:24', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311700531609600, '2025-08-01 23:58:58', '2025-08-01 23:58:58', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311702918168576, '2025-08-01 23:58:58', '2025-08-01 23:58:58', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311704486838272, '2025-08-01 23:58:59', '2025-08-01 23:58:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311705631883264, '2025-08-01 23:58:59', '2025-08-01 23:58:59', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951311738074824704, '2025-08-01 23:59:07', '2025-08-01 23:59:07', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951312144884563968, '2025-08-02 00:00:44', '2025-08-02 00:00:44', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
+INSERT INTO `sys_user` VALUES (1951315654149668864, '2025-08-02 00:14:40', '2025-08-02 00:14:40', NULL, NULL, 1961818974295425024, '7878', 'xxxxxxx45454', 'dfsdfsdfsdfsd', NULL, 1, '17685306043', 'https://foruda.gitee.com/avatar/1677025460372421810/4898013_smog_huang_1578976658.png!avatar200', NULL, NULL, 1);
 
 -- ----------------------------
 -- Table structure for sys_user_role
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-                                  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-                                  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
-                                  PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -1074,13 +1078,13 @@ INSERT INTO `sys_user_role` VALUES (45, '2025-06-09 16:25:36', '2025-06-09 16:25
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_setting`;
 CREATE TABLE `sys_user_setting`  (
-                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-                                     `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
-                                     `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
-                                     PRIMARY KEY (`id`) USING BTREE
+  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
+  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
+  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户个人设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
