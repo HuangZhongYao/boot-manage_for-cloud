@@ -10,6 +10,7 @@ import jakarta.annotation.Resource;
 import org.github.bm.common.base.dto.input.BaseLongIdInputDTO;
 import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.common.exception.UserFriendlyException;
+import org.github.bm.common.security.SecurityContextHolder;
 import org.github.bm.system.converter.NotificationsConverter;
 import org.github.bm.system.dto.AddNotificationsInputDTO;
 import org.github.bm.system.dto.EditNotificationsInputDTO;
@@ -86,7 +87,6 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
 
         // 发布人Id列表
         List<Long> publisherIdList = page.getRecords().stream().map(NotificationsEntity::getPublisher).toList();
-
         // 构建VO
         Page<NotificationsVO> pageVO = new Page<>();
         BeanUtils.copyProperties(page, pageVO);
@@ -99,7 +99,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             Map<Long, String> createdByUserMap = null == createdByUserList ? new HashMap<>() : createdByUserList.stream().collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
             // 赋值发布人属性
             pageVO.getRecords().forEach(item -> {
-                String username = createdByUserMap.get(item.getCreatedBy());
+                String username = createdByUserMap.get(item.getPublisher());
                 if (null != username) {
                     item.setPublisherName(username);
                 }
@@ -289,6 +289,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         updateEntity.setId(inputDTO.getId());
         updateEntity.setState(NotificationsStateEnum.PUBLISHED);
         updateEntity.setPublishTime(LocalDateTime.now());
+        updateEntity.setPublisher(SecurityContextHolder.getAuthUserId());
 
         // websocket构建消息体
         NotificationMessagePayloadDTO payloadDTO = NotificationMessagePayloadDTO.builder()
