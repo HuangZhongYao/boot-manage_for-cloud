@@ -5,7 +5,6 @@ import lombok.*;
 import org.github.bm.common.base.entity.AbstractBaseEntity;
 import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsStateEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
 
 import java.time.LocalDateTime;
 
@@ -52,11 +51,6 @@ public class NotificationsEntity extends AbstractBaseEntity {
      * 撤回时间
      */
     private LocalDateTime revokeTime;
-
-    /**
-     * 通知类型
-     */
-    private NotificationsTypeEnum type;
 
     /**
      * 通知级别

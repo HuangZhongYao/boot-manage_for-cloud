@@ -1,9 +1,8 @@
 package org.github.bm.websocket.dto;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.github.bm.system.enums.NotificationsLevelEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
+import org.github.bm.system.enums.NotificationsRecordBusinessTypeEnum;
 import org.github.bm.websocket.base.AbstractPayload;
 
 import java.time.LocalDateTime;
@@ -18,11 +17,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NotificationMessagePayloadDTO extends AbstractPayload {
-    /**
-     * 通知公告Id
-     * NotificationsEntity#id {@link org.github.bm.system.entity.NotificationsEntity#id}
-     */
-    private Long notificationsId;
 
     /**
      * 通知公告内容
@@ -35,9 +29,14 @@ public class NotificationMessagePayloadDTO extends AbstractPayload {
     private LocalDateTime publishTime;
 
     /**
-     * 通知类型
+     * 通知业务场景
      */
-    private NotificationsTypeEnum type;
+    private NotificationsRecordBusinessTypeEnum businessType;
+
+    /**
+     * 通知业务场景关联业务Id
+     */
+    private Long businessId;
 
     /**
      * 通知级别

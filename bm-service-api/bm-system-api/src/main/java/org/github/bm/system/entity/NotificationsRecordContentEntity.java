@@ -20,6 +20,11 @@ import org.github.bm.common.base.entity.AbstractIdAndTimeEntity;
 public class NotificationsRecordContentEntity extends AbstractIdAndTimeEntity {
 
     /**
+     * 标题
+     */
+    private String title;
+
+    /**
      * 内容
      */
     private String content;

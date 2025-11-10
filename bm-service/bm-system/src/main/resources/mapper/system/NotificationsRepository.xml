@@ -9,19 +9,19 @@
                a.created_time,
                a.updated_time,
                a.user_id,
-               a.notifications_id,
                a.`read_state`,
                a.read_time,
-               a.type,
+               a.business_type,
+               a.business_id,
+               a.content_id,
                a.level,
                b.title,
                b.content,
-               b.publish_time,
                c.username,
                c.account
         FROM sys_notifications_record a
-                 INNER JOIN
-             sys_notifications b ON a.notifications_id = b.id
+                 LEFT JOIN
+             sys_notifications_record_content b ON a.content_id = b.id
                  LEFT JOIN
              sys_user c ON a.user_id = c.id
         WHERE a.user_id = #{userId}

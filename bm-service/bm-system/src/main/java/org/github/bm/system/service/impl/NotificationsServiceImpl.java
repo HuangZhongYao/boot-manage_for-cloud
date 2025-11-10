@@ -265,10 +265,10 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         // websocket构建消息体
         NotificationMessagePayloadDTO payloadDTO = NotificationMessagePayloadDTO.builder()
                 .content(notificationsEntity.getTitle())
-                .notificationsId(notificationsEntity.getId())
                 .publishTime(notificationsEntity.getPublishTime())
                 .level(notificationsEntity.getLevel())
-                .type(notificationsEntity.getType())
+                .businessId(notificationsEntity.getId())
+                .businessType(NotificationsRecordBusinessTypeEnum.NOTIFICATIONS)
                 .build();
         payloadDTO.setTitle(notificationsEntity.getTitle());
         payloadDTO.setFrom(AbstractPayload.DEFAULT_FROM);

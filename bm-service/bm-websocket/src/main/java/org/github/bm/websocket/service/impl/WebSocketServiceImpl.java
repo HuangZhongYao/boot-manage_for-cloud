@@ -36,8 +36,8 @@ public class WebSocketServiceImpl implements IWebSocketService {
         if (CollectionUtil.isEmpty(payload.getTo())) {
             return 0;
         }
-        // 获取所有在线用户
-        for (Long userId : onlineUserService.getOnlineUserIdList()) {
+        // 发送给指定的接收用户
+        for (Long userId : payload.getTo()) {
             simpMessagingTemplate.convertAndSendToUser(String.valueOf(userId), SimpConstant.Queue.USER_QUEUE_MESSAGES, message);
         }
         // 获取消息处理策略

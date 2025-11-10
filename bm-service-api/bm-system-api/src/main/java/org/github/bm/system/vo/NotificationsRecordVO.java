@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
-import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.enums.NotificationsLevelEnum;
-import org.github.bm.system.enums.NotificationsTypeEnum;
+import org.github.bm.system.enums.NotificationsRecordBusinessTypeEnum;
 
 import java.time.LocalDateTime;
 
@@ -37,10 +36,16 @@ public class NotificationsRecordVO extends BaseIdAndTimeIdVO {
     private String content;
 
     /**
-     * NotificationsEntity 主表 id {@link NotificationsEntity#id}
+     * 通知业务场景
      */
-    @Schema(description = "通知表Id")
-    private Long notificationsId;
+    @Schema(description = "通知业务场景类型")
+    private NotificationsRecordBusinessTypeEnum businessType;
+
+    /**
+     * 通知业务场景关联业务Id
+     */
+    @Schema(description = "通知业务场景关联业务Id")
+    private Long businessId;
 
     /**
      * 用户id {@link UserEntity#id}
@@ -71,12 +76,6 @@ public class NotificationsRecordVO extends BaseIdAndTimeIdVO {
      */
     @Schema(description = "通知发布时间")
     private LocalDateTime publishTime;
-
-    /**
-     * 通知类型
-     */
-    @Schema(description = "通知类型")
-    private NotificationsTypeEnum type;
 
     /**
      * 通知级别
