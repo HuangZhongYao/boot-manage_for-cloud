@@ -19,7 +19,10 @@ import org.github.bm.system.entity.NotificationsEntity;
 import org.github.bm.system.entity.NotificationsRecordContentEntity;
 import org.github.bm.system.entity.NotificationsRecordEntity;
 import org.github.bm.system.entity.NotificationsTargetEntity;
-import org.github.bm.system.enums.*;
+import org.github.bm.system.enums.NotificationsLevelEnum;
+import org.github.bm.system.enums.NotificationsRecordBusinessTypeEnum;
+import org.github.bm.system.enums.NotificationsStateEnum;
+import org.github.bm.system.enums.NotificationsTargetEnum;
 import org.github.bm.system.repository.NotificationsRecordContentRepository;
 import org.github.bm.system.repository.NotificationsRepository;
 import org.github.bm.system.service.*;
@@ -131,21 +134,33 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             throw new UserFriendlyException("请选择通知目标");
         }
         // 通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList = notificationsTargetDTOList
-                .stream()
-                .map(item ->
-                        NotificationsTargetEntity.builder()
-                                .notificationsId(notificationsEntity.getId())
-                                .targetType(item.getType())
-                                .targetId(item.getId())
-                                .targetName(item.getName())
-                                .build()
-                )
-                .toList();
+        List<NotificationsTargetEntity> notificationsTargetEntityList = null;
+        if (inputDTO.getAllNotifications()) {
+            notificationsTargetEntityList = new ArrayList<>(1);
+            notificationsTargetEntityList.add(
+                    NotificationsTargetEntity.builder()
+                            .notificationsId(notificationsEntity.getId())
+                            .targetType(NotificationsTargetEnum.ALL)
+                            .targetId(null)
+                            .targetName(NotificationsTargetEnum.ALL.getDesc())
+                            .build()
+            );
+        } else {
+            notificationsTargetEntityList = notificationsTargetDTOList
+                    .stream()
+                    .map(item ->
+                            NotificationsTargetEntity.builder()
+                                    .notificationsId(notificationsEntity.getId())
+                                    .targetType(item.getType())
+                                    .targetId(item.getId())
+                                    .targetName(item.getName())
+                                    .build()
+                    )
+                    .toList();
+        }
 
         // 批量保存通知目标实体列表
         notificationsTargetService.saveBatch(notificationsTargetEntityList);
-
         return true;
     }
 
@@ -163,17 +178,30 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             throw new UserFriendlyException("请选择通知目标");
         }
         // 通知目标实体对象列表
-        List<NotificationsTargetEntity> notificationsTargetEntityList = notificationsTargetDTOList
-                .stream()
-                .map(item ->
-                        NotificationsTargetEntity.builder()
-                                .notificationsId(notificationsEntity.getId())
-                                .targetType(item.getType())
-                                .targetId(item.getId())
-                                .targetName(item.getName())
-                                .build()
-                )
-                .toList();
+        List<NotificationsTargetEntity> notificationsTargetEntityList = null;
+        if (inputDTO.getAllNotifications()) {
+            notificationsTargetEntityList = new ArrayList<>(1);
+            notificationsTargetEntityList.add(
+                    NotificationsTargetEntity.builder()
+                            .notificationsId(notificationsEntity.getId())
+                            .targetType(NotificationsTargetEnum.ALL)
+                            .targetId(null)
+                            .targetName(NotificationsTargetEnum.ALL.getDesc())
+                            .build()
+            );
+        } else {
+            notificationsTargetEntityList = notificationsTargetDTOList
+                    .stream()
+                    .map(item ->
+                            NotificationsTargetEntity.builder()
+                                    .notificationsId(notificationsEntity.getId())
+                                    .targetType(item.getType())
+                                    .targetId(item.getId())
+                                    .targetName(item.getName())
+                                    .build()
+                    )
+                    .toList();
+        }
         // 保存之前先清除
         notificationsTargetService.getBaseMapper().delete(Wrappers.<NotificationsTargetEntity>lambdaQuery().eq(NotificationsTargetEntity::getNotificationsId, notificationsEntity.getId()));
         // 批量保存通知目标实体列表
@@ -240,7 +268,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
         });
 
         // 通知内容实体
-        NotificationsRecordContentEntity notificationsRecordContent = NotificationsRecordContentEntity.builder().content(notificationsEntity.getContent()).build();
+        NotificationsRecordContentEntity notificationsRecordContent = NotificationsRecordContentEntity.builder().title(notificationsEntity.getTitle()).content(notificationsEntity.getContent()).build();
         notificationsRecordContentRepository.insert(notificationsRecordContent);
 
         // 构建通知记录实体
@@ -264,7 +292,8 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
 
         // websocket构建消息体
         NotificationMessagePayloadDTO payloadDTO = NotificationMessagePayloadDTO.builder()
-                .content(notificationsEntity.getTitle())
+                .title(notificationsEntity.getTitle())
+                .content(notificationsEntity.getContent())
                 .publishTime(notificationsEntity.getPublishTime())
                 .level(notificationsEntity.getLevel())
                 .businessId(notificationsEntity.getId())

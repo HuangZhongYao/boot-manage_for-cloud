@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 public class NotificationMessagePayloadDTO extends AbstractPayload {
 
     /**
+     * 通知标题
+     */
+    private String title;
+
+    /**
      * 通知公告内容
      */
     private String content;
