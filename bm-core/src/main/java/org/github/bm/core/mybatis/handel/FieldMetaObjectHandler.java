@@ -35,9 +35,9 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
             metaObject.setValue("id", idGenerator.next());
         }
         // 填充创建人
-        String operator = this.getLoginUserId();
-        this.strictInsertFill(metaObject, "createdBy", String.class, operator);
-        this.strictInsertFill(metaObject, "updatedBy", String.class, operator);
+        Long operator = this.getLoginUserId();
+        this.strictInsertFill(metaObject, "createdBy", Long.class, operator);
+        this.strictInsertFill(metaObject, "updatedBy", Long.class, operator);
         // 填充插入时间 ，注意字段名要对不然是无效的
         LocalDateTime now = LocalDateTime.now();
         this.strictInsertFill(metaObject, "createdTime", LocalDateTime.class, now);
@@ -52,8 +52,8 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         // 填充更新人
-        String operator = this.getLoginUserId();
-        this.strictInsertFill(metaObject, "updatedBy", String.class, operator);
+        Long operator = this.getLoginUserId();
+        this.strictUpdateFill(metaObject, "updatedBy", Long.class, operator);
         // 填充更新时间
         LocalDateTime now = LocalDateTime.now();
         this.strictUpdateFill(metaObject, "updatedTime", LocalDateTime.class, now);
@@ -64,12 +64,12 @@ public class FieldMetaObjectHandler implements MetaObjectHandler {
      *
      * @return
      */
-    private String getLoginUserId() {
+    private Long getLoginUserId() {
         // 获取操作人
         Long loginId = SecurityContextHolder.getAuthUserId();
         if (null == loginId) {
             return null;
         }
-        return String.valueOf(loginId);
+        return loginId;
     }
 }

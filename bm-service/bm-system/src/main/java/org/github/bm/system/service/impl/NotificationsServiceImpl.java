@@ -96,7 +96,7 @@ public class NotificationsServiceImpl extends ServiceImpl<NotificationsRepositor
             // 获取发布人
             List<UserEntity> createdByUserList = userClient.getUserByIDList(publisherIdList);
             // 发布人分组
-            Map<Long, String> createdByUserMap = createdByUserList.stream().collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
+            Map<Long, String> createdByUserMap = null == createdByUserList ? new HashMap<>() : createdByUserList.stream().collect(Collectors.toMap(UserEntity::getId, UserEntity::getUsername));
             // 赋值发布人属性
             pageVO.getRecords().forEach(item -> {
                 String username = createdByUserMap.get(item.getCreatedBy());
