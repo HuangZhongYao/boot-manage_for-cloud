@@ -46,10 +46,10 @@
         <java.version>17</java.version>
         <maven.plugin.version>3.10.1</maven.plugin.version>
         <maven.test.skip>true</maven.test.skip>
+        <mysql-driver.version>8.3.0</mysql-driver.version>
         <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <mybatis-spring.version>3.0.3</mybatis-spring.version>
         <spring-boot-admin.version>3.5.0</spring-boot-admin.version>
-        <mysql-driver.version>8.0.33</mysql-driver.version>
         <modelmapper.version>3.2.0</modelmapper.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <openfeign.version>4.1.1</openfeign.version>
@@ -155,9 +155,10 @@
 
             <!--MySQL 驱动-->
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
+                <groupId>com.mysql</groupId>
+                <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql-driver.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!--mybatis-plus-starter-->
