@@ -1,6 +1,7 @@
 package org.github.bm.common.base.response;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 /**
  * 响应状态码枚举
@@ -21,6 +22,7 @@ public enum ResponseCode {
     NOT_FOUND(404, "没有该api或资源"),
     REQUEST_METHOD_NOT_FOUND(405, "请求方式错误"),
     VALIDATION_FAILED(410, "参数验证失败"),
+    TOO_MANY_REQUESTS(HttpStatus.TOO_MANY_REQUESTS.value(), "请求频繁"),
     ILLEGAL_REQUEST(510, "非法的请求,内调用认证失败"),
     ;
 

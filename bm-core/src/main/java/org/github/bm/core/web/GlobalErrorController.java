@@ -2,6 +2,10 @@ package org.github.bm.core.web;
 
 //import cn.dev33.satoken.exception.NotLoginException;
 //import cn.dev33.satoken.exception.NotPermissionException;
+
+import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeException;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +39,32 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalErrorController {
 
+    /**
+     * 统一处理 Sentinel BlockException（限流、熔断等）
+     */
+    @ExceptionHandler(BlockException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    public ErrorResponse handleBlockException(BlockException exception, HttpServletRequest request,
+                                              HttpServletResponse response) {
+        String message;
+        // 区分异常类型
+        if (exception instanceof FlowException) {
+            // 限流
+            message = "请求过于频繁，请稍后再试";
+        } else if (exception instanceof DegradeException) {
+            // 熔断
+            message = "服务暂时不可用，请稍后再试";
+        } else {
+            message = "系统繁忙，请稍后再试";
+        }
+        // 返回统一响应格式
+        ErrorResponse errorResponse = buildErrorResponse(exception, request);
+        errorResponse.setMessage(message);
+        errorResponse.setCode(ResponseCode.TOO_MANY_REQUESTS.getCode());
+        return errorResponse;
+    }
+
 
     /**
      * 统一处理业务中抛出的用户友好异常
@@ -61,8 +91,8 @@ public class GlobalErrorController {
 
         // 打印日志
         log.error("用户友好异常提示信息: {}. 在 {}.{}()方法中第 {} 行. ", exception.getMessage(),
-            stackTraceElement.getClassName(), stackTraceElement.getMethodName(),
-            stackTraceElement.getLineNumber());
+                stackTraceElement.getClassName(), stackTraceElement.getMethodName(),
+                stackTraceElement.getLineNumber());
         return errorResponse;
     }
 
@@ -142,7 +172,7 @@ public class GlobalErrorController {
         List<ObjectError> allErrors = exception.getBindingResult().getAllErrors();
         // 获取全部异常的message用 ';' 拼接为字符串
         String errorMsg = allErrors.stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
-            .collect(Collectors.joining(";"));
+                .collect(Collectors.joining(";"));
         errorResponse.setMessage(errorMsg);
         errorResponse.setCode(ResponseCode.VALIDATION_FAILED.getCode());
 
@@ -173,7 +203,7 @@ public class GlobalErrorController {
     @ExceptionHandler(MissingRequestHeaderException.class)
     @ResponseStatus(HttpStatus.OK)
     public ErrorResponse handelMissingRequestHeaderException(HttpServletRequest request,
-                                                                       HttpServletResponse response,
+                                                             HttpServletResponse response,
                                                              MissingRequestHeaderException exception) {
         ErrorResponse errorResponse = this.buildErrorResponse(exception, request);
         errorResponse.setCode(ResponseCode.VALIDATION_FAILED.getCode());
@@ -196,7 +226,7 @@ public class GlobalErrorController {
                                                              HttpRequestMethodNotSupportedException exception) {
 
         String msg = String.format("%s 该接口不支持 %s,请使用 %s ", request.getRequestURI(),
-            exception.getMethod(), Arrays.toString(exception.getSupportedMethods()));
+                exception.getMethod(), Arrays.toString(exception.getSupportedMethods()));
 
         ErrorResponse errorResponse = this.buildErrorResponse(exception, request);
         errorResponse.setMessage(msg);
