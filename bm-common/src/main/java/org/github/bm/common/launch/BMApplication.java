@@ -34,16 +34,19 @@ public class BMApplication {
         // 设置环境变量读取nacos配置、注册服务、sentinel、seata
         Properties props = System.getProperties();
         String startJarPath = BMApplication.class.getResource("/").getPath().split("!")[0];
-        String env = getEnv(props.getProperty("spring.profiles.active"));
+        String env = getEnv(environment.getProperty("spring.profiles.active"));
         System.out.printf("----启动中，读取到的环境变量:[%s]，jar地址:[%s]----%n", env, startJarPath);
         setProperty(props, "info.version", AppConstant.APPLICATION_VERSION);
         setProperty(props, "spring.application.name", serviceEnum.getName());
         setProperty(props, "spring.profiles.active", env);
-        setProperty(props, "spring.cloud.nacos.discovery.server-addr", LauncherConstant.nacosAddr(env));
-        setProperty(props, "spring.cloud.nacos.config.server-addr", LauncherConstant.nacosAddr(env));
+        setProperty(props, "spring.cloud.nacos.username", LauncherConstant.NacosConstant.NACOS_USERNAME);// nacos用户名
+        setProperty(props, "spring.cloud.nacos.password", LauncherConstant.NacosConstant.NACOS_PASSWORD);// nacos密码
+        setProperty(props, "spring.cloud.nacos.discovery.server-addr", LauncherConstant.nacosAddr(env));// nacos服务发现地址
+        setProperty(props, "spring.cloud.nacos.config.server-addr", LauncherConstant.nacosAddr(env));// nacos配置中心地址
         setProperty(props, "spring.config.import[0]", "nacos:" + NacosConstant.dataId(NacosConstant.NACOS_CONFIG_PREFIX));// 公共配置
         setProperty(props, "spring.config.import[1]", "nacos:" + NacosConstant.dataId(serviceEnum.getName()));// 当前服务配置
-        setProperty(props, "spring.cloud.nacos.config.namespace", LauncherConstant.NACOS_NAMESPACE);// 设置nacos配置中心命名空间
+        setProperty(props, "spring.cloud.nacos.config.namespace", LauncherConstant.nacosNamespace(env));// 设置nacos配置中心命名空间
+        setProperty(props, "spring.cloud.nacos.discovery.namespace", LauncherConstant.nacosNamespace(env));// 设置nacos服务发现命名空间
         setProperty(props, "spring.cloud.nacos.config.refresh-enabled", NacosConstant.NACOS_CONFIG_REFRESH);
         setProperty(props, "spring.cloud.nacos.config.prefix", NacosConstant.NACOS_CONFIG_PREFIX);
         setProperty(props, "spring.cloud.nacos.config.file-extension", NacosConstant.NACOS_CONFIG_FORMAT);
