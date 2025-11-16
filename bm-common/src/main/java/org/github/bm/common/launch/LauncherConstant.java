@@ -48,17 +48,17 @@ public interface LauncherConstant {
         /**
          * sentinel dev 地址
          */
-        String SENTINEL_DEV_ADDR = "127.0.0.1:18080";
+        String SENTINEL_DEV_ADDR = "127.0.0.1:8858";
 
         /**
          * sentinel prod 地址
          */
-        String SENTINEL_PROD_ADDR = "192.168.1.219:18080";
+        String SENTINEL_PROD_ADDR = "192.168.1.219:8858";
 
         /**
          * sentinel test 地址
          */
-        String SENTINEL_TEST_ADDR = "192.168.1.219:18080";
+        String SENTINEL_TEST_ADDR = "192.168.1.219:8858";
     }
 
     interface ZipkinConstant {
