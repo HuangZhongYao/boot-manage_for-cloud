@@ -3,6 +3,7 @@ package org.github.bm.websocket.web;
 import cn.hutool.core.collection.CollectionUtil;
 import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.Resource;
 import org.github.bm.common.base.response.ApiResponse;
 import org.github.bm.websocket.base.SimpConstant;
@@ -36,7 +37,7 @@ public class WebSocketController {
     @GetMapping("/testSendTopic")
     @ResponseBody
     public ApiResponse<Boolean> testSendTopic(@RequestParam("message") String message) {
-        simpMessagingTemplate.convertAndSend(SimpConstant.Topic.TEST_TOPIC,
+        simpMessagingTemplate.convertAndSend(SimpConstant.Topic.NOTIFICATIONS_TOPIC,
                 "服务器发送测试广播消息:" + message);
         return ApiResponse.ok(true);
     }
@@ -45,7 +46,7 @@ public class WebSocketController {
     @GetMapping("/testSendToUser")
     @ResponseBody
     public ApiResponse<Boolean> testSendToUser(@RequestParam("message") String message,
-                                               @RequestParam("userIds") String[] userIds) {
+                                               @Parameter(description = "用户id",example = "1,2,3") @RequestParam("userIds") String[] userIds) {
         for (String userId : userIds) {
             simpMessagingTemplate.convertAndSendToUser(userId, SimpConstant.Queue.USER_QUEUE_MESSAGES, "服务器发送测试消息" + message);
         }
