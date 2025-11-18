@@ -39,6 +39,10 @@ web/package-lock.json
 
 ### Mac OS ###
 .DS_Store
+
+###
 /.idea/
 /.idea/**/.idea/
 /web/package-lock.json
+/boot-manage-logs/
+/**/**/*.iml
