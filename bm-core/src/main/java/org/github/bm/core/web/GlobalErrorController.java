@@ -14,6 +14,7 @@ import org.github.bm.common.base.response.ResponseCode;
 import org.github.bm.common.exception.UserFriendlyException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -64,7 +65,6 @@ public class GlobalErrorController {
         errorResponse.setCode(ResponseCode.TOO_MANY_REQUESTS.getCode());
         return errorResponse;
     }
-
 
     /**
      * 统一处理业务中抛出的用户友好异常
@@ -220,7 +220,7 @@ public class GlobalErrorController {
      * @return 异常信息
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)
     public ErrorResponse handleHttpRequestMethodNotSupported(HttpServletRequest request,
                                                              HttpServletResponse response,
                                                              HttpRequestMethodNotSupportedException exception) {
@@ -236,10 +236,24 @@ public class GlobalErrorController {
         return errorResponse;
     }
 
+    /**
+     * 处理 HTTP 消息不可读异常
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public ErrorResponse handleHttpMessageNotReadableException(HttpServletRequest request,
+                                                               HttpServletResponse response,
+                                                               HttpMessageNotReadableException exception) {
+        ErrorResponse errorResponse = buildErrorResponse(exception, request);
+        errorResponse.setCode(ResponseCode.REQUEST_FAILED.getCode());
+        errorResponse.setMessage(ResponseCode.REQUEST_FAILED.getMessage() + ",请求参数格式错误");
+        return errorResponse;
+    }
 
-    private ErrorResponse buildErrorResponse(Exception e, HttpServletRequest request) {
+
+    private ErrorResponse buildErrorResponse(Exception exception, HttpServletRequest request) {
         ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(e.getMessage());
+        errorResponse.setMessage(exception.getMessage());
         errorResponse.setPath(request.getRequestURI());
         return errorResponse;
     }
