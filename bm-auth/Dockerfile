@@ -17,4 +17,4 @@ EXPOSE 8190
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 # 默认容器启动参数
-CMD ["--spring.profiles.active=test"]
+CMD ["--spring.profiles.active=prod"]
