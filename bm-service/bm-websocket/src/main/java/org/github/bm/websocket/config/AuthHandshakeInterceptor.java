@@ -43,8 +43,7 @@ public class AuthHandshakeInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         // 从请求参数中获取token
-        if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
+        if (request instanceof ServletServerHttpRequest servletRequest) {
             String accessToken = servletRequest.getServletRequest().getParameter(SecurityConstants.AUTH_HEADER_KEY);
 
             if (accessToken != null && validateToken(accessToken)) {

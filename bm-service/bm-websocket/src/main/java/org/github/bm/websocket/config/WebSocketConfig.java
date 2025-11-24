@@ -11,6 +11,8 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.messaging.simp.stomp.StompCommand;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
@@ -41,9 +43,24 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // 配置消息代理            ！！注意如果websocket需要部署多个服务则不能使用简单代理了。需要依赖外部消息代理如RabbitMQ
-        registry.enableSimpleBroker(SimpConstant.TOPIC_PREFIX, SimpConstant.QUEUE_PREFIX, SimpConstant.USER_DESTINATION_PREFIX); // 启用简单代理
+        registry.enableSimpleBroker(SimpConstant.TOPIC_PREFIX, SimpConstant.QUEUE_PREFIX, SimpConstant.USER_DESTINATION_PREFIX)// 启用简单代理
+                .setHeartbeatValue(new long[]{10000, 10000}) //设置心跳值10秒间隔
+                .setTaskScheduler(taskScheduler()); //设置任务调度器
         registry.setApplicationDestinationPrefixes(SimpConstant.APP_DESTINATION_PREFIX); // 应用程序目的地前缀
         registry.setUserDestinationPrefix(SimpConstant.USER_DESTINATION_PREFIX); // 用户目的地前缀
+    }
+
+
+    /**
+     * 配置用于心跳任务调度的TaskScheduler
+     * @return TaskScheduler实例
+     */
+    private TaskScheduler taskScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(1);
+        scheduler.setThreadNamePrefix("websocket-heartbeat-");
+        scheduler.initialize();
+        return scheduler;
     }
 
     @Override
