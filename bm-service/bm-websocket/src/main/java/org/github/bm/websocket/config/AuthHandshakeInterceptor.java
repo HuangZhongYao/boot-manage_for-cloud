@@ -3,6 +3,7 @@ package org.github.bm.websocket.config;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.common.prop.SecurityProperties;
 import org.github.bm.common.security.SecurityConstants;
@@ -15,8 +16,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.messaging.AbstractSubProtocolEvent;
 import org.springframework.web.socket.server.HandshakeInterceptor;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.security.Principal;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 
 
@@ -25,7 +29,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class AuthHandshakeInterceptor implements HandshakeInterceptor {
+public class AuthHandshakeInterceptor  implements HandshakeInterceptor {
     @Resource
     SecurityProperties securityProperties = new SecurityProperties();
 
@@ -44,8 +48,12 @@ public class AuthHandshakeInterceptor implements HandshakeInterceptor {
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         // 从请求参数中获取token
         if (request instanceof ServletServerHttpRequest servletRequest) {
+            // 获取请求参数中的token
             String accessToken = servletRequest.getServletRequest().getParameter(SecurityConstants.AUTH_HEADER_KEY);
-
+            if (accessToken == null) {
+                // 如果请求参数中没有token则从请求头中获取
+                accessToken = servletRequest.getHeaders().getFirst(SecurityConstants.AUTH_HEADER_KEY);
+            }
             if (accessToken != null && validateToken(accessToken)) {
                 // 将用户信息存储到attributes中
                 String userId = getUserIdFromToken(accessToken);

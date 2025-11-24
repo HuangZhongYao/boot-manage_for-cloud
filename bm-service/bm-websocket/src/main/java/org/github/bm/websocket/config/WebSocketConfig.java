@@ -16,7 +16,6 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
-import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.util.Map;
 
@@ -36,8 +35,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/ws")
                 .setAllowedOriginPatterns("*")
                 .addInterceptors(authHandshakeInterceptor)// 添加握手拦截器
-                .setHandshakeHandler(authHandshakeHandler)// 添加握手处理器
-                .withSockJS(); // 支持SockJS回退
+                .setHandshakeHandler(authHandshakeHandler);// 添加握手处理器
     }
 
     @Override
@@ -53,6 +51,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     /**
      * 配置用于心跳任务调度的TaskScheduler
+     *
      * @return TaskScheduler实例
      */
     private TaskScheduler taskScheduler() {
