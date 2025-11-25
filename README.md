@@ -41,6 +41,19 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 - 🍔 封装`mapstruct`、`modelmapper`对象转换工具 ， VO、DTO、Entity之间互相转换一行代码搞定，结合函数式接口还可以在转换时添加逻辑。
 - ⏲  LocalDateTime ， 日期类型使用Java8 更安全的LocalDateTime， 配置jackson消息转换器解决Java8 LocalDateTime序列化时`'T'`。
 
+#### 配套前端
+前端项目使用Vue3 + JavaScript 构建  
+
+技术栈:
+- <img width="16" src="./doc/picture/vue.svg" > Vue 3
+- <img width="20" src="./doc/picture/pinia.svg" > Pinia
+- <img width="16" src="./doc/picture/naiveui.svg" > Naive ui
+- <img width="20" src="./doc/picture/nginx.svg" > Nginx
+- <img width="20" src="./doc/picture/unocss.svg" > Unocss
+
+源码
+- 源码 GitHub: [https://github.com/HuangZhongYao/boot-manage-ui_for-cloud](https://github.com/HuangZhongYao/boot-manage-ui_for-cloud)
+- 源码 Gitee: [https://gitee.com/smog_huang/boot-manage-ui_for-cloud](https://gitee.com/smog_huang/boot-manage-ui_for-cloud)
 
 ## 二、架构图
 
