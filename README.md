@@ -214,7 +214,17 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 
 ### 编译打包
 
+```shell
+# 全部打包
+mvn clean package
 
+# 打包指定模块 bm-gateway
+mvn clean package -pl bm-gateway -am
+
+# 打包指定模块 bm-system
+mvn clean package -pl bm-service/bm-system -am
+
+```
 
 
 
