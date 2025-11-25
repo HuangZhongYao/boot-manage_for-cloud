@@ -48,7 +48,6 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 - <img width="16" src="./doc/picture/vue.svg" > Vue 3
 - <img width="20" src="./doc/picture/pinia.svg" > Pinia
 - <img width="16" src="./doc/picture/naiveui.svg" > Naive ui
-- <img width="20" src="./doc/picture/nginx.svg" > Nginx
 - <img width="20" src="./doc/picture/unocss.svg" > Unocss
 
 源码
