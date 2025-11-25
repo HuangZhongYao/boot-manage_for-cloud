@@ -46,6 +46,37 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 
 ## 三、项目结构
 
+```text
+├─bm-auth                                                           #认证服务
+├─bm-common                                                         #公共模块 工具类、常量、枚举、基类、启动器等
+├─bm-core                                                           #核心配置模块 mybatis-plus、redis、mvc、过滤器、全局异常处理等配置
+├─bm-gateway                                                        #网关服务
+├─bm-ops                                                            #Devops服务合集 如调度中心、监控服务、日志服务
+│  └─bm-admin                                                       #SpringBoot Admin服务 监控和管理Spring Boot应用
+├─bm-service                                                        #微服务合集
+│  ├─bm-example                                                     #example服务 演示模块
+│  ├─bm-resource                                                    #资源服务 管理文件、数据源、短信配置、邮件配置等
+│  ├─bm-system                                                      #系统服务 字典、组织、角色、菜单、公告通知等
+│  ├─bm-user                                                        #用户服务 用户管理
+│  └─bm-websocket                                                   #socket服务 长链接消息推送、在线用户管理
+├─bm-service-api                                                    #服务对外暴露api合集 FeignClient、实体、DTO、VO等
+│  ├─bm-example-api                                                 #example服务api
+│  ├─bm-resource-api                                                #资源服务api
+│  ├─bm-system-api                                                  #系统服务api
+│  ├─bm-user-api                                                    #用户服务api
+│  └─bm-websocket-api                                               #socket服务api
+└─doc                                                               #文档
+│   ├─nacos                                                         #Nacos 初始化配置
+│   │─nginx                                                         #Nnginx 配置
+│   │─seata                                                         #Seata 配置
+│   │  │─application.yml                                            #Seata 配置文件
+│   │  │─seata-2.0.0.sql                                            #seata 数据库初始化脚本
+│   │  └─undo_log.sql                                               #undo_log表创建脚本
+│   │─sql                                                           #SQL脚本
+│   │  └─bm-initial-mysql.sql                                       #项目初始化脚本
+└─README.md                                                         #项目自述文件
+```
+
 ## 四、快速开始
 ### 环境要求
 | 名称 | 版本     | 必要 | 说明 |
