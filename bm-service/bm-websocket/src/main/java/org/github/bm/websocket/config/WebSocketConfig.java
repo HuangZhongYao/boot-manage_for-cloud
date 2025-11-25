@@ -3,9 +3,11 @@ package org.github.bm.websocket.config;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.github.bm.websocket.base.SimpConstant;
+import org.github.bm.websocket.service.IOnlineUserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -28,6 +30,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private AuthHandshakeInterceptor authHandshakeInterceptor;
     @Resource
     private AuthHandshakeHandler authHandshakeHandler;
+    @Resource
+    private IOnlineUserService onlineUserService;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -77,36 +81,47 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
             public Message<?> preSend(Message<?> message, MessageChannel channel) {
                 // 使用StompHeaderAccessor包装消息，便于访问STOMP协议相关头信息
                 StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
+                // 获取WebSocket会话属性
+                // 会话属性是在握手阶段由HandshakeInterceptor设置的
+                // 包含了用户认证信息等上下文数据
+                Map<String, Object> sessionAttributes = accessor.getSessionAttributes();
 
-                // 检查是否为CONNECT命令（WebSocket连接建立时的握手消息）
+                // 从会话属性中获取用户ID
+                // 在握手拦截器(AuthHandshakeInterceptor)中，已经将解析出的用户ID
+                Long userId = null;
+                if (sessionAttributes != null && sessionAttributes.containsKey(SimpConstant.SIMP_USER_KEY)){
+                    userId = Long.valueOf(accessor.getSessionAttributes().get(SimpConstant.SIMP_USER_KEY).toString());
+                }
+                log.info("从会话属性中获取到用户ID: {}", userId);
+
+                // 检查是否为CONNECT命令
                 if (StompCommand.CONNECT.equals(accessor.getCommand())) {
-                    // 获取WebSocket会话属性
-                    // 会话属性是在握手阶段由HandshakeInterceptor设置的
-                    // 包含了用户认证信息等上下文数据
-                    Map<String, Object> sessionAttributes = accessor.getSessionAttributes();
-
-                    // 验证会话属性是否存在且包含用户标识键
-                    // SimpConstant.SIMP_USER_KEY是自定义的常量，用于标识会话中的用户信息键
-                    if (sessionAttributes != null && sessionAttributes.containsKey(SimpConstant.SIMP_USER_KEY)) {
-                        // 从会话属性中获取用户ID
-                        // 在握手拦截器(AuthHandshakeInterceptor)中，已经将解析出的用户ID
-                        // 存储在会话属性的SimpConstant.SIMP_USER_KEY键下
-                        Object userId = accessor.getSessionAttributes().get(SimpConstant.SIMP_USER_KEY);
-
+                    if (userId != null) {
                         // 将用户ID设置到STOMP访问器中，使其成为Principal
                         // 这样在后续的消息处理方法中可以通过Principal参数获取当前用户信息
                         // 这样设置后，Controller中的Principal.getName()将返回用户ID字符串
-                        log.info("从会话属性中获取到用户ID: {}", userId);
                         // 设置Principal
                         accessor.setUser(StompPrincipal.builder().name(userId.toString()).build());
                         log.info("Principal已设置，用户ID: {}", userId);
+                        // 添加用户到在线用户列表
+                        onlineUserService.addOnlineUser(userId);
                     } else {
                         log.warn("会话属性中未找到用户信息，会话属性: {}", sessionAttributes);
                     }
+                }else if (StompCommand.DISCONNECT.equals(accessor.getCommand())) {
+                    if (userId != null) {
+                        // 移除用户从在线用户列表
+                        onlineUserService.removeOnlineUser(userId);
+                    }
                 }
-
-                // 返回原始消息或修改后的消息
-                // 如果需要阻止消息处理，可以返回null
+                // 处理心跳消息
+                if (message.getHeaders().containsKey("simpMessageType") && SimpMessageType.HEARTBEAT.equals(message.getHeaders().get("simpMessageType", SimpMessageType.class))) {
+                    if (userId != null) {
+                        // 添加用户到在线用户列表
+                        onlineUserService.addOnlineUser(userId);
+                    }
+                }
+                // 返回原始消息或修改后的消息 如果需要阻止消息处理，可以返回null
                 return message;
             }
         });
