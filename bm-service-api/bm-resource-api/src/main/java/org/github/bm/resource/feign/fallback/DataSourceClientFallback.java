@@ -1,7 +1,7 @@
 package org.github.bm.resource.feign.fallback;
 
 import org.github.bm.resource.entity.DataSourceEntity;
-import org.github.bm.resource.feign.IDataSourceFeignClient;
+import org.github.bm.resource.feign.IDataSourceClient;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
 @Component
-public class DataSourceFeignClientFallback implements IDataSourceFeignClient {
+public class DataSourceClientFallback implements IDataSourceClient {
     /**
      * 获取全部数据源
      *
@@ -20,5 +20,10 @@ public class DataSourceFeignClientFallback implements IDataSourceFeignClient {
     @Override
     public List<DataSourceEntity> getDataSourceAll() {
         return List.of();
+    }
+
+    @Override
+    public boolean deleteDataSourceTest() {
+        return false;
     }
 }

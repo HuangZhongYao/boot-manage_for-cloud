@@ -15,6 +15,7 @@ import org.github.bm.example.repository.BusTruckRepository;
 import org.github.bm.example.service.IBusTruckService;
 import org.github.bm.example.vo.BusTruckVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 车辆表Service服务接口实现层
@@ -51,6 +52,7 @@ public class IBusTruckServiceImpl implements IBusTruckService {
     }
 
     @Override
+    @Transactional
     public Boolean addBusTruck(AddBusTruckInputDTO inputDTO) {
 
         // 将DTO转换为实体对象

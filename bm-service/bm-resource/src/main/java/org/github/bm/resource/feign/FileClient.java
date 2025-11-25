@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 @Hidden
 @RestController
-public class FileFeignClient implements IFileFeignClient {
+public class FileClient implements IFileClient {
 
     @Resource
     private IStorageService storageService;

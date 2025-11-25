@@ -1,6 +1,6 @@
 package org.github.bm.resource.feign.fallback;
 
-import org.github.bm.resource.feign.IFileFeignClient;
+import org.github.bm.resource.feign.IFileClient;
 import org.github.bm.resource.model.BMFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * CreatedBy IntelliJ IDEA By HuangZhongYao
  */
 @Component
-public class FileFeignClientFallback implements IFileFeignClient {
+public class FileClientFallback implements IFileClient {
     /**
      * 上传文件
      *

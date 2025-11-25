@@ -15,6 +15,7 @@ import org.github.bm.example.repository.BusOrderRepository;
 import org.github.bm.example.service.IBusOrderService;
 import org.github.bm.example.vo.BusOrderVO;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 商城订单表Service服务接口实现层
@@ -51,6 +52,7 @@ public class IBusOrderServiceImpl implements IBusOrderService {
     }
 
     @Override
+    @Transactional
     public Boolean addBusOrder(AddBusOrderInputDTO inputDTO) {
 
         // 将DTO转换为实体对象

@@ -2,6 +2,7 @@ package org.github.bm.resource.feign;
 
 import org.github.bm.common.base.fegin.BaseFeign;
 import org.github.bm.common.constant.AppConstant;
+import org.github.bm.resource.feign.fallback.FileClientFallback;
 import org.github.bm.resource.model.BMFile;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -14,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * 对内部服务提供上传文件的接口
  */
-@FeignClient(value = AppConstant.APPLICATION_RESOURCE_NAME, contextId = "fileFeignClient")
-public interface IFileFeignClient extends BaseFeign {
+@FeignClient(value = AppConstant.APPLICATION_RESOURCE_NAME, contextId = "fileFeignClient",fallback = FileClientFallback.class)
+public interface IFileClient extends BaseFeign {
     String BASE_PREFIX = BASE_API_PREFIX + "/file";
     String UPLOAD_FILE = BASE_PREFIX + "/uploadFile";
     String UPLOAD_FILE_STREAM = BASE_PREFIX + "/uploadFileByte";
