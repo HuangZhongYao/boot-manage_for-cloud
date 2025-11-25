@@ -11,8 +11,9 @@
   * JDK : >= 17 (建议JDK 17)
   * Maven : 3.8.x
   * MySQL : 8.x.x
-  * Redis : 8.x.x
+  * Redis : 6.x.x
   * Nacos : >= 2.3.2
+  * Seata : >= 2.0.0 (建议2.0.0)
   * Sentinel : >= 1.8.6 
 
 ### 启动项目
