@@ -1,6 +1,46 @@
+<p align="center">
+  <a href="https://github.com/HuangZhongYao/boot-manage_for-cloud">
+    <img alt="Boot Manage Admin Logo" width="200" src="./doc/picture/logo.png">
+  </a>
+</p>
+<p align="center">
+  <a href="./LICENSE">
+    <img alt="MIT License" src="./doc/picture/license.svg"/>
+  </a>
+  <a href="https://github.com/HuangZhongYao/boot-manage_for-cloud" >
+    <img alt="GitHub" width="20" src="./doc/picture/github.svg" >
+  </a>
+  <a href="https://gitee.com/smog_huang/boot-manage_for-cloud" >
+    <img alt="Gitee" width="20" src="./doc/picture/gitee.svg" >
+  </a>
+</p>
+
 # boot-manage (bm 后台管理系统模板--cloud版)
 
 ## 一、项目介绍
+boot-manage admin 是一款极简风格的微服务架构后台管理模板。    
+后端基于Java17、SpringBoot 3、SpringCloud Alibaba 轻量级实现只需要安装Nacos、Redis、MySQL即可启动。
+内置集成分布式事务、流量控制组件开箱即用  
+前端使用 Vite + Vue3 + Naive UI + Pinia + Unocss + 无 Typescript降低门槛。
+
+#### 技术栈
+- <img width="20" src="./doc/picture/java.svg" > Java 17
+- <img width="20" src="./doc/picture/springboot.svg" > SpringBoot 3.2.x
+- <img width="20" src="./doc/picture/mybatis.svg" > Mybatis-Plus
+- <img width="16" src="./doc/picture/jwt.svg" > JWT
+- <img width="20" src="./doc/picture/swagger.svg" > knife4j-ui + Swagger 3
+- <img width="20" src="./doc/picture/redis.svg" > Redis
+- <img width="20" src="./doc/picture/mysql.svg" > MySQL 8
+
+#### 特性
+- 😋 遵守Restful API风格 。
+- 😀 使用当前最新技术 Java17 + SpringBoot 3.x 。
+- 😉 封装参数验证注解 ，基于`validation`封装常用非空、手机号、车牌号、邮箱、中文、非中文、IP、MAC... 常见类型数据参数验证, 减少90%校验参数代码。 源码中几乎很少看到判断参数的代码。
+- 🍗 封装通用DTO ， 对于基础字段无需重复定义只需继承 `BaseXXXDTO`。
+- 🤣 扩展Mybatis BaseMapper 查询结果转换类型、函数处理、批量操作。
+- 🍔 封装`mapstruct`、`modelmapper`对象转换工具 ， VO、DTO、Entity之间互相转换一行代码搞定，结合函数式接口还可以在转换时添加逻辑。
+- ⏲  LocalDateTime ， 日期类型使用Java8 更安全的LocalDateTime， 配置jackson消息转换器解决Java8 LocalDateTime序列化时`'T'`。
+
 
 ## 二、架构图
 
