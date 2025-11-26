@@ -61,23 +61,6 @@ public interface LauncherConstant {
         String SENTINEL_TEST_ADDR = "192.168.1.219:8858";
     }
 
-    interface ZipkinConstant {
-        /**
-         * zipkin dev 地址
-         */
-        String ZIPKIN_DEV_ADDR = "http://127.0.0.1:9411";
-
-        /**
-         * zipkin prod 地址
-         */
-        String ZIPKIN_PROD_ADDR = "http://192.168.1.219:9411";
-
-        /**
-         * zipkin test 地址
-         */
-        String ZIPKIN_TEST_ADDR = "http://192.168.1.219:9411";
-    }
-
     /**
      * 动态获取nacos命名空间id
      *
@@ -122,21 +105,4 @@ public interface LauncherConstant {
             default -> SentinelConstant.SENTINEL_DEV_ADDR;
         };
     }
-
-    /**
-     * 动态获取zipkin地址
-     *
-     * @param profile 环境变量
-     * @return addr
-     */
-    static String zipkinAddr(String profile) {
-        if (null == profile) return ZipkinConstant.ZIPKIN_DEV_ADDR;
-        return switch (profile) {
-            case AppConstant.PROD_CODE -> ZipkinConstant.ZIPKIN_PROD_ADDR;
-            case AppConstant.TEST_CODE -> ZipkinConstant.ZIPKIN_TEST_ADDR;
-            default -> ZipkinConstant.ZIPKIN_DEV_ADDR;
-        };
-    }
-
-
 }

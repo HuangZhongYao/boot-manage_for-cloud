@@ -100,7 +100,6 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 | Nacos | &gt;= 2.3.2 | 是  |  |
 | Seata | &gt;= 2.0.0 | 否  | 建议2.0.0 非必要安装不影响启动 |
 | Sentinel | &gt;= 1.8.6 | 否  | 非必要安装不影响启动 |
-| Zipkin | &gt;= 2.9.2 | 否  | 非必要安装不影响启动 |
 
 ### 启动项目
 #### 配置中间件
@@ -111,7 +110,6 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
     导入nacos配置[doc/nacos/]()目录下的配置
   - 启动Sentinel (可选)
   - 启动Seata (可选)
-  - 启动Zipkin (可选)
 #### 修改配置
 - nacos配置  
  修改`bm.yml` 中数据源、Redis 连接信息 
@@ -157,60 +155,67 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
     ```
 - 启动常量 [LauncherConstant.java](bm-common/src/main/java/org/github/bm/common/launch/LauncherConstant.java)  
     修改dev环境Nacos启动参数   
-    Sentinel 、Seata 、Zipkin 等不是必要的如果用到则配置,不配置也不影响项目启动
+    Sentinel 等不是必要的如果用到则配置,不配置也不影响项目启动
     ```java
     public interface LauncherConstant {
-        /**
-         * nacos namespace id ,为空为public
-         */
-        String NACOS_NAMESPACE = "";
     
-        /**
-         * nacos dev 地址
-         */
-        String NACOS_DEV_ADDR = "127.0.0.1:8848";
+        interface NacosConstant {
+            /**
+             * nacos用户名如果开启认证则填写
+             */
+            String NACOS_USERNAME = "";
+            /**
+             * nacos密码如果开启认证则填写
+             */
+            String NACOS_PASSWORD = "";
+            /**
+             * nacos dev 命名空间 id ,为空为public
+             */
+            String NACOS_DEV_NAMESPACE = "9a019fa4-2b71-48d1-bf7c-23f4e4c0395a";
     
-        /**
-         * nacos prod 地址
-         */
-        String NACOS_PROD_ADDR = "172.30.0.48:8848";
+            /**
+             * nacos test 命名空间 id ,为空为public
+             */
+            String NACOS_TEST_NAMESPACE = "3ae2a34e-8ac6-46c3-bcb5-1c4eb6195dcf";
     
-        /**
-         * nacos test 地址
-         */
-        String NACOS_TEST_ADDR = "172.30.0.48:8848";
+            /**
+             * nacos prod 命名空间 id ,为空为public
+             */
+            String NACOS_PROD_NAMESPACE = "a64b1361-f8c7-46d9-95c7-ea2ad9d336b4";
     
-        /**
-         * sentinel dev 地址
-         */
-        String SENTINEL_DEV_ADDR = "127.0.0.1:10810";
+            /**
+             * nacos dev 地址
+             */
+            String NACOS_DEV_ADDR = "127.0.0.1:8848";
     
-        /**
-         * sentinel prod 地址
-         */
-        String SENTINEL_PROD_ADDR = "172.30.0.58:8858";
+            /**
+             * nacos prod 地址
+             */
+            String NACOS_PROD_ADDR = "192.168.1.219:8848";
     
-        /**
-         * sentinel test 地址
-         */
-        String SENTINEL_TEST_ADDR = "172.30.0.58:8858";
+            /**
+             * nacos test 地址
+             */
+            String NACOS_TEST_ADDR = "192.168.1.219:8848";
+        }
     
-        /**
-         * zipkin dev 地址
-         */
-        String ZIPKIN_DEV_ADDR = "http://127.0.0.1:9411";
+        interface SentinelConstant {
+            /**
+             * sentinel dev 地址
+             */
+            String SENTINEL_DEV_ADDR = "127.0.0.1:8858";
     
-        /**
-         * zipkin prod 地址
-         */
-        String ZIPKIN_PROD_ADDR = "http://172.30.0.58:9411";
+            /**
+             * sentinel prod 地址
+             */
+            String SENTINEL_PROD_ADDR = "192.168.1.219:8858";
     
-        /**
-         * zipkin test 地址
-         */
-        String ZIPKIN_TEST_ADDR = "http://172.30.0.58:9411";
+            /**
+             * sentinel test 地址
+             */
+            String SENTINEL_TEST_ADDR = "192.168.1.219:8858";
+        }
     }
-    
     ```
 #### 启动服务
 启动全部服务没有先后顺序
@@ -241,6 +246,8 @@ mvn clean package -pl bm-service/bm-system -am
 
 
 
-## 参考文档
-###### SpringBoot、SpringCloud Alibaba、SpringCloud及组件[版本选择参考](https://sca.aliyun.com/docs/2023/overview/version-explain/)
+## 五、参考文档
+#### SpringBoot、SpringCloud Alibaba、SpringCloud及组件[版本选择参考](https://sca.aliyun.com/docs/2023/overview/version-explain/)
 ![img.png](doc/picture/img.png)
+
+#### 
