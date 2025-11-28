@@ -11,7 +11,7 @@
  Target Server Version : 80043 (8.0.43)
  File Encoding         : 65001
 
- Date: 10/11/2025 16:33:42
+ Date: 28/11/2025 08:29:05
 */
 
 SET NAMES utf8mb4;
@@ -22,12 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `base_template`;
 CREATE TABLE `base_template`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`) USING BTREE
+                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '创建表基础模板' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -39,20 +39,20 @@ CREATE TABLE `base_template`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_order`;
 CREATE TABLE `bus_order`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
-  `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
-  `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
-  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
-  `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
-  `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
-  `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商城订单表' ROW_FORMAT = DYNAMIC;
+                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                              `updated_time` date NULL DEFAULT NULL COMMENT '更新时间',
+                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                              `order_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '订单号',
+                              `commodity` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '商品',
+                              `order_time` datetime NULL DEFAULT NULL COMMENT '下单时间',
+                              `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货地址',
+                              `consignee` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人',
+                              `consignee_phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '收货人电话',
+                              `pay_state` tinyint NULL DEFAULT NULL COMMENT '支付状态',
+                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1993518689441284097 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商城订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_order
@@ -97,59 +97,105 @@ INSERT INTO `bus_order` VALUES (51, '2024-07-28 18:37:43', '2024-07-28', '1', '1
 INSERT INTO `bus_order` VALUES (53, '2024-07-28 20:03:37', '2024-07-28', '1', '1', 'YR455454', '羊肉', '2024-04-02 11:56:06', '重庆市', '78', '878', 2);
 INSERT INTO `bus_order` VALUES (54, '2024-07-28 22:12:45', '2024-07-28', '1', '1', 'GR36984554545', '狗肉', '2024-08-01 11:56:06', '云岩区', '王小李', '148563201545', 2);
 INSERT INTO `bus_order` VALUES (55, '2024-07-31 00:45:52', '2024-07-31', '1', '1', 'UUUU89999', 'yuuu', '2024-04-02 11:56:06', '天机市', '黄中国农村', '34534534', 2);
+INSERT INTO `bus_order` VALUES (1993145574731284480, '2025-11-25 10:31:51', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:31:48', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993146434156756992, '2025-11-25 10:35:15', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:35:15', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993146557305716736, '2025-11-25 10:35:45', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:35:45', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993146653065871360, '2025-11-25 10:36:08', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:36:08', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993146974177591296, '2025-11-25 10:37:24', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:37:24', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993147077214863360, '2025-11-25 10:37:49', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:37:49', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993147538772852736, '2025-11-25 10:39:39', '2025-11-25', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-25 10:39:39', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993507123648004096, '2025-11-26 10:28:31', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:28:30', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993507573457747968, '2025-11-26 10:30:18', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:30:18', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993508333763428352, '2025-11-26 10:33:19', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:33:19', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993509063454883840, '2025-11-26 10:36:13', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:36:13', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993509518935326720, '2025-11-26 10:38:02', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:38:02', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993510594434564096, '2025-11-26 10:42:18', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 10:42:18', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993515581596237824, '2025-11-26 11:02:07', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:02:07', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993516007053852672, '2025-11-26 11:03:48', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:03:48', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993517311104909312, '2025-11-26 11:08:59', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:08:59', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993517584355426304, '2025-11-26 11:10:05', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:10:04', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993517715054133248, '2025-11-26 11:10:36', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:10:36', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993517761233420288, '2025-11-26 11:10:47', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:10:47', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993518017761247232, '2025-11-26 11:11:48', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:11:48', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
+INSERT INTO `bus_order` VALUES (1993518174041014272, '2025-11-26 11:12:25', '2025-11-26', NULL, NULL, '741245test', 'GlobalTransactional', '2025-11-26 11:12:25', 'GlobalTransactionaltest', 'GlobalTransactional', 'GlobalTransactional', 1);
 
 -- ----------------------------
 -- Table structure for bus_truck
 -- ----------------------------
 DROP TABLE IF EXISTS `bus_truck`;
 CREATE TABLE `bus_truck`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
-  `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
-  `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
-  `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
-  `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
-  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
-  `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
-  `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
-  `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
-  `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
-  `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
-  `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车辆表' ROW_FORMAT = DYNAMIC;
+                              `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                              `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                              `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                              `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                              `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                              `plate_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车牌号',
+                              `model` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '型号',
+                              `vin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'VIN车辆识别代码',
+                              `reg_date` datetime NULL DEFAULT NULL COMMENT '注册日期',
+                              `issuers` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发证机关',
+                              `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车辆所有人',
+                              `brand` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '品牌',
+                              `quality` int NULL DEFAULT NULL COMMENT '总质量kg',
+                              `file_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '文档编号',
+                              `engine_no` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发动机编号',
+                              `vehicle_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '车型',
+                              `use_character` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '使用性质',
+                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1993518689613250561 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '车辆表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_truck
 -- ----------------------------
+INSERT INTO `bus_truck` VALUES (1993145620713439232, '2025-11-25 10:32:01', '2025-11-25 10:32:01', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:32:00', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993146441861693440, '2025-11-25 10:35:17', '2025-11-25 10:35:17', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:35:17', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993146557418962944, '2025-11-25 10:35:45', '2025-11-25 10:35:45', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:35:45', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993146653149757440, '2025-11-25 10:36:08', '2025-11-25 10:36:08', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:36:08', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993146975427493888, '2025-11-25 10:37:24', '2025-11-25 10:37:24', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:37:24', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993147077386829824, '2025-11-25 10:37:49', '2025-11-25 10:37:49', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:37:49', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993147538907070464, '2025-11-25 10:39:39', '2025-11-25 10:39:39', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-25 10:39:39', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993507124985987072, '2025-11-26 10:28:31', '2025-11-26 10:28:31', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:28:31', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993507573675851776, '2025-11-26 10:30:18', '2025-11-26 10:30:18', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:30:18', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993508333927006208, '2025-11-26 10:33:19', '2025-11-26 10:33:19', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:33:19', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993509063647821824, '2025-11-26 10:36:13', '2025-11-26 10:36:13', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:36:13', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993509519048572928, '2025-11-26 10:38:02', '2025-11-26 10:38:02', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:38:02', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993510594606530560, '2025-11-26 10:42:18', '2025-11-26 10:42:18', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 10:42:18', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993515582862917632, '2025-11-26 11:02:07', '2025-11-26 11:02:07', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:02:07', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993516007263567872, '2025-11-26 11:03:49', '2025-11-26 11:03:49', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:03:49', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993517311201378304, '2025-11-26 11:08:59', '2025-11-26 11:08:59', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:08:59', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993517585613717504, '2025-11-26 11:10:05', '2025-11-26 11:10:05', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:10:05', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993517715184156672, '2025-11-26 11:10:36', '2025-11-26 11:10:36', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:10:36', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993517761392803840, '2025-11-26 11:10:47', '2025-11-26 11:10:47', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:10:47', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993518017979351040, '2025-11-26 11:11:48', '2025-11-26 11:11:48', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:11:48', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
+INSERT INTO `bus_truck` VALUES (1993518174129094656, '2025-11-26 11:12:25', '2025-11-26 11:12:25', NULL, NULL, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', '2025-11-26 11:12:25', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 100, 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional', 'GlobalTransactional');
 
 -- ----------------------------
 -- Table structure for dev_datasource
 -- ----------------------------
 DROP TABLE IF EXISTS `dev_datasource`;
 CREATE TABLE `dev_datasource`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
-  `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
-  `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
-  `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-  PRIMARY KEY (`id`) USING BTREE
+                                   `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                   `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                   `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                   `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                   `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据源名称',
+                                   `url` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'jdbc url',
+                                   `type` tinyint NULL DEFAULT NULL COMMENT '数据源类型',
+                                   `driver_class_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库驱动类名',
+                                   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
+                                   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据库连接密码',
+                                   `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+                                   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1976535119783002113 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of dev_datasource
 -- ----------------------------
+INSERT INTO `dev_datasource` VALUES (12, '2025-08-23 11:17:54', '2025-08-23 11:17:56', '1', '1', 'seatatest', 'jdbc:mysql://127.0.0.1:3306/bm?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', 1, 'com.mysql.cj.jdbc.Driver', 'seatatest', 'root', 0);
+INSERT INTO `dev_datasource` VALUES (13, '2025-08-23 11:17:54', '2025-08-23 11:17:56', '1', '1', 'seatatest', 'jdbc:mysql://127.0.0.1:3306/bm?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', 1, 'com.mysql.cj.jdbc.Driver', 'seatatest', 'root', 0);
+INSERT INTO `dev_datasource` VALUES (14, '2025-08-23 11:17:54', '2025-08-23 11:17:56', '1', '1', 'seatatest', 'jdbc:mysql://127.0.0.1:3306/bm?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', 1, 'com.mysql.cj.jdbc.Driver', 'seatatest', 'root', 0);
+INSERT INTO `dev_datasource` VALUES (111, '2025-08-23 11:17:54', '2025-08-23 11:17:56', '1', '1', 'seatatest', 'jdbc:mysql://127.0.0.1:3306/bm?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', 1, 'com.mysql.cj.jdbc.Driver', 'seatatest', 'root', 0);
 INSERT INTO `dev_datasource` VALUES (1959103277882671103, '2025-08-23 11:17:54', '2025-08-23 11:17:56', '1', '1', 'local', 'jdbc:mysql://127.0.0.1:3306/bm?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai', 1, 'com.mysql.cj.jdbc.Driver', 'root', 'root', 0);
 INSERT INTO `dev_datasource` VALUES (1959103277882671104, '2025-08-23 11:59:54', '2025-08-23 11:59:54', '1', '1', 'test', NULL, 1, 'com.mysql.cj.jdbc.Driver', 'root', '123456', 1);
 INSERT INTO `dev_datasource` VALUES (1959157384936947712, '2025-08-23 15:34:55', '2025-08-23 15:34:55', '1', '1', 'devPG数据源', NULL, 4, 'com.mysql.cj.jdbc.Driver', 'admin', 'admin', 1);
@@ -160,18 +206,18 @@ INSERT INTO `dev_datasource` VALUES (1976535119783002112, '2025-10-10 14:27:49',
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-  `sort` int NULL DEFAULT NULL COMMENT '排序值',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`) USING BTREE
+                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                  `dict_type_id` bigint NULL DEFAULT NULL COMMENT '字典数据类型id',
+                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+                                  `sort` int NULL DEFAULT NULL COMMENT '排序值',
+                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1980170245347737601 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -210,18 +256,18 @@ INSERT INTO `sys_dict_data` VALUES (1980170245347737600, '2025-10-20 15:12:31', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
-  `sort` int NULL DEFAULT NULL COMMENT '排序值',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`) USING BTREE
+                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级',
+                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '名称',
+                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '编码',
+                                  `sort` int NULL DEFAULT NULL COMMENT '排序值',
+                                  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+                                  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1963511847990591489 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -259,22 +305,22 @@ INSERT INTO `sys_dict_type` VALUES (1963511847990591488, '2025-09-04 15:58:00', 
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications`;
 CREATE TABLE `sys_notifications`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
-  `state` tinyint NULL DEFAULT NULL COMMENT '状态',
-  `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
-  `publisher` bigint NULL DEFAULT NULL COMMENT '发布人id',
-  `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
-  `type` tinyint NULL DEFAULT NULL COMMENT '通知类型',
-  `level` tinyint NULL DEFAULT NULL COMMENT '通知级别',
-  `all_notifications` tinyint NULL DEFAULT NULL COMMENT '是否全体通知',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1987796045492387841 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
+                                      `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                      `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                      `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                      `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                      `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                      `title` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+                                      `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+                                      `state` tinyint NULL DEFAULT NULL COMMENT '状态',
+                                      `publish_time` datetime NULL DEFAULT NULL COMMENT '发布时间',
+                                      `publisher` bigint NULL DEFAULT NULL COMMENT '发布人id',
+                                      `revoke_time` datetime NULL DEFAULT NULL COMMENT '撤回时间',
+                                      `type` tinyint NULL DEFAULT NULL COMMENT '通知类型',
+                                      `level` tinyint NULL DEFAULT NULL COMMENT '通知级别',
+                                      `all_notifications` tinyint NULL DEFAULT NULL COMMENT '是否全体通知',
+                                      PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1992862424344035329 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications
@@ -285,25 +331,27 @@ INSERT INTO `sys_notifications` VALUES (1976488251443118080, '2025-10-10 11:21:3
 INSERT INTO `sys_notifications` VALUES (1987792515905880064, '2025-11-10 16:00:42', '2025-11-10 16:06:00', NULL, NULL, '测试重构通知记录', '<p><a href=\"https://www.google.com.hk/imghp?hl=zh-CN&ogbl\" target=\"_top\">图片</a></p><p><a href=\"https://accounts.google.com/ServiceLogin?hl=zh-CN&amp;passive=true&amp;continue=https://www.google.com.hk/&amp;ec=futura_exp_og_so_72776762_e\" target=\"_top\" style=\"text-align: center;\">登录</a></p><p> </p><p><a href=\"https://about.google/?utm_source=google-ZZ&utm_medium=referral&utm_campaign=hp-footer&fg=1\" target=\"\">关于 Google</a><a href=\"https://www.google.com.hk/intl/zh-CN_zz/ads/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1\" target=\"\">广告</a><a href=\"https://www.google.com.hk/services/?subid=ww-ww-et-g-awa-a-g_hpbfoot1_1!o2&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpbfooter&fg=1\" target=\"\">商务</a><a href=\"https://google.com/search/howsearchworks/?fg=1\" target=\"\">Google 搜索的运作方式</a></p><p><a href=\"https://policies.google.com/privacy?hl=zh-CN&fg=1\" target=\"\">隐私权</a><a href=\"https://policies.google.com/terms?hl=zh-CN&fg=1\" target=\"\">条款</a>设置</p>', 2, '2025-11-10 16:06:00', NULL, NULL, NULL, 1, 1);
 INSERT INTO `sys_notifications` VALUES (1987793178039681024, '2025-11-10 16:03:20', '2025-11-10 16:07:49', NULL, NULL, '测试重构通知记录', '<p>434343</p>', 2, '2025-11-10 16:07:49', NULL, NULL, NULL, 1, 1);
 INSERT INTO `sys_notifications` VALUES (1987796045492387840, '2025-11-10 16:14:43', '2025-11-10 16:14:51', NULL, NULL, '测试重构通知记录', '<p><span style=\"color: rgb(255, 255, 255); font-size: 14px;\">En</span></p><p><br></p><ul><li><a href=\"https://nacos.io/\" target=\"_blank\">首页</a></li><li><a href=\"https://nacos.io/docs/latest/what-is-nacos/\" target=\"_blank\">文档</a></li><li><a href=\"https://nacos.io/blog/\" target=\"_blank\">博客</a></li><li><a href=\"https://nacos.io/news/\" target=\"_blank\">社区</a></li><li><a href=\"https://cn.aliyun.com/product/aliware/mse?spm=nacos-website.topbar.0.0.0\" target=\"_blank\">Nacos企业版</a></li><li></li><li></li><li></li><li></li></ul><h1 style=\"text-align: center;\">NACOS2.5.1</h1><h1 style=\"text-align: center;\">模式standalone</h1><ul><li>配置管理</li><li>服务管理服务列表订阅者列表</li><li>命名空间</li><li>集群管理</li><li>设置中心</li><li></li><li></li><li></li><li>当前集群没有开启鉴权，请参考<a href=\"https://nacos.io/docs/latest/manual/admin/auth/\" target=\"\">文档</a>开启鉴权~</li><li></li><li>服务列表</li><li></li><li></li><li></li><li></li><li></li><li></li><li><span style=\"color: rgb(32, 155, 250); font-size: 14px;\">public</span></li><li><span style=\"color: rgb(153, 153, 153);\">|</span><span style=\"color: rgb(201, 201, 204); font-size: 14px;\">dev</span></li><li></li><li></li><li>服务名称分组名称隐藏空服务</li><li></li><li></li><li></li></ul><table style=\"width: auto;\"><tbody><tr><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">服务名</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">分组名称</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">集群数目</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">健康实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">触发保护阈值</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">操作</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-system</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-websocket</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-user</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-resource</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-example</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-gateway</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-auth</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-admin</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除<br><br><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">每页显示：</span><em>100</em><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">总数：8</span></td></tr></tbody></table><ul><li></li><li></li><li></li><li></li></ul>', 2, '2025-11-10 16:14:51', NULL, NULL, NULL, 1, 1);
+INSERT INTO `sys_notifications` VALUES (1992862020789075968, '2025-11-24 15:45:06', '2025-11-24 15:45:11', '1', '1', '关于最近高市早苗的不良言论', '<p>中方决定xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>', 2, '2025-11-24 15:45:10', 1, NULL, NULL, 2, 1);
+INSERT INTO `sys_notifications` VALUES (1992862424344035328, '2025-11-24 15:46:42', '2025-11-24 15:46:50', '1', '1', '关于高十四点就送进佛阿萨的麻烦老师的解放军撒旦解放拉萨的肌肤上的连锁酒店房间啊是飒飒地方上的上的', '<p><br></p><p> <a href=\"https://gitee.com/\" target=\"\">我的</a> </p><p> <a href=\"https://gitee.com/notifications\" target=\"\">59</a> &nbsp;</p><p><a href=\"https://www.oschina.net/event/8598101\" target=\"_blank\">11月29日 Gitee Talk | 模力方舟 AI 沙龙深圳站：看懂算力到应用的下一个主战场！点击立即报名~</a></p><p> &nbsp;</p><h2><em>贵xxx工程有限公司/智xx综合调度系统（xx-admin）</em></h2><p>全部</p><p><img src=\"https://cn-assets.gitee.com/assets/issues/pic_issue_default-f9c4dd2dbbe1797c75f1eae0bf54d0d7.png\" alt=\"Pic issue default\" data-href=\"\" style=\"\"/></p><p>没有符合条件的 Pull Request</p><p>北京奥思研工智能科技有限公司版权所有</p><p><a href=\"https://gitee.com/all-about-git\" target=\"\" style=\"line-height: 2;\">Git 大全</a></p><p><a href=\"https://help.gitee.com/learn-Git-Branching/\" target=\"\" style=\"line-height: 2;\">Git 命令学习</a></p><p><a href=\"https://copycat.gitee.com/\" target=\"\" style=\"line-height: 2;\">CopyCat 代码克隆检测</a></p><p><a href=\"https://gitee.com/appclient\" target=\"\" style=\"line-height: 2;\">APP与插件下载</a> </p><p><a href=\"https://gitee.com/gitee-stars\" target=\"\" style=\"line-height: 2;\">Gitee 封面人物</a></p><p><a href=\"https://gitee.com/gvp\" target=\"\" style=\"line-height: 2;\">GVP 项目</a></p><p><a href=\"https://blog.gitee.com/\" target=\"\" style=\"line-height: 2;\">Gitee 博客</a></p><p><a href=\"https://gitee.com/enterprises#nonprofit-plan\" target=\"\" style=\"line-height: 2;\">Gitee 公益计划</a></p><p><a href=\"https://gitee.com/features/gitee-go\" target=\"\" style=\"line-height: 2;\">Gitee 持续集成</a> </p><p><a href=\"https://gitee.com/api/v5/swagger\" target=\"\" style=\"line-height: 2;\">OpenAPI</a></p><p><a href=\"https://gitee.com/oschina/mcp-gitee\" target=\"\" style=\"line-height: 2;\">MCP Server</a></p><p><a href=\"https://help.gitee.com/\" target=\"\" style=\"line-height: 2;\">帮助文档</a></p><p><a href=\"https://gitee.com/self_services\" target=\"\" style=\"line-height: 2;\">在线自助服务</a></p><p><a href=\"https://gitee.com/help/articles/4378\" target=\"\" style=\"line-height: 2;\">更新日志</a> </p><p><a href=\"https://gitee.com/about_us\" target=\"\" style=\"line-height: 2;\">关于我们</a></p><p><a href=\"https://gitee.com/oschina/jobs\" target=\"\" style=\"line-height: 2;\">加入我们</a></p><p><a href=\"https://gitee.com/terms\" target=\"\" style=\"line-height: 2;\">使用条款</a></p><p><a href=\"https://gitee.com/oschina/git-osc/issues\" target=\"\" style=\"line-height: 2;\">意见建议</a></p><p><a href=\"https://gitee.com/links.html\" target=\"\" style=\"line-height: 2;\">合作伙伴</a> </p><p><img src=\"https://cn-assets.gitee.com/assets/communication_QR-3b8de44bedfd3cf6c52c96b1a05771c6.png\" alt=\"技术交流QQ群\" data-href=\"\" style=\"width: 80px;height: 80px;\"/></p><p>技术交流QQ群 </p><p><img src=\"https://cn-assets.gitee.com/assets/weixin_QR-853f852365876b5f318023e95cbbfdb6.png\" alt=\"微信服务号\" data-href=\"\" style=\"width: 80px !important;height: 80px !important;\"/></p><p>微信服务号</p><p><a href=\"mailto: client@oschina.cn\" target=\"\"> client@oschina.cn</a></p><p><a href=\"\" target=\"\"> 企业版在线使用：400-606-0201</a></p><p><a href=\"\" target=\"\">专业版私有部署：</a></p><p><img src=\"https://cn-assets.gitee.com/assets/logo-openatom-new-955174a984c899d2e230d052bdc237cf.svg\" alt=\"开放原子开源基金会\" data-href=\"\" style=\"width: 21px;height: 21px;\"/><a href=\"https://www.openatom.org/\" target=\"_blank\">开放原子开源基金会</a></p><p>合作代码托管平台<img src=\"https://cn-assets.gitee.com/assets/12377@2x-1aa42ed2d2256f82a61ecf57be1ec244.png\" alt=\"违法和不良信息举报中心\" data-href=\"\" style=\"width: 21px;height: 18px;\"/><a href=\"https://www.12377.cn/\" target=\"_blank\">违法和不良信息举报中心</a></p><p><a href=\"http://beian.miit.gov.cn/\" target=\"\">京ICP备2025119063号</a></p><p> <a href=\"https://gitee.com/language/zh-CN\" target=\"\">简 体</a> / <a href=\"https://gitee.com/language/zh-TW\" target=\"\">繁 體</a> / <a href=\"https://gitee.com/language/en\" target=\"\">English</a></p><p><span style=\"color: rgb(140, 146, 164);\"><em><br></em></span></p>', 2, '2025-11-24 15:46:50', 1, NULL, NULL, 3, 1);
 
 -- ----------------------------
 -- Table structure for sys_notifications_record
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_record`;
 CREATE TABLE `sys_notifications_record`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `content_id` bigint NULL DEFAULT NULL COMMENT '通知内容表id',
-  `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
-  `read_state` tinyint NULL DEFAULT NULL COMMENT '读取状态',
-  `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
-  `business_type` tinyint NULL DEFAULT NULL COMMENT '通知业务场景类型',
-  `business_id` bigint NULL DEFAULT NULL COMMENT '通知业务场景关联业务Id',
-  `level` tinyint NULL DEFAULT NULL COMMENT '消息通知等级枚举',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `id_index`(`content_id` ASC, `user_id` ASC, `created_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1987796078677721089 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录表' ROW_FORMAT = DYNAMIC;
+                                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                             `content_id` bigint NULL DEFAULT NULL COMMENT '通知内容表id',
+                                             `user_id` bigint NULL DEFAULT NULL COMMENT '用户id',
+                                             `read_state` tinyint NULL DEFAULT NULL COMMENT '读取状态',
+                                             `read_time` datetime NULL DEFAULT NULL COMMENT '阅读时间',
+                                             `business_type` tinyint NULL DEFAULT NULL COMMENT '通知业务场景类型',
+                                             `business_id` bigint NULL DEFAULT NULL COMMENT '通知业务场景关联业务Id',
+                                             `level` tinyint NULL DEFAULT NULL COMMENT '消息通知等级枚举',
+                                             PRIMARY KEY (`id`) USING BTREE,
+                                             INDEX `id_index`(`content_id` ASC, `user_id` ASC, `created_time` ASC) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1992862458548584449 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_record
@@ -658,19 +706,87 @@ INSERT INTO `sys_notifications_record` VALUES (1987796078660943872, '2025-11-10 
 INSERT INTO `sys_notifications_record` VALUES (1987796078665138176, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311700531609600, 0, NULL, 1, 1987796045492387840, 1);
 INSERT INTO `sys_notifications_record` VALUES (1987796078673526784, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951300416163545088, 0, NULL, 1, 1987796045492387840, 1);
 INSERT INTO `sys_notifications_record` VALUES (1987796078677721088, '2025-11-10 16:14:51', '2025-11-10 16:14:51', 1987796078451228672, 1951311705631883264, 0, NULL, 1, 1987796045492387840, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039378231296, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039386619904, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 6, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039395008512, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 7, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039403397120, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 8, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039411785728, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 9, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039424368640, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 10, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039432757248, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 11, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039449534464, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 12, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039462117376, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 13, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039470505984, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 14, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039478894592, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 15, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039483088896, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 16, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039491477504, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 17, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039499866112, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311556855726080, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039504060416, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 18, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039508254720, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 19, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039512449024, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 20, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039516643328, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 21, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039520837632, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 22, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039525031936, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 23, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039529226240, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 24, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039533420544, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311702918168576, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039537614848, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311738074824704, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039537614849, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311704486838272, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039541809152, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951299613977739264, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039546003456, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1950580430986018816, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039550197760, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311553856798720, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039554392064, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311558462144512, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039558586368, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951312144884563968, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039562780672, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951315654149668864, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039562780673, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951301892227203072, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039566974976, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311700531609600, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039571169280, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951300416163545088, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862039575363584, '2025-11-24 15:45:10', '2025-11-24 15:45:10', 1992862039361454080, 1951311705631883264, 0, NULL, 1, 1992862020789075968, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458418561024, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458422755328, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 6, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458426949632, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 7, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458431143936, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 8, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458431143937, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 9, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458435338240, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 10, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458439532544, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 11, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458443726848, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 12, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458447921152, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 13, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458447921153, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 14, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458456309760, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 15, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458460504064, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 16, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458464698368, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 17, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458468892672, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311556855726080, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458473086976, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 18, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458473086977, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 19, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458477281280, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 20, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458481475584, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 21, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458485669888, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 22, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458489864192, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 23, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458494058496, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 24, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458494058497, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311702918168576, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458498252800, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311738074824704, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458502447104, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311704486838272, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458506641408, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951299613977739264, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458510835712, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1950580430986018816, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458515030016, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311553856798720, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458519224320, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311558462144512, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458523418624, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951312144884563968, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458531807232, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951315654149668864, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458536001536, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951301892227203072, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458540195840, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311700531609600, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458544390144, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951300416163545088, 0, NULL, 1, 1992862424344035328, 1);
+INSERT INTO `sys_notifications_record` VALUES (1992862458548584448, '2025-11-24 15:46:50', '2025-11-24 15:46:50', 1992862458397589504, 1951311705631883264, 0, NULL, 1, 1992862424344035328, 1);
 
 -- ----------------------------
 -- Table structure for sys_notifications_record_content
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_record_content`;
 CREATE TABLE `sys_notifications_record_content`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1987796078451228673 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录内容表' ROW_FORMAT = DYNAMIC;
+                                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                                     `title` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标题',
+                                                     `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '内容',
+                                                     PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1992862458397589505 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知记录内容表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_record_content
@@ -681,21 +797,23 @@ INSERT INTO `sys_notifications_record_content` VALUES (1987793685806317568, '202
 INSERT INTO `sys_notifications_record_content` VALUES (1987794082096742400, '2025-11-10 16:06:55', '2025-11-10 16:06:55', '测试重构通知记录', '<p>434343</p>');
 INSERT INTO `sys_notifications_record_content` VALUES (1987794305497956352, '2025-11-10 16:07:49', '2025-11-10 16:07:49', '测试重构通知记录', '<p>434343</p>');
 INSERT INTO `sys_notifications_record_content` VALUES (1987796078451228672, '2025-11-10 16:14:51', '2025-11-10 16:14:51', '测试重构通知记录', '<p><span style=\"color: rgb(255, 255, 255); font-size: 14px;\">En</span></p><p><br></p><ul><li><a href=\"https://nacos.io/\" target=\"_blank\">首页</a></li><li><a href=\"https://nacos.io/docs/latest/what-is-nacos/\" target=\"_blank\">文档</a></li><li><a href=\"https://nacos.io/blog/\" target=\"_blank\">博客</a></li><li><a href=\"https://nacos.io/news/\" target=\"_blank\">社区</a></li><li><a href=\"https://cn.aliyun.com/product/aliware/mse?spm=nacos-website.topbar.0.0.0\" target=\"_blank\">Nacos企业版</a></li><li></li><li></li><li></li><li></li></ul><h1 style=\"text-align: center;\">NACOS2.5.1</h1><h1 style=\"text-align: center;\">模式standalone</h1><ul><li>配置管理</li><li>服务管理服务列表订阅者列表</li><li>命名空间</li><li>集群管理</li><li>设置中心</li><li></li><li></li><li></li><li>当前集群没有开启鉴权，请参考<a href=\"https://nacos.io/docs/latest/manual/admin/auth/\" target=\"\">文档</a>开启鉴权~</li><li></li><li>服务列表</li><li></li><li></li><li></li><li></li><li></li><li></li><li><span style=\"color: rgb(32, 155, 250); font-size: 14px;\">public</span></li><li><span style=\"color: rgb(153, 153, 153);\">|</span><span style=\"color: rgb(201, 201, 204); font-size: 14px;\">dev</span></li><li></li><li></li><li>服务名称分组名称隐藏空服务</li><li></li><li></li><li></li></ul><table style=\"width: auto;\"><tbody><tr><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">服务名</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">分组名称</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">集群数目</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">健康实例数</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: left;\">触发保护阈值</th><th colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">操作</th></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-system</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-websocket</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-user</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-resource</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-example</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-gateway</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-auth</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除</td></tr><tr><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">bm-admin</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">DEFAULT_GROUP</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">1</td><td colSpan=\"1\" rowSpan=\"1\" width=\"auto\">false</td><td colspan=\"1\" rowspan=\"1\" width=\"auto\" style=\"text-align: center;\">详情|示例代码|订阅者|删除<br><br><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">每页显示：</span><em>100</em><span style=\"color: rgb(153, 153, 153); font-size: 14px;\">总数：8</span></td></tr></tbody></table><ul><li></li><li></li><li></li><li></li></ul>');
+INSERT INTO `sys_notifications_record_content` VALUES (1992862039361454080, '2025-11-24 15:45:10', '2025-11-24 15:45:10', '关于最近高市早苗的不良言论', '<p>中方决定xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>');
+INSERT INTO `sys_notifications_record_content` VALUES (1992862458397589504, '2025-11-24 15:46:50', '2025-11-24 15:46:50', '关于高十四点就送进佛阿萨的麻烦老师的解放军撒旦解放拉萨的肌肤上的连锁酒店房间啊是飒飒地方上的上的', '<p><br></p><p> <a href=\"https://gitee.com/\" target=\"\">我的</a> </p><p> <a href=\"https://gitee.com/notifications\" target=\"\">59</a> &nbsp;</p><p><a href=\"https://www.oschina.net/event/8598101\" target=\"_blank\">11月29日 Gitee Talk | 模力方舟 AI 沙龙深圳站：看懂算力到应用的下一个主战场！点击立即报名~</a></p><p> &nbsp;</p><h2><em>贵xxx工程有限公司/智xx综合调度系统（xx-admin）</em></h2><p>全部</p><p><img src=\"https://cn-assets.gitee.com/assets/issues/pic_issue_default-f9c4dd2dbbe1797c75f1eae0bf54d0d7.png\" alt=\"Pic issue default\" data-href=\"\" style=\"\"/></p><p>没有符合条件的 Pull Request</p><p>北京奥思研工智能科技有限公司版权所有</p><p><a href=\"https://gitee.com/all-about-git\" target=\"\" style=\"line-height: 2;\">Git 大全</a></p><p><a href=\"https://help.gitee.com/learn-Git-Branching/\" target=\"\" style=\"line-height: 2;\">Git 命令学习</a></p><p><a href=\"https://copycat.gitee.com/\" target=\"\" style=\"line-height: 2;\">CopyCat 代码克隆检测</a></p><p><a href=\"https://gitee.com/appclient\" target=\"\" style=\"line-height: 2;\">APP与插件下载</a> </p><p><a href=\"https://gitee.com/gitee-stars\" target=\"\" style=\"line-height: 2;\">Gitee 封面人物</a></p><p><a href=\"https://gitee.com/gvp\" target=\"\" style=\"line-height: 2;\">GVP 项目</a></p><p><a href=\"https://blog.gitee.com/\" target=\"\" style=\"line-height: 2;\">Gitee 博客</a></p><p><a href=\"https://gitee.com/enterprises#nonprofit-plan\" target=\"\" style=\"line-height: 2;\">Gitee 公益计划</a></p><p><a href=\"https://gitee.com/features/gitee-go\" target=\"\" style=\"line-height: 2;\">Gitee 持续集成</a> </p><p><a href=\"https://gitee.com/api/v5/swagger\" target=\"\" style=\"line-height: 2;\">OpenAPI</a></p><p><a href=\"https://gitee.com/oschina/mcp-gitee\" target=\"\" style=\"line-height: 2;\">MCP Server</a></p><p><a href=\"https://help.gitee.com/\" target=\"\" style=\"line-height: 2;\">帮助文档</a></p><p><a href=\"https://gitee.com/self_services\" target=\"\" style=\"line-height: 2;\">在线自助服务</a></p><p><a href=\"https://gitee.com/help/articles/4378\" target=\"\" style=\"line-height: 2;\">更新日志</a> </p><p><a href=\"https://gitee.com/about_us\" target=\"\" style=\"line-height: 2;\">关于我们</a></p><p><a href=\"https://gitee.com/oschina/jobs\" target=\"\" style=\"line-height: 2;\">加入我们</a></p><p><a href=\"https://gitee.com/terms\" target=\"\" style=\"line-height: 2;\">使用条款</a></p><p><a href=\"https://gitee.com/oschina/git-osc/issues\" target=\"\" style=\"line-height: 2;\">意见建议</a></p><p><a href=\"https://gitee.com/links.html\" target=\"\" style=\"line-height: 2;\">合作伙伴</a> </p><p><img src=\"https://cn-assets.gitee.com/assets/communication_QR-3b8de44bedfd3cf6c52c96b1a05771c6.png\" alt=\"技术交流QQ群\" data-href=\"\" style=\"width: 80px;height: 80px;\"/></p><p>技术交流QQ群 </p><p><img src=\"https://cn-assets.gitee.com/assets/weixin_QR-853f852365876b5f318023e95cbbfdb6.png\" alt=\"微信服务号\" data-href=\"\" style=\"width: 80px !important;height: 80px !important;\"/></p><p>微信服务号</p><p><a href=\"mailto: client@oschina.cn\" target=\"\"> client@oschina.cn</a></p><p><a href=\"\" target=\"\"> 企业版在线使用：400-606-0201</a></p><p><a href=\"\" target=\"\">专业版私有部署：</a></p><p><img src=\"https://cn-assets.gitee.com/assets/logo-openatom-new-955174a984c899d2e230d052bdc237cf.svg\" alt=\"开放原子开源基金会\" data-href=\"\" style=\"width: 21px;height: 21px;\"/><a href=\"https://www.openatom.org/\" target=\"_blank\">开放原子开源基金会</a></p><p>合作代码托管平台<img src=\"https://cn-assets.gitee.com/assets/12377@2x-1aa42ed2d2256f82a61ecf57be1ec244.png\" alt=\"违法和不良信息举报中心\" data-href=\"\" style=\"width: 21px;height: 18px;\"/><a href=\"https://www.12377.cn/\" target=\"_blank\">违法和不良信息举报中心</a></p><p><a href=\"http://beian.miit.gov.cn/\" target=\"\">京ICP备2025119063号</a></p><p> <a href=\"https://gitee.com/language/zh-CN\" target=\"\">简 体</a> / <a href=\"https://gitee.com/language/zh-TW\" target=\"\">繁 體</a> / <a href=\"https://gitee.com/language/en\" target=\"\">English</a></p><p><span style=\"color: rgb(140, 146, 164);\"><em><br></em></span></p>');
 
 -- ----------------------------
 -- Table structure for sys_notifications_target
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notifications_target`;
 CREATE TABLE `sys_notifications_target`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
-  `target_type` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
-  `target_id` bigint NULL DEFAULT NULL COMMENT '通知目标Id',
-  `target_name` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标名称',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1987796045567885313 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告通知目标表' ROW_FORMAT = DYNAMIC;
+                                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                             `notifications_id` bigint NULL DEFAULT NULL COMMENT '主表通知公告表Id',
+                                             `target_type` tinyint NULL DEFAULT NULL COMMENT '通知目标类型',
+                                             `target_id` bigint NULL DEFAULT NULL COMMENT '通知目标Id',
+                                             `target_name` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '通知目标名称',
+                                             PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1992862424406949889 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '通知公告通知目标表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_notifications_target
@@ -733,25 +851,27 @@ INSERT INTO `sys_notifications_target` VALUES (1976488251585724416, '2025-10-10 
 INSERT INTO `sys_notifications_target` VALUES (1976488251589918720, '2025-10-10 11:21:35', '2025-10-10 11:21:35', 1976488251443118080, 3, 1961819826523471872, '产品部');
 INSERT INTO `sys_notifications_target` VALUES (1976488251594113024, '2025-10-10 11:21:35', '2025-10-10 11:21:35', 1976488251443118080, 3, 1961819848073805824, '研发部');
 INSERT INTO `sys_notifications_target` VALUES (1987796045567885312, '2025-11-10 16:14:43', '2025-11-10 16:14:43', 1987796045492387840, 4, NULL, '全部');
+INSERT INTO `sys_notifications_target` VALUES (1992862021292392448, '2025-11-24 15:45:06', '2025-11-24 15:45:06', 1992862020789075968, 4, NULL, '全部');
+INSERT INTO `sys_notifications_target` VALUES (1992862424406949888, '2025-11-24 15:46:42', '2025-11-24 15:46:42', 1992862424344035328, 4, NULL, '全部');
 
 -- ----------------------------
 -- Table structure for sys_organization
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_organization`;
 CREATE TABLE `sys_organization`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
-  `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
-  `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
-  `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
-  PRIMARY KEY (`id`) USING BTREE
+                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                     `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                     `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织名称',
+                                     `sort` tinyint NULL DEFAULT NULL COMMENT '排序',
+                                     `parent_id` bigint NULL DEFAULT NULL COMMENT '父级ID',
+                                     `type` tinyint NULL DEFAULT NULL COMMENT '组织机构类型类型',
+                                     `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+                                     `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+                                     `leader` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '负责人id json 数组',
+                                     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1961819924967981057 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统组织表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -791,25 +911,25 @@ INSERT INTO `sys_organization` VALUES (1961819924967981056, '2025-08-30 23:54:54
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_resources`;
 CREATE TABLE `sys_resources`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
-  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
-  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
-  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
-  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
-  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
-  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
-  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
-  `sort` int NULL DEFAULT NULL COMMENT '排序',
-  PRIMARY KEY (`id`, `code`) USING BTREE
+                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                  `parent_id` bigint NULL DEFAULT NULL COMMENT '上级资源id',
+                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '资源编码',
+                                  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源名称',
+                                  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源类型',
+                                  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '路由地址',
+                                  `component` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
+                                  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+                                  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
+                                  `layout` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '布局方式',
+                                  `is_show` tinyint NULL DEFAULT NULL COMMENT '是否显示',
+                                  `enable` tinyint NULL DEFAULT NULL COMMENT '是否启用',
+                                  `keep_alive` tinyint NULL DEFAULT NULL COMMENT '是否启用组件之间切换时缓存它们的状态',
+                                  `sort` int NULL DEFAULT NULL COMMENT '排序',
+                                  PRIMARY KEY (`id`, `code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1965222813082058753 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统资源表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -868,17 +988,17 @@ INSERT INTO `sys_resources` VALUES (1965222813082058752, 9, '2025-09-09 09:16:45
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
-  `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
-  `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
-  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
-  PRIMARY KEY (`id`) USING BTREE
+                             `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                             `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名',
+                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+                             `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '图标',
+                             `enable` tinyint NULL DEFAULT NULL COMMENT '启用状态',
+                             `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色编码',
+                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1978732602692993025 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -897,14 +1017,14 @@ INSERT INTO `sys_role` VALUES (1978732602692993024, '2025-10-16 15:59:50', '2025
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_resources`;
 CREATE TABLE `sys_role_resources`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-  `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
-  PRIMARY KEY (`id`) USING BTREE
+                                       `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                       `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                       `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                       `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                       `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                       `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+                                       `resources_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '资源|权限 Id',
+                                       PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1978732865558413314 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -959,12 +1079,12 @@ INSERT INTO `sys_role_resources` VALUES (1978732865558413313, '2025-10-16 16:00:
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_setting`;
 CREATE TABLE `sys_setting`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  PRIMARY KEY (`id`) USING BTREE
+                                `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -976,23 +1096,23 @@ CREATE TABLE `sys_setting`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-  `id` bigint NOT NULL COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
-  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `gender` tinyint NULL DEFAULT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `last_login_time` datetime NULL DEFAULT NULL,
-  `enable` tinyint NULL DEFAULT NULL,
-  PRIMARY KEY (`id`, `account`) USING BTREE
+                             `id` bigint NOT NULL COMMENT '自增主键',
+                             `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                             `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                             `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                             `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                             `organization_id` bigint NULL DEFAULT NULL COMMENT '所属组织id',
+                             `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '登录账号',
+                             `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `salt` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `gender` tinyint NULL DEFAULT NULL,
+                             `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `avatar_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+                             `last_login_time` datetime NULL DEFAULT NULL,
+                             `enable` tinyint NULL DEFAULT NULL,
+                             PRIMARY KEY (`id`, `account`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -1038,14 +1158,14 @@ INSERT INTO `sys_user` VALUES (1951315654149668864, '2025-08-02 00:14:40', '2025
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
-  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
-  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
-  PRIMARY KEY (`id`) USING BTREE
+                                  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                  `updated_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+                                  `role_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色id',
+                                  `user_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户id',
+                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -1078,17 +1198,37 @@ INSERT INTO `sys_user_role` VALUES (45, '2025-06-09 16:25:36', '2025-06-09 16:25
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_setting`;
 CREATE TABLE `sys_user_setting`  (
-  `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-  `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
-  `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
-  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
-  PRIMARY KEY (`id`) USING BTREE
+                                     `id` bigint NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+                                     `created_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                     `updated_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+                                     `created_by` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+                                     `layout_mode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '布局方式',
+                                     `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主题',
+                                     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户个人设置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_setting
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for undo_log
+-- ----------------------------
+DROP TABLE IF EXISTS `undo_log`;
+CREATE TABLE `undo_log`  (
+                             `branch_id` bigint NOT NULL COMMENT 'branch transaction id',
+                             `xid` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'global transaction id',
+                             `context` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'undo_log context,such as serialization',
+                             `rollback_info` longblob NOT NULL COMMENT 'rollback info',
+                             `log_status` int NOT NULL COMMENT '0:normal status,1:defense status',
+                             `log_created` datetime(6) NOT NULL COMMENT 'create datetime',
+                             `log_modified` datetime(6) NOT NULL COMMENT 'modify datetime',
+                             UNIQUE INDEX `ux_undo_log`(`xid` ASC, `branch_id` ASC) USING BTREE,
+                             INDEX `ix_log_created`(`log_created` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'AT transaction mode undo table' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of undo_log
 -- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
