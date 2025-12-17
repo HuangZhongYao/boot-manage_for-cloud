@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.github.bm</groupId>
         <artifactId>bm-service-api</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>bm-example-api</artifactId>

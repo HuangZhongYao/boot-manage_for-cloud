@@ -4,7 +4,7 @@
 
     <groupId>org.github.bm</groupId>
     <artifactId>boot-manage_for-cloud</artifactId>
-    <version>1.0.0</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
 
     <name>boot-manage_for-cloud</name>
@@ -36,7 +36,7 @@
     <!-- 属性 -->
     <properties>
         <!--项目版本-->
-        <bm-cloud.version>1.0.0</bm-cloud.version>
+        <revision>1.0.0</revision>
         <!--框架版本， 参考https://sca.aliyun.com/docs/2023/overview/version-explain/?spm=5176.29160081.0.0.74805c72wXUsy2 -->
         <spring-boot.version>3.2.4</spring-boot.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>

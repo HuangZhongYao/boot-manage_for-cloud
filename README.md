@@ -55,6 +55,7 @@ boot-manage admin 是一款极简风格的微服务架构后台管理模板。
 - 源码 Gitee: [https://gitee.com/smog_huang/boot-manage-ui_for-cloud](https://gitee.com/smog_huang/boot-manage-ui_for-cloud)
 
 ## 二、架构图
+![BM架构图.png](doc/picture/BM%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 ## 三、项目结构
 

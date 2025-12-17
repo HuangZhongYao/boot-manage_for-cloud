@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.github.bm</groupId>
         <artifactId>bm-service</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>bm-example</artifactId>
@@ -20,22 +20,22 @@
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-core</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-example-api</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-user-api</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-resource-api</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

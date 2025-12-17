@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.github.bm</groupId>
         <artifactId>bm-service-api</artifactId>
-        <version>1.0.0</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>bm-websocket-api</artifactId>
@@ -16,12 +16,12 @@
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-system-api</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.github.bm</groupId>
             <artifactId>bm-user-api</artifactId>
-            <version>${bm-cloud.version}</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
