@@ -59,6 +59,16 @@
             <artifactId>mybatis-plus-annotation</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-extension</artifactId>
+        </dependency>
+
         <!--日志-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
