@@ -1,8 +1,8 @@
 package org.github.bm.system.repository;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.github.bm.common.mybatis.BaseMapperExtension;
-import org.github.bm.common.util.tree.ITreeNode;
+import org.github.bm.base.mybatis.BaseMapperExtension;
+import org.github.bm.base.util.tree.ITreeNode;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package org.github.bm.system.repository;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
-import org.github.bm.common.mybatis.BaseMapperExtension;
+import org.github.bm.base.mybatis.BaseMapperExtension;
 import org.github.bm.system.dto.RolePageQueryInputDTO;
 import org.github.bm.system.entity.RoleEntity;
 import org.github.bm.system.vo.RolePageQueryListItemVO;

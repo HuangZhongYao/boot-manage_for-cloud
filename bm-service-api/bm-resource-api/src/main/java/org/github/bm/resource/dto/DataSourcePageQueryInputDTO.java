@@ -1,7 +1,7 @@
 package org.github.bm.resource.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
+import org.github.bm.base.base.dto.input.BaseQueryPageInputDTO;
 
 public class DataSourcePageQueryInputDTO extends BaseQueryPageInputDTO {
 

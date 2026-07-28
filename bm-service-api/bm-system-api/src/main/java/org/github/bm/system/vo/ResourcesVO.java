@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
-import org.github.bm.common.enums.ResourcesTypeEnum;
+import org.github.bm.base.base.vo.BaseIdAndTimeIdVO;
+import org.github.bm.base.enums.ResourcesTypeEnum;
 
 import java.io.Serial;
 

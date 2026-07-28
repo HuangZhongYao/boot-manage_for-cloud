@@ -3,7 +3,7 @@ package org.github.bm.resource.web;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.github.bm.common.base.response.ApiResponse;
+import org.github.bm.base.base.response.ApiResponse;
 import org.github.bm.resource.model.BMFile;
 import org.github.bm.resource.service.IStorageService;
 import org.springframework.web.bind.annotation.PostMapping;

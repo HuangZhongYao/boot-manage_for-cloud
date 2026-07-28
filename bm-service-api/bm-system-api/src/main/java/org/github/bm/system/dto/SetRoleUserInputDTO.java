@@ -2,7 +2,7 @@ package org.github.bm.system.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.BaseDTO;
+import org.github.bm.base.base.dto.BaseDTO;
 
 import java.io.Serial;
 import java.util.Set;

@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
-import org.github.bm.common.base.response.ApiResponse;
-import org.github.bm.common.base.web.BaseController;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.response.ApiResponse;
+import org.github.bm.base.base.web.BaseController;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.service.IDictService;
 import org.github.bm.system.vo.DictDataVO;

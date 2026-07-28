@@ -4,9 +4,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
-import org.github.bm.common.enums.GenderEnum;
-import org.github.bm.user.entity.UserEntity;
+import org.github.bm.base.base.dto.input.BaseQueryPageInputDTO;
+import org.github.bm.base.enums.GenderEnum;
 
 import java.io.Serial;
 

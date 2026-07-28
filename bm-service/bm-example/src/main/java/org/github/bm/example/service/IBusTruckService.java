@@ -1,7 +1,7 @@
 package org.github.bm.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.example.dto.AddBusTruckInputDTO;
 import org.github.bm.example.dto.BusTruckQueryPageInputDTO;
 import org.github.bm.example.dto.EditBusTruckInputDTO;

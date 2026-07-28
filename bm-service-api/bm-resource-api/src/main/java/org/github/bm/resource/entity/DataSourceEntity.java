@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.github.bm.common.base.entity.AbstractBaseEntity;
-import org.github.bm.common.enums.DataSourceEnum;
+import org.github.bm.base.base.entity.AbstractBaseEntity;
+import org.github.bm.base.enums.DataSourceEnum;
 /**
  * 数据源实体类
  */

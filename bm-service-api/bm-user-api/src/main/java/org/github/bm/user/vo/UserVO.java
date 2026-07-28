@@ -6,9 +6,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.base.base.vo.BaseIdAndTimeAndOperationIdVO;
 import org.github.bm.system.vo.UserRoleVO;
-import org.github.bm.common.enums.GenderEnum;
+import org.github.bm.base.enums.GenderEnum;
 
 /**
  * @Desc

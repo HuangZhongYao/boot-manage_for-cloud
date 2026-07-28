@@ -2,16 +2,13 @@ package org.github.bm.system.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.github.bm.common.base.dto.input.BaseLongIdInputDTO;
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
-import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
+import org.github.bm.base.base.dto.input.BaseLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.AddNotificationsInputDTO;
 import org.github.bm.system.dto.EditNotificationsInputDTO;
 import org.github.bm.system.dto.NotificationsPageQueryInputDTO;
 import org.github.bm.system.entity.NotificationsEntity;
-import org.github.bm.system.entity.NotificationsTargetEntity;
 import org.github.bm.system.vo.NotificationsVO;
-import org.github.bm.system.vo.RolePageQueryListItemVO;
 
 /**
  * Time 2025-08-28 17:10

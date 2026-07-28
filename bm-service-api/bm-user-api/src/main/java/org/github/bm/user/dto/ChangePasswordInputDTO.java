@@ -3,8 +3,8 @@ package org.github.bm.user.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import org.github.bm.common.base.dto.input.BaseLongIdInputDTO;
-import org.github.bm.common.validate.ValidateNotNullAndEmpty;
+import org.github.bm.base.base.dto.input.BaseLongIdInputDTO;
+import org.github.bm.base.validate.ValidateNotNullAndEmpty;
 
 import java.io.Serial;
 

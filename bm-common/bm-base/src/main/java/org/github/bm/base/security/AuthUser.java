@@ -1,0 +1,44 @@
+package org.github.bm.base.security;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.github.bm.base.base.entity.AbstractIdEntity;
+
+import java.io.Serial;
+@Setter
+@Getter
+public class AuthUser extends AbstractIdEntity {
+    @Serial
+    private static final long serialVersionUID = -4075127738715995785L;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 账号
+     */
+    private String account;
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 启用状态
+     */
+    private Boolean enable;
+
+    public AuthUser() {
+    }
+
+    public AuthUser(Long id,String username, String account, String phone, Boolean enable) {
+        super.setId(id);
+        this.username = username;
+        this.account = account;
+        this.phone = phone;
+        this.enable = enable;
+    }
+}

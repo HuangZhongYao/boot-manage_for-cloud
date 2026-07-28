@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
+import org.github.bm.base.base.vo.BaseIdAndTimeIdVO;
 
 /**
  * @Desc: Created by IntelliJ IDEA.

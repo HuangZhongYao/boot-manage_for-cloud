@@ -3,10 +3,9 @@ package org.github.bm.resource.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.github.bm.common.base.dto.BaseDTO;
-import org.github.bm.common.base.dto.input.BaseLongIdInputDTO;
-import org.github.bm.common.enums.DataSourceEnum;
-import org.github.bm.common.validate.ValidateNotNullAndEmpty;
+import org.github.bm.base.base.dto.input.BaseLongIdInputDTO;
+import org.github.bm.base.enums.DataSourceEnum;
+import org.github.bm.base.validate.ValidateNotNullAndEmpty;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

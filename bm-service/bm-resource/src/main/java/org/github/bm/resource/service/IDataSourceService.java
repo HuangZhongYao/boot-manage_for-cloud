@@ -2,7 +2,7 @@ package org.github.bm.resource.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.resource.dto.DataSourceAddInputDTO;
 import org.github.bm.resource.dto.DataSourceEditInputDTO;
 import org.github.bm.resource.dto.DataSourcePageQueryInputDTO;

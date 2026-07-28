@@ -2,7 +2,7 @@ package org.github.bm.websocket.service.impl;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.constant.RedisConstant;
+import org.github.bm.base.constant.RedisConstant;
 import org.github.bm.core.service.IRedisService;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;

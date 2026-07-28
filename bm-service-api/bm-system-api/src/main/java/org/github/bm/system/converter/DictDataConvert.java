@@ -1,6 +1,6 @@
 package org.github.bm.system.converter;
 
-import org.github.bm.common.base.convert.AbstractConvert;
+import org.github.bm.base.base.convert.AbstractConvert;
 import org.github.bm.system.entity.DictDataEntity;
 import org.github.bm.system.vo.DictDataVO;
 import org.mapstruct.Mapper;

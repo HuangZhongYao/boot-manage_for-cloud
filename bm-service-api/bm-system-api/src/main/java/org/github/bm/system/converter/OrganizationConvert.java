@@ -1,6 +1,6 @@
 package org.github.bm.system.converter;
 
-import org.github.bm.common.base.convert.AbstractConvert;
+import org.github.bm.base.base.convert.AbstractConvert;
 import org.github.bm.system.dto.AddOrganizationInputDTO;
 import org.github.bm.system.dto.EditOrganizationInputDTO;
 import org.github.bm.system.entity.OrganizationEntity;

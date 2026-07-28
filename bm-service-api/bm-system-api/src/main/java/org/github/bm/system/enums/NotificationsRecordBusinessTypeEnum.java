@@ -2,7 +2,7 @@ package org.github.bm.system.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.github.bm.common.base.enums.IEnumsValue;
+import org.github.bm.base.base.enums.IEnumsValue;
 
 /**
  * 通知记录业务场景类型枚举。

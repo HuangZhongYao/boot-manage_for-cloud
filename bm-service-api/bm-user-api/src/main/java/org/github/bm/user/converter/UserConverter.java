@@ -1,6 +1,6 @@
 package org.github.bm.user.converter;
 
-import org.github.bm.common.base.convert.AbstractConvert;
+import org.github.bm.base.base.convert.AbstractConvert;
 import org.github.bm.system.vo.RoleUserModel;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.vo.UserVO;

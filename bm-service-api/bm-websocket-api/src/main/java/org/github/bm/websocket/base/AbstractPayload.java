@@ -1,7 +1,7 @@
 package org.github.bm.websocket.base;
 
 import lombok.*;
-import org.github.bm.common.base.dto.BaseDTO;
+import org.github.bm.base.base.dto.BaseDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;

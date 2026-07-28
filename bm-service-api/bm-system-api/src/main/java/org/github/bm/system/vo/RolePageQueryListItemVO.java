@@ -2,7 +2,7 @@ package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
+import org.github.bm.base.base.vo.BaseIdAndTimeIdVO;
 
 import java.io.Serial;
 import java.util.ArrayList;

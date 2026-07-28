@@ -328,5 +328,7 @@
                 <version>3.6.3</version>
             </plugin>
         </plugins>
+        <!--定义打包文件名字-->
+        <finalName>${artifactId}</finalName>
     </build>
 </project>

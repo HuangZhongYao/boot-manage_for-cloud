@@ -1,7 +1,7 @@
 package org.github.bm.system.feign;
 
-import org.github.bm.common.base.fegin.BaseFeign;
-import org.github.bm.common.constant.AppConstant;
+import org.github.bm.base.base.fegin.BaseFeign;
+import org.github.bm.base.constant.AppConstant;
 import org.github.bm.system.entity.ResourcesEntity;
 import org.github.bm.system.feign.fallback.ResourcesClientFallback;
 import org.github.bm.system.vo.ResourcesTreeVO;

@@ -1,6 +1,6 @@
 package org.github.bm.auth.converter;
 
-import org.github.bm.common.security.AuthInfo;
+import org.github.bm.base.security.AuthInfo;
 import org.github.bm.user.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

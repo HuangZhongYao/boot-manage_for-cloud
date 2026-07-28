@@ -2,8 +2,8 @@ package org.github.bm.system.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.vo.BaseIdVO;
-import org.github.bm.common.enums.GenderEnum;
+import org.github.bm.base.base.vo.BaseIdVO;
+import org.github.bm.base.enums.GenderEnum;
 
 import java.io.Serial;
 import java.time.LocalDateTime;

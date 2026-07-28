@@ -2,8 +2,8 @@ package org.github.bm.user.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
-import org.github.bm.common.base.entity.AbstractBaseEntity;
-import org.github.bm.common.enums.GenderEnum;
+import org.github.bm.base.base.entity.AbstractBaseEntity;
+import org.github.bm.base.enums.GenderEnum;
 
 import java.io.Serial;
 import java.time.LocalDateTime;

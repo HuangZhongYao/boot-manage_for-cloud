@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.annotation.Resource;
-import org.github.bm.common.base.response.ApiResponse;
+import org.github.bm.base.base.response.ApiResponse;
 import org.github.bm.websocket.base.SimpConstant;
 import org.github.bm.websocket.base.WebSocketMessage;
 import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;

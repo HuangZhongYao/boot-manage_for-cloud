@@ -1,7 +1,7 @@
 package org.github.bm.system.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.vo.RolePageQueryListItemVO;
 import org.github.bm.system.vo.RoleUserModel;

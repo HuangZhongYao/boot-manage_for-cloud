@@ -3,12 +3,10 @@ package org.github.bm.websocket.config;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.prop.SecurityProperties;
-import org.github.bm.common.security.SecurityConstants;
+import org.github.bm.base.prop.SecurityProperties;
+import org.github.bm.base.security.SecurityConstants;
 import org.github.bm.websocket.base.SimpConstant;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -16,11 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.messaging.AbstractSubProtocolEvent;
 import org.springframework.web.socket.server.HandshakeInterceptor;
-import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
-import java.security.Principal;
-import java.util.Enumeration;
-import java.util.List;
 import java.util.Map;
 
 

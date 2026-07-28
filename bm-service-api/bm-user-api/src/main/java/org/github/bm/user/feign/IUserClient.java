@@ -1,7 +1,7 @@
 package org.github.bm.user.feign;
 
-import org.github.bm.common.base.fegin.BaseFeign;
-import org.github.bm.common.constant.AppConstant;
+import org.github.bm.base.base.fegin.BaseFeign;
+import org.github.bm.base.constant.AppConstant;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.fallback.UserClientFallback;
 import org.springframework.cloud.openfeign.FeignClient;

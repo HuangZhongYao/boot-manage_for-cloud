@@ -2,9 +2,9 @@ package org.github.bm.gateway;
 
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.constant.AppConstant;
-import org.github.bm.common.constant.ServiceEnum;
-import org.github.bm.common.launch.BMApplication;
+import org.github.bm.base.constant.AppConstant;
+import org.github.bm.base.constant.ServiceEnum;
+import org.github.bm.base.launch.BMApplication;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

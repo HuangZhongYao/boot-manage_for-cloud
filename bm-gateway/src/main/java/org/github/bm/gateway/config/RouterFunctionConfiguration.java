@@ -2,7 +2,7 @@ package org.github.bm.gateway.config;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.constant.ServiceEnum;
+import org.github.bm.base.constant.ServiceEnum;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;

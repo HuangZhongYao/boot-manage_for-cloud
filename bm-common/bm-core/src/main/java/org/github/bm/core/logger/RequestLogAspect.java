@@ -10,8 +10,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.github.bm.common.constant.AppConstant;
-import org.github.bm.common.util.ClassUtil;
+import org.github.bm.base.constant.AppConstant;
+import org.github.bm.base.util.ClassUtil;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.MethodParameter;
@@ -48,7 +48,7 @@ public class RequestLogAspect {
 	 * @throws Throwable 异常
 	 */
 	@Around(
-			"execution(!static org.github.bm.common.base.response.ApiResponse *(..)) && " +
+			"execution(!static org.github.bm.base.base.response.ApiResponse *(..)) && " +
 					"(@within(org.springframework.stereotype.Controller) || " +
 					"@within(org.springframework.web.bind.annotation.RestController))"
 	)

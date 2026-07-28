@@ -2,7 +2,7 @@ package org.github.bm.system.service;
 
 
 
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.*;
 import org.github.bm.system.vo.DictDataVO;
 import org.github.bm.system.vo.DictTypeTreeVO;

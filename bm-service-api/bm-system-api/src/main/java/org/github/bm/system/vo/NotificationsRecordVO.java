@@ -3,7 +3,7 @@ package org.github.bm.system.vo;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.vo.BaseIdAndTimeIdVO;
+import org.github.bm.base.base.vo.BaseIdAndTimeIdVO;
 import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsRecordBusinessTypeEnum;
 

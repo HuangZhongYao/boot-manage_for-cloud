@@ -46,3 +46,8 @@ web/package-lock.json
 /web/package-lock.json
 /boot-manage-logs/
 /**/**/*.iml
+
+### AI Agent
+.claude
+.codegraph
+.codex

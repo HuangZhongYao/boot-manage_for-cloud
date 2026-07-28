@@ -2,8 +2,7 @@ package org.github.bm.system.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.input.BaseQueryPageInputDTO;
-import org.github.bm.system.entity.RoleEntity;
+import org.github.bm.base.base.dto.input.BaseQueryPageInputDTO;
 
 import java.io.Serial;
 

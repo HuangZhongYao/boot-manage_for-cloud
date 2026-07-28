@@ -2,7 +2,7 @@ package org.github.bm.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
-import org.github.bm.common.base.entity.AbstractBaseEntity;
+import org.github.bm.base.base.entity.AbstractBaseEntity;
 import org.github.bm.system.enums.NotificationsLevelEnum;
 import org.github.bm.system.enums.NotificationsStateEnum;
 

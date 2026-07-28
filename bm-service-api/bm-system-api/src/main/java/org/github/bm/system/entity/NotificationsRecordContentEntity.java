@@ -2,7 +2,7 @@ package org.github.bm.system.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
-import org.github.bm.common.base.entity.AbstractIdAndTimeEntity;
+import org.github.bm.base.base.entity.AbstractIdAndTimeEntity;
 
 /**
  * 通知记录通知内容表实体

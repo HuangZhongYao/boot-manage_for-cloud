@@ -1,6 +1,6 @@
 package org.github.bm.system.repository;
 
-import org.github.bm.common.mybatis.BaseMapperExtension;
+import org.github.bm.base.mybatis.BaseMapperExtension;
 import org.github.bm.system.entity.DictTypeEntity;
 import org.springframework.stereotype.Repository;
 

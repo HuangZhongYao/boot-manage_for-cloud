@@ -3,7 +3,7 @@ package org.github.bm.gateway.config;
 import com.github.xiaoymin.knife4j.spring.gateway.Knife4jGatewayProperties;
 import com.github.xiaoymin.knife4j.spring.gateway.discover.spi.GatewayServiceExcludeService;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.constant.AppConstant;
+import org.github.bm.base.constant.AppConstant;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Component
 public class Knife4JGatewayServiceExcludeService implements GatewayServiceExcludeService {
     /**
-     * 聚合文档排除不以{@link org.github.bm.common.constant.AppConstant#APPLICATION_NAME_PREFIX}开头命名的服务和配置文件excluded-services中的服务
+     * 聚合文档排除不以{@link org.github.bm.base.constant.AppConstant#APPLICATION_NAME_PREFIX}开头命名的服务和配置文件excluded-services中的服务
      *
      * @param environment 当前环境变量
      * @param properties  Knife4j网关聚合配置信息

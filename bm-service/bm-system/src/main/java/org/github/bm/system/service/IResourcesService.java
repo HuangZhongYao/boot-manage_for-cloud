@@ -2,7 +2,7 @@ package org.github.bm.system.service;
 
 
 
-import org.github.bm.common.base.dto.input.BaseManyLongIdInputDTO;
+import org.github.bm.base.base.dto.input.BaseManyLongIdInputDTO;
 import org.github.bm.system.dto.AddResourcesInputDTO;
 import org.github.bm.system.dto.EditResourcesInputDTO;
 import org.github.bm.system.dto.SetResourcesStateInputDTO;

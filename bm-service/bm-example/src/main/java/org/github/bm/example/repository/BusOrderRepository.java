@@ -1,6 +1,6 @@
 package org.github.bm.example.repository;
 
-import org.github.bm.common.mybatis.BaseMapperExtension;
+import org.github.bm.base.mybatis.BaseMapperExtension;
 import org.github.bm.example.entity.BusOrderEntity;
 import org.springframework.stereotype.Repository;
 

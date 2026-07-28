@@ -2,9 +2,9 @@ package org.github.bm.user.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.BaseDTO;
-import org.github.bm.common.validate.ValidateNotNullAndEmpty;
-import org.github.bm.common.validate.group.Group;
+import org.github.bm.base.base.dto.BaseDTO;
+import org.github.bm.base.validate.ValidateNotNullAndEmpty;
+import org.github.bm.base.validate.group.Group;
 
 import java.io.Serial;
 import java.util.ArrayList;

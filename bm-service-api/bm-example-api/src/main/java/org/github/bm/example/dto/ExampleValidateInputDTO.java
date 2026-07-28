@@ -2,8 +2,8 @@ package org.github.bm.example.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import org.github.bm.common.base.dto.BaseDTO;
-import org.github.bm.common.validate.*;
+import org.github.bm.base.base.dto.BaseDTO;
+import org.github.bm.base.validate.*;
 
 import java.io.Serial;
 

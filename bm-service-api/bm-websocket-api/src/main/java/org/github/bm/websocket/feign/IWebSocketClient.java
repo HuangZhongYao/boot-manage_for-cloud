@@ -1,7 +1,7 @@
 package org.github.bm.websocket.feign;
 
-import org.github.bm.common.base.fegin.BaseFeign;
-import org.github.bm.common.constant.AppConstant;
+import org.github.bm.base.base.fegin.BaseFeign;
+import org.github.bm.base.constant.AppConstant;
 import org.github.bm.websocket.base.WebSocketMessage;
 import org.github.bm.websocket.dto.NotificationMessagePayloadDTO;
 import org.github.bm.websocket.feign.fallback.WebSocketClientFallback;

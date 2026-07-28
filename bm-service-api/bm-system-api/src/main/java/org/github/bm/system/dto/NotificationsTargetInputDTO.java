@@ -1,14 +1,11 @@
 package org.github.bm.system.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.Valid;
 import lombok.*;
-import org.github.bm.common.base.dto.BaseDTO;
-import org.github.bm.common.validate.ValidateNotNullAndEmpty;
+import org.github.bm.base.base.dto.BaseDTO;
+import org.github.bm.base.validate.ValidateNotNullAndEmpty;
 import org.github.bm.system.enums.NotificationsTargetEnum;
 import org.springframework.validation.annotation.Validated;
-
-import java.util.Set;
 
 @Getter
 @Setter

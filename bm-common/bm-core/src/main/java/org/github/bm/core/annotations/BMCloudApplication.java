@@ -1,6 +1,6 @@
 package org.github.bm.core.annotations;
 
-import org.github.bm.common.constant.AppConstant;
+import org.github.bm.base.constant.AppConstant;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;

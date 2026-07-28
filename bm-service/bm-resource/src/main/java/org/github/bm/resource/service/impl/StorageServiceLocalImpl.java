@@ -5,7 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.github.bm.common.constant.ServiceEnum;
+import org.github.bm.base.constant.ServiceEnum;
 import org.github.bm.resource.config.StorageProperties;
 import org.github.bm.resource.config.WebMvcStaticResourcesConfiguration;
 import org.github.bm.resource.model.BMFile;

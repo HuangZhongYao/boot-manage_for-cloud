@@ -1,7 +1,7 @@
 package org.github.bm.system.vo;
 
 import lombok.*;
-import org.github.bm.common.base.vo.BaseIdAndTimeAndOperationIdVO;
+import org.github.bm.base.base.vo.BaseIdAndTimeAndOperationIdVO;
 import org.github.bm.system.enums.OrganizationTypeEnum;
 
 /**

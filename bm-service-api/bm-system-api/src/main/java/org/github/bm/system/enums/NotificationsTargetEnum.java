@@ -1,6 +1,6 @@
 package org.github.bm.system.enums;
 
-import org.github.bm.common.base.enums.IEnumsValue;
+import org.github.bm.base.base.enums.IEnumsValue;
 
 /**
  * 公告通知目标类型枚举
