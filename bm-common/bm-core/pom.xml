@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.github.bm</groupId>
-        <artifactId>boot-manage_for-cloud</artifactId>
+        <artifactId>bm-common</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -11,12 +11,13 @@
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
+    <description>springboot项目核心配置</description>
 
 
     <dependencies>
         <dependency>
             <groupId>org.github.bm</groupId>
-            <artifactId>bm-common</artifactId>
+            <artifactId>bm-base</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
