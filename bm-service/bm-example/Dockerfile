@@ -8,7 +8,7 @@ MAINTAINER pisleo@yeah.net
 WORKDIR /bm/example
 
 # target 目录下的 JAR 包到容器（通配符匹配版本号变动的 JAR）
-COPY target/bm-example-*.jar ./app.jar
+COPY target/bm-example*.jar ./app.jar
 
 # 声明容器对外暴露的端口（文档性说明，实际映射需通过 docker run -p 指定）
 EXPOSE 8270
