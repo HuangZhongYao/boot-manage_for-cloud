@@ -1,6 +1,5 @@
 package org.github.bm.system.vo;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.github.bm.base.base.vo.BaseIdAndTimeIdVO;
@@ -21,7 +20,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@TableName("sys_notifications_record")
 public class NotificationsRecordVO extends BaseIdAndTimeIdVO {
     /**
      * 标题

@@ -15,6 +15,7 @@ import org.github.bm.system.service.INotificationsRecordService;
 import org.github.bm.system.vo.NotificationsRecordVO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -84,6 +85,7 @@ public class NotificationsRecordServiceImpl extends ServiceImpl<NotificationsRec
             // 构建更新实体
             NotificationsRecordEntity updateRecord = new NotificationsRecordEntity();
             updateRecord.setReadState(true);
+            updateRecord.setReadTime(LocalDateTime.now());
 
             // 执行更新操作
             return this.update(updateRecord, queryWrapper);
