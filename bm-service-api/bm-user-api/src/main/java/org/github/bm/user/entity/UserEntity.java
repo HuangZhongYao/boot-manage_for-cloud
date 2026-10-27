@@ -47,11 +47,6 @@ public class UserEntity extends AbstractBaseEntity {
     private String password;
 
     /**
-     * 密码盐
-     */
-    private String salt;
-
-    /**
      * 性别
      */
     private GenderEnum gender = GenderEnum.UNKNOWN;

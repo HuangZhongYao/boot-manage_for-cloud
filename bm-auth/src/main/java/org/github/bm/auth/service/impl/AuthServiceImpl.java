@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
 import com.alibaba.fastjson2.JSON;
@@ -89,7 +90,7 @@ public class AuthServiceImpl implements IAuthService {
         // 解密后密码明文
         String passwordText = new String(decrypt);
         // 校验密码
-        if (!passwordText.equals("123456")) throw new UserFriendlyException("账号或密码错误", 420);
+        if (!DigestUtil.bcryptCheck(passwordText,userEntity.getPassword())) throw new UserFriendlyException("账号或密码错误", 420);
         // 更新登录时间
         userClient.updateLastLoginTime(List.of(userEntity.getId()), LocalDateTime.now());
         return this.generateJwt(userEntity, clientEnum);

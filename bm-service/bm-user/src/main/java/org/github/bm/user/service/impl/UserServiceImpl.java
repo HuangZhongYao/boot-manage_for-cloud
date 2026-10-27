@@ -149,12 +149,8 @@ public class UserServiceImpl implements IUserService {
 
         // 将DTO转换为实体对象
         UserEntity userEntity = ModelMapperUtil.map(inputDTO, UserEntity.class, target -> {
-            // 设置密码盐
-            String pwdSalt = RandomUtil.randomString(8);
-            target.setSalt(pwdSalt);
-
             // 设置密码
-            String pwd = DigestUtil.sha256Hex(inputDTO.getPassword() + pwdSalt, CharsetUtil.UTF_8);
+            String pwd = DigestUtil.bcrypt(inputDTO.getPassword());
             target.setPassword(pwd);
         });
         // 插入数据库
@@ -186,15 +182,11 @@ public class UserServiceImpl implements IUserService {
                 .eq(UserEntity::getId, inputDTO.getId())
                 .last(" limit 1 ");
 
-        // 设置密码盐
-        String pwdSalt = RandomUtil.randomString(8);
-
         // 设置密码
-        String pwd = DigestUtil.sha256Hex(inputDTO.getPassword() + pwdSalt, CharsetUtil.UTF_8);
+        String pwd = DigestUtil.bcrypt(inputDTO.getPassword());
 
         UserEntity userEntity = UserEntity
                 .builder()
-                .salt(pwdSalt)
                 .password(pwd)
                 .build();
 
@@ -214,21 +206,15 @@ public class UserServiceImpl implements IUserService {
         UserEntity userEntity = userRepository.selectById(inputDTO.getId());
 
         // 判断输入旧密码是否正确
-        String oldPwd = DigestUtil.sha256Hex(inputDTO.getOldPassword() + userEntity.getSalt(),
-                CharsetUtil.UTF_8);
-        if (!StrUtil.equals(userEntity.getPassword(), oldPwd)) {
+        if (DigestUtil.bcryptCheck(inputDTO.getOldPassword(),userEntity.getPassword())) {
             throw new UserFriendlyException("输入旧密码不正确", 420);
         }
 
-        // 设置密码盐
-        String pwdSalt = RandomUtil.randomString(8);
         // 设置密码
-        String pwd = DigestUtil.sha256Hex(inputDTO.getNewPassword() + pwdSalt, CharsetUtil.UTF_8);
-
+        String pwd = DigestUtil.bcrypt(inputDTO.getNewPassword());
         // 设置更新数据
         UserEntity updateEntity = UserEntity
                 .builder()
-                .salt(pwdSalt)
                 .password(pwd)
                 .build();
         updateEntity.setId(updateEntity.getId());
