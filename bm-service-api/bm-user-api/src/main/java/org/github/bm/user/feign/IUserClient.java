@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public interface IUserClient extends BaseFeign {
     String GET_ALL_USER_ID_LIST = API_PREFIX + "/getAllUserIdList";
     String GET_ORGANIZATION_USER_LIST_BY_ORGANIZATION_ID_LIST = API_PREFIX + "/getOrganizationUserListByOrganizationIdList";
     String GET_ORGANIZATION_USER_ID_LIST_BY_ORGANIZATION_ID_LIST = API_PREFIX + "/getOrganizationUserIdListByOrganizationIdList";
+    String UPDATE_LAST_LOGIN_TIME = API_PREFIX + "/updateLastLoginTime";
 
     /**
      * 根据ID查询用户
@@ -78,4 +80,14 @@ public interface IUserClient extends BaseFeign {
      */
     @GetMapping(GET_ORGANIZATION_USER_ID_LIST_BY_ORGANIZATION_ID_LIST)
     List<Long> getOrganizationUserIdListByOrganizationIdList(@RequestParam("ids") List<Long> ids);
+
+    /**
+     * 更新用户最后登录时间
+     *
+     * @param ids  用户ID列表
+     * @param time 最后登录时间
+     * @return 是否成功
+     */
+    @PostMapping(UPDATE_LAST_LOGIN_TIME)
+    Boolean updateLastLoginTime(@RequestParam("ids") List<Long> ids, @RequestParam("time") LocalDateTime time);
 }

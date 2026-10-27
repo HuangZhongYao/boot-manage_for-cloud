@@ -38,6 +38,7 @@ import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,6 +90,8 @@ public class AuthServiceImpl implements IAuthService {
         String passwordText = new String(decrypt);
         // 校验密码
         if (!passwordText.equals("123456")) throw new UserFriendlyException("账号或密码错误", 420);
+        // 更新登录时间
+        userClient.updateLastLoginTime(List.of(userEntity.getId()), LocalDateTime.now());
         return this.generateJwt(userEntity, clientEnum);
     }
 

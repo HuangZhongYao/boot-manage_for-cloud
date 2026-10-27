@@ -3,8 +3,10 @@ package org.github.bm.user.feign.fallback;
 import org.github.bm.user.entity.UserEntity;
 import org.github.bm.user.feign.IUserClient;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -76,5 +78,10 @@ public class UserClientFallback implements IUserClient {
     @Override
     public List<Long> getOrganizationUserIdListByOrganizationIdList(List<Long> ids) {
         return List.of();
+    }
+
+    @Override
+    public Boolean updateLastLoginTime(List<Long> ids, @RequestParam("time") LocalDateTime time) {
+        return false;
     }
 }
